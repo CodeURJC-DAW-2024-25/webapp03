@@ -85,7 +85,7 @@ Admins can add materials to the courses
 |Delete courses|❌|❌|✅|
 |Add material to courses|❌|❌|✅|
 |Create an account|✅|❌|❌|
-|Log in|✅|❌|❌|
+|Log in|✅|✅|✅|
 |View charts and statistics about courses|✅|✅|✅|
 |Delete accounts|❌|❌|✅|
 |Purchase courses|❌|✅|❌|
