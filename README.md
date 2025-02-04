@@ -42,11 +42,11 @@ LibACE is a web application where you can access courses
 
 **Users**
 
-UNREGISTERED USER: Has access to the main screen, the ability to view all available courses on the website, their prices, and the option to log in/register.
+UNREGISTERED USER: Has the ability to view all available courses on the website, their prices, and the option to log in/register.
 
-REGISTERED USER: In addition to access to the main screen and all available courses, they can access the content of the courses they have purchased and buy more courses. They can also add comments on the courses they have bought and modify their profile.
+REGISTERED USER: In addition to access all available courses, they can access the content of the courses they have purchased and buy more courses. They can also add comments on the courses they have bought and modify their profile.
 
-ADMIN (MANAGE/EDIT COURSES, CREATE/DELETE): Has the ability to add, delete, and modify courses and comments.
+ADMIN (MANAGE/EDIT COURSES, CREATE/DELETE): Has the ability to add, delete, and modify courses and comments. They also can see the information of all courses.
 
 
 **Courses**
