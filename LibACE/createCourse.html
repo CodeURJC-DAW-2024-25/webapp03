@@ -31,21 +31,30 @@
         </nav>
         <div class="container d-flex justify-content-center align-items-center vh-100">
             <div class="col-md-4">
-                <h3 class="text-center mb-4">Cree una cuenta</h3>
+                <h3 class="text-center mb-4">Crear curso</h3>
                 <form>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="user-addon">👤</span>
-                        <input type="text" class="form-control" name="username" placeholder="Usuario" aria-label="Usuario" aria-describedby="user-addon">
+                        <span class="input-group-text" id="user-addon"></span>
+                        <input type="text" class="form-control" name="course_name" placeholder="Nombre del curso" aria-label="Nombre del curso" aria-describedby="course-name-addon">
                     </div>
     
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="password-addon">🔒</span>
-                        <input type="password" class="form-control" name="password" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="password-addon">
+                        <span class="input-group-text" id="image-addon"></span>
+                        <input type="text" class="form-control" name="course_image" placeholder="Ruta de la portada" aria-label="Ruta de la portada" aria-describedby="image-addon">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="price-addon"></span>
+                        <input type="text" class="form-control" name="price" placeholder="Precio" aria-label="Precio" aria-describedby="price-addon">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="description-addon"></span>
+                        <input type="text" class="form-control" name="description" placeholder="Descripción" aria-label="Descripción" aria-describedby="description-addon">
                     </div>
     
-                    <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+                    <button type="submit" class="btn btn-primary w-100">Crear curso</button>
                 </form>
-                <p class="text-muted text-center">O si ya tiene cuenta, <a href="login.html">inicie sesión aquí</a></p>
             </div>
         </div>
         
