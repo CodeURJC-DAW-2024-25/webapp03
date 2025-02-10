@@ -31,40 +31,21 @@
         </nav>
         <div class="container d-flex justify-content-center align-items-center vh-100">
             <div class="col-md-4">
-                <h3 class="text-center mb-4">Crear curso</h3>
+                <h3 class="text-center mb-4">Modificar perfil</h3>
                 <form>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="user-addon"></span>
-                        <input type="text" class="form-control" name="course_name" placeholder="Nombre del curso" aria-label="Nombre del curso" aria-describedby="course-name-addon">
+                        <span class="input-group-text" id="user-addon">👤</span>
+                        <input type="text" class="form-control" name="username" placeholder="Usuario" aria-label="Usuario" aria-describedby="user-addon">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="password-addon">🔒</span>
+                        <input type="password" class="form-control" name="password" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="password-addon">
                     </div>
     
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="image-addon"></span>
-                        <input type="text" class="form-control" name="course_image" placeholder="Ruta de la portada" aria-label="Ruta de la portada" aria-describedby="image-addon">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="price-addon"></span>
-                        <input type="text" class="form-control" name="price" placeholder="Precio" aria-label="Precio" aria-describedby="price-addon">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="description-addon"></span>
-                        <input type="text" class="form-control" name="description" placeholder="Descripción" aria-label="Descripción" aria-describedby="description-addon">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="category-addon"></span>
-                        <select class="form-select" name="category" aria-label="Categoría del curso" aria-describedby="category-addon">
-                            <option selected disabled>Selecciona una categoría</option>
-                            <option value="programacion">Programación</option>
-                            <option value="diseño">Diseño</option>
-                            <option value="marketing">Marketing</option>
-                        </select>
-                    </div>
-    
-                    <button type="submit" class="btn btn-primary w-100">Crear curso</button>
+                    <button type="submit" class="btn btn-primary w-100 mb-2">Guardar cambios</button>
                 </form>
+                <a href="profile_page.html" class="btn btn-danger w-100">Cancelar</a>
             </div>
         </div>
         
