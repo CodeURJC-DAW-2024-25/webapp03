@@ -14,6 +14,7 @@
     - [Complementary technology](#complementary_technology)
     - [Advanced algorithms](algorithm)
     - [Trello](trello)
+    - [Navigation](navigation)
 
 <br>
 
@@ -134,3 +135,8 @@ An algorithm to recommend courses based on the courses you have already signed u
 <h3 id="trello">Trello</h3>
 
 - [Trello](https://trello.com/b/rYpLm9YG/daw-grupo-3)
+
+
+<h3 id="navigation">Navigation</h3>
+
+![navigationDiagram](pics/navigationDiagram.png)
