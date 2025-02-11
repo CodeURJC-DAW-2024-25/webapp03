@@ -12,9 +12,11 @@
     - [Images](#images)
     - [Charts](#charts)
     - [Complementary technology](#complementary_technology)
-    - [Advanced algorithms](algorithm)
-    - [Trello](trello)
-    - [Navigation](navigation)
+    - [Advanced algorithms](#algorithm)
+    - [Trello](#trello)
+    - [Screenshots](#screenshots)
+    - [Navigation](#navigation)
+
 
 <br>
 
@@ -135,6 +137,53 @@ An algorithm to recommend courses based on the courses you have already signed u
 <h3 id="trello">Trello</h3>
 
 - [Trello](https://trello.com/b/rYpLm9YG/daw-grupo-3)
+
+
+<h3 id="screenshots">Screenshots</h3>
+
+<h4 id="index">Index</h4>
+
+![indexImage](pics/screenshots/index.png)
+
+<h4 id="login">Login</h4>
+
+![loginImage](pics/screenshots/login.png)
+
+<h4 id="register">Register</h4>
+
+![registerImage](pics/screenshots/register.png)
+
+<h4 id="createCourse">Create course</h4>
+
+![createCourseImage](pics/screenshots/createCourse.png)
+
+<h4 id="adminUsers">Admin Users</h4>
+
+![adminUsersImage](pics/screenshots/adminUsers.png)
+
+<h4 id="course">Course</h4>
+
+![courseImage](pics/screenshots/course.png)
+
+<h4 id="profilePage">Profile page</h4>
+
+![profilePageImage](pics/screenshots/profile_page.png)
+
+<h4 id="modifyProfile">Modify profile</h4>
+
+![modifyProfileImage](pics/screenshots/modify_profile.png)
+
+<h4 id="error403">Error 403</h4>
+
+![error403Image](pics/screenshots/error403.png)
+
+<h4 id="error404">Error 404</h4>
+
+![error404Image](pics/screenshots/error404.png)
+
+<h4 id="error500">Error 500</h4>
+
+![error500Image](pics/screenshots/error500.png)
 
 
 <h3 id="navigation">Navigation</h3>
