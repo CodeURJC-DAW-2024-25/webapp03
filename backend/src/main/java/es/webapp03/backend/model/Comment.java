@@ -5,6 +5,7 @@ import java.util.Date;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 public class Comment {
 
@@ -12,35 +13,35 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long course_id;
+    private Course course;
 
-    private Long user_id;
+    private User user;
 
     private String text;
 
     private Date created_date;
 
-    public Comment(Long course_id, Long user_id, String text, Date created_date){
-        this.course_id = course_id;
-        this.user_id = user_id;
+    public Comment(Course course, User user, String text, Date created_date){
+        this.course = course;
+        this.user = user;
         this.text = text;
         this.created_date = created_date;
     }
 
-    public Long getCourse_id() {
-        return course_id;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourse_id(Long course_id) {
-        this.course_id = course_id;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getText() {
