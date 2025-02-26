@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <style>
+        h1{
+            color: brown;
+        }
+        .quotation {
+            width: 100%;
+        }
+        .quotation, .quotation th, .quotation td {
+            border: 1px solid brown;
+            border-collapse: collapse;
+        }
+        .quotation th {
+            background-color: brown;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>Quotation</h1>
+<table>
+    <tr>
+        <th>Customer</th>
+    </tr>
+    <tr>
+        <td>Company Name: {{customer.companyName}}</td>
+    </tr>
+    <tr>
+        <td>Contact Name: {{customer.contactName}}</td>
+    </tr>
+    <tr>
+        <td>Address: {{customer.address}}</td>
+    </tr>
+    <tr>
+        <td>Email: {{customer.email}}</td>
+    </tr>
+    <tr>
+        <td>Phone: {{customer.phone}}</td>
+    </tr>
+</table>
+<br />
+<table class="quotation">
+    <tr>
+        <th>Item #</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Total</th>
+    </tr>
+    {{#quoteItems}}
+    <tr>
+        <td>{{@index}}</td>
+        <td>{{description}}</td>
+        <td>{{quantity}}</td>
+        <td>{{unitPrice}}</td>
+        <td>{{total}}</td>
+    </tr>
+    {{/quoteItems}}
+</table>
+</body>
+</html>
