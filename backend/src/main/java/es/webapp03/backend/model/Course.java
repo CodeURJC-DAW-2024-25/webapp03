@@ -1,12 +1,15 @@
 package es.webapp03.backend.model;
 
 import java.sql.Blob;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Course {
@@ -19,17 +22,20 @@ public class Course {
 
     private String description;
 
-    private boolean diploma;
-
     @Lob
 	private Blob imageFile;
 
-    private boolean image;
+    @ManyToMany(mappedBy= "courses")
+ 	private List<User> users;
 
-    public Course(String title, String description, boolean diploma) {
+    @OneToMany(mappedBy= "course")
+ 	private List<Material> materials;
+
+
+    public Course(String title, String description, Blob imageFile) {
         this.title = title;
         this.description = description;
-        this.diploma = diploma;
+        this.imageFile = imageFile;
     }
 
 
@@ -53,14 +59,6 @@ public class Course {
         this.description = description;
     }
 
-    public boolean isDiploma() {
-        return diploma;
-    }
-
-    public void setDiploma(boolean diploma) {
-        this.diploma = diploma;
-    }
-
     public Blob getImageFile() {
 		return imageFile;
 	}
@@ -69,11 +67,22 @@ public class Course {
 		this.imageFile = image;
 	}
 
-    public boolean getImage(){
-		return this.image;
-	}
+    public List<User> getUsers() {
+        return users;
+    }
 
-	public void setImage(boolean image){
-		this.image = image;
-	}
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+
+    public List<Material> getMaterials() {
+        return materials;
+    }
+
+
+    public void setMaterials(List<Material> materials) {
+        this.materials = materials;
+    }
 }

@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 
 @Entity(name = "UserTable")
 public class User {
@@ -25,7 +26,10 @@ public class User {
 	private String encodedPassword;
 
 	@Lob
-	private Blob image;
+	private Blob imageFile;
+
+	@ManyToMany
+ 	private List<Course> courses;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
@@ -33,11 +37,11 @@ public class User {
 	public User() {
 	}
 
-	public User(String name, String email, String encodedPassword, Blob image, String... roles) {
+	public User(String name, String email, String encodedPassword, Blob imageFile, String... roles) {
 		this.name = name;
 		this.email = email;
 		this.encodedPassword = encodedPassword;
-		this.image = image;
+		this.imageFile = imageFile;
 		this.roles = List.of(roles);
 	}
 
@@ -65,12 +69,20 @@ public class User {
 		this.encodedPassword = encodedPassword;
 	}
 
-	public Blob getImage() {
-		return image;
+	public Blob getImageFile() {
+		return imageFile;
 	}
 
-	public void setImage(Blob image) {
-		this.image = image;
+	public void setImage(Blob imageFile) {
+		this.imageFile = imageFile;
+	}
+
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
 	}
 
 	public List<String> getRoles() {

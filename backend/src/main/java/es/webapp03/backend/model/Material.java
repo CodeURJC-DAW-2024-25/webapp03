@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Material {
@@ -16,7 +17,8 @@ public class Material {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long course_id;
+    @ManyToOne
+    private Course course;
 
     private String name;
 
@@ -66,12 +68,12 @@ public class Material {
         this.file = file;
     }
 
-    public Long getcourseId() {
-        return course_id;
+    public Course getcourse() {
+        return course;
     }
 
-    public void setCourseId(Long course_id) {
-        this.course_id = course_id;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
 }
