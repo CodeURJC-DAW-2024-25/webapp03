@@ -31,6 +31,9 @@ public class Course {
     @OneToMany(mappedBy= "course")
  	private List<Material> materials;
 
+    public Course() {
+        // Constructor vacío requerido por JPA
+    }
 
     public Course(String title, String description, Blob imageFile) {
         this.title = title;

@@ -2,24 +2,33 @@ package es.webapp03.backend.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
+
+@Entity
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne
     private Course course;
 
+    @ManyToOne
     private User user;
 
     private String text;
 
     private Date created_date;
+
+    public Comment() {
+        // Constructor vacío requerido por JPA
+    }
 
     public Comment(Course course, User user, String text, Date created_date){
         this.course = course;

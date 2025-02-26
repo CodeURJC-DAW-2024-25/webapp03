@@ -29,6 +29,10 @@ public class Material {
     @Lob
 	private Blob file;
 
+    public Material() {
+        // Constructor vacío requerido por JPA
+    }
+
     public Material(String name, String type, String url, Blob file) {
 		this.name = name;
 		this.type = type;
