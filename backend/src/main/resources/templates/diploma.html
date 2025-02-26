@@ -2,62 +2,52 @@
 <html>
 <head>
     <style>
-        h1{
+        h1 {
             color: brown;
         }
-        .quotation {
+        .diploma {
             width: 100%;
         }
-        .quotation, .quotation th, .quotation td {
+        .diploma, .diploma th, .diploma td {
             border: 1px solid brown;
             border-collapse: collapse;
         }
-        .quotation th {
+        .diploma th {
             background-color: brown;
             color: white;
         }
     </style>
 </head>
 <body>
-<h1>Quotation</h1>
+<h1>Diploma</h1>
 <table>
     <tr>
-        <th>Customer</th>
+        <th>User Information</th>
     </tr>
     <tr>
-        <td>Company Name: {{customer.companyName}}</td>
+        <td>Name: {{user.name}}</td>
     </tr>
     <tr>
-        <td>Contact Name: {{customer.contactName}}</td>
+        <td>Email: {{user.email}}</td>
     </tr>
     <tr>
-        <td>Address: {{customer.address}}</td>
-    </tr>
-    <tr>
-        <td>Email: {{customer.email}}</td>
-    </tr>
-    <tr>
-        <td>Phone: {{customer.phone}}</td>
+        <td>Roles: {{#user.roles}}{{.}}, {{/user.roles}}</td>
     </tr>
 </table>
 <br />
-<table class="quotation">
+<table class="diploma">
     <tr>
-        <th>Item #</th>
+        <th>Course #</th>
+        <th>Title</th>
         <th>Description</th>
-        <th>Quantity</th>
-        <th>Unit Price</th>
-        <th>Total</th>
     </tr>
-    {{#quoteItems}}
+    {{#user.courses}}
     <tr>
-        <td>{{@index}}</td>
+        <td>{{id}}</td>
+        <td>{{title}}</td>
         <td>{{description}}</td>
-        <td>{{quantity}}</td>
-        <td>{{unitPrice}}</td>
-        <td>{{total}}</td>
     </tr>
-    {{/quoteItems}}
+    {{/user.courses}}
 </table>
 </body>
 </html>
