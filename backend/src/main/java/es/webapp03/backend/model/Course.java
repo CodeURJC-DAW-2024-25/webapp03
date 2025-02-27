@@ -23,13 +23,15 @@ public class Course {
     private String description;
 
     @Lob
-	private Blob imageFile;
+    private Blob imageFile;
 
-    @ManyToMany(mappedBy= "courses")
- 	private List<User> users;
+    private boolean image;
 
-    @OneToMany(mappedBy= "course")
- 	private List<Material> materials;
+    @ManyToMany(mappedBy = "courses")
+    private List<User> users;
+
+    @OneToMany(mappedBy = "course")
+    private List<Material> materials;
 
     public Course() {
         // Constructor vacío requerido por JPA
@@ -41,10 +43,9 @@ public class Course {
         this.imageFile = imageFile;
     }
 
-
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -62,28 +63,33 @@ public class Course {
         this.description = description;
     }
 
-    public Blob getImageFile() {
-		return imageFile;
-	}
+    public void setImage(boolean image) {
+        this.image = image;
+    }
 
-	public void setImageFile(Blob image) {
-		this.imageFile = image;
-	}
+    public boolean getImage() {
+        return this.image;
+    }
+
+    public Blob getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(Blob image) {
+        this.imageFile = image;
+    }
 
     public List<User> getUsers() {
         return users;
     }
 
-
     public void setUsers(List<User> users) {
         this.users = users;
     }
 
-
     public List<Material> getMaterials() {
         return materials;
     }
-
 
     public void setMaterials(List<Material> materials) {
         this.materials = materials;

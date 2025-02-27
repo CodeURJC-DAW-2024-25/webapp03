@@ -33,25 +33,29 @@ import es.webapp03.backend.repository.CommentRepository;
 import es.webapp03.backend.repository.CourseRepository;
 import es.webapp03.backend.repository.MaterialRepository;
 import es.webapp03.backend.repository.UserRepository;
+import es.webapp03.backend.service.UserService;
 
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class WebController {
-    
-    @Autowired
+
+	@Autowired
 	private CommentRepository commentRepository;
 
-    @Autowired
+	@Autowired
 	private CourseRepository courseRepository;
 
-    @Autowired
+	@Autowired
 	private MaterialRepository materialRepository;
 
-    @Autowired
+	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private UserService userService;
 
-    @ModelAttribute
+	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
 
 		Principal principal = request.getUserPrincipal();
@@ -75,7 +79,23 @@ public class WebController {
 		return "index";
 	}
 
-    @RequestMapping("/login")
+	@GetMapping("/register")
+	public String showRegisterForm(Model model) {
+
+		return "register";
+	}
+
+	@PostMapping
+	public String registerUser(User user, String roleName, Model model) {
+		if (userService.findByName(user.getName()) != null) {
+			model.addAttribute("error", "Username taken");
+			return "register";
+		}
+		userService.registerUser(user, roleName);
+		return "index";
+	}
+
+	@RequestMapping("/login")
 	public String login() {
 		return "login";
 	}
@@ -144,7 +164,7 @@ public class WebController {
 
 		model.addAttribute("courseId", course.getId());
 
-		return "redirect:/courses/"+course.getId();
+		return "redirect:/courses/" + course.getId();
 	}
 
 	@GetMapping("/editcourse/{id}")
@@ -160,7 +180,8 @@ public class WebController {
 	}
 
 	@PostMapping("/editcourse")
-	public String editCourseProcess(Model model, Course course, boolean removeImage, MultipartFile imageField) throws IOException, SQLException {
+	public String editCourseProcess(Model model, Course course, boolean removeImage, MultipartFile imageField)
+			throws IOException, SQLException {
 
 		updateImage(course, removeImage, imageField);
 
@@ -168,11 +189,12 @@ public class WebController {
 
 		model.addAttribute("courseId", course.getId());
 
-		return "redirect:/courses/"+course.getId();
+		return "redirect:/courses/" + course.getId();
 	}
 
-	private void updateImage(Course course, boolean removeImage, MultipartFile imageField) throws IOException, SQLException {
-		
+	private void updateImage(Course course, boolean removeImage, MultipartFile imageField)
+			throws IOException, SQLException {
+
 		if (!imageField.isEmpty()) {
 			course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
 			course.setImage(true);
@@ -191,6 +213,5 @@ public class WebController {
 			}
 		}
 	}
-
 
 }
