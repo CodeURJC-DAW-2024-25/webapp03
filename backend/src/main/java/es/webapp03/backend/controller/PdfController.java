@@ -3,7 +3,6 @@ package es.webapp03.backend.controller;
 import es.webapp03.backend.services.HtmlToPdfConverterService;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.model.Course;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,6 @@ public class PdfController {
 
     private final HtmlToPdfConverterService htmlToPdfConverterService;
 
-    @Autowired
     public PdfController(HtmlToPdfConverterService htmlToPdfConverterService) {
         this.htmlToPdfConverterService = htmlToPdfConverterService;
     }
@@ -30,22 +28,22 @@ public class PdfController {
         try {
             // Prepare the data
             Map<String, Object> data = new HashMap<>();
-            
+
             // Create a sample user
             User user = new User();
             user.setName("John Doe");
             user.setEmail("john.doe@example.com");
             user.setRoles(List.of("USER", "ADMIN"));
-            
+
             // Create a list of sample courses
             List<Course> courses = new ArrayList<>();
             Course course1 = new Course("Course 1", "Description for Course 1", null);
             Course course2 = new Course("Course 2", "Description for Course 2", null);
             courses.add(course1);
             courses.add(course2);
-            
+
             user.setCourses(courses);
-            
+
             data.put("user", user);
 
             // Generate the PDF file
@@ -55,7 +53,8 @@ public class PdfController {
 
             return ResponseEntity.ok("PDF generated successfully: " + pdfFilePath);
         } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error generating PDF: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error generating PDF: " + e.getMessage());
         }
     }
 }

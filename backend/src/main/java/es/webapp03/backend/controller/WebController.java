@@ -9,6 +9,7 @@ import java.util.Optional;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
+import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -24,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import es.webapp03.backend.model.Comment;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.Material;
 import es.webapp03.backend.model.User;
@@ -33,25 +33,27 @@ import es.webapp03.backend.repository.CommentRepository;
 import es.webapp03.backend.repository.CourseRepository;
 import es.webapp03.backend.repository.MaterialRepository;
 import es.webapp03.backend.repository.UserRepository;
-
+import es.webapp03.backend.service.UserService;
 
 @Controller
 public class WebController {
-    
-    @Autowired
+
+	@Autowired
 	private CommentRepository commentRepository;
 
-    @Autowired
+	@Autowired
 	private CourseRepository courseRepository;
 
-    @Autowired
+	@Autowired
 	private MaterialRepository materialRepository;
 
-    @Autowired
+	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private UserService userService;
 
-    @ModelAttribute
+	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
 
 		Principal principal = request.getUserPrincipal();
@@ -75,7 +77,7 @@ public class WebController {
 		return "index";
 	}
 
-    @RequestMapping("/login")
+	@RequestMapping("/login")
 	public String login() {
 		return "login";
 	}
@@ -95,6 +97,22 @@ public class WebController {
 		} else {
 			return "index";
 		}
+	}
+
+	@GetMapping("/register")
+	public String showRegisterForm(Model model) {
+
+		return "register";
+	}
+
+	@PostMapping
+	public String registerUser(User user, String roleName, Model model) {
+		if (userRepository.findByName(user.getName()) != null) {
+			model.addAttribute("error", "Username taken");
+			return "register";
+		}
+		userService.registerUser(user, roleName);
+		return "index";
 	}
 
 	@GetMapping("/courses/{id}/image")
@@ -144,7 +162,7 @@ public class WebController {
 
 		model.addAttribute("courseId", course.getId());
 
-		return "redirect:/courses/"+course.getId();
+		return "redirect:/courses/" + course.getId();
 	}
 
 	@GetMapping("/editcourse/{id}")
@@ -160,7 +178,8 @@ public class WebController {
 	}
 
 	@PostMapping("/editcourse")
-	public String editCourseProcess(Model model, Course course, boolean removeImage, MultipartFile imageField) throws IOException, SQLException {
+	public String editCourseProcess(Model model, Course course, boolean removeImage, MultipartFile imageField)
+			throws IOException, SQLException {
 
 		updateImage(course, removeImage, imageField);
 
@@ -168,11 +187,12 @@ public class WebController {
 
 		model.addAttribute("courseId", course.getId());
 
-		return "redirect:/courses/"+course.getId();
+		return "redirect:/courses/" + course.getId();
 	}
 
-	private void updateImage(Course course, boolean removeImage, MultipartFile imageField) throws IOException, SQLException {
-		
+	private void updateImage(Course course, boolean removeImage, MultipartFile imageField)
+			throws IOException, SQLException {
+
 		if (!imageField.isEmpty()) {
 			course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
 			course.setImage(true);
@@ -191,6 +211,5 @@ public class WebController {
 			}
 		}
 	}
-
 
 }

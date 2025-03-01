@@ -29,9 +29,11 @@ public class User {
 	@Lob
 	private Blob imageFile;
 
+	private boolean image;
+
 	@ManyToMany
 	@JoinTable(name = "user_course")
- 	private List<Course> courses;
+	private List<Course> courses;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
@@ -69,6 +71,14 @@ public class User {
 
 	public void setEncodedPassword(String encodedPassword) {
 		this.encodedPassword = encodedPassword;
+	}
+
+	public boolean getImage() {
+		return this.image;
+	}
+
+	public void setImage(boolean image) {
+		this.image = image;
 	}
 
 	public Blob getImageFile() {

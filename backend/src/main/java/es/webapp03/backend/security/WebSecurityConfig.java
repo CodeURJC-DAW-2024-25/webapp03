@@ -31,4 +31,34 @@ public class WebSecurityConfig {
 
 		return authProvider;
 	}
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+		http.authenticationProvider(authenticationProvider());
+
+		http
+				.authorizeHttpRequests(authorize -> authorize
+						// PUBLIC PAGES
+						.requestMatchers("/").permitAll()
+						.requestMatchers("/images/**").permitAll() // Allow access to static resources
+						.requestMatchers("/courses/**").permitAll()
+						// PRIVATE PAGES
+						.requestMatchers("/newcourse").hasAnyRole("USER")
+						.requestMatchers("/editcourse").hasAnyRole("USER")
+						.requestMatchers("/editcourse/*").hasAnyRole("USER")
+						.requestMatchers("/removecourse/*").hasAnyRole("ADMIN")
+						.requestMatchers("/newcomment").hasAnyRole("USER"))
+				.formLogin(formLogin -> formLogin
+						.loginPage("/login")
+						.failureUrl("/loginerror")
+						.defaultSuccessUrl("/")
+						.permitAll())
+				.logout(logout -> logout
+						.logoutUrl("/logout")
+						.logoutSuccessUrl("/")
+						.permitAll());
+
+		return http.build();
+	}
 }
