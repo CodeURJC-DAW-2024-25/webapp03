@@ -3,10 +3,7 @@ package es.webapp03.backend.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +18,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import es.webapp03.backend.model.Comment;
 import es.webapp03.backend.model.Course;
-import es.webapp03.backend.model.Material;
-import es.webapp03.backend.model.User;
-
 import es.webapp03.backend.repository.CommentRepository;
 import es.webapp03.backend.repository.CourseRepository;
 import es.webapp03.backend.repository.MaterialRepository;
 import es.webapp03.backend.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -137,7 +130,7 @@ public class WebController {
 
 		if (!imageField.isEmpty()) {
 			course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-			course.setImage(true);
+			/* course.setImage(true); */
 		}
 
 		courseRepository.save(course);
@@ -162,7 +155,7 @@ public class WebController {
 	@PostMapping("/editcourse")
 	public String editCourseProcess(Model model, Course course, boolean removeImage, MultipartFile imageField) throws IOException, SQLException {
 
-		updateImage(course, removeImage, imageField);
+		/* updateImage(course, removeImage, imageField); */
 
 		courseRepository.save(course);
 
@@ -171,7 +164,7 @@ public class WebController {
 		return "redirect:/courses/"+course.getId();
 	}
 
-	private void updateImage(Course course, boolean removeImage, MultipartFile imageField) throws IOException, SQLException {
+	/* private void updateImage(Course course, boolean removeImage, MultipartFile imageField) throws IOException, SQLException {
 		
 		if (!imageField.isEmpty()) {
 			course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
@@ -190,7 +183,7 @@ public class WebController {
 				}
 			}
 		}
-	}
+	} */
 
 
 }

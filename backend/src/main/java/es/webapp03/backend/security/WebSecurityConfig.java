@@ -31,4 +31,49 @@ public class WebSecurityConfig {
 
 		return authProvider;
 	}
+
+	/* @Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+		http.authenticationProvider(authenticationProvider());
+
+		http
+				.authorizeHttpRequests(authorize -> authorize
+						// PUBLIC PAGES
+						.requestMatchers("/").permitAll()
+						.requestMatchers("/images/**").permitAll() // Allow access to static resources
+						.requestMatchers("/books/**").permitAll()
+						// PRIVATE PAGES
+						.requestMatchers("/newbook").hasAnyRole("USER")
+						.requestMatchers("/editbook").hasAnyRole("USER")
+						.requestMatchers("/editbook/*").hasAnyRole("USER")
+						.requestMatchers("/removebook/*").hasAnyRole("ADMIN"))
+				.formLogin(formLogin -> formLogin
+						.loginPage("/login")
+						.failureUrl("/loginerror")
+						.defaultSuccessUrl("/")
+						.permitAll())
+				.logout(logout -> logout
+						.logoutUrl("/logout")
+						.logoutSuccessUrl("/")
+						.permitAll());
+
+		return http.build();
+	} */
+
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http
+			.authorizeHttpRequests(auth -> auth
+				.requestMatchers("/", "/public/**", "/css/**", "/js/**", "/images/**").permitAll() // Permitir acceso sin login
+				.anyRequest().authenticated() // Proteger el resto
+			)
+			.formLogin(login -> login
+				.loginPage("/login").permitAll() // Página de login
+				.defaultSuccessUrl("/", true) // Redirigir a "/" después de login
+			)
+			.logout(logout -> logout.permitAll());
+
+		return http.build();
+	}
 }

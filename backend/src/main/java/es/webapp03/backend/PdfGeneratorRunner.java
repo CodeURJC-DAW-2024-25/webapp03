@@ -1,4 +1,4 @@
-package es.webapp03.backend;
+/* package es.webapp03.backend;
 
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.model.Course;
@@ -44,4 +44,4 @@ public class PdfGeneratorRunner implements CommandLineRunner {
         String pdfFilePath = "output/diploma.pdf";
         htmlToPdfConverterService.generatePdfFromTemplate(templatePath, data, pdfFilePath);
     }
-}
+} */
