@@ -175,9 +175,19 @@ public class WebController {
 	}
 
 	@GetMapping("/profile_page")
-		public String redirectToProfile() {
-    	return "profile_page"; // O la URL correcta de tu archivo
+	public String showProfilePage(Model model, Principal principal) {
+		if (principal != null) {
+			String email = principal.getName();
+			Optional<User> user = userRepository.findByEmail(email);
+	
+			if (user.isPresent()) {
+				model.addAttribute("name", user.get().getName());
+				model.addAttribute("email", user.get().getEmail());
+			}
+		}
+		return "profile_page";
 	}
+	
 
 
 	@GetMapping("/newcomment")
