@@ -2,7 +2,7 @@ package es.webapp03.backend.model;
 
 import java.sql.Blob;
 import java.util.List;
-
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,6 +32,9 @@ public class Course {
 
     @OneToMany(mappedBy = "course")
     private List<Material> materials;
+
+    @ElementCollection
+    private List<String> tags;
 
     public Course() {
         // Constructor vacío requerido por JPA
@@ -93,5 +96,13 @@ public class Course {
 
     public void setMaterials(List<Material> materials) {
         this.materials = materials;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 }

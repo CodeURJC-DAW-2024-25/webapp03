@@ -69,7 +69,7 @@ public class WebController {
 		}
 	}
 
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String showCourses(Model model) {
 
 		model.addAttribute("courses", courseRepository.findAll());
