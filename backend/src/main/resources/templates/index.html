@@ -60,6 +60,7 @@
                     </div>
                     {{/courses}}
 
+                    <!-- Botón para crear un nuevo curso (Solo administradores) -->
                     {{#admin}}
                     <div class="text-center mt-4">
                         <a href="/newcourse" class="btn btn-success btn-xl text-uppercase">Crear Nuevo Curso</a>
@@ -90,14 +91,18 @@
                                     </ul>
                                     <a class="btn btn-primary btn-xl text-uppercase" href="/courses/{{id}}">
                                         Ir al Curso
-                                    </a>                                    
-                                    <button class="btn btn-secondary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    </a>
+
+                                    <!-- Opciones de edición y eliminación (Solo administradores) -->
+                                    {{#admin}}  
+                                    <a class="btn btn-secondary btn-xl text-uppercase" href="/editcourse/{{id}}">
                                         Modificar Curso
-                                    </button>
-                                    <button class="btn btn-danger btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    </a>
+                                    <a class="btn btn-danger btn-xl text-uppercase" href="/removecourse/{{id}}">
                                         <i class="fas fa-xmark me-1"></i>
                                         Borrar Curso
-                                    </button>
+                                    </a>
+                                    {{/admin}}  
                                 </div>
                             </div>
                         </div>

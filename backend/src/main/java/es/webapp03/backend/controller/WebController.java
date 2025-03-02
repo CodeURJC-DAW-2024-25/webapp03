@@ -167,14 +167,11 @@ public class WebController {
 	}
 
 	@GetMapping("/removecourse/{id}")
-	public String removeCourse(Model model, @PathVariable long id) {
-
-		Optional<Course> course = courseRepository.findById(id);
-		if (course.isPresent()) {
+	public String removeCourse(@PathVariable long id) {
+		if (courseRepository.existsById(id)) {
 			courseRepository.deleteById(id);
-			model.addAttribute("course", course.get());
 		}
-		return "index";
+		return "redirect:/";
 	}
 
 	@GetMapping("/newcomment")
