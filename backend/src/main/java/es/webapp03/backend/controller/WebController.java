@@ -174,6 +174,12 @@ public class WebController {
 		return "redirect:/";
 	}
 
+	@GetMapping("/profile_page")
+		public String redirectToProfile() {
+    	return "profile_page"; // O la URL correcta de tu archivo
+	}
+
+
 	@GetMapping("/newcomment")
 	public String newComment(Model model) {
 
