@@ -205,19 +205,23 @@ public class WebController {
 
 	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/newcourse")
-	public String newCourseProcess(Model model, Course course, MultipartFile imageField) throws IOException {
+	public String newCourseProcess(Model model, @RequestParam String title, @RequestParam String description, @RequestParam MultipartFile imageField) throws IOException {
 
-		if (!imageField.isEmpty()) {
-			course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-			course.setImage(true);
-		}
+    Course course = new Course();
+    course.setTitle(title);
+    course.setDescription(description);
 
-		courseRepository.save(course);
+    if (!imageField.isEmpty()) {
+        course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+        course.setImage(true);
+    }
 
-		model.addAttribute("courseId", course.getId());
+    courseRepository.save(course);
 
-		return "redirect:/courses/" + course.getId();
-	}
+    model.addAttribute("courseId", course.getId());
+
+    return "redirect:/courses/" + course.getId();
+}
 
 	@GetMapping("/editcourse/{id}")
 	public String editCourse(Model model, @PathVariable long id) {
