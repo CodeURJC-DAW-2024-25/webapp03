@@ -1,8 +1,12 @@
 package es.webapp03.backend.service;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.Arrays;
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,8 +18,6 @@ import es.webapp03.backend.repository.MaterialRepository;
 import es.webapp03.backend.repository.CourseRepository;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.model.Course;
-import es.webapp03.backend.model.Material;
-import es.webapp03.backend.model.Commentary;
 import es.webapp03.backend.repository.CommentRepository;
 
 @Service
@@ -36,8 +38,22 @@ public class DatabaseInitializer {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    private Blob loadDefaultImage() {
+        try {
+            InputStream defaultImageStream = getClass().getResourceAsStream("/static/assets/img/portfolio/5.jpg");
+            if (defaultImageStream != null) {
+                byte[] imageBytes = defaultImageStream.readAllBytes();
+                return new SerialBlob(imageBytes);
+            }
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @PostConstruct
     public void init() throws IOException, URISyntaxException {
+        Blob defaultImage = loadDefaultImage();
 
         userRepository.save(new User("Laura", "laura@gmail.com", passwordEncoder.encode("laurapass"), null, "USER"));
         userRepository.save(new User("Domingo", "domingo@gmail.com", passwordEncoder.encode("domingopass"), null, "USER"));
@@ -53,29 +69,24 @@ public class DatabaseInitializer {
         userRepository.save(new User("Raúl", "raul@gmail.com", passwordEncoder.encode("raulpass"), null, "USER"));
         userRepository.save(new User("admin", "admin@gmail.com", passwordEncoder.encode("adminpass"), null, "USER", "ADMIN"));
 
-        Course course1 = new Course("Course 1", "Description 1", null);
+        Course course1 = new Course("Course 1", "Description 1", defaultImage);
         course1.setTags(Arrays.asList("Tag1", "Tag2", "Tag3"));
 
-        Course course2 = new Course("Course 2", "Description 2", null);
+        Course course2 = new Course("Course 2", "Description 2", defaultImage);
         course2.setTags(Arrays.asList("Tag2", "Tag4"));
 
-        Course course3 = new Course("Course 3", "Description 3", null);
+        Course course3 = new Course("Course 3", "Description 3", defaultImage);
         course3.setTags(Arrays.asList("Tag1", "Tag5"));
 
-        Course course4 = new Course("Course 4", "Description 4", null);
+        Course course4 = new Course("Course 4", "Description 4", defaultImage);
         course4.setTags(Arrays.asList("Tag3", "Tag6"));
 
-        Course course5 = new Course("Course 5", "Description 5", null);
+        Course course5 = new Course("Course 5", "Description 5", defaultImage);
         course5.setTags(Arrays.asList("Tag4", "Tag7"));
 
-        Course course6 = new Course("Course 6", "Description 6", null);
+        Course course6 = new Course("Course 6", "Description 6", defaultImage);
         course6.setTags(Arrays.asList("Tag5", "Tag8"));
 
-        courseRepository.save(course1);
-        courseRepository.save(course2);
-        courseRepository.save(course3);
-        courseRepository.save(course4);
-        courseRepository.save(course5);
-        courseRepository.save(course6);
+        courseRepository.saveAll(Arrays.asList(course1, course2, course3, course4, course5, course6));
     }
 }
