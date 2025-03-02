@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>LibACE - Editar Curso</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/LibACE_icon.jpeg" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+    <!-- Navigation-->
+    {{>header}}
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="col-md-4">
+            <h3 class="text-center mb-4">Editar Curso</h3>
+            <form action="/editcourse" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="{{course.id}}" />
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="title-addon"></span>
+                    <input type="text" class="form-control" name="title" placeholder="Nombre del curso"
+                        aria-label="Nombre del curso" aria-describedby="title-addon" value="{{course.title}}" required>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="description-addon"></span>
+                    <textarea class="form-control" name="description" placeholder="Descripción" aria-label="Descripción"
+                        aria-describedby="description-addon" required>{{course.description}}</textarea>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="image-addon"></span>
+                    <input type="file" class="form-control" name="imageField" aria-label="Imagen del curso"
+                        aria-describedby="image-addon">
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" name="removeImage" id="removeImage">
+                    <label class="form-check-label" for="removeImage">Eliminar imagen actual</label>
+                </div>
+
+                <input type="hidden" name="_csrf" value="{{token}}" />
+
+                <button type="submit" class="btn btn-primary w-100">Guardar cambios</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Core theme CSS (includes Bootstrap) -->
+    <link href="/css/styles.css" rel="stylesheet" />
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+
+</html>

@@ -225,49 +225,38 @@ public class WebController {
 
 	@GetMapping("/editcourse/{id}")
 	public String editCourse(Model model, @PathVariable long id) {
-
-		Optional<Course> course = courseRepository.findById(id);
-		if (course.isPresent()) {
-			model.addAttribute("course", course.get());
-			return "createCourse";
-		} else {
-			return "index";
-		}
-	}
+    Optional<Course> course = courseRepository.findById(id);
+    if (course.isPresent()) {
+        model.addAttribute("course", course.get());
+        return "editCourse"; // Devuelve la plantilla de edición
+    } else {
+        return "redirect:/index"; // Si el curso no existe, redirige al índice
+    }
+}
 
 	@PostMapping("/editcourse")
-	public String editCourseProcess(Model model, Course course, boolean removeImage, MultipartFile imageField)
-			throws IOException, SQLException {
+	public String editCourseProcess(Model model, @RequestParam Long id, @RequestParam String title, @RequestParam String description, @RequestParam(required = false) MultipartFile imageField, @RequestParam(required = false) boolean removeImage) throws IOException, SQLException {
+    Optional<Course> optionalCourse = courseRepository.findById(id);
+    if (optionalCourse.isPresent()) {
+        Course course = optionalCourse.get();
+        course.setTitle(title);
+        course.setDescription(description);
 
-		updateImage(course, removeImage, imageField);
+        // Manejo de la imagen
+        if (removeImage) {
+            course.setImageFile(null);
+            course.setImage(false);
+        } else if (!imageField.isEmpty()) {
+            course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+            course.setImage(true);
+        }
 
-		courseRepository.save(course);
-
-		model.addAttribute("courseId", course.getId());
-
-		return "redirect:/courses/" + course.getId();
-	}
-
-	private void updateImage(Course course, boolean removeImage, MultipartFile imageField)
-			throws IOException, SQLException {
-
-		if (!imageField.isEmpty()) {
-			course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-			course.setImage(true);
-		} else {
-			if (removeImage) {
-				course.setImageFile(null);
-				course.setImage(false);
-			} else {
-				// Maintain the same image loading it before updating the book
-				Course dbCourse = courseRepository.findById(course.getId()).orElseThrow();
-				if (dbCourse.getImage()) {
-					course.setImageFile(BlobProxy.generateProxy(dbCourse.getImageFile().getBinaryStream(),
-							dbCourse.getImageFile().length()));
-					course.setImage(true);
-				}
-			}
-		}
-	}
-
+        courseRepository.save(course); // Guarda los cambios en la base de datos
+        return "redirect:/courses/" + course.getId(); // Redirige a la página del curso
+    } else {
+        return "redirect:/index"; // Si el curso no existe, redirige al índice
+    }
 }
+
+} 
+	
