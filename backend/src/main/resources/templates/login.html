@@ -24,20 +24,21 @@
         <div class="container d-flex justify-content-center align-items-center vh-100">
             <div class="col-md-4">
                 <h3 class="text-center mb-4">Inicie sesión</h3>
-                <form>
+                <form method="post" action="/login">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="mail-addon">👤</span>
-                        <input type="text" class="form-control" name="mail" placeholder="Correo" aria-label="Correo" aria-describedby="mail-addon">
+                        <input type="text" class="form-control" name="username" placeholder="Correo" required>
                     </div>
-    
+                
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="password-addon">🔒</span>
-                        <input type="password" class="form-control" name="password" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="password-addon">
+                        <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
                     </div>
-    
+                
                     <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
                 </form>
-                <p class="text-muted text-center">O si no tiene cuenta, <a href="register.html">regístrese aquí</a></p>
+                
+                <p class="text-muted text-center">O si no tiene cuenta, <a href="/register">regístrese aquí</a></p>
             </div>
         </div>
         

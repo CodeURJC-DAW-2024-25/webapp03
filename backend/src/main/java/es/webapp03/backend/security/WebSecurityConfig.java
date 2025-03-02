@@ -33,32 +33,41 @@ public class WebSecurityConfig {
 	}
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		http.authenticationProvider(authenticationProvider());
+    http.authenticationProvider(authenticationProvider());
 
-		http
-				.authorizeHttpRequests(authorize -> authorize
-						// PUBLIC PAGES
-						.requestMatchers("/").permitAll()
-						.requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll() // Allow access to static resources
-						.requestMatchers("/courses/**").permitAll()
-						// PRIVATE PAGES
-						.requestMatchers("/newcourse").hasAnyRole("USER")
-						.requestMatchers("/editcourse").hasAnyRole("USER")
-						.requestMatchers("/editcourse/*").hasAnyRole("USER")
-						.requestMatchers("/removecourse/*").hasAnyRole("ADMIN")
-						.requestMatchers("/newcomment").hasAnyRole("USER"))
-				.formLogin(formLogin -> formLogin
-						.loginPage("/login")
-						.failureUrl("/loginerror")
-						.defaultSuccessUrl("/")
-						.permitAll())
-				.logout(logout -> logout
-						.logoutUrl("/logout")
-						.logoutSuccessUrl("/")
-						.permitAll());
+    http
+        .authorizeHttpRequests(authorize -> authorize
+            // 📌 Páginas públicas
+            .requestMatchers("/", "/index", "/courses/**", "/register", "/registererror").permitAll()
+            .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
+            .requestMatchers("/login", "/logout").permitAll()
 
-		return http.build();
-	}
+            // 📌 Páginas privadas
+            .requestMatchers("/newcourse").hasRole("USER")
+            .requestMatchers("/editcourse/**").hasRole("USER")
+            .requestMatchers("/removecourse/**").hasRole("ADMIN")
+            .requestMatchers("/newcomment").hasRole("USER")
+
+            // 📌 Cualquier otra petición NO DEBE FORZAR AUTENTICACIÓN
+            .anyRequest().permitAll() // 👈 Esto permite todo lo no especificado
+        )
+        .formLogin(formLogin -> formLogin
+            .loginPage("/login")
+            .failureUrl("/loginerror")
+            .defaultSuccessUrl("/")
+            .permitAll()
+        )
+        .logout(logout -> logout
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/")
+            .permitAll()
+        );
+
+    return http.build();
 }
+
+	
+}
+

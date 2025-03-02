@@ -69,7 +69,7 @@ public class WebController {
 		}
 	}
 
-	@GetMapping("/")
+	@GetMapping("/index")
 	public String showCourses(Model model) {
 
 		model.addAttribute("courses", courseRepository.findAll());
@@ -105,7 +105,7 @@ public class WebController {
 		return "register";
 	}
 
-	@PostMapping
+	@PostMapping("/register")
 	public String registerUser(User user, String roleName, Model model) {
 		if (userRepository.findByName(user.getName()) != null) {
 			model.addAttribute("error", "Username taken");
