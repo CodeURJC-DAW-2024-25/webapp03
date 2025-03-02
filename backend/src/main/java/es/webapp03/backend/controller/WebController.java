@@ -188,7 +188,21 @@ public class WebController {
 		return "profile_page";
 	}
 	
+	@GetMapping("/admin/users")
+	public String showAdminUsers(Model model) {
+		List<User> users = userRepository.findByRoles("USER");
+		model.addAttribute("users", users);
+		return "adminUsers";
+	}
+	
 
+	@GetMapping("/deleteuser/{id}")
+	public String deleteUser(@PathVariable long id) {
+    	if (userRepository.existsById(id)) {
+        	userRepository.deleteById(id);
+    	}
+   		return "redirect:/admin/users";
+	}
 
 	@GetMapping("/newcomment")
 	public String newComment(Model model) {

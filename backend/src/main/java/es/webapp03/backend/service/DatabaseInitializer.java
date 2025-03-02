@@ -67,7 +67,7 @@ public class DatabaseInitializer {
         userRepository.save(new User("Sofía", "sofia@gmail.com", passwordEncoder.encode("sofiapass"), null, "USER"));
         userRepository.save(new User("María", "maria@gmail.com", passwordEncoder.encode("mariapass"), null, "USER"));
         userRepository.save(new User("Raúl", "raul@gmail.com", passwordEncoder.encode("raulpass"), null, "USER"));
-        userRepository.save(new User("admin", "admin@gmail.com", passwordEncoder.encode("adminpass"), null, "USER", "ADMIN"));
+        userRepository.save(new User("admin", "admin@gmail.com", passwordEncoder.encode("adminpass"), null, "ADMIN"));
 
         Course course1 = new Course("Course 1", "Description 1", defaultImage);
         course1.setTags(Arrays.asList("Tag1", "Tag2", "Tag3"));
