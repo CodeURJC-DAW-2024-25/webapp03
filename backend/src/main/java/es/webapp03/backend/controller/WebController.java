@@ -183,9 +183,26 @@ public class WebController {
 			if (user.isPresent()) {
 				model.addAttribute("name", user.get().getName());
 				model.addAttribute("email", user.get().getEmail());
+				model.addAttribute("imageFile", "/profile/image");
 			}
 		}
 		return "profile_page";
+	}
+	
+
+	@GetMapping("/profile/image")
+	public ResponseEntity<Object> getProfileImage(Principal principal) throws SQLException {
+    	if (principal != null) {
+        	Optional<User> user = userRepository.findByEmail(principal.getName());
+        	if (user.isPresent() && user.get().getImageFile() != null) {
+            	Resource file = new InputStreamResource(user.get().getImageFile().getBinaryStream());
+            	return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+                    .contentLength(user.get().getImageFile().length())
+                    .body(file);
+        	}
+    	}
+    	return ResponseEntity.notFound().build();
 	}
 	
 	@GetMapping("/admin/users")
@@ -203,6 +220,58 @@ public class WebController {
     	}
    		return "redirect:/admin/users";
 	}
+	
+	@GetMapping("/edit_profile")
+	public String showEditProfile(Model model, Principal principal) {
+		if (principal != null) {
+			Optional<User> user = userRepository.findByEmail(principal.getName());
+			if (user.isPresent()) {
+				model.addAttribute("user", user.get());
+				return "modify_profile";
+			}
+		}
+		return "redirect:/profile_page";
+	}
+	
+	@PostMapping("/edit_profile")
+	public String editProfile(@RequestParam String name, 
+							  @RequestParam String email, 
+							  @RequestParam(required = false) MultipartFile image, 
+							  HttpServletRequest request, 
+							  HttpServletResponse response, 
+							  Principal principal) throws IOException {
+	
+		if (principal != null) {
+			Optional<User> optionalUser = userRepository.findByEmail(principal.getName());
+	
+			if (optionalUser.isPresent()) {
+				User user = optionalUser.get();
+				user.setName(name);
+	
+				boolean emailChanged = !user.getEmail().equals(email);
+				user.setEmail(email);
+	
+				if (image != null && !image.isEmpty()) {
+					user.setImage(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				}
+	
+				userRepository.save(user);
+	
+				if (emailChanged) {
+					request.getSession().invalidate();
+					SecurityContextHolder.clearContext();
+					return "redirect:/login";
+				}
+	
+				return "redirect:/profile_page";
+			}
+		}
+		return "redirect:/edit_profile";
+	}
+	
+	
+	
+
 
 	@GetMapping("/newcomment")
 	public String newComment(Model model) {
