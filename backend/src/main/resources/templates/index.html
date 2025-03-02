@@ -59,6 +59,12 @@
                         <h3 class="section-subheading text-muted">No hay cursos disponibles.</h3>
                     </div>
                     {{/courses}}
+
+                    {{#admin}}
+                    <div class="text-center mt-4">
+                        <a href="/newcourse" class="btn btn-success btn-xl text-uppercase">Crear Nuevo Curso</a>
+                    </div>
+                    {{/admin}}
                 </div>
             </div>
         </section>

@@ -11,10 +11,18 @@
                 </li>
             </ul>
             <!-- Elementos alineados a la derecha -->
+            {{^logged}}
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="/login">Iniciar Sesión</a></li>
                 <li class="nav-item"><a class="nav-link" href="/register">Registrarse</a></li>
             </ul>
+            {{/logged}}
+
+            {{#logged}}
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/profile_page">{{userName}}</a></li>
+            </ul>
+            {{/logged}}
         </div>
     </div>
 </nav>

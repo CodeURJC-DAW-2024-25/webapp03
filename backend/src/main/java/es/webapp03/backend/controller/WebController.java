@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowire;
@@ -14,7 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,6 +60,12 @@ public class WebController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -106,13 +120,34 @@ public class WebController {
 	}
 
 	@PostMapping("/register")
-	public String registerUser(User user, String roleName, Model model) {
-		if (userRepository.findByName(user.getName()) != null) {
-			model.addAttribute("error", "Username taken");
-			return "register";
+	public ResponseEntity<String> registerUser(@RequestParam String name,
+			@RequestParam String email,
+			@RequestParam String password, HttpServletResponse response) {
+
+		try {
+			// Verificar si el usuario ya existe
+			if (userRepository.findByEmail(email).isPresent()) {
+				return ResponseEntity.badRequest().body("El email ya está en uso.");
+			}
+
+			// Encriptar contraseña
+			String encodedPassword = passwordEncoder.encode(password);
+
+			// Crear y guardar usuario con rol "USER" (sin imagen)
+			User newUser = new User(name, email, encodedPassword, null, "USER");
+			userRepository.save(newUser);
+			Authentication authentication = authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(email, password));
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+			// Redirigir a la página de inicio
+			response.sendRedirect("/");
+			return ResponseEntity.ok().build();
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error al registrar usuario: " + e.getMessage());
 		}
-		userService.registerUser(user, roleName);
-		return "index";
+
 	}
 
 	@GetMapping("/courses/{id}/image")
@@ -150,6 +185,12 @@ public class WebController {
 		return "course";
 	}
 
+	@GetMapping("/newcourse")
+	public String showNewCourse() {
+		return "newcourse";
+	}
+
+	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/newcourse")
 	public String newCourseProcess(Model model, Course course, MultipartFile imageField) throws IOException {
 
