@@ -15,6 +15,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -213,7 +214,11 @@ public class WebController {
 	}
 
 	@GetMapping("/PdfTest.html")
-	public String showPdfTestPage() {
+	public String showPdfTestPage(HttpServletRequest request, Model model) {
+		CsrfToken token = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+		if (token != null) {
+			model.addAttribute("token", token.getToken());
+		}
 		return "PdfTest";
 	}
 
