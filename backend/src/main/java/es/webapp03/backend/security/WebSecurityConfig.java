@@ -41,7 +41,7 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests(authorize -> authorize
 						// PUBLIC PAGES
 						.requestMatchers("/").permitAll()
-						.requestMatchers("/images/**").permitAll() // Allow access to static resources
+						.requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll() // Allow access to static resources
 						.requestMatchers("/courses/**").permitAll()
 						// PRIVATE PAGES
 						.requestMatchers("/newcourse").hasAnyRole("USER")
