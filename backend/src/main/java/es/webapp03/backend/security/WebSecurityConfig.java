@@ -14,60 +14,57 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-	@Autowired
-	RepositoryUserDetailsService userDetailsService;
+    @Autowired
+    RepositoryUserDetailsService userDetailsService;
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-		authProvider.setUserDetailsService(userDetailsService);
-		authProvider.setPasswordEncoder(passwordEncoder());
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
 
-		return authProvider;
-	}
+        return authProvider;
+    }
 
-	@Bean
-public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    http.authenticationProvider(authenticationProvider());
+        http.authenticationProvider(authenticationProvider());
 
-    http
-        .authorizeHttpRequests(authorize -> authorize
-            // 📌 Páginas públicas
-            .requestMatchers("/", "/index", "/courses/**", "/register", "/registererror").permitAll()
-            .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
-            .requestMatchers("/login", "/logout").permitAll()
+        http
+                .authorizeHttpRequests(authorize -> authorize
+                        // 📌 Páginas públicas
+                        .requestMatchers("/", "/index", "/courses/**", "/register", "/registererror").permitAll()
+                        .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/login", "/logout").permitAll()
 
-            // 📌 Páginas privadas
-            .requestMatchers("/newcourse").hasRole("USER")
-            .requestMatchers("/editcourse/**").hasRole("USER")
-            .requestMatchers("/removecourse/**").hasRole("ADMIN")
-            .requestMatchers("/newcomment").hasRole("USER")
+                        // 📌 Páginas privadas
+                        .requestMatchers("/newcourse").hasRole("USER")
+                        .requestMatchers("/editcourse/**").hasRole("USER")
+                        .requestMatchers("/removecourse/**").hasRole("ADMIN")
+                        .requestMatchers("/newcomment").hasRole("USER")
 
-            // 📌 Cualquier otra petición NO DEBE FORZAR AUTENTICACIÓN
-            .anyRequest().permitAll() // 👈 Esto permite todo lo no especificado
-        )
-        .formLogin(formLogin -> formLogin
-            .loginPage("/login")
-            .failureUrl("/loginerror")
-            .defaultSuccessUrl("/")
-            .permitAll()
-        )
-        .logout(logout -> logout
-            .logoutUrl("/logout")
-            .logoutSuccessUrl("/")
-            .permitAll()
-        );
+                        // 📌 Cualquier otra petición NO DEBE FORZAR AUTENTICACIÓN
+                        .anyRequest().permitAll() // 👈 Esto permite todo lo no especificado
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .failureUrl("/loginerror")
+                        .defaultSuccessUrl("/")
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .permitAll());
 
-    return http.build();
+        return http.build();
+    }
+
 }
-
-	
-}
-
