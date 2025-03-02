@@ -27,9 +27,22 @@
             fetch('/api/pdf/generate?templateName=' + templateName + '&outputFileName=' + outputFileName, {
                 method: 'POST'
             })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    throw new Error('Error generating PDF');
+                }
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = outputFileName + '.pdf';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
             })
             .catch(error => {
                 console.error('Error:', error);

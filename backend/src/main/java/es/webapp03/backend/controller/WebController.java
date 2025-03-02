@@ -212,4 +212,9 @@ public class WebController {
 		}
 	}
 
+	@GetMapping("/PdfTest.html")
+	public String showPdfTestPage() {
+		return "PdfTest";
+	}
+
 }
