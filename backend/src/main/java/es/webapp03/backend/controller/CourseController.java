@@ -40,7 +40,7 @@ public class CourseController {
 		}
 	}
 
-	@DeleteMapping("/removecourse/{id}")
+	@GetMapping("/removecourse/{id}")
 	public String removeCourse(@PathVariable long id) {
 		if (courseRepository.existsById(id)) {
 			courseRepository.deleteById(id);

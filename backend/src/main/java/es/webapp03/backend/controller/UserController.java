@@ -131,34 +131,39 @@ public class UserController {
 	
 	@PostMapping("/edit_profile")
 	public String editProfile(@RequestParam String name, 
-							  @RequestParam String email, 
-							  @RequestParam(required = false) MultipartFile image, 
-							  HttpServletRequest request, 
-							  HttpServletResponse response, 
-							  Principal principal) throws IOException {
-	
+							@RequestParam String email, 
+							@RequestParam(required = false) String password,
+							@RequestParam(required = false) MultipartFile image, 
+							HttpServletRequest request, 
+							HttpServletResponse response, 
+							Principal principal) throws IOException {
+
 		if (principal != null) {
 			Optional<User> optionalUser = userRepository.findByEmail(principal.getName());
-	
+
 			if (optionalUser.isPresent()) {
 				User user = optionalUser.get();
 				user.setName(name);
-	
+
 				boolean emailChanged = !user.getEmail().equals(email);
 				user.setEmail(email);
-	
+
+				if (password != null && !password.isEmpty()) {
+					user.setEncodedPassword(passwordEncoder.encode(password));
+				}
+
 				if (image != null && !image.isEmpty()) {
 					user.setImage(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
 				}
-	
+
 				userRepository.save(user);
-	
+
 				if (emailChanged) {
 					request.getSession().invalidate();
 					SecurityContextHolder.clearContext();
 					return "redirect:/login";
 				}
-	
+
 				return "redirect:/profile_page";
 			}
 		}
