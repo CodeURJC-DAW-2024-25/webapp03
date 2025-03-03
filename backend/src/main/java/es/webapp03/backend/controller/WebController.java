@@ -91,64 +91,6 @@ public class WebController {
 		return "index";
 	}
 
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
-
-	@RequestMapping("/loginerror")
-	public String loginerror() {
-		return "error";
-	}
-
-	@GetMapping("/courses/{id}")
-	public String showCourse(Model model, @PathVariable long id) {
-
-		Optional<Course> course = courseRepository.findById(id);
-		if (course.isPresent()) {
-			model.addAttribute("course", course.get());
-			return "course";
-		} else {
-			return "index";
-		}
-	}
-
-	@GetMapping("/register")
-	public String showRegisterForm(Model model) {
-
-		return "register";
-	}
-
-	@PostMapping("/register")
-	public ResponseEntity<String> registerUser(@RequestParam String name,
-			@RequestParam String email,
-			@RequestParam String password, HttpServletResponse response) {
-
-		try {
-			// Verificar si el usuario ya existe
-			if (userRepository.findByEmail(email).isPresent()) {
-				return ResponseEntity.badRequest().body("El email ya está en uso.");
-			}
-
-			// Encriptar contraseña
-			String encodedPassword = passwordEncoder.encode(password);
-
-			// Crear y guardar usuario con rol "USER" (sin imagen)
-			User newUser = new User(name, email, encodedPassword, null, "USER");
-			userRepository.save(newUser);
-			Authentication authentication = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(email, password));
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-
-			// Redirigir a la página de inicio
-			response.sendRedirect("/");
-			return ResponseEntity.ok().build();
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("Error al registrar usuario: " + e.getMessage());
-		}
-
-	}
 
 	@GetMapping("/courses/{id}/image")
 	public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
@@ -166,14 +108,6 @@ public class WebController {
 		}
 	}
 
-	@GetMapping("/removecourse/{id}")
-	public String removeCourse(@PathVariable long id) {
-		if (courseRepository.existsById(id)) {
-			courseRepository.deleteById(id);
-		}
-		return "redirect:/";
-	}
-
 	@GetMapping("/profile_page")
 	public String showProfilePage(Model model, Principal principal) {
 		if (principal != null) {
@@ -187,90 +121,13 @@ public class WebController {
 		}
 		return "profile_page";
 	}
-	
-	@GetMapping("/admin/users")
-	public String showAdminUsers(Model model) {
-		List<User> users = userRepository.findByRoles("USER");
-		model.addAttribute("users", users);
-		return "adminUsers";
-	}
-	
-
-	@GetMapping("/deleteuser/{id}")
-	public String deleteUser(@PathVariable long id) {
-    	if (userRepository.existsById(id)) {
-        	userRepository.deleteById(id);
-    	}
-   		return "redirect:/admin/users";
-	}
-
-	@GetMapping("/newcomment")
-	public String newComment(Model model) {
-
-		model.addAttribute("comment", commentRepository.findAll());
-
-		return "course";
-	}
 
 	@GetMapping("/newcourse")
 	public String showNewCourse() {
 		return "newcourse";
 	}
 
-	@PreAuthorize("hasRole('USER')")
-	@PostMapping("/newcourse")
-	public String newCourseProcess(Model model, @RequestParam String title, @RequestParam String description, @RequestParam MultipartFile imageField) throws IOException {
-
-    Course course = new Course();
-    course.setTitle(title);
-    course.setDescription(description);
-
-    if (!imageField.isEmpty()) {
-        course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-        course.setImage(true);
-    }
-
-    courseRepository.save(course);
-
-    model.addAttribute("courseId", course.getId());
-
-    return "redirect:/courses/" + course.getId();
-}
-
-	@GetMapping("/editcourse/{id}")
-	public String editCourse(Model model, @PathVariable long id) {
-    Optional<Course> course = courseRepository.findById(id);
-    if (course.isPresent()) {
-        model.addAttribute("course", course.get());
-        return "editCourse"; // Devuelve la plantilla de edición
-    } else {
-        return "redirect:/index"; // Si el curso no existe, redirige al índice
-    }
-}
-
-	@PostMapping("/editcourse")
-	public String editCourseProcess(Model model, @RequestParam Long id, @RequestParam String title, @RequestParam String description, @RequestParam(required = false) MultipartFile imageField, @RequestParam(required = false) boolean removeImage) throws IOException, SQLException {
-    Optional<Course> optionalCourse = courseRepository.findById(id);
-    if (optionalCourse.isPresent()) {
-        Course course = optionalCourse.get();
-        course.setTitle(title);
-        course.setDescription(description);
-
-        // Manejo de la imagen
-        if (removeImage) {
-            course.setImageFile(null);
-            course.setImage(false);
-        } else if (!imageField.isEmpty()) {
-            course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-            course.setImage(true);
-        }
-
-        courseRepository.save(course); // Guarda los cambios en la base de datos
-        return "redirect:/courses/" + course.getId(); // Redirige a la página del curso
-    } else {
-        return "redirect:/index"; // Si el curso no existe, redirige al índice
-    }
-}
+	
 
 } 
 	
