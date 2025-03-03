@@ -117,10 +117,16 @@ public class WebController {
 			if (user.isPresent()) {
 				model.addAttribute("name", user.get().getName());
 				model.addAttribute("email", user.get().getEmail());
+				model.addAttribute("imageFile", "/profile/image");
 			}
 		}
 		return "profile_page";
 	}
+	
+	
+	
+
+	
 
 	@GetMapping("/newcourse")
 	public String showNewCourse() {
