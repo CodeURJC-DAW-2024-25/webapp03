@@ -2,6 +2,8 @@ package es.webapp03.backend.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.ui.Model;
@@ -47,24 +49,37 @@ public class CourseController {
 	}
 
 	@PreAuthorize("hasRole('USER')")
-	@PostMapping("/newcourse")
-	public String newCourseProcess(Model model, @RequestParam String title, @RequestParam String description, @RequestParam MultipartFile imageField) throws IOException {
+	@GetMapping("/courses/filter")
+public String filterCoursesByTags(@RequestParam List<String> tags, Model model) {
+    List<Course> filteredCourses = courseRepository.findByTags(tags);
+    model.addAttribute("courses", filteredCourses);
+    return "index"; // Devuelve la vista index con los cursos filtrados
+}
 
-		Course course = new Course();
-		course.setTitle(title);
-		course.setDescription(description);
+@PostMapping("/newcourse")
+public String newCourseProcess(Model model, @RequestParam String title, @RequestParam String description, @RequestParam(required = false) MultipartFile imageField, @RequestParam String tags) throws IOException {
 
-		if (!imageField.isEmpty()) {
-			course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-			course.setImage(true);
-		}
+    Course course = new Course();
+    course.setTitle(title);
+    course.setDescription(description);
 
-		courseRepository.save(course);
+    // Procesar los tags (separados por comas)
+    List<String> tagList = Arrays.asList(tags.split(","));
+    course.setTags(tagList);
 
-		model.addAttribute("courseId", course.getId());
+    // Manejo de la imagen
+    if (!imageField.isEmpty()) {
+        course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+        course.setImage(true);
+    }
 
-		return "redirect:/courses/" + course.getId();
-	}
+    courseRepository.save(course); // Guarda el curso en la base de datos
+
+    model.addAttribute("courseId", course.getId());
+
+    return "redirect:/courses/" + course.getId(); // Redirige a la página del curso
+}
+
 
 	@GetMapping("/editcourse/{id}")
 	public String editCourse(Model model, @PathVariable long id) {
@@ -100,5 +115,7 @@ public class CourseController {
 			return "redirect:/index"; // Si el curso no existe, redirige al índice
 		}
 	}
+
+	
     
 }

@@ -1,135 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>LibACE</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/LibACE_icon.jpeg" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    
-    <body id="page-top">
-        <!-- Navigation-->
-        {{>header}}
-        
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container">
-                <div class="masthead-subheading">¡Bienvenido a LibACE!</div>
-                <div class="masthead-heading text-uppercase">¿Preparado para aprender?</div>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>LibACE</title>
+    <!-- Favicon (ruta absoluta) -->
+    <link rel="icon" type="image/x-icon" href="/assets/LibACE_icon.jpeg" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (ruta absoluta) -->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+    <!-- Navigation-->
+    {{>header}}
+
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">¡Bienvenido a LibACE!</div>
+            <div class="masthead-heading text-uppercase">¿Preparado para aprender?</div>
+        </div>
+    </header>
+
+    <!-- Portfolio Grid-->
+    <section class="page-section bg-light" id="portfolio">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Cursos</h2>
+                <h3 class="section-subheading text-muted">A continuación se encuentran los cursos disponibles.</h3>
             </div>
-        </header>
-        
-        <!-- Portfolio Grid-->
-        <section class="page-section bg-light" id="portfolio">
-            <div class="container">
+            <div class="row">
+                {{#courses}}
+                <!-- Portfolio item -->
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{id}}">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img class="img-fluid" src="/courses/{{id}}/image" alt="{{title}}" />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">{{title}}</div>
+                            <div class="portfolio-caption-subheading text-muted">
+                                {{#tags}}
+                                <span class="badge bg-secondary">{{.}}</span>
+                                {{/tags}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/courses}}
+                {{^courses}}
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Cursos</h2>
-                    <h3 class="section-subheading text-muted">A continuación se encuentran los cursos disponibles.</h3>
+                    <h3 class="section-subheading text-muted">No hay cursos disponibles.</h3>
                 </div>
-                <div class="row">
-                    {{#courses}}
-                    <!-- Portfolio item -->
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{id}}">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="/courses/{{id}}/image" alt="{{title}}" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">{{title}}</div>
-                                <div class="portfolio-caption-subheading text-muted">{{tags}}</div>
+                {{/courses}}
+
+                <!-- Portfolio Modals-->
+                {{#courses}}
+                <div class="portfolio-modal modal fade" id="portfolioModal{{id}}" tabindex="-1" role="dialog"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                                    alt="Close modal" />
                             </div>
-                        </div>
-                    </div>
-                    {{/courses}}
-                    {{^courses}}
-                    <div class="text-center">
-                        <h3 class="section-subheading text-muted">No hay cursos disponibles.</h3>
-                    </div>
-                    {{/courses}}
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8">
+                                        <div class="modal-body">
+                                            <h2 class="text-uppercase">{{title}}</h2>
+                                            <img class="img-fluid" src="/courses/{{id}}/image" alt="{{title}}" />
+                                            <p>{{description}}</p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <strong>Categorías:</strong>
+                                                    {{tags}}
+                                                </li>
+                                            </ul>
+                                            <a class="btn btn-primary btn-xl text-uppercase" href="/courses/{{id}}">
+                                                Ir al Curso
+                                            </a>
 
-                    <!-- Botón para crear un nuevo curso (Solo administradores) -->
-                    {{#admin}}
-                    <div class="text-center mt-4">
-                        <a href="/newcourse" class="btn btn-success btn-xl text-uppercase">Crear Nuevo Curso</a>
-                        <a href="/admin/users" class="btn btn-secondary btn-xl text-uppercase">Lista de usuarios</a>
-                    </div>
-                    {{/admin}}
-                </div>
-            </div>
-        </section>
-
-        <!-- Portfolio Modals-->
-        {{#courses}}
-        <div class="portfolio-modal modal fade" id="portfolioModal{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <h2 class="text-uppercase">{{title}}</h2>
-                                    <img class="img-fluid" src="/courses/{{id}}/image" alt="{{title}}" />
-                                    <p>{{description}}</p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <strong>Categorías:</strong>
-                                            {{tags}}
-                                        </li>
-                                    </ul>
-                                    <a class="btn btn-primary btn-xl text-uppercase" href="/courses/{{id}}">
-                                        Ir al Curso
-                                    </a>
-
-                                    <!-- Opciones de edición y eliminación (Solo administradores) -->
-                                    {{#admin}}  
-                                    <a class="btn btn-secondary btn-xl text-uppercase" href="/editcourse/{{id}}">
-                                        Modificar Curso
-                                    </a>
-                                    <a class="btn btn-danger btn-xl text-uppercase" href="/removecourse/{{id}}">
-                                        <i class="fas fa-xmark me-1"></i>
-                                        Borrar Curso
-                                    </a>
-                                    {{/admin}}  
+                                            <!-- Opciones de edición y eliminación (Solo administradores) -->
+                                            {{#admin}}
+                                            <a class="btn btn-secondary btn-xl text-uppercase"
+                                                href="/editcourse/{{id}}">
+                                                Modificar Curso
+                                            </a>
+                                            <a class="btn btn-danger btn-xl text-uppercase" href="/removecourse/{{id}}">
+                                                <i class="fas fa-xmark me-1"></i>
+                                                Borrar Curso
+                                            </a>
+                                            {{/admin}}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {{/courses}}
+
+                <!-- Botón para crear un nuevo curso (Solo administradores) -->
+                {{#admin}}
+                <div class="text-center mt-4">
+                    <a href="/newcourse" class="btn btn-success btn-xl text-uppercase">Crear Nuevo Curso</a>
+                    <a href="/admin/users" class="btn btn-secondary btn-xl text-uppercase">Lista de usuarios</a>
+                </div>
+                {{/admin}}
             </div>
         </div>
-        {{/courses}}
+    </section>
 
-        <!-- Statistics Section -->
-        <section class="page-section" id="course-stats">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Estadísticas de Usuarios por Curso</h2>
-                    <h3 class="section-subheading text-muted">Distribución de estudiantes en cada curso</h3>
-                </div>
-                <canvas id="courseChart"></canvas>
+    <!-- Statistics Section -->
+    <section class="page-section" id="course-stats">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Estadísticas de Usuarios por Curso</h2>
+                <h3 class="section-subheading text-muted">Distribución de estudiantes en cada curso</h3>
             </div>
-        </section>
+            <canvas id="courseChart"></canvas>
+        </div>
+    </section>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="js/chart.js"></script>
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+    <!--FILTRO -->
+    <div class="container mt-3">
+        <form action="/courses/filter" method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="tags" placeholder="Filtrar por tags (separados por comas)"
+                    aria-label="Filtrar por tags" aria-describedby="filter-button">
+                <button class="btn btn-outline-secondary" type="submit" id="filter-button">Filtrar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap core JS (ruta absoluta) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS (ruta absoluta) -->
+    <script src="/js/scripts.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/chart.js"></script>
+</body>
+
+
 </html>
