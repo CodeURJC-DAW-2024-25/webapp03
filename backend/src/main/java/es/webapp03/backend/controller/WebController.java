@@ -89,15 +89,18 @@ public class WebController {
 	}
 
 	@GetMapping("/courses/{id}")
-	public String showCourse(Model model, @PathVariable long id) {
-
+	public String showCourse(Model model, @PathVariable long id, Principal principal) {
+	
 		Optional<Course> course = courseRepository.findById(id);
-		if (course.isPresent()) {
-			model.addAttribute("course", course.get());
-			return "course";
-		} else {
-			return "index";
+		if (principal != null) {
+			User user = userRepository.findByName(principal.getName()).orElse(null);
+			if (course.isPresent() && user != null) {
+				model.addAttribute("course", course.get());
+				model.addAttribute("user", user);
+				return "course";
+			}
 		}
+		return "index";
 	}
 
 	@GetMapping("/register")
