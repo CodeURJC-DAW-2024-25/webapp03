@@ -94,7 +94,7 @@ public class UserController {
 		return "adminUsers";
 	}
 
-	@DeleteMapping("/deleteuser/{id}")
+	@GetMapping("/deleteuser/{id}")
 	public String deleteUser(@PathVariable long id) {
     	if (userRepository.existsById(id)) {
         	userRepository.deleteById(id);
