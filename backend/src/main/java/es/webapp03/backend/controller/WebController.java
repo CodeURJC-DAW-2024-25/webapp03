@@ -91,7 +91,6 @@ public class WebController {
 		return "index";
 	}
 
-
 	@GetMapping("/courses/{id}/image")
 	public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
 
@@ -113,7 +112,7 @@ public class WebController {
 		if (principal != null) {
 			String email = principal.getName();
 			Optional<User> user = userRepository.findByEmail(email);
-	
+
 			if (user.isPresent()) {
 				model.addAttribute("name", user.get().getName());
 				model.addAttribute("email", user.get().getEmail());
@@ -122,18 +121,10 @@ public class WebController {
 		}
 		return "profile_page";
 	}
-	
-	
-	
-
-	
 
 	@GetMapping("/newcourse")
 	public String showNewCourse() {
 		return "newcourse";
 	}
 
-	
-
-} 
-	
+}
