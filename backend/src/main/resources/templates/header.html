@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #212529 !important;">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
             <span class="navbar-toggler-icon"></span>
@@ -11,10 +11,26 @@
                 </li>
             </ul>
             <!-- Elementos alineados a la derecha -->
+            {{^logged}}
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="/login">Iniciar Sesión</a></li>
                 <li class="nav-item"><a class="nav-link" href="/register">Registrarse</a></li>
             </ul>
+            {{/logged}}
+
+            {{#logged}}
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/profile_page">
+                    {{userName}}
+                </a></li>
+                <li class="nav-item">
+                    <form action="/logout" method="post" class="d-inline">
+                        <button class="btn btn-primary btn-nowrap" type="submit">Log Out</button>
+                        <input type="hidden" name="_csrf" value="{{token}}" />
+                    </form>
+                </li>
+            </ul>
+            {{/logged}}
         </div>
     </div>
 </nav>

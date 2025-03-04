@@ -1,7 +1,10 @@
 package es.webapp03.backend.model;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,8 +33,8 @@ public class Course {
     @ManyToMany(mappedBy = "courses")
     private List<User> users;
 
-    @OneToMany(mappedBy = "course")
-    private List<Material> materials;
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Material> materials = new ArrayList<>();
 
     @ElementCollection
     private List<String> tags;

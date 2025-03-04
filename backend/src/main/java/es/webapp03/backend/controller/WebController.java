@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowire;
@@ -14,8 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +61,12 @@ public class WebController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private AuthenticationManager authenticationManager;
+
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
 
@@ -78,65 +91,6 @@ public class WebController {
 		return "index";
 	}
 
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
-
-	@RequestMapping("/loginerror")
-	public String loginerror() {
-		return "error";
-	}
-
-@GetMapping("/courses/{id}")
-public String showCourse(Model model, @PathVariable long id, Principal principal) {
-
-	Optional<Course> course = courseRepository.findById(id);
-	if (principal != null) {
-		User user = userRepository.findByName(principal.getName()).orElse(null);
-		if (course.isPresent() && user != null) {
-			model.addAttribute("course", course.get());
-			model.addAttribute("user", user);
-			return "course";
-		}
-	}
-	return "index";
-}
-
-	// @GetMapping("/courses/{id}")
-	// public String showCourse(Model model, @PathVariable long id, Principal principal) {
-	
-	// 	Optional<Course> course = courseRepository.findById(id);
-	// 	Blob courseimage = course.isPresent() ? course.get().getImageFile() : null;
-	// 	if (principal != null) {
-	// 		User user = userRepository.findByName(principal.getName()).orElse(null);
-	// 		if (course.isPresent() && user != null) {
-	// 			model.addAttribute("course", course.get());
-	// 			model.addAttribute("user", user);
-	// 			model.addAttribute("course", user)
-	// 			return "course";
-	// 		}
-	// 	}
-	// 	return "index";
-	// }
-
-
-	@GetMapping("/register")
-	public String showRegisterForm(Model model) {
-
-		return "register";
-	}
-
-	@PostMapping("/register")
-	public String registerUser(User user, String roleName, Model model) {
-		if (userRepository.findByName(user.getName()) != null) {
-			model.addAttribute("error", "Username taken");
-			return "register";
-		}
-		userService.registerUser(user, roleName);
-		return "index";
-	}
-
 	@GetMapping("/courses/{id}/image")
 	public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
 
@@ -153,86 +107,24 @@ public String showCourse(Model model, @PathVariable long id, Principal principal
 		}
 	}
 
-	@GetMapping("/removecourse/{id}")
-	public String removeCourse(Model model, @PathVariable long id) {
+	@GetMapping("/profile_page")
+	public String showProfilePage(Model model, Principal principal) {
+		if (principal != null) {
+			String email = principal.getName();
+			Optional<User> user = userRepository.findByEmail(email);
 
-		Optional<Course> course = courseRepository.findById(id);
-		if (course.isPresent()) {
-			courseRepository.deleteById(id);
-			model.addAttribute("course", course.get());
-		}
-		return "index";
-	}
-
-	@GetMapping("/newcomment")
-	public String newComment(Model model) {
-
-		model.addAttribute("comment", commentRepository.findAll());
-
-		return "course";
-	}
-
-	@PostMapping("/newcourse")
-	public String newCourseProcess(Model model, Course course, MultipartFile imageField) throws IOException {
-
-		if (!imageField.isEmpty()) {
-			course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-			course.setImage(true);
-		}
-
-		courseRepository.save(course);
-
-		model.addAttribute("courseId", course.getId());
-
-		return "redirect:/courses/" + course.getId();
-	}
-
-	@GetMapping("/editcourse/{id}")
-	public String editCourse(Model model, @PathVariable long id) {
-
-		Optional<Course> course = courseRepository.findById(id);
-		if (course.isPresent()) {
-			model.addAttribute("course", course.get());
-			return "createCourse";
-		} else {
-			return "index";
-		}
-	}
-
-	@PostMapping("/editcourse")
-	public String editCourseProcess(Model model, Course course, boolean removeImage, MultipartFile imageField)
-			throws IOException, SQLException {
-
-		updateImage(course, removeImage, imageField);
-
-		courseRepository.save(course);
-
-		model.addAttribute("courseId", course.getId());
-
-		return "redirect:/courses/" + course.getId();
-	}
-
-	private void updateImage(Course course, boolean removeImage, MultipartFile imageField)
-			throws IOException, SQLException {
-
-		if (!imageField.isEmpty()) {
-			course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-			course.setImage(true);
-		} else {
-			if (removeImage) {
-				course.setImageFile(null);
-				course.setImage(false);
-			} else {
-				// Maintain the same image loading it before updating the book
-				Course dbCourse = courseRepository.findById(course.getId()).orElseThrow();
-				if (dbCourse.getImage()) {
-					course.setImageFile(BlobProxy.generateProxy(dbCourse.getImageFile().getBinaryStream(),
-							dbCourse.getImageFile().length()));
-					course.setImage(true);
-				}
+			if (user.isPresent()) {
+				model.addAttribute("name", user.get().getName());
+				model.addAttribute("email", user.get().getEmail());
+				model.addAttribute("imageFile", "/profile/image");
 			}
 		}
+		return "profile_page";
 	}
 
+	@GetMapping("/newcourse")
+	public String showNewCourse() {
+		return "newcourse";
+	}
 
 }

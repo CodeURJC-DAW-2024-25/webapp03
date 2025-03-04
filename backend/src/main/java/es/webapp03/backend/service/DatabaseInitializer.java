@@ -52,48 +52,57 @@ public class DatabaseInitializer {
         return null;
     }
 
+    private Blob loadDefaultUserImage() {
+        try {
+            InputStream defaultUserImageStream = getClass().getResourceAsStream("/static/assets/user_image_default.jpg");
+            if (defaultUserImageStream != null) {
+                byte[] imageBytes = defaultUserImageStream.readAllBytes();
+                return new SerialBlob(imageBytes);
+            }
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+
     @PostConstruct
     public void init() throws IOException, URISyntaxException {
-        Blob defaultImage = loadDefaultImage();
-
-        // Create users
-        User user1 = new User("Laura", "laura@gmail.com", passwordEncoder.encode("laurapass"), null, "USER");
-        User user2 = new User("Domingo", "domingo@gmail.com", passwordEncoder.encode("domingopass"), null, "USER");
-        User user3 = new User("Marcos", "marcos@gmail.com", passwordEncoder.encode("marcospass"), null, "USER");
-        User user4 = new User("Juan", "juan@gmail.com", passwordEncoder.encode("juanpass"), null, "USER");
-        User user5 = new User("Sergio", "sergio@gmail.com", passwordEncoder.encode("sergiopass"), null, "USER");
-        User user6 = new User("David", "david@gmail.com", passwordEncoder.encode("davidpass"), null, "USER");
-        User user7 = new User("Paula", "paula@gmail.com", passwordEncoder.encode("paulapass"), null, "USER");
-        User user8 = new User("Gonzalo", "gonzalo@gmail.com", passwordEncoder.encode("gonzalopass"), null, "USER");
-        User user9 = new User("Marta", "marta@gmail.com", passwordEncoder.encode("martapass"), null, "USER");
-        User user10 = new User("Sofía", "sofia@gmail.com", passwordEncoder.encode("sofiapass"), null, "USER");
-        User user11 = new User("María", "maria@gmail.com", passwordEncoder.encode("mariapass"), null, "USER");
-        User user12 = new User("Raúl", "raul@gmail.com", passwordEncoder.encode("raulpass"), null, "USER");
-        User admin = new User("admin", "admin@gmail.com", passwordEncoder.encode("adminpass"), null, "USER", "ADMIN");
-
-        // Save users to the repository
-        userRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12, admin));
-
-        // Create courses
-        Course course1 = new Course("Course 1", "Description 1", defaultImage);
+        Blob defaultCourseImage = loadDefaultImage(); // Imagen por defecto para cursos
+        Blob defaultUserImage = loadDefaultUserImage(); // Imagen por defecto para usuarios
+    
+        userRepository.save(new User("Laura", "laura@gmail.com", passwordEncoder.encode("laurapass"), defaultUserImage, "USER"));
+        userRepository.save(new User("Domingo", "domingo@gmail.com", passwordEncoder.encode("domingopass"), defaultUserImage, "USER"));
+        userRepository.save(new User("Marcos", "marcos@gmail.com", passwordEncoder.encode("marcospass"), defaultUserImage, "USER"));
+        userRepository.save(new User("Juan", "juan@gmail.com", passwordEncoder.encode("juanpass"), defaultUserImage, "USER"));
+        userRepository.save(new User("Sergio", "sergio@gmail.com", passwordEncoder.encode("sergiopass"), defaultUserImage, "USER"));
+        userRepository.save(new User("David", "david@gmail.com", passwordEncoder.encode("davidpass"), defaultUserImage, "USER"));
+        userRepository.save(new User("Paula", "paula@gmail.com", passwordEncoder.encode("paulapass"), defaultUserImage, "USER"));
+        userRepository.save(new User("Gonzalo", "gonzalo@gmail.com", passwordEncoder.encode("gonzalopass"), defaultUserImage, "USER"));
+        userRepository.save(new User("Marta", "marta@gmail.com", passwordEncoder.encode("martapass"), defaultUserImage, "USER"));
+        userRepository.save(new User("Sofía", "sofia@gmail.com", passwordEncoder.encode("sofiapass"), defaultUserImage, "USER"));
+        userRepository.save(new User("María", "maria@gmail.com", passwordEncoder.encode("mariapass"), defaultUserImage, "USER"));
+        userRepository.save(new User("Raúl", "raul@gmail.com", passwordEncoder.encode("raulpass"), defaultUserImage, "USER"));
+        userRepository.save(new User("admin", "admin@gmail.com", passwordEncoder.encode("adminpass"), defaultUserImage, "ADMIN"));
+    
+        Course course1 = new Course("Course 1", "Description 1", defaultCourseImage);
         course1.setTags(Arrays.asList("Tag1", "Tag2", "Tag3"));
-
-        Course course2 = new Course("Course 2", "Description 2", defaultImage);
+    
+        Course course2 = new Course("Course 2", "Description 2", defaultCourseImage);
         course2.setTags(Arrays.asList("Tag2", "Tag4"));
-
-        Course course3 = new Course("Course 3", "Description 3", defaultImage);
+    
+        Course course3 = new Course("Course 3", "Description 3", defaultCourseImage);
         course3.setTags(Arrays.asList("Tag1", "Tag5"));
-
-        Course course4 = new Course("Course 4", "Description 4", defaultImage);
+    
+        Course course4 = new Course("Course 4", "Description 4", defaultCourseImage);
         course4.setTags(Arrays.asList("Tag3", "Tag6"));
-
-        Course course5 = new Course("Course 5", "Description 5", defaultImage);
+    
+        Course course5 = new Course("Course 5", "Description 5", defaultCourseImage);
         course5.setTags(Arrays.asList("Tag4", "Tag7"));
-
-        Course course6 = new Course("Course 6", "Description 6", defaultImage);
+    
+        Course course6 = new Course("Course 6", "Description 6", defaultCourseImage);
         course6.setTags(Arrays.asList("Tag5", "Tag8"));
-
-        // Save courses to the repository
+    
         courseRepository.saveAll(Arrays.asList(course1, course2, course3, course4, course5, course6));
 
         // Assign courses to users
@@ -114,4 +123,5 @@ public class DatabaseInitializer {
         // Save users again to update the courses
         userRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12, admin));
     }
+    
 }

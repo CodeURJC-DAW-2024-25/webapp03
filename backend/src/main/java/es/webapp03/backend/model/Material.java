@@ -1,8 +1,6 @@
 package es.webapp03.backend.model;
 
-import java.sql.Blob;
-import java.util.List;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Material {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,18 +25,19 @@ public class Material {
     private String url;
 
     @Lob
-	private Blob file;
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] file;
 
     public Material() {
         // Constructor vacío requerido por JPA
     }
 
-    public Material(String name, String type, String url, Blob file) {
-		this.name = name;
-		this.type = type;
-		this.url = url;
-		this.file = file;
-	}
+    public Material(String name, String type, byte[] file, Course course) {
+        this.name = name;
+        this.type = type;
+        this.course = course;
+        this.file = file;
+    }
 
     public String getName() {
         return name;
@@ -64,11 +63,11 @@ public class Material {
         this.url = url;
     }
 
-    public Blob getFile() {
+    public byte[] getFile() {
         return file;
     }
 
-    public void setFile(Blob file) {
+    public void setFile(byte[] file) {
         this.file = file;
     }
 
