@@ -21,63 +21,39 @@
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            text-align: center;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
+        .congratulations {
+            font-size: 24px;
+            color: #28a745;
+            margin-top: 20px;
         }
-        th, td {
-            padding: 12px;
-            border: 1px solid #dee2e6;
-            text-align: left;
-        }
-        th {
-            background-color: #343a40;
-            color: #fff;
-        }
-        .diploma th {
-            background-color: #6c757d;
-        }
-        .diploma td {
-            background-color: #f8f9fa;
+        .course-info {
+            font-size: 20px;
+            color: #007bff;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Diploma</h1>
-        <table>
-            <tr>
-                <th colspan="2">User Information</th>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>{{user.name}}</td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>{{user.email}}</td>
-            </tr>
-            <tr>
-                <td>Roles</td>
-                <td>{{#user.roles}}{{.}}, {{/user.roles}}</td>
-            </tr>
-        </table>
-        <table class="diploma">
-            <tr>
-                <th>Course #</th>
-                <th>Title</th>
-                <th>Description</th>
-            </tr>
-            {{#user.courses}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{title}}</td>
-                <td>{{description}}</td>
-            </tr>
-            {{/user.courses}}
-        </table>
+        <p class="congratulations">¡Felicidades {{user.name}}!</p>
+        {{#course}}
+        <p class="course-info">Has completado: {{course.title}}</p>
+        {{#image}}
+        <img class="course-image" src="/courses/{{id}}/image" alt="{{title}}">
+        {{/image}}
+        {{^image}}
+        <p class="course-info">Imagen del curso no disponible.</p>
+        {{/image}}
+        {{/course}}
+        {{^course}}
+        <p class="course-info">Has completado: Curso Papiroflexia</p>
+        
+        
+        {{/course}}
     </div>
+    
 </body>
 </html>

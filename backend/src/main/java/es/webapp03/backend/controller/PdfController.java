@@ -46,8 +46,8 @@ public class PdfController {
             // Prepare data for the template
             Map<String, Object> modelMap = new HashMap<>();
             modelMap.put("user", user);
-            modelMap.put("roles", user.getRoles());
-            modelMap.put("courses", user.getCourses());
+            
+            
 
             // Generate PDF
             byte[] pdfBytes = pdfService.generatePdfFromTemplate(templateContent, modelMap);

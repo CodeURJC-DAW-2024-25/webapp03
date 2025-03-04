@@ -88,20 +88,38 @@ public class WebController {
 		return "error";
 	}
 
-	@GetMapping("/courses/{id}")
-	public String showCourse(Model model, @PathVariable long id, Principal principal) {
-	
-		Optional<Course> course = courseRepository.findById(id);
-		if (principal != null) {
-			User user = userRepository.findByName(principal.getName()).orElse(null);
-			if (course.isPresent() && user != null) {
-				model.addAttribute("course", course.get());
-				model.addAttribute("user", user);
-				return "course";
-			}
+@GetMapping("/courses/{id}")
+public String showCourse(Model model, @PathVariable long id, Principal principal) {
+
+	Optional<Course> course = courseRepository.findById(id);
+	if (principal != null) {
+		User user = userRepository.findByName(principal.getName()).orElse(null);
+		if (course.isPresent() && user != null) {
+			model.addAttribute("course", course.get());
+			model.addAttribute("user", user);
+			return "course";
 		}
-		return "index";
 	}
+	return "index";
+}
+
+	// @GetMapping("/courses/{id}")
+	// public String showCourse(Model model, @PathVariable long id, Principal principal) {
+	
+	// 	Optional<Course> course = courseRepository.findById(id);
+	// 	Blob courseimage = course.isPresent() ? course.get().getImageFile() : null;
+	// 	if (principal != null) {
+	// 		User user = userRepository.findByName(principal.getName()).orElse(null);
+	// 		if (course.isPresent() && user != null) {
+	// 			model.addAttribute("course", course.get());
+	// 			model.addAttribute("user", user);
+	// 			model.addAttribute("course", user)
+	// 			return "course";
+	// 		}
+	// 	}
+	// 	return "index";
+	// }
+
 
 	@GetMapping("/register")
 	public String showRegisterForm(Model model) {
@@ -216,13 +234,5 @@ public class WebController {
 		}
 	}
 
-	@GetMapping("/PdfTest.html")
-	public String showPdfTestPage(HttpServletRequest request, Model model) {
-		CsrfToken token = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
-		if (token != null) {
-			model.addAttribute("token", token.getToken());
-		}
-		return "PdfTest";
-	}
 
 }
