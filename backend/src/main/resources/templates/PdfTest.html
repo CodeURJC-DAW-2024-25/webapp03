@@ -15,6 +15,7 @@
         <input type="text" id="outputFileName" name="outputFileName" value="diploma" required>
         <br><br>
         <button type="submit">Generate PDF</button>
+        <input type="hidden" name="_csrf" value="{{token}}" />
     </form>
 
     <script>
