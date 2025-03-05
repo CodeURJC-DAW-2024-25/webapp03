@@ -33,6 +33,11 @@
             color: #007bff;
             margin-top: 10px;
         }
+        .course-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -43,12 +48,12 @@
         
         {{#course}}
         <p class="course-info">Has completado: {{title}}</p>
-        {{#image}}
-        <img class="course-image" src="/courses/{{id}}/image" alt="{{title}}">
-        {{/image}}
-        {{^image}}
+        {{#courseImageUrl}}
+        <img class="course-image" src="{{courseImageUrl}}" alt="{{title}}">
+        {{/courseImageUrl}}
+        {{^courseImageUrl}}
         <p class="course-info">Imagen del curso no disponible.</p>
-        {{/image}}
+        {{/courseImageUrl}}
         {{/course}}
         
     </div>
