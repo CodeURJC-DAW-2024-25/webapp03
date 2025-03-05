@@ -38,9 +38,11 @@
 <body>
     <div class="container">
         <h1>Diploma</h1>
-        <p class="congratulations">¡Felicidades {{user.name}}!</p>
+        
+        <p class="congratulations">¡Felicidades {{userFormalName}}!</p>
+        
         {{#course}}
-        <p class="course-info">Has completado: {{course.title}}</p>
+        <p class="course-info">Has completado: {{title}}</p>
         {{#image}}
         <img class="course-image" src="/courses/{{id}}/image" alt="{{title}}">
         {{/image}}
@@ -48,12 +50,7 @@
         <p class="course-info">Imagen del curso no disponible.</p>
         {{/image}}
         {{/course}}
-        {{^course}}
-        <p class="course-info">Has completado: Curso Papiroflexia</p>
         
-        
-        {{/course}}
     </div>
-    
 </body>
 </html>

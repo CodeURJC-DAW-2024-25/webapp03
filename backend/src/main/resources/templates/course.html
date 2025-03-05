@@ -81,6 +81,19 @@ ng>Usuario2:</strong> ¿Podrían agregar más ejemplos en el curso?</p>
             </div>
         </div>
     </div>
+    <!-- Generate PDF Form -->
+    {{#logged}}
+    <div class="generate-pdf mt-5">
+        <h3>Generate Diploma PDF</h3>
+        <form id="pdfForm" action="/api/pdf/generate/{{course.id}}" method="post">
+            <input type="hidden" id="templateName" name="templateName" value="diploma" required>
+            <input type="hidden" id="outputFileName" name="outputFileName" value="Diploma_{{userFormalName}}_{{course.title}}" required>
+            <input type="hidden" id="csrfToken" name="_csrf" value="{{token}}">
+            <button type="submit" class="btn btn-primary">Generate PDF</button>
+        </form>
+    </div>
+    {{/logged}}
+</div>
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
