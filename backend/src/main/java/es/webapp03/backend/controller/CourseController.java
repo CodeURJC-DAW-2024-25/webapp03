@@ -23,8 +23,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.webapp03.backend.model.Course;
+import es.webapp03.backend.model.Comment;
 import es.webapp03.backend.model.Material;
 import es.webapp03.backend.repository.CourseRepository;
+import es.webapp03.backend.repository.CommentRepository;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
@@ -32,6 +34,9 @@ public class CourseController {
 
 	@Autowired
 	private CourseRepository courseRepository;
+
+	@Autowired
+	private CommentRepository commentRepository;
 
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -56,8 +61,11 @@ public class CourseController {
 			}
 
 			List<Material> m = c.getMaterials();
+
+			List<Comment> comments = commentRepository.findByCourseIdOrderByCreatedDateDesc(id);
 			model.addAttribute("course", c);
 			model.addAttribute("material", m);
+			model.addAttribute("comments", comments);
 			return "course";
 		} else {
 			return "index";

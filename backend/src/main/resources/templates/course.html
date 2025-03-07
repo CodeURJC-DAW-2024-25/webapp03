@@ -66,16 +66,27 @@
         <!--Comentarios-->
         <div class="comment-section mt-4">
             <h3>Comentarios</h3>
-            <div class="comment">
+            <!-- <div class="comment">
                 <p><strong>Usuario1:</strong> ¡Este curso es genial! Me encantó la explicación.</p>
             </div>
             <div class="comment">
                 <p><strong>Usuario2:</strong> ¿Podrían agregar más ejemplos en el curso?</p>
-            </div>
-            <div class="comment-form">
-                <textarea class="form-control mt-2" placeholder="Escribe tu comentario aquí..."></textarea>
+            </div> -->
+            <ul class="list-group">
+                {{#comments}}
+                <li class="list-group-item">
+                    <div>
+                        <strong>{{user.name}}</strong> comentó el <em>{{createdDate}}</em>:
+                    </div>
+                    <p>{{text}}</p>
+                </li>
+                {{/comments}}
+            </ul>
+            <form class="comment-form" action="/courses/{{course.id}}/comment/upload" method="post">
+                <textarea class="form-control mt-2" name="newcomment" placeholder="Escribe tu comentario aquí..."></textarea>
+                <input type="hidden" name="_csrf" value="{{token}}" />
                 <button class="btn btn-primary btn-sm mt-2">Enviar</button>
-            </div>
+            </form>
         </div>
     </div>
 
