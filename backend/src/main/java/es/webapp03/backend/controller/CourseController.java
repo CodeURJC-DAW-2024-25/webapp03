@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +54,7 @@ public class CourseController {
 		}
 	}
 
+
 	@GetMapping("/courses/{id}")
 	public String showCourse(Model model, @PathVariable long id) {
 		Optional<Course> course = courseRepository.findById(id);
@@ -79,6 +83,7 @@ public class CourseController {
 		}
 		return "redirect:/";
 	}
+
 
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/courses/filter")
@@ -149,4 +154,13 @@ public class CourseController {
 			return "redirect:/index"; // Si el curso no existe, redirige al índice
 		}
 	}
+	@GetMapping("/courses/loadMore")
+	public String loadMoreCourses(@RequestParam int page, Model model) {
+    int pageSize = 3; // Número de cursos por página
+    Pageable pageable = PageRequest.of(page, pageSize);
+    Page<Course> coursePage = courseRepository.findAll(pageable);
+    
+    model.addAttribute("courses", coursePage.getContent());
+    return "fragments/courseList"; // Devuelve un fragmento de HTML con los cursos
+}
 }

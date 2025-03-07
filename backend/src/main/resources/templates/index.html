@@ -37,7 +37,8 @@
                 <h2 class="section-heading text-uppercase">Cursos</h2>
                 <h3 class="section-subheading text-muted">A continuación se encuentran los cursos disponibles.</h3>
             </div>
-            <div class="row">
+            <!-- Contenedor para los cursos -->
+            <div id="course-container" class="row">
                 {{#courses}}
                 <!-- Portfolio item -->
                 <div class="col-lg-4 col-sm-6 mb-4">
@@ -59,66 +60,73 @@
                     </div>
                 </div>
                 {{/courses}}
-                {{^courses}}
-                <div class="text-center">
-                    <h3 class="section-subheading text-muted">No hay cursos disponibles.</h3>
+            </div>
+
+            <!-- Botón para cargar más cursos -->
+            <div class="text-center mt-4">
+                <button id="load-more" class="btn btn-primary">Más resultados</button>
+            </div>
+
+            <!-- Spinner de carga -->
+            <div id="loading-spinner" class="text-center" style="display: none;">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
-                {{/courses}}
+            </div>
 
-                <!-- Portfolio Modals-->
-                {{#courses}}
-                <div class="portfolio-modal modal fade" id="portfolioModal{{id}}" tabindex="-1" role="dialog"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
-                                    alt="Close modal" />
-                            </div>
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-8">
-                                        <div class="modal-body">
-                                            <h2 class="text-uppercase">{{title}}</h2>
-                                            <img class="img-fluid" src="/courses/{{id}}/image" alt="{{title}}" />
-                                            <p>{{description}}</p>
-                                            <ul class="list-inline">
-                                                <li>
-                                                    <strong>Categorías:</strong>
-                                                    {{tags}}
-                                                </li>
-                                            </ul>
-                                            <a class="btn btn-primary btn-xl text-uppercase" href="/courses/{{id}}">
-                                                Ir al Curso
-                                            </a>
+            <!-- Portfolio Modals-->
+            {{#courses}}
+            <div class="portfolio-modal modal fade" id="portfolioModal{{id}}" tabindex="-1" role="dialog"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                                alt="Close modal" />
+                        </div>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="modal-body">
+                                        <h2 class="text-uppercase">{{title}}</h2>
+                                        <img class="img-fluid" src="/courses/{{id}}/image" alt="{{title}}" />
+                                        <p>{{description}}</p>
+                                        <ul class="list-inline">
+                                            <li>
+                                                <strong>Categorías:</strong>
+                                                {{tags}}
+                                            </li>
+                                        </ul>
+                                        <a class="btn btn-primary btn-xl text-uppercase" href="/courses/{{id}}">
+                                            Ir al Curso
+                                        </a>
 
-                                            <!-- Opciones de edición y eliminación (Solo administradores) -->
-                                            {{#admin}}
-                                            <a class="btn btn-secondary btn-xl text-uppercase"
-                                                href="/editcourse/{{id}}">
-                                                Modificar Curso
-                                            </a>
-                                            <a class="btn btn-danger btn-xl text-uppercase" href="/removecourse/{{id}}">
-                                                <i class="fas fa-xmark me-1"></i>
-                                                Borrar Curso
-                                            </a>
-                                            {{/admin}}
-                                        </div>
+                                        <!-- Opciones de edición y eliminación (Solo administradores) -->
+                                        {{#admin}}
+                                        <a class="btn btn-secondary btn-xl text-uppercase" href="/editcourse/{{id}}">
+                                            Modificar Curso
+                                        </a>
+                                        <a class="btn btn-danger btn-xl text-uppercase" href="/removecourse/{{id}}">
+                                            <i class="fas fa-xmark me-1"></i>
+                                            Borrar Curso
+                                        </a>
+                                        {{/admin}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {{/courses}}
-
-                <!-- Botón para crear un nuevo curso (Solo administradores) -->
-                {{#admin}}
-                <div class="text-center mt-4">
-                    <a href="/newcourse" class="btn btn-success btn-xl text-uppercase">Crear Nuevo Curso</a>
-                    <a href="/admin/users" class="btn btn-secondary btn-xl text-uppercase">Lista de usuarios</a>
-                </div>
-                {{/admin}}
             </div>
+            {{/courses}}
+
+            <!-- Botón para crear un nuevo curso (Solo administradores) -->
+            {{#admin}}
+            <div class="text-center mt-4">
+                <a href="/newcourse" class="btn btn-success btn-xl text-uppercase">Crear Nuevo Curso</a>
+                <a href="/admin/users" class="btn btn-secondary btn-xl text-uppercase">Lista de usuarios</a>
+            </div>
+            {{/admin}}
+        </div>
         </div>
     </section>
 
