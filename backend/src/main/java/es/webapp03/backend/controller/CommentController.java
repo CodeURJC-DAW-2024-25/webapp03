@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import es.webapp03.backend.model.Comment;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.model.Course;
-import es.webapp03.backend.model.Material;
 import es.webapp03.backend.repository.CommentRepository;
 import es.webapp03.backend.repository.CourseRepository;
 import es.webapp03.backend.repository.UserRepository;
@@ -96,16 +95,19 @@ public class CommentController {
         }
     }
     
-    /* @PostMapping("/newcomment") //Revisar si este método hay que borrarlo o ponerlo dentro del metodo de cargar el curso
-	public String newComment(Model model) {
+    @PostMapping("/courses/{courseId}/comment/{commentId}/delete")
+    public ResponseEntity<byte[]> deleteFile(@PathVariable Long courseId, @PathVariable Long commentId) {
 
-		model.addAttribute("comment", commentRepository.findAll());
+        Optional<Comment> commentOpt = commentRepository.findById(commentId);
+        if (commentOpt.isPresent()) {
+            commentRepository.delete(commentOpt.get());
+        }
 
-		return "course";
-	} */
-
-	/* @PostMapping("/newcomment")
-	public void newComment() */
+        // Redirect to the course page
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("/courses/" + courseId));
+        return new ResponseEntity<>(headers, HttpStatus.FOUND);
+    }
 
 
 }
