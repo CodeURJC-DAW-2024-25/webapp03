@@ -78,7 +78,7 @@ public class PdfController {
             Map<String, Object> modelMap = new HashMap<>();
             modelMap.put("userFormalName", user.getName()); // Set userName as a string
             modelMap.put("course", course);
-            modelMap.put("image", base64Image != null);
+            // modelMap.put("image", base64Image != null);
             modelMap.put("courseImageUrl", base64Image != null ? "data:image/jpeg;base64," + base64Image : null);
 
             // Generate PDF

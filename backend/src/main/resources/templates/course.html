@@ -99,15 +99,16 @@
             <a href="/register" class="btn btn-secondary">Registrarse</a>
         </div>
     </div>
+    {{/logged}}
     <!-- Generate PDF Form -->
     {{#logged}}
-    <div class="generate-pdf mt-5">
-        <h3>Generate Diploma PDF</h3>
+    <div class="generate-pdf mt-5 text-center">
+        <h3>¡Felicidades! Aquí tienes tu diploma</h3>
         <form id="pdfForm" action="/api/pdf/generate/{{course.id}}" method="post">
             <input type="hidden" id="templateName" name="templateName" value="diploma" required>
             <input type="hidden" id="outputFileName" name="outputFileName" value="Diploma_{{userFormalName}}_{{course.title}}" required>
             <input type="hidden" id="csrfToken" name="_csrf" value="{{token}}">
-            <button type="submit" class="btn btn-primary">Generate PDF</button>
+            <button type="submit" class="btn btn-primary">¡Descarga tu diploma!</button>
         </form>
     </div>
     {{/logged}}
