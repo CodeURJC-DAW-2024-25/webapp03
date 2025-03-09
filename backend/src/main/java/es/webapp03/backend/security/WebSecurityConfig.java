@@ -56,7 +56,8 @@ public class WebSecurityConfig {
 
                         // 📌 Páginas privadas
                         .requestMatchers("/newcourse").hasRole("ADMIN")
-                        .requestMatchers("/editcourse/**").hasRole("USER")
+                        .requestMatchers("courses/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/editcourse/**").hasRole("ADMIN")
                         .requestMatchers("/removecourse/**").hasRole("ADMIN")
                         .requestMatchers("/newcomment").hasRole("USER")
 
