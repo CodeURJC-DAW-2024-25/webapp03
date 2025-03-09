@@ -1,53 +1,61 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
         h1 {
-            color: brown;
+            color: #343a40;
+            text-align: center;
+            margin-top: 20px;
         }
-        .diploma {
-            width: 100%;
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
         }
-        .diploma, .diploma th, .diploma td {
-            border: 1px solid brown;
-            border-collapse: collapse;
+        .congratulations {
+            font-size: 24px;
+            color: #28a745;
+            margin-top: 20px;
         }
-        .diploma th {
-            background-color: brown;
-            color: white;
+        .course-info {
+            font-size: 20px;
+            color: #007bff;
+            margin-top: 10px;
+        }
+        .course-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-<h1>Diploma</h1>
-<table>
-    <tr>
-        <th>User Information</th>
-    </tr>
-    <tr>
-        <td>Name: {{user.name}}</td>
-    </tr>
-    <tr>
-        <td>Email: {{user.email}}</td>
-    </tr>
-    <tr>
-        <td>Roles: {{#user.roles}}{{.}}, {{/user.roles}}</td>
-    </tr>
-</table>
-<br />
-<table class="diploma">
-    <tr>
-        <th>Course #</th>
-        <th>Title</th>
-        <th>Description</th>
-    </tr>
-    {{#user.courses}}
-    <tr>
-        <td>{{id}}</td>
-        <td>{{title}}</td>
-        <td>{{description}}</td>
-    </tr>
-    {{/user.courses}}
-</table>
+    <div class="container">
+        <h1>Diploma</h1>
+        
+        <p class="congratulations">¡Felicidades {{userFormalName}}!</p>
+        
+        {{#course}}
+        <p class="course-info">Has completado: {{title}}</p>
+        {{#courseImageUrl}}
+        <img class="course-image" src="{{courseImageUrl}}" alt="{{title}}">
+        {{/courseImageUrl}}
+        {{^courseImageUrl}}
+        <p class="course-info">Imagen del curso no disponible.</p>
+        {{/courseImageUrl}}
+        {{/course}}
+        
+    </div>
 </body>
 </html>

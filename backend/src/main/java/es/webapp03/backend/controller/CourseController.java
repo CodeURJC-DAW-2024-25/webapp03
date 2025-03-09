@@ -28,7 +28,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.Comment;
 import es.webapp03.backend.model.Material;
+import es.webapp03.backend.model.User;
 import es.webapp03.backend.repository.CourseRepository;
+import es.webapp03.backend.service.UserService;
 import es.webapp03.backend.repository.CommentRepository;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -38,6 +40,9 @@ public class CourseController {
 	@Autowired
 	private CourseRepository courseRepository;
 
+    @Autowired
+    private UserService userService;
+
 	@Autowired
 	private CommentRepository commentRepository;
 
@@ -46,8 +51,18 @@ public class CourseController {
 		Principal principal = request.getUserPrincipal();
 
 		if (principal != null) {
+
 			model.addAttribute("logged", true);
+
+
+			//Esta parte devuelve el correo, no el nombre ya que usa principal. Si algo funcional mal es respecto a esto.
 			model.addAttribute("userName", principal.getName());
+			User user = userService.findByEmail(principal.getName());
+
+			model.addAttribute("userFormalName", user.getName()); // Set userName as the user's name
+
+
+			
 			model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		} else {
 			model.addAttribute("logged", false);
@@ -75,6 +90,23 @@ public class CourseController {
 			return "index";
 		}
 	}
+
+		// @GetMapping("/courses/{id}")
+	// public String showCourse(Model model, @PathVariable long id, Principal principal) {
+	
+	// 	Optional<Course> course = courseRepository.findById(id);
+	// 	Blob courseimage = course.isPresent() ? course.get().getImageFile() : null;
+	// 	if (principal != null) {
+	// 		User user = userRepository.findByName(principal.getName()).orElse(null);
+	// 		if (course.isPresent() && user != null) {
+	// 			model.addAttribute("course", course.get());
+	// 			model.addAttribute("user", user);
+	// 			model.addAttribute("course", user)
+	// 			return "course";
+	// 		}
+	// 	}
+	// 	return "index";
+	// }
 
 	@GetMapping("/removecourse/{id}")
 	public String removeCourse(@PathVariable long id) {
@@ -164,3 +196,5 @@ public class CourseController {
     return "fragments/courseList"; // Devuelve un fragmento de HTML con los cursos
 }
 }
+
+

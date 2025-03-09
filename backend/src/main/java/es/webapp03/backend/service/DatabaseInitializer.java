@@ -7,6 +7,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,8 @@ public class DatabaseInitializer {
 
     private Blob loadDefaultUserImage() {
         try {
-            InputStream defaultUserImageStream = getClass().getResourceAsStream("/static/assets/user_image_default.jpg");
+            InputStream defaultUserImageStream = getClass()
+                    .getResourceAsStream("/static/assets/user_image_default.jpg");
             if (defaultUserImageStream != null) {
                 byte[] imageBytes = defaultUserImageStream.readAllBytes();
                 return new SerialBlob(imageBytes);
@@ -114,22 +116,22 @@ public class DatabaseInitializer {
 
         Course course1 = new Course("Course 1", "Description 1", defaultCourseImage);
         course1.setTags(Arrays.asList("Tag1", "Tag2", "Tag3"));
-    
+
         Course course2 = new Course("Course 2", "Description 2", defaultCourseImage);
         course2.setTags(Arrays.asList("Tag2", "Tag4"));
-    
+
         Course course3 = new Course("Course 3", "Description 3", defaultCourseImage);
         course3.setTags(Arrays.asList("Tag1", "Tag5"));
-    
+
         Course course4 = new Course("Course 4", "Description 4", defaultCourseImage);
         course4.setTags(Arrays.asList("Tag3", "Tag6"));
-    
+
         Course course5 = new Course("Course 5", "Description 5", defaultCourseImage);
         course5.setTags(Arrays.asList("Tag4", "Tag7"));
-    
+
         Course course6 = new Course("Course 6", "Description 6", defaultCourseImage);
         course6.setTags(Arrays.asList("Tag5", "Tag8"));
-    
+
         courseRepository.saveAll(Arrays.asList(course1, course2, course3, course4, course5, course6));
 
         Comment comment1 = new Comment(course1, user1, "¡Excelente curso!", LocalDate.now());
@@ -155,5 +157,4 @@ public class DatabaseInitializer {
         materialRepository.saveAll(Arrays.asList(mat1, mat2, mat3));
         
     }
-    
 }
