@@ -1,9 +1,14 @@
 package es.webapp03.backend.controller;
 
+import java.io.InputStream;
 import java.net.URI;
 
 import java.security.Principal;
 import java.util.Optional;
+
+import javax.sql.rowset.serial.SerialBlob;
+import java.sql.Blob;
+import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -46,47 +51,50 @@ public class MaterialController {
         }
     }
 
-    @PostMapping("/courses/{courseId}/materials/upload")
-    public ResponseEntity<Void> uploadFile(@PathVariable Long courseId, @RequestParam("file") MultipartFile file) {
-        try {
-            Optional<Course> courseOpt = courseRepository.findById(courseId);
-            if (courseOpt.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            Course course = courseOpt.get();
-
-            // Convert file to byte[]
-            byte[] fileBytes = file.getBytes();
-
-            // Save file in the database
-            Material material = new Material(file.getOriginalFilename(), file.getContentType(), fileBytes, course);
-            materialRepository.save(material);
-
-            // Redirect to the course page
-            HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(URI.create("/courses/" + courseId));
-            return new ResponseEntity<>(headers, HttpStatus.FOUND);
-
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @GetMapping("/courses/{courseId}/materials/{materialId}/download")
-    public ResponseEntity<byte[]> downloadFile(@PathVariable Long courseId, @PathVariable Long materialId) {
-        Optional<Material> materialOpt = materialRepository.findById(materialId);
-        if (materialOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+@PostMapping("/courses/{courseId}/materials/upload")
+public ResponseEntity<Void> uploadFile(@PathVariable Long courseId, @RequestParam("file") MultipartFile file) {
+    try {
+        Optional<Course> courseOpt = courseRepository.findById(courseId);
+        if (courseOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        Material material = materialOpt.get();
+        Course course = courseOpt.get();
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + material.getName() + "\"")
-                .contentType(MediaType.parseMediaType(material.getType()))
-                .body(material.getFile());
+        // Convert file to Blob
+        InputStream fileInputStream = file.getInputStream();
+        Blob fileBlob = new SerialBlob(fileInputStream.readAllBytes());
+
+        // Save file in the database as a Blob
+        Material material = new Material(file.getOriginalFilename(), file.getContentType(), fileBlob, course);
+        materialRepository.save(material);
+
+        // Redirect to the course page
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("/courses/" + courseId));
+        return new ResponseEntity<>(headers, HttpStatus.FOUND);
+
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+}
+
+
+@GetMapping("/courses/{courseId}/materials/{materialId}/download")
+public ResponseEntity<byte[]> downloadFile(@PathVariable Long courseId, @PathVariable Long materialId) throws SQLException {
+    Optional<Material> materialOpt = materialRepository.findById(materialId);
+    if (materialOpt.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+    Material material = materialOpt.get();
+
+    return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + material.getName() + "\"")
+            .contentType(MediaType.parseMediaType(material.getType()))
+            .body(material.getFile().getBytes(1, (int) material.getFile().length()));
+}
+
 
     @PostMapping("/courses/{courseId}/materials/{materialId}/delete")
     public ResponseEntity<byte[]> deleteFile(@PathVariable Long courseId, @PathVariable Long materialId) {

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -17,7 +18,9 @@ import jakarta.annotation.PostConstruct;
 import es.webapp03.backend.repository.MaterialRepository;
 import es.webapp03.backend.repository.CourseRepository;
 import es.webapp03.backend.model.User;
+import es.webapp03.backend.model.Comment;
 import es.webapp03.backend.model.Course;
+import es.webapp03.backend.model.Material;
 import es.webapp03.backend.repository.CommentRepository;
 
 @Service
@@ -63,10 +66,23 @@ public class DatabaseInitializer {
         }
         return null;
     }
+
+    private Blob loadDefaultMaterial(String path) {
+        try {
+            InputStream materialStream = getClass().getResourceAsStream(path);
+            if (materialStream != null) {
+                byte[] materialBytes = materialStream.readAllBytes();
+                return new SerialBlob(materialBytes);
+            }
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }    
     
 
     @PostConstruct
-    public void init() throws IOException, URISyntaxException {
+    public void init() throws IOException, URISyntaxException, SQLException {
         Blob defaultCourseImage = loadDefaultImage(); // Imagen por defecto para cursos
         Blob defaultUserImage = loadDefaultUserImage(); // Imagen por defecto para usuarios
     
@@ -84,6 +100,18 @@ public class DatabaseInitializer {
         userRepository.save(new User("Raúl", "raul@gmail.com", passwordEncoder.encode("raulpass"), defaultUserImage, "USER"));
         userRepository.save(new User("admin", "admin@gmail.com", passwordEncoder.encode("adminpass"), defaultUserImage, "ADMIN"));
     
+        User user1 = userRepository.findByEmail("laura@gmail.com").orElseThrow();
+        User user2 = userRepository.findByEmail("domingo@gmail.com").orElseThrow();
+        User user3 = userRepository.findByEmail("marcos@gmail.com").orElseThrow();
+        User user4 = userRepository.findByEmail("juan@gmail.com").orElseThrow();
+        User user5 = userRepository.findByEmail("sergio@gmail.com").orElseThrow();
+        User user6 = userRepository.findByEmail("david@gmail.com").orElseThrow();
+        User user7 = userRepository.findByEmail("paula@gmail.com").orElseThrow();
+        User user8 = userRepository.findByEmail("gonzalo@gmail.com").orElseThrow();
+        User user9 = userRepository.findByEmail("marta@gmail.com").orElseThrow();
+        User user10 = userRepository.findByEmail("sofia@gmail.com").orElseThrow();
+
+
         Course course1 = new Course("Course 1", "Description 1", defaultCourseImage);
         course1.setTags(Arrays.asList("Tag1", "Tag2", "Tag3"));
     
@@ -103,6 +131,29 @@ public class DatabaseInitializer {
         course6.setTags(Arrays.asList("Tag5", "Tag8"));
     
         courseRepository.saveAll(Arrays.asList(course1, course2, course3, course4, course5, course6));
+
+        Comment comment1 = new Comment(course1, user1, "¡Excelente curso!", LocalDate.now());
+        Comment comment2 = new Comment(course1, user2, "Muy útil, gracias!", LocalDate.now());
+        Comment comment3 = new Comment(course1, user3, "Me encantó la dinámica de las clases.", LocalDate.now());
+        Comment comment4 = new Comment(course1, user4, "Información clara y bien explicada.", LocalDate.now());
+        Comment comment5 = new Comment(course1, user5, "Definitivamente lo recomendaré a mis amigos.", LocalDate.now());
+        Comment comment6 = new Comment(course1, user6, "El contenido es justo lo que necesitaba.", LocalDate.now());
+        Comment comment7 = new Comment(course1, user7, "Podría haber más ejemplos prácticos, pero en general muy bueno.", LocalDate.now());
+        Comment comment8 = new Comment(course1, user8, "Aprendí mucho en poco tiempo, excelente curso.", LocalDate.now());
+        Comment comment9 = new Comment(course1, user9, "El profesor explica de manera muy sencilla.", LocalDate.now());
+        Comment comment10 = new Comment(course1, user10, "Me gustaría que agregaran más ejercicios.", LocalDate.now());
+        commentRepository.saveAll(Arrays.asList(comment1, comment2, comment3, comment4, comment5, comment6, comment7, comment8, comment9, comment10));
+        
+        Blob material1Blob = loadDefaultMaterial("/static/assets/materials/Tema3.1-SeguridadWeb.pdf");
+        Blob material2Blob = loadDefaultMaterial("/static/assets/materials/Fundamentos.pdf");
+        Blob material3Blob = loadDefaultMaterial("/static/assets/materials/practica1_gic_gis.pdf");
+    
+        Material mat1 = new Material("Tema3.1-SeguridadWeb.pdf", "application/pdf", material1Blob, course1);
+        Material mat2 = new Material("Fundamentos.pdf", "application/pdf", material2Blob, course1);
+        Material mat3 = new Material("practica1_gic_gis.pdf", "application/pdf", material3Blob, course1);
+
+        materialRepository.saveAll(Arrays.asList(mat1, mat2, mat3));
+        
     }
     
 }
