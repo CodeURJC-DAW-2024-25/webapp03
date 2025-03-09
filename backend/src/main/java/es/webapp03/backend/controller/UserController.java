@@ -13,17 +13,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.stereotype.Controller;
 
@@ -47,8 +40,19 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
+
+	@ModelAttribute
+	public void addAttributes(Model model, HttpServletRequest request) {
+		Principal principal = request.getUserPrincipal();
+
+		if (principal != null) {
+			model.addAttribute("logged", true);
+			model.addAttribute("userName", principal.getName());
+			model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		} else {
+			model.addAttribute("logged", false);
+		}
+	}
 
     @GetMapping("/register")
 	public String showRegisterForm(Model model) {
@@ -57,14 +61,14 @@ public class UserController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<String> registerUser(@RequestParam String name,
+	public String registerUser(@RequestParam String name,
 			@RequestParam String email,
-			@RequestParam String password, HttpServletResponse response) {
+			@RequestParam String password) {
 
 		try {
 			// Verificar si el usuario ya existe
 			if (userRepository.findByEmail(email).isPresent()) {
-				return ResponseEntity.badRequest().body("El email ya está en uso.");
+				return "registererror";
 			}
 
 			// Encriptar contraseña
@@ -73,16 +77,10 @@ public class UserController {
 			// Crear y guardar usuario con rol "USER" (sin imagen)
 			User newUser = new User(name, email, encodedPassword, null, "USER");
 			userRepository.save(newUser);
-			Authentication authentication = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(email, password));
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-
 			// Redirigir a la página de inicio
-			response.sendRedirect("/");
-			return ResponseEntity.ok().build();
+			return "redirect:/";
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("Error al registrar usuario: " + e.getMessage());
+			return "registererror";
 		}
 
 	}

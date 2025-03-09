@@ -13,9 +13,6 @@ public class LoginController {
 
 	@GetMapping("/loginerror")
 	public String loginerror() {
-		return "error";
+		return "loginerror";
 	}
-
-	
-    
 }
