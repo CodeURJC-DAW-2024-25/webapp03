@@ -74,7 +74,7 @@ Admins can add materials to the courses
 
 <h3 id="entities_diagram">Entities diagram</h3>
 
-![Entitnes diagram](pics/entities_diagram.jpeg)
+![Entitnes diagram](pics/entities_diagram.png)
 
 <hr>
 
