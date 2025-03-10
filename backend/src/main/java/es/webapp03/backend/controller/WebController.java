@@ -2,7 +2,10 @@ package es.webapp03.backend.controller;
 
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -59,20 +62,22 @@ public class WebController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", coursePage.getTotalPages());
 
-        List<Course> topCourses = courseService.getTopCourses();
-
-        List<String> courseNames = topCourses.stream()
-                .map(Course::getTitle)
-                .collect(Collectors.toList());
-
-        List<Integer> userCounts = topCourses.stream()
-                .map(Course::getNumberOfUsers)
-                .collect(Collectors.toList());
-
-        model.addAttribute("courseNames", courseNames);
-        model.addAttribute("userCounts", userCounts);
-
         return "index";
+    }
+
+    @GetMapping("/chartData")
+    public ResponseEntity<?> getChartData() {
+        List<Course> topCourses = courseService.getTopCourses();
+        List<Map<String, Object>> chartData = new ArrayList<>();
+
+        for (Course course : topCourses) {
+            Map<String, Object> courseData = new HashMap<>();
+            courseData.put("name", course.getTitle());
+            courseData.put("inscriptions", course.getNumberOfUsers());
+            chartData.add(courseData);
+        }
+
+        return ResponseEntity.ok(chartData);
     }
 
     @GetMapping("/courses/{id}/image")
