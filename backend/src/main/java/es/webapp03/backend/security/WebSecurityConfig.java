@@ -50,6 +50,8 @@ public class WebSecurityConfig {
                         .requestMatchers("courses/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/editcourse/**").hasRole("ADMIN")
                         .requestMatchers("/removecourse/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/edit_profile/**").hasRole("ADMIN")
                         .requestMatchers("/newcomment").hasRole("USER")
 
                         // 📌 Cualquier otra petición NO DEBE FORZAR AUTENTICACIÓN
