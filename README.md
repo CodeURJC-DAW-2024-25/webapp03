@@ -272,18 +272,21 @@ At the beginning of the project I created the repositories and the main controll
 
 <h3>Gonzalo García Castillo</h3>
 
+Mostly focused on implementing the external library functionality (the PDF Diploma generation from Html). Finally also refactoring the dependencies logic in the project since I was in charge of creating the Class Diagram (The fifth commit is the first of this refactors).
+
+IMPORTANT NOTE: All commits under the name of "Layncatto" were done by me by a personal github account by mistake. Apologies in advance.
+
 | Commit | Description |
 |:-:|:-:|
-|1º|Description|
-|2º|Description|
-|3º|Description|
-|4º|Description|
-|5º|Description|
-
+|[1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/dc4ec0ed3263344f99aa1d6f22e9ccff6ed1cd87)|Resuming pdf logic|
+|[2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/67f9357689d84412f98379cca24b99b7ce2a2f1f)|Enhance course display with user context and improve diploma layout|
+|[3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/f4120f10ea4cdbc6f005c1134f5ae73d6a31a782)|Fixed Diploma generation to retrive name and not email|
+|[4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/c57a5f0fe1c8ec1c81a36da5831c26c385b797d5)|Add base64 image support for course diplomas in PDF generation|
+|[5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/d2bf6c9a7c5a5022db4a68175691643a5c7a3337)|Refactor CommentController to use services for comment and course operations|
 | File | Name |
 |:-:|:-:|
-|1º|Name|
-|2º|Name|
-|3º|Name|
-|4º|Name|
-|5º|Name|
+|[1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/PdfController.java)|PdfController|
+|[2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/PdfService.java)|PdfService|
+|[3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseService.java)|CourseService|
+|[4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/resources/templates/diploma.html)|diploma.html|
+|[5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/resources/templates/course.html)|course.html|
