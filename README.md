@@ -16,9 +16,9 @@
     - [Trello](#trello)
     - [Screenshots](#screenshots)
     - [Navigation](#navigation)
+    - [Classes and Templates Diagram](#classes)
     - [Members contribution](#contribution)
-
-
+    
 <br>
 
 <h2 id="intro">Introduction</h2>
@@ -189,6 +189,10 @@ An algorithm to recommend courses based on the courses you have already signed u
 <h3 id="navigation">Navigation diagram</h3>
 
 ![navigationDiagram](pics/navigation_diagram.png)
+
+<h3 id="classes">Classes and Templates Diagram</h3>
+
+![ClassesTemplatesDiagram](pics/classes_diagram.jpeg)
 
 <h3 id="contribution">Members contribution</h3>
 
