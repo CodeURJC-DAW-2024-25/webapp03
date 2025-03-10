@@ -155,11 +155,11 @@ An algorithm to recommend courses based on the courses you have already signed u
 
 <h4 id="createCourse">Create course</h4>
 
-![createCourseImage](pics/screenshots/createCourse.png)
+![createCourseImage](pics/screenshots/create_course.png)
 
-<h4 id="adminUsers">Admin Users</h4>
+<h4 id="adminUsers">Users list</h4>
 
-![adminUsersImage](pics/screenshots/adminUsers.png)
+![adminUsersImage](pics/screenshots/users_list.png)
 
 <h4 id="course">Course</h4>
 
@@ -173,19 +173,22 @@ An algorithm to recommend courses based on the courses you have already signed u
 
 ![modifyProfileImage](pics/screenshots/modify_profile.png)
 
-<h4 id="error403">Error 403</h4>
+<h4 id="error1">Login error</h4>
 
-![error403Image](pics/screenshots/error403.png)
+![error1Image](pics/screenshots/login_error.png)
 
-<h4 id="error404">Error 404</h4>
+<h4 id="error2">Register error</h4>
 
-![error404Image](pics/screenshots/error404.png)
+![error2Image](pics/screenshots/register_error.png)
 
-<h4 id="error500">Error 500</h4>
+<h4 id="error3">Course access error</h4>
 
-![error500Image](pics/screenshots/error500.png)
+![error3Image](pics/screenshots/course_access_error.png)
 
+<h4 id="error4">Generic error</h4>
 
-<h3 id="navigation">Navigation</h3>
+![error4Image](pics/screenshots/generic_error.png)
+
+<h3 id="navigation">Navigation diagram</h3>
 
 ![navigationDiagram](pics/navigationDiagram.png)
