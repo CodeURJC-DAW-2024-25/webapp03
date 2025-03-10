@@ -2,6 +2,7 @@ package es.webapp03.backend.service;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,8 +51,26 @@ public class CourseService {
     }
 
     public void deleteById(long id) {
-        courseRepository.deleteById(id);
+        Optional<Course> optCourse = courseRepository.findById(id);
+    
+        if (optCourse.isPresent()) {
+            Course course = optCourse.get();
+    
+            // Remove the relationship with users
+            for (User user : new ArrayList<>(course.getUsers())) {
+                user.getCourses().remove(course);
+            }
+            course.getUsers().clear(); // Clear the list of users in the course
+    
+            // Save changes to avoid integrity constraints
+            courseRepository.save(course);
+    
+            // Delete the course
+            courseRepository.deleteById(id);
+        }
     }
+    
+
 
     public List<Course> findByTags(List<String> tags) {
         return courseRepository.findByTags(tags);
