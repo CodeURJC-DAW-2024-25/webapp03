@@ -1,5 +1,5 @@
+<!-- Contenedor para los cursos -->
 {{#courses}}
-<!-- Portfolio item -->
 <div class="col-lg-4 col-sm-6 mb-4">
     <div class="portfolio-item">
         <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{id}}">
@@ -14,6 +14,50 @@
                 {{#tags}}
                 <span class="badge bg-secondary">{{.}}</span>
                 {{/tags}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/courses}}
+
+<!-- Portfolio Modals -->
+{{#courses}}
+<div class="portfolio-modal modal fade" id="portfolioModal{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal">
+                <img src="assets/img/close-icon.svg" alt="Close modal" />
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="modal-body">
+                            <h2 class="text-uppercase">{{title}}</h2>
+                            <img class="img-fluid" src="/courses/{{id}}/image" alt="{{title}}" />
+                            <p>{{description}}</p>
+                            <ul class="list-inline">
+                                <li>
+                                    <strong>Categorías:</strong>
+                                    {{tags}}
+                                </li>
+                            </ul>
+                            <a class="btn btn-primary btn-xl text-uppercase" href="/courses/{{id}}">
+                                Ir al Curso
+                            </a>
+
+                            <!-- Opciones de edición y eliminación (Solo administradores) -->
+                            {{#admin}}
+                            <a class="btn btn-secondary btn-xl text-uppercase" href="/editcourse/{{id}}">
+                                Modificar Curso
+                            </a>
+                            <a class="btn btn-danger btn-xl text-uppercase" href="/removecourse/{{id}}">
+                                <i class="fas fa-xmark me-1"></i>
+                                Borrar Curso
+                            </a>
+                            {{/admin}}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
