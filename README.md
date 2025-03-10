@@ -16,6 +16,7 @@
     - [Trello](#trello)
     - [Screenshots](#screenshots)
     - [Navigation](#navigation)
+    - [Members contribution](#contribution)
 
 
 <br>
@@ -91,10 +92,10 @@ Admins can add materials to the courses
 |Log in|✅|✅|✅|
 |View charts and statistics about courses|✅|✅|✅|
 |Delete accounts|❌|❌|✅|
-|Purchase courses|❌|✅|❌|
-|Complete courses|❌|✅|❌|
+|Join a course|❌|✅|✅|
+|Download diploma|❌|✅|✅|
 |See material of courses|❌|✅|✅|
-|Write comments in courses|❌|✅|❌|
+|Write comments in courses|❌|✅|✅|
 
 <hr>
 
@@ -111,10 +112,6 @@ Admins can add materials to the courses
 **Number of users chart**
 
 The chart shows the courses with the most users currently
-
-**Best-selling courses chart**
-
-This chart shows the courses that have sold the most
 
 <hr>
 
@@ -192,3 +189,97 @@ An algorithm to recommend courses based on the courses you have already signed u
 <h3 id="navigation">Navigation diagram</h3>
 
 ![navigationDiagram](pics/navigation_diagram.png)
+
+<h3 id="contribution">Members contribution</h3>
+
+<h3>David Cereceda Catalán</h3>
+
+| Commit | Description |
+|:-:|:-:|
+|1º|Description|
+|2º|Description|
+|3º|Description|
+|4º|Description|
+|5º|Description|
+
+| File | Name |
+|:-:|:-:|
+|1º|Name|
+|2º|Name|
+|3º|Name|
+|4º|Name|
+|5º|Name|
+
+<h3>Sergio Rodríguez Gil</h3>
+
+At the beginning of the project I created the repositories and the main controller (which was divided into smaller ones later). Secondly, I modified the class responsible to initialize the database with users, courses, materials and comments. Finally, I implemented functionalities such as modify profile data, modify password, and delete users; apart from fixing some errors along the way meaning.
+
+| Commit | Description |
+|:-:|:-:|
+|[1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/0252236a6c185d1f551e7d4fc3e6412ea142b7fd)|Implement delete course|
+|[2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/0fd628b7b6e32ba1678d0ed7f92effe353afab4f)|Implements logic behind adminUsers.html|
+|[3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/52359184a890dd44796740399d71e29aaffb288c)|Implement edit profile functionality|
+|[4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/fd36af402ef8c0b1669cbb5ea3f34ac43b235a14)|Implements change password functionality|
+|[5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/81022fb4891dc903e1026835ba120c5d9cf2cbc4)|Initialize database with materials and comments|
+
+| File | Name |
+|:-:|:-:|
+|[1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/WebController.java)|WebController|
+|[2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/DatabaseInitializer.java)|DatabaseInitializer|
+|[3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseController.java)|CourseController|
+|[4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/UserController.java)|UserController|
+|[5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/LoginController.java)|LoginController|
+
+<h3>Sergio López Cuesta</h3>
+
+| Commit | Description |
+|:-:|:-:|
+|1º|Description|
+|2º|Description|
+|3º|Description|
+|4º|Description|
+|5º|Description|
+
+| File | Name |
+|:-:|:-:|
+|1º|Name|
+|2º|Name|
+|3º|Name|
+|4º|Name|
+|5º|Name|
+
+<h3>Marcos Alejandro Pascual Rojas</h3>
+
+| Commit | Description |
+|:-:|:-:|
+|1º|Description|
+|2º|Description|
+|3º|Description|
+|4º|Description|
+|5º|Description|
+
+| File | Name |
+|:-:|:-:|
+|1º|Name|
+|2º|Name|
+|3º|Name|
+|4º|Name|
+|5º|Name|
+
+<h3>Gonzalo García Castillo</h3>
+
+| Commit | Description |
+|:-:|:-:|
+|1º|Description|
+|2º|Description|
+|3º|Description|
+|4º|Description|
+|5º|Description|
+
+| File | Name |
+|:-:|:-:|
+|1º|Name|
+|2º|Name|
+|3º|Name|
+|4º|Name|
+|5º|Name|
