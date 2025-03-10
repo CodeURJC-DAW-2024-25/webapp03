@@ -49,6 +49,10 @@ public class User {
 		this.roles = List.of(roles);
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -95,6 +99,10 @@ public class User {
 
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
+	}
+
+	public void addCourse(Course course){
+		this.courses.add(course);
 	}
 
 	public List<String> getRoles() {

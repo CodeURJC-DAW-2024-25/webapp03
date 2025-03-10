@@ -4,6 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import es.webapp03.backend.model.User;
+import es.webapp03.backend.model.Course;
 import es.webapp03.backend.repository.UserRepository;
 
 @Service
@@ -20,6 +21,11 @@ public class UserService {
         user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
         user.getRoles().add(roleName);
         return userRepository.save(user);
+    }
+
+    public void addCourseToUser(User user, Course course){
+        user.addCourse(course);
+        userRepository.save(user);
     }
 
     public User findByName(String name) {

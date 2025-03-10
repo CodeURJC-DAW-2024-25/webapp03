@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -31,7 +33,9 @@ import es.webapp03.backend.model.Material;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.repository.CourseRepository;
 import es.webapp03.backend.service.UserService;
+import es.webapp03.backend.service.CourseService;
 import es.webapp03.backend.repository.CommentRepository;
+import es.webapp03.backend.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
@@ -42,6 +46,12 @@ public class CourseController {
 
     @Autowired
     private UserService userService;
+
+	@Autowired
+    private UserRepository userRepository;
+
+	@Autowired
+    private CourseService courseService;
 
 	@Autowired
 	private CommentRepository commentRepository;
@@ -75,6 +85,17 @@ public class CourseController {
 		Optional<Course> course = courseRepository.findById(id);
 		if (course.isPresent()) {
 			Course c = course.get();
+
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        	String username = authentication.getName();
+			if (!courseService.isUserInCourse(id, username)){
+				Optional<User> optUser = userRepository.findByEmail(username);
+				if (optUser.isPresent()){
+					User user = optUser.get();
+					courseService.addUserToCourse(c, user);
+					userService.addCourseToUser(user, c);
+				}
+			}
 			if (c.getMaterials() == null) {
 				c.setMaterials(new ArrayList<>()); // Ensure materials is never null
 			}
@@ -132,6 +153,7 @@ public class CourseController {
 		Course course = new Course();
 		course.setTitle(title);
 		course.setDescription(description);
+		course.setNumberOfUsers(0);
 
 		// Procesar los tags (separados por comas)
 		List<String> tagList = Arrays.asList(tags.split(","));

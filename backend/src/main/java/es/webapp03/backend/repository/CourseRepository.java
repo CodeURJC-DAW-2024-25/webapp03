@@ -17,6 +17,8 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     // Buscar cursos que contengan al menos uno de los tags proporcionados
     @Query("SELECT DISTINCT c FROM Course c JOIN c.tags t WHERE t IN :tags")
     List<Course> findByTags(@Param("tags") List<String> tags);
+
+    List<Course> findTop3ByOrderByNumberOfUsersDesc();
 }
 
 

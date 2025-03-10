@@ -65,14 +65,14 @@ public class CommentController {
 
 			Principal principal = request.getUserPrincipal();
             if (principal == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // No autenticado
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
 
             String username = principal.getName();
             Optional<User> userOpt = userRepository.findByEmail(username);
 
             if (userOpt.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // Usuario no encontrado
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
 
             User user = userOpt.get();

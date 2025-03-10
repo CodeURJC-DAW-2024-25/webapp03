@@ -30,6 +30,8 @@ public class Course {
 
     private boolean image;
 
+    private int numberOfUsers;
+
     @ManyToMany(mappedBy = "courses")
     private List<User> users;
 
@@ -43,10 +45,11 @@ public class Course {
         // Constructor vacío requerido por JPA
     }
 
-    public Course(String title, String description, Blob imageFile) {
+    public Course(String title, String description, Blob imageFile, int numberOfUsers) {
         this.title = title;
         this.description = description;
         this.imageFile = imageFile;
+        this.numberOfUsers = numberOfUsers;
     }
 
     public Long getId() {
@@ -77,6 +80,14 @@ public class Course {
         this.image = image;
     }
 
+    public int getNumberOfUsers() {
+        return this.numberOfUsers;
+    }
+
+    public void setNumberOfUsers(int numberOfUsers) {
+        this.numberOfUsers = numberOfUsers;
+    }
+
     public Blob getImageFile() {
         return imageFile;
     }
@@ -91,6 +102,10 @@ public class Course {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public void addUser(User user){
+        this.users.add(user);
     }
 
     public List<Material> getMaterials() {
