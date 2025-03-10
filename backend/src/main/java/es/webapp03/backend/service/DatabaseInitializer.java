@@ -41,51 +41,23 @@ public class DatabaseInitializer {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private Blob loadDefaultImage() {
+    private Blob loadResource(String path) {
         try {
-            InputStream defaultImageStream = getClass().getResourceAsStream("/static/assets/img/portfolio/5.jpg");
-            if (defaultImageStream != null) {
-                byte[] imageBytes = defaultImageStream.readAllBytes();
-                return new SerialBlob(imageBytes);
+            InputStream resourceStream = getClass().getResourceAsStream(path);
+            if (resourceStream != null) {
+                byte[] resourceBytes = resourceStream.readAllBytes();
+                return new SerialBlob(resourceBytes);
             }
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-
-    private Blob loadDefaultUserImage() {
-        try {
-            InputStream defaultUserImageStream = getClass()
-                    .getResourceAsStream("/static/assets/user_image_default.jpg");
-            if (defaultUserImageStream != null) {
-                byte[] imageBytes = defaultUserImageStream.readAllBytes();
-                return new SerialBlob(imageBytes);
-            }
-        } catch (IOException | SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private Blob loadDefaultMaterial(String path) {
-        try {
-            InputStream materialStream = getClass().getResourceAsStream(path);
-            if (materialStream != null) {
-                byte[] materialBytes = materialStream.readAllBytes();
-                return new SerialBlob(materialBytes);
-            }
-        } catch (IOException | SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }    
-    
 
     @PostConstruct
     public void init() throws IOException, URISyntaxException, SQLException {
-        Blob defaultCourseImage = loadDefaultImage(); // Imagen por defecto para cursos
-        Blob defaultUserImage = loadDefaultUserImage(); // Imagen por defecto para usuarios
+        Blob defaultCourseImage = loadResource("/static/assets/img/portfolio/5.jpg");
+        Blob defaultUserImage = loadResource("/static/assets/user_image_default.jpg");
     
         userRepository.save(new User("Laura", "laura@gmail.com", passwordEncoder.encode("laurapass"), defaultUserImage, "USER"));
         userRepository.save(new User("Domingo", "domingo@gmail.com", passwordEncoder.encode("domingopass"), defaultUserImage, "USER"));
@@ -111,7 +83,6 @@ public class DatabaseInitializer {
         User user8 = userRepository.findByEmail("gonzalo@gmail.com").orElseThrow();
         User user9 = userRepository.findByEmail("marta@gmail.com").orElseThrow();
         User user10 = userRepository.findByEmail("sofia@gmail.com").orElseThrow();
-
 
         Course course1 = new Course("Course 1", "Description 1", defaultCourseImage, 0);
         course1.setTags(Arrays.asList("Tag1", "Tag2", "Tag3"));
@@ -145,15 +116,14 @@ public class DatabaseInitializer {
         Comment comment10 = new Comment(course1, user10, "Me gustaría que agregaran más ejercicios.", LocalDate.now());
         commentRepository.saveAll(Arrays.asList(comment1, comment2, comment3, comment4, comment5, comment6, comment7, comment8, comment9, comment10));
         
-        Blob material1Blob = loadDefaultMaterial("/static/assets/materials/Tema3.1-SeguridadWeb.pdf");
-        Blob material2Blob = loadDefaultMaterial("/static/assets/materials/Fundamentos.pdf");
-        Blob material3Blob = loadDefaultMaterial("/static/assets/materials/practica1_gic_gis.pdf");
+        Blob material1Blob = loadResource("/static/assets/materials/Tema3.1-SeguridadWeb.pdf");
+        Blob material2Blob = loadResource("/static/assets/materials/Fundamentos.pdf");
+        Blob material3Blob = loadResource("/static/assets/materials/practica1_gic_gis.pdf");
     
         Material mat1 = new Material("Tema3.1-SeguridadWeb.pdf", "application/pdf", material1Blob, course1);
         Material mat2 = new Material("Fundamentos.pdf", "application/pdf", material2Blob, course1);
         Material mat3 = new Material("practica1_gic_gis.pdf", "application/pdf", material3Blob, course1);
 
         materialRepository.saveAll(Arrays.asList(mat1, mat2, mat3));
-        
     }
 }
