@@ -5,6 +5,7 @@ import java.security.Principal;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,6 +45,7 @@ import es.webapp03.backend.repository.CourseRepository;
 import es.webapp03.backend.repository.MaterialRepository;
 import es.webapp03.backend.repository.UserRepository;
 import es.webapp03.backend.service.UserService;
+import es.webapp03.backend.service.CourseService;
 
 @Controller
 public class WebController {
@@ -62,6 +64,9 @@ public class WebController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private CourseService courseService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -91,8 +96,21 @@ public class WebController {
     model.addAttribute("courses", coursePage.getContent()); // Solo los cursos de la página actual
     model.addAttribute("currentPage", page);
     model.addAttribute("totalPages", coursePage.getTotalPages());
+
+	List<Course> topCourses = courseService.getTopCourses();
+
+        List<String> courseNames = topCourses.stream()
+                .map(Course::getTitle)
+                .collect(Collectors.toList());
+
+        List<Integer> userCounts = topCourses.stream()
+                .map(Course::getNumberOfUsers)
+                .collect(Collectors.toList());
+
+        model.addAttribute("courseNames", courseNames);
+        model.addAttribute("userCounts", userCounts);
     
-    return "index"; // Devuelve la vista index con los cursos paginados
+    return "index";
 }
 
 	@GetMapping("/courses/{id}/image")

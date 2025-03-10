@@ -114,22 +114,22 @@ public class DatabaseInitializer {
         User user10 = userRepository.findByEmail("sofia@gmail.com").orElseThrow();
 
 
-        Course course1 = new Course("Course 1", "Description 1", defaultCourseImage);
+        Course course1 = new Course("Course 1", "Description 1", defaultCourseImage, 0);
         course1.setTags(Arrays.asList("Tag1", "Tag2", "Tag3"));
 
-        Course course2 = new Course("Course 2", "Description 2", defaultCourseImage);
+        Course course2 = new Course("Course 2", "Description 2", defaultCourseImage, 0);
         course2.setTags(Arrays.asList("Tag2", "Tag4"));
 
-        Course course3 = new Course("Course 3", "Description 3", defaultCourseImage);
+        Course course3 = new Course("Course 3", "Description 3", defaultCourseImage, 0);
         course3.setTags(Arrays.asList("Tag1", "Tag5"));
 
-        Course course4 = new Course("Course 4", "Description 4", defaultCourseImage);
+        Course course4 = new Course("Course 4", "Description 4", defaultCourseImage, 0);
         course4.setTags(Arrays.asList("Tag3", "Tag6"));
 
-        Course course5 = new Course("Course 5", "Description 5", defaultCourseImage);
+        Course course5 = new Course("Course 5", "Description 5", defaultCourseImage, 0);
         course5.setTags(Arrays.asList("Tag4", "Tag7"));
 
-        Course course6 = new Course("Course 6", "Description 6", defaultCourseImage);
+        Course course6 = new Course("Course 6", "Description 6", defaultCourseImage, 0);
         course6.setTags(Arrays.asList("Tag5", "Tag8"));
 
         courseRepository.saveAll(Arrays.asList(course1, course2, course3, course4, course5, course6));

@@ -2,13 +2,12 @@ package es.webapp03.backend.controller;
 
 import java.io.InputStream;
 import java.net.URI;
-
 import java.security.Principal;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.Optional;
 
 import javax.sql.rowset.serial.SerialBlob;
-import java.sql.Blob;
-import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -26,17 +25,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.Material;
-import es.webapp03.backend.repository.CourseRepository;
-import es.webapp03.backend.repository.MaterialRepository;
+import es.webapp03.backend.service.CourseService;
+import es.webapp03.backend.service.MaterialService;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class MaterialController {
-    @Autowired
-    private CourseRepository courseRepository;
 
     @Autowired
-    private MaterialRepository materialRepository;
+    private CourseService courseService;
+
+    @Autowired
+    private MaterialService materialService;
 
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
@@ -51,58 +52,52 @@ public class MaterialController {
         }
     }
 
-@PostMapping("/courses/{courseId}/materials/upload")
-public ResponseEntity<Void> uploadFile(@PathVariable Long courseId, @RequestParam("file") MultipartFile file) {
-    try {
-        Optional<Course> courseOpt = courseRepository.findById(courseId);
-        if (courseOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    @PostMapping("/courses/{courseId}/materials/upload")
+    public ResponseEntity<Void> uploadFile(@PathVariable Long courseId, @RequestParam("file") MultipartFile file) {
+        try {
+            Optional<Course> courseOpt = courseService.findById(courseId);
+            if (courseOpt.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+
+            Course course = courseOpt.get();
+
+            // Convert file to Blob
+            InputStream fileInputStream = file.getInputStream();
+            Blob fileBlob = new SerialBlob(fileInputStream.readAllBytes());
+
+            // Save file in the database as a Blob
+            Material material = new Material(file.getOriginalFilename(), file.getContentType(), fileBlob, course);
+            materialService.save(material);
+
+            // Redirect to the course page
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create("/courses/" + courseId));
+            return new ResponseEntity<>(headers, HttpStatus.FOUND);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/courses/{courseId}/materials/{materialId}/download")
+    public ResponseEntity<byte[]> downloadFile(@PathVariable Long courseId, @PathVariable Long materialId) throws SQLException {
+        Optional<Material> materialOpt = materialService.findById(materialId);
+        if (materialOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        Course course = courseOpt.get();
+        Material material = materialOpt.get();
 
-        // Convert file to Blob
-        InputStream fileInputStream = file.getInputStream();
-        Blob fileBlob = new SerialBlob(fileInputStream.readAllBytes());
-
-        // Save file in the database as a Blob
-        Material material = new Material(file.getOriginalFilename(), file.getContentType(), fileBlob, course);
-        materialRepository.save(material);
-
-        // Redirect to the course page
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("/courses/" + courseId));
-        return new ResponseEntity<>(headers, HttpStatus.FOUND);
-
-    } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + material.getName() + "\"")
+                .contentType(MediaType.parseMediaType(material.getType()))
+                .body(material.getFile().getBytes(1, (int) material.getFile().length()));
     }
-}
-
-
-@GetMapping("/courses/{courseId}/materials/{materialId}/download")
-public ResponseEntity<byte[]> downloadFile(@PathVariable Long courseId, @PathVariable Long materialId) throws SQLException {
-    Optional<Material> materialOpt = materialRepository.findById(materialId);
-    if (materialOpt.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
-
-    Material material = materialOpt.get();
-
-    return ResponseEntity.ok()
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + material.getName() + "\"")
-            .contentType(MediaType.parseMediaType(material.getType()))
-            .body(material.getFile().getBytes(1, (int) material.getFile().length()));
-}
-
 
     @PostMapping("/courses/{courseId}/materials/{materialId}/delete")
     public ResponseEntity<byte[]> deleteFile(@PathVariable Long courseId, @PathVariable Long materialId) {
-
-        Optional<Material> materialOpt = materialRepository.findById(materialId);
-        if (materialOpt.isPresent()) {
-            materialRepository.delete(materialOpt.get());
-        }
+        materialService.deleteById(materialId);
 
         // Redirect to the course page
         HttpHeaders headers = new HttpHeaders();
