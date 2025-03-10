@@ -289,3 +289,11 @@ IMPORTANT NOTE: All commits under the name of "Layncatto" were done by me by a p
 | [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseService.java) | CourseService |
 |            [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/resources/templates/diploma.html)            | diploma.html  |
 |            [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/resources/templates/course.html)             |  course.html  |
+
+<h2 id="execution">Execution instructions</h2>
+
+1. Install VSCode
+2. Install Java, Maven and Spring Boot extensions in VSCode
+3. Download MySQL and MySQL Workbench (use "password" as your password). Create a schema named "libace"
+4. Download this repository code and execute it on VSCode (is easier with the Spring Boot Dashboard extension)
+5. Introduce this URL in your browser (it will tell you its not secure, but that just because its on development, nothing to worry about): https://localhost:8443/
