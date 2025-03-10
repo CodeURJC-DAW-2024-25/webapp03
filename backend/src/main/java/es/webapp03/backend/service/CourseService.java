@@ -1,6 +1,5 @@
 package es.webapp03.backend.service;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.repository.CourseRepository;
-import es.webapp03.backend.repository.UserRepository;
 
 @Service
 public class CourseService {
