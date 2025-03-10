@@ -17,7 +17,8 @@
   - [Screenshots](#screenshots)
   - [Navigation](#navigation)
   - [Classes and Templates Diagram](#classes)
-  - [Members contribution](#contribution)
+- [Members contribution](#contribution)
+- [Execution instructions](#execution)
 
 <br>
 
