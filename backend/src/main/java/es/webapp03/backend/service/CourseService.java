@@ -34,10 +34,14 @@ public class CourseService {
         if (optCourse.isPresent()) {
             course = optCourse.get();
         }
-        return course.getUsers().stream().anyMatch(user -> user.getEmail().equals(userEmail));
+        return course != null && course.getUsers().stream().anyMatch(user -> user.getEmail().equals(userEmail));
     }
 
     public List<Course> getTopCourses(){
         return courseRepository.findTop3ByOrderByNumberOfUsersDesc();
+    }
+
+    public Optional<Course> findById(Long courseId) {
+        return courseRepository.findById(courseId);
     }
 }

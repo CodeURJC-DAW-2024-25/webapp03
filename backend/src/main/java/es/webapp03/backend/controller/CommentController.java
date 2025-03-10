@@ -15,34 +15,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
+import jakarta.servlet.http.HttpServletRequest;
 
 import es.webapp03.backend.model.Comment;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.model.Course;
-import es.webapp03.backend.repository.CommentRepository;
-import es.webapp03.backend.repository.CourseRepository;
-import es.webapp03.backend.repository.UserRepository;
 import es.webapp03.backend.service.CommentService;
-import jakarta.servlet.http.HttpServletRequest;
+import es.webapp03.backend.service.CourseService;
+import es.webapp03.backend.service.UserService;
 
 @Controller
 public class CommentController {
 
-	@Autowired
-	private CommentRepository commentRepository;
-
-	@Autowired
-	private CourseRepository courseRepository;
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
-	private UserRepository userRepository;
+    private CourseService courseService;
 
-	@Autowired
-	private CommentService commentService;
+    @Autowired
+    private UserService userService;
 
-	@ModelAttribute
+    @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
 
@@ -55,35 +49,34 @@ public class CommentController {
         }
     }
 
-	@PostMapping("/courses/{courseId}/comment/upload")
+    @PostMapping("/courses/{courseId}/comment/upload")
     public ResponseEntity<Void> uploadComment(HttpServletRequest request, @PathVariable Long courseId, @RequestParam("newcomment") String newcomment) {
         try {
-            Optional<Course> courseOpt = courseRepository.findById(courseId);
+            Optional<Course> courseOpt = courseService.findById(courseId);
             if (courseOpt.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
 
-			Principal principal = request.getUserPrincipal();
+            Principal principal = request.getUserPrincipal();
             if (principal == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
 
             String username = principal.getName();
-            Optional<User> userOpt = userRepository.findByEmail(username);
+            User user = userService.findByEmail(username);
+            Optional<User> userOpt = Optional.ofNullable(user);
 
             if (userOpt.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
 
-            User user = userOpt.get();
-
-
+            user = userOpt.get();
             Course course = courseOpt.get();
-			LocalDate date = LocalDate.now();
+            LocalDate date = LocalDate.now();
 
             // Save comment in the database
-			Comment comment = new Comment(course, user, newcomment, date);
-			commentRepository.save(comment);
+            Comment comment = new Comment(course, user, newcomment, date);
+            commentService.save(comment);
 
             // Redirect to the course page
             HttpHeaders headers = new HttpHeaders();
@@ -94,20 +87,14 @@ public class CommentController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    
+
     @PostMapping("/courses/{courseId}/comment/{commentId}/delete")
     public ResponseEntity<byte[]> deleteFile(@PathVariable Long courseId, @PathVariable Long commentId) {
-
-        Optional<Comment> commentOpt = commentRepository.findById(commentId);
-        if (commentOpt.isPresent()) {
-            commentRepository.delete(commentOpt.get());
-        }
+        commentService.deleteById(commentId);
 
         // Redirect to the course page
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create("/courses/" + courseId));
         return new ResponseEntity<>(headers, HttpStatus.FOUND);
     }
-
-
 }
