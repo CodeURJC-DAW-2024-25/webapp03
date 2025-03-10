@@ -12,105 +12,117 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 @Entity(name = "UserTable")
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	private String name;
+    private String name;
 
-	private String email;
+    private String email;
 
-	private String encodedPassword;
+    private String encodedPassword;
 
-	@Lob
-	private Blob imageFile;
+    @Lob
+    private Blob imageFile;
 
-	private boolean image;
+    private boolean image;
 
-	@ManyToMany
-	@JoinTable(name = "user_course")
-	private List<Course> courses;
+    @ManyToMany
+    @JoinTable(name = "user_course")
+    private List<Course> courses;
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	private List<String> roles;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles;
 
-	public User() {
-	}
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
 
-	public User(String name, String email, String encodedPassword, Blob imageFile, String... roles) {
-		this.name = name;
-		this.email = email;
-		this.encodedPassword = encodedPassword;
-		this.imageFile = imageFile;
-		this.roles = List.of(roles);
-	}
+    public User() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public User(String name, String email, String encodedPassword, Blob imageFile, String... roles) {
+        this.name = name;
+        this.email = email;
+        this.encodedPassword = encodedPassword;
+        this.imageFile = imageFile;
+        this.roles = List.of(roles);
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getEncodedPassword() {
-		return encodedPassword;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setEncodedPassword(String encodedPassword) {
-		this.encodedPassword = encodedPassword;
-	}
+    public String getEncodedPassword() {
+        return encodedPassword;
+    }
 
-	public boolean getImage() {
-		return this.image;
-	}
+    public void setEncodedPassword(String encodedPassword) {
+        this.encodedPassword = encodedPassword;
+    }
 
-	public void setImage(boolean image) {
-		this.image = image;
-	}
+    public boolean getImage() {
+        return this.image;
+    }
 
-	public Blob getImageFile() {
-		return imageFile;
-	}
+    public void setImage(boolean image) {
+        this.image = image;
+    }
 
-	public void setImage(Blob imageFile) {
-		this.imageFile = imageFile;
-	}
+    public Blob getImageFile() {
+        return imageFile;
+    }
 
-	public List<Course> getCourses() {
-		return courses;
-	}
+    public void setImage(Blob imageFile) {
+        this.imageFile = imageFile;
+    }
 
-	public void setCourses(List<Course> courses) {
-		this.courses = courses;
-	}
+    public List<Course> getCourses() {
+        return courses;
+    }
 
-	public void addCourse(Course course){
-		this.courses.add(course);
-	}
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
 
-	public List<String> getRoles() {
-		return roles;
-	}
+    public void addCourse(Course course) {
+        this.courses.add(course);
+    }
 
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
-	}
+    public List<String> getRoles() {
+        return roles;
+    }
 
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }
