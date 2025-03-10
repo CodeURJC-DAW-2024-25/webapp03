@@ -1,5 +1,7 @@
 package es.webapp03.backend.service;
 
+import java.util.List;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -36,4 +38,19 @@ public class UserService {
         return userRepository.findByEmail(email).orElse(null);
     }
 
+    public void save(User newUser) {
+        userRepository.save(newUser);
+    }
+
+    public List<User> findByRoles(String role) {
+        return userRepository.findByRoles(role);
+    }
+
+    public boolean existsById(long id) {
+        return userRepository.existsById(id);
+    }
+
+    public void deleteById(long id) {
+        userRepository.deleteById(id);
+    }
 }

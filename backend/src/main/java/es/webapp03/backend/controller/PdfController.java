@@ -3,7 +3,7 @@ package es.webapp03.backend.controller;
 import com.lowagie.text.DocumentException;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.User;
-import es.webapp03.backend.repository.CourseRepository;
+import es.webapp03.backend.service.CourseService;
 import es.webapp03.backend.service.PdfService;
 import es.webapp03.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class PdfController {
     private UserService userService;
 
     @Autowired
-    private CourseRepository courseRepository;
+    private CourseService courseService;
 
     @PostMapping("/api/pdf/generate/{courseId}")
     public ResponseEntity<byte[]> generatePdf(@RequestParam String templateName, @RequestParam String outputFileName, @RequestParam("_csrf") String csrfToken, Principal principal, @PathVariable Long courseId) {
@@ -56,7 +56,7 @@ public class PdfController {
                 return ResponseEntity.status(404).body(null); // User not found
             }
 
-            Optional<Course> courseOpt = courseRepository.findById(courseId);
+            Optional<Course> courseOpt = courseService.findById(courseId);
             if (courseOpt.isEmpty()) {
                 return ResponseEntity.status(404).body(null); // Course not found
             }
@@ -78,7 +78,6 @@ public class PdfController {
             Map<String, Object> modelMap = new HashMap<>();
             modelMap.put("userFormalName", user.getName()); // Set userName as a string
             modelMap.put("course", course);
-            // modelMap.put("image", base64Image != null);
             modelMap.put("courseImageUrl", base64Image != null ? "data:image/jpeg;base64," + base64Image : null);
 
             // Generate PDF
