@@ -31,192 +31,156 @@ import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.Comment;
 import es.webapp03.backend.model.Material;
 import es.webapp03.backend.model.User;
-import es.webapp03.backend.repository.CourseRepository;
 import es.webapp03.backend.service.UserService;
 import es.webapp03.backend.service.CourseService;
-import es.webapp03.backend.repository.CommentRepository;
-import es.webapp03.backend.repository.UserRepository;
+import es.webapp03.backend.service.CommentService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class CourseController {
 
-	@Autowired
-	private CourseRepository courseRepository;
-
     @Autowired
     private UserService userService;
 
-	@Autowired
-    private UserRepository userRepository;
-
-	@Autowired
+    @Autowired
     private CourseService courseService;
 
-	@Autowired
-	private CommentRepository commentRepository;
+    @Autowired
+    private CommentService commentService;
 
-	@ModelAttribute
-	public void addAttributes(Model model, HttpServletRequest request) {
-		Principal principal = request.getUserPrincipal();
+    @ModelAttribute
+    public void addAttributes(Model model, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
 
-		if (principal != null) {
+        if (principal != null) {
+            model.addAttribute("logged", true);
+            model.addAttribute("userName", principal.getName());
+            User user = userService.findByEmail(principal.getName());
+            model.addAttribute("userFormalName", user.getName());
+            model.addAttribute("admin", request.isUserInRole("ADMIN"));
+        } else {
+            model.addAttribute("logged", false);
+        }
+    }
 
-			model.addAttribute("logged", true);
+    @GetMapping("/courses/{id}")
+    public String showCourse(Model model, @PathVariable long id) {
+        Optional<Course> course = courseService.findById(id);
+        if (course.isPresent()) {
+            Course c = course.get();
 
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName();
+            if (!courseService.isUserInCourse(id, username)) {
+                User user = userService.findByEmail(username);
+                if (user != null) {
+                    courseService.addUserToCourse(c, user);
+                    userService.addCourseToUser(user, c);
+                }
+            }
+            if (c.getMaterials() == null) {
+                c.setMaterials(new ArrayList<>()); // Ensure materials is never null
+            }
 
-			//Esta parte devuelve el correo, no el nombre ya que usa principal. Si algo funcional mal es respecto a esto.
-			model.addAttribute("userName", principal.getName());
-			User user = userService.findByEmail(principal.getName());
+            List<Material> m = c.getMaterials();
+            List<Comment> comments = commentService.findByCourseIdOrderByCreatedDateDesc(id);
+            model.addAttribute("course", c);
+            model.addAttribute("material", m);
+            model.addAttribute("comments", comments);
+            return "course";
+        } else {
+            return "index";
+        }
+    }
 
-			model.addAttribute("userFormalName", user.getName()); // Set userName as the user's name
+    @GetMapping("/removecourse/{id}")
+    public String removeCourse(@PathVariable long id) {
+        if (courseService.existsById(id)) {
+            courseService.deleteById(id);
+        }
+        return "redirect:/";
+    }
 
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/courses/filter")
+    public String filterCoursesByTags(@RequestParam List<String> tags, Model model) {
+        List<Course> filteredCourses = courseService.findByTags(tags);
+        model.addAttribute("courses", filteredCourses);
+        return "index"; // Devuelve la vista index con los cursos filtrados
+    }
 
-			
-			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		} else {
-			model.addAttribute("logged", false);
-		}
-	}
+    @PostMapping("/newcourse")
+    public String newCourseProcess(Model model, @RequestParam String title, @RequestParam String description,
+            @RequestParam(required = false) MultipartFile imageField, @RequestParam String tags) throws IOException {
 
+        Course course = new Course();
+        course.setTitle(title);
+        course.setDescription(description);
+        course.setNumberOfUsers(0);
 
-	@GetMapping("/courses/{id}")
-	public String showCourse(Model model, @PathVariable long id) {
-		Optional<Course> course = courseRepository.findById(id);
-		if (course.isPresent()) {
-			Course c = course.get();
+        // Procesar los tags (separados por comas)
+        List<String> tagList = Arrays.asList(tags.split(","));
+        course.setTags(tagList);
 
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        	String username = authentication.getName();
-			if (!courseService.isUserInCourse(id, username)){
-				Optional<User> optUser = userRepository.findByEmail(username);
-				if (optUser.isPresent()){
-					User user = optUser.get();
-					courseService.addUserToCourse(c, user);
-					userService.addCourseToUser(user, c);
-				}
-			}
-			if (c.getMaterials() == null) {
-				c.setMaterials(new ArrayList<>()); // Ensure materials is never null
-			}
+        // Manejo de la imagen
+        if (!imageField.isEmpty()) {
+            course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+            course.setImage(true);
+        }
 
-			List<Material> m = c.getMaterials();
+        courseService.save(course); // Guarda el curso en la base de datos
 
-			List<Comment> comments = commentRepository.findByCourseIdOrderByCreatedDateDesc(id);
-			model.addAttribute("course", c);
-			model.addAttribute("material", m);
-			model.addAttribute("comments", comments);
-			return "course";
-		} else {
-			return "index";
-		}
-	}
+        model.addAttribute("courseId", course.getId());
 
-		// @GetMapping("/courses/{id}")
-	// public String showCourse(Model model, @PathVariable long id, Principal principal) {
-	
-	// 	Optional<Course> course = courseRepository.findById(id);
-	// 	Blob courseimage = course.isPresent() ? course.get().getImageFile() : null;
-	// 	if (principal != null) {
-	// 		User user = userRepository.findByName(principal.getName()).orElse(null);
-	// 		if (course.isPresent() && user != null) {
-	// 			model.addAttribute("course", course.get());
-	// 			model.addAttribute("user", user);
-	// 			model.addAttribute("course", user)
-	// 			return "course";
-	// 		}
-	// 	}
-	// 	return "index";
-	// }
+        return "redirect:/courses/" + course.getId(); // Redirige a la página del curso
+    }
 
-	@GetMapping("/removecourse/{id}")
-	public String removeCourse(@PathVariable long id) {
-		if (courseRepository.existsById(id)) {
-			courseRepository.deleteById(id);
-		}
-		return "redirect:/";
-	}
+    @GetMapping("/editcourse/{id}")
+    public String editCourse(Model model, @PathVariable long id) {
+        Optional<Course> course = courseService.findById(id);
+        if (course.isPresent()) {
+            model.addAttribute("course", course.get());
+            return "editCourse"; // Devuelve la plantilla de edición
+        } else {
+            return "redirect:/index"; // Si el curso no existe, redirige al índice
+        }
+    }
 
+    @PostMapping("/editcourse")
+    public String editCourseProcess(Model model, @RequestParam Long id, @RequestParam String title,
+            @RequestParam String description, @RequestParam(required = false) MultipartFile imageField,
+            @RequestParam(required = false) boolean removeImage) throws IOException, SQLException {
+        Optional<Course> optionalCourse = courseService.findById(id);
+        if (optionalCourse.isPresent()) {
+            Course course = optionalCourse.get();
+            course.setTitle(title);
+            course.setDescription(description);
 
-	@PreAuthorize("hasRole('USER')")
-	@GetMapping("/courses/filter")
-	public String filterCoursesByTags(@RequestParam List<String> tags, Model model) {
-		List<Course> filteredCourses = courseRepository.findByTags(tags);
-		model.addAttribute("courses", filteredCourses);
-		return "index"; // Devuelve la vista index con los cursos filtrados
-	}
+            // Manejo de la imagen
+            if (removeImage) {
+                course.setImageFile(null);
+                course.setImage(false);
+            } else if (!imageField.isEmpty()) {
+                course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+                course.setImage(true);
+            }
 
-	@PostMapping("/newcourse")
-	public String newCourseProcess(Model model, @RequestParam String title, @RequestParam String description,
-			@RequestParam(required = false) MultipartFile imageField, @RequestParam String tags) throws IOException {
+            courseService.save(course); // Guarda los cambios en la base de datos
+            return "redirect:/courses/" + course.getId(); // Redirige a la página del curso
+        } else {
+            return "redirect:/index"; // Si el curso no existe, redirige al índice
+        }
+    }
 
-		Course course = new Course();
-		course.setTitle(title);
-		course.setDescription(description);
-		course.setNumberOfUsers(0);
+    @GetMapping("/courses/loadMore")
+    public String loadMoreCourses(@RequestParam int page, Model model) {
+        int pageSize = 3; // Número de cursos por página
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Course> coursePage = courseService.findAll(pageable);
 
-		// Procesar los tags (separados por comas)
-		List<String> tagList = Arrays.asList(tags.split(","));
-		course.setTags(tagList);
-
-		// Manejo de la imagen
-		if (!imageField.isEmpty()) {
-			course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-			course.setImage(true);
-		}
-
-		courseRepository.save(course); // Guarda el curso en la base de datos
-
-		model.addAttribute("courseId", course.getId());
-
-		return "redirect:/courses/" + course.getId(); // Redirige a la página del curso
-	}
-
-	@GetMapping("/editcourse/{id}")
-	public String editCourse(Model model, @PathVariable long id) {
-		Optional<Course> course = courseRepository.findById(id);
-		if (course.isPresent()) {
-			model.addAttribute("course", course.get());
-			return "editCourse"; // Devuelve la plantilla de edición
-		} else {
-			return "redirect:/index"; // Si el curso no existe, redirige al índice
-		}
-	}
-
-	@PostMapping("/editcourse")
-	public String editCourseProcess(Model model, @RequestParam Long id, @RequestParam String title,
-			@RequestParam String description, @RequestParam(required = false) MultipartFile imageField,
-			@RequestParam(required = false) boolean removeImage) throws IOException, SQLException {
-		Optional<Course> optionalCourse = courseRepository.findById(id);
-		if (optionalCourse.isPresent()) {
-			Course course = optionalCourse.get();
-			course.setTitle(title);
-			course.setDescription(description);
-
-			// Manejo de la imagen
-			if (removeImage) {
-				course.setImageFile(null);
-				course.setImage(false);
-			} else if (!imageField.isEmpty()) {
-				course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-				course.setImage(true);
-			}
-
-			courseRepository.save(course); // Guarda los cambios en la base de datos
-			return "redirect:/courses/" + course.getId(); // Redirige a la página del curso
-		} else {
-			return "redirect:/index"; // Si el curso no existe, redirige al índice
-		}
-	}
-	@GetMapping("/courses/loadMore")
-	public String loadMoreCourses(@RequestParam int page, Model model) {
-    int pageSize = 3; // Número de cursos por página
-    Pageable pageable = PageRequest.of(page, pageSize);
-    Page<Course> coursePage = courseRepository.findAll(pageable);
-    
-    model.addAttribute("courses", coursePage.getContent());
-    return "fragments/courseList"; // Devuelve un fragmento de HTML con los cursos
-}
+        model.addAttribute("courses", coursePage.getContent());
+        return "fragments/courseList"; // Devuelve un fragmento de HTML con los cursos
+    }
 }
 
 

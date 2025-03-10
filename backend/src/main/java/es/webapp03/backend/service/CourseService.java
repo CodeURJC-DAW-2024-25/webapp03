@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.model.Course;
@@ -43,5 +45,25 @@ public class CourseService {
 
     public Optional<Course> findById(Long courseId) {
         return courseRepository.findById(courseId);
+    }
+
+    public boolean existsById(long id) {
+        return courseRepository.existsById(id);
+    }
+
+    public void deleteById(long id) {
+        courseRepository.deleteById(id);
+    }
+
+    public List<Course> findByTags(List<String> tags) {
+        return courseRepository.findByTags(tags);
+    }
+
+    public void save(Course course) {
+        courseRepository.save(course);
+    }
+
+    public Page<Course> findAll(Pageable pageable) {
+        return courseRepository.findAll(pageable);
     }
 }
