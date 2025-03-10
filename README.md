@@ -283,6 +283,7 @@ IMPORTANT NOTE: All commits under the name of "Layncatto" were done by me by a p
 |[3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/f4120f10ea4cdbc6f005c1134f5ae73d6a31a782)|Fixed Diploma generation to retrive name and not email|
 |[4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/c57a5f0fe1c8ec1c81a36da5831c26c385b797d5)|Add base64 image support for course diplomas in PDF generation|
 |[5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/d2bf6c9a7c5a5022db4a68175691643a5c7a3337)|Refactor CommentController to use services for comment and course operations|
+
 | File | Name |
 |:-:|:-:|
 |[1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/PdfController.java)|PdfController|
