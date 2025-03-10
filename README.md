@@ -191,4 +191,4 @@ An algorithm to recommend courses based on the courses you have already signed u
 
 <h3 id="navigation">Navigation diagram</h3>
 
-![navigationDiagram](pics/navigationDiagram.png)
+![navigationDiagram](pics/navigation_diagram.png)
