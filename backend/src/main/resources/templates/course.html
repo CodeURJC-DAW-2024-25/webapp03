@@ -58,6 +58,9 @@
                             </li>
                             {{/material}}
                         </ul>
+                        {{^material}}
+                        <p class="text-muted text-center mt-3">No hay material en estos momentos.</p>
+                        {{/material}}
                     </div>
                 </div>
             </div>
@@ -102,7 +105,7 @@
     {{/logged}}
     <!-- Generate PDF Form -->
     {{#logged}}
-    <div class="generate-pdf mt-5 text-center">
+    <div class="generate-pdf mt-5 text-center mb-5">
         <h3>¡Felicidades! Aquí tienes tu diploma</h3>
         <form id="pdfForm" action="/api/pdf/generate/{{course.id}}" method="post">
             <input type="hidden" id="templateName" name="templateName" value="diploma" required>
