@@ -46,15 +46,15 @@ LibACE is a web application where you can access courses
 
 **Users**
 
-UNREGISTERED USER: Has the ability to view all available courses on the website, their prices, and the option to log in/register.
+UNREGISTERED USER: Has the ability to view all available courses on the website, and the option to log in/register.
 
-REGISTERED USER: In addition to access all available courses, they can access the content of the courses they have purchased and buy more courses. They can also add comments on the courses they have bought and modify their profile.
+REGISTERED USER: In addition to access all available courses, they can access the content of the courses. They can also add comments on the courses and modify their profile.
 
-ADMIN (MANAGE/EDIT COURSES, CREATE/DELETE): Has the ability to add, delete, and modify courses and comments. They also can see the information of all courses.
+ADMIN (MANAGE/EDIT COURSES, CREATE/DELETE): Has the ability to add, delete, and modify courses and comments. They also can see the information of all courses and the ability to delete users.
 
 **Courses**
 
-Users can purchase courses, admins can create, modify and delete courses
+Users can view courses, admins can create, modify and delete courses
 
 **Comment**
 
@@ -63,10 +63,6 @@ The courses have comments, comments can be created by registered users
 **Material**
 
 Admins can add materials to the courses
-
-**Purchase**
-
-'Purchase' is an entity that matches users to the courses they have purchased
 
 <br>
 
@@ -124,9 +120,9 @@ When the user finish a course, he can generate a Diploma in PDF
 
 <h3 id="algorithm">Advanced algorithms</h3>
 
-**Recomendation system**
+**Filter system**
 
-An algorithm to recommend courses based on the courses you have already signed up for.
+An algorithm to filter courses based on a tag provided by the user.
 
 <br>
 
