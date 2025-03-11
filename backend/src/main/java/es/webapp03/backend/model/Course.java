@@ -33,7 +33,7 @@ public class Course {
     private int numberOfUsers;
 
     @ManyToMany(mappedBy = "courses")
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Material> materials = new ArrayList<>();
