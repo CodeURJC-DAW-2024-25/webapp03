@@ -6,11 +6,15 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -97,4 +101,13 @@ public class CommentController {
         headers.setLocation(URI.create("/courses/" + courseId));
         return new ResponseEntity<>(headers, HttpStatus.FOUND);
     }
+    @GetMapping("/courses/{courseId}/comments/load")
+    public String loadMoreComments(@PathVariable Long courseId, @RequestParam int page, Model model) {
+    int pageSize = 3; // Número de comentarios por página
+    Pageable pageable = PageRequest.of(page, pageSize);
+    Page<Comment> commentsPage = commentService.findByCourseId(courseId, pageable);
+
+    model.addAttribute("comments", commentsPage.getContent());
+    return "fragments/commentList"; // Devuelve un fragmento de HTML con los comentarios
+}
 }

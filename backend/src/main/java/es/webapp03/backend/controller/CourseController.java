@@ -61,34 +61,45 @@ public class CourseController {
 	}
 
 	@GetMapping("/courses/{id}")
-	public String showCourse(Model model, @PathVariable long id) {
-		Optional<Course> course = courseService.findById(id);
-		if (course.isPresent()) {
-			Course c = course.get();
+public String showCourse(Model model, @PathVariable long id) {
+    Optional<Course> course = courseService.findById(id);
+    if (course.isPresent()) {
+        Course c = course.get();
 
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			String username = authentication.getName();
-			if (!courseService.isUserInCourse(id, username)) {
-				User user = userService.findByEmail(username);
-				if (user != null) {
-					courseService.addUserToCourse(c, user);
-					userService.addCourseToUser(user, c);
-				}
-			}
-			if (c.getMaterials() == null) {
-				c.setMaterials(new ArrayList<>()); // Ensure materials is never null
-			}
+        // Verificar si el usuario está en el curso y agregarlo si no lo está
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        if (!courseService.isUserInCourse(id, username)) {
+            User user = userService.findByEmail(username);
+            if (user != null) {
+                courseService.addUserToCourse(c, user);
+                userService.addCourseToUser(user, c);
+            }
+        }
 
-			List<Material> m = c.getMaterials();
-			List<Comment> comments = commentService.findByCourseIdOrderByCreatedDateDesc(id);
-			model.addAttribute("course", c);
-			model.addAttribute("material", m);
-			model.addAttribute("comments", comments);
-			return "course";
-		} else {
-			return "index";
-		}
-	}
+        // Asegurarse de que la lista de materiales no sea nula
+        if (c.getMaterials() == null) {
+            c.setMaterials(new ArrayList<>());
+        }
+
+        // Obtener solo los 3 primeros materiales
+        List<Material> materials = c.getMaterials();
+        List<Material> firstThreeMaterials = materials.subList(0, Math.min(materials.size(), 3));
+
+        // Obtener solo los 3 primeros comentarios ordenados por fecha descendente
+        List<Comment> comments = commentService.findByCourseIdOrderByCreatedDateDesc(id);
+        List<Comment> firstThreeComments = comments.subList(0, Math.min(comments.size(), 3));
+
+        // Agregar atributos al modelo
+        model.addAttribute("course", c);
+        model.addAttribute("material", firstThreeMaterials);
+        model.addAttribute("comments", firstThreeComments);
+
+        return "course";
+    } else {
+        return "index";
+    }
+}
 
 	@GetMapping("/removecourse/{id}")
 	public String removeCourse(@PathVariable long id) {

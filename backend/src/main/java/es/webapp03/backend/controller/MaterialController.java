@@ -10,6 +10,9 @@ import java.util.Optional;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -104,4 +107,13 @@ public class MaterialController {
         headers.setLocation(URI.create("/courses/" + courseId));
         return new ResponseEntity<>(headers, HttpStatus.FOUND);
     }
+    @GetMapping("/courses/{courseId}/materials/load")
+    public String loadMoreMaterials(@PathVariable Long courseId, @RequestParam int page, Model model) {
+    int pageSize = 3; // Número de materiales por página
+    Pageable pageable = PageRequest.of(page, pageSize);
+    Page<Material> materialsPage = materialService.findByCourseId(courseId, pageable);
+
+    model.addAttribute("material", materialsPage.getContent());
+    return "fragments/materialList"; // Devuelve un fragmento de HTML con los materiales
+}
 }
