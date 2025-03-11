@@ -230,21 +230,25 @@ At the beginning of the project I created the repositories and the main controll
 
 <h3>Sergio López Cuesta</h3>
 
-| Commit | Description |
-| :----: | :---------: |
-|   1º   | Description |
-|   2º   | Description |
-|   3º   | Description |
-|   4º   | Description |
-|   5º   | Description |
+I implemented the filter of courses by TAGS, made the entire pagination system from all entities and created some methods that we needed during the Sprint
 
-| File | Name |
-| :--: | :--: |
-|  1º  | Name |
-|  2º  | Name |
-|  3º  | Name |
-|  4º  | Name |
-|  5º  | Name |
+|                                                 Commit                                                 |                   Description                   |
+| :----------------------------------------------------------------------------------------------------: | :---------------------------------------------: |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/6a560779e30ab099ef4909171fba618056904992)| Pagination changes on 2 entities (Materials & Courses)|
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/944bcf5859d341c53667ee2822996e0727ff6c05) |          Pagination changed on Courses          |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/6c807de36b67d24c6805ae4c41d5b27b4988441e) |   Pagination changed on UserList from Admin     |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/321ad56dbb68bef2f5ce3ccefd28cc015832f917) |  Filter by tags and changes in the html files   |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/f7470eb4487abb9b8f2ee87cecd740aae4f50f44) |         Create methods of NewCourses            |
+
+|                                                                    File                                                                     |        Name         |
+| :-----------------------------------------------------------------------------------------------------------------------------------------: | :-----------------: |
+|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/WebController.java)   |    WebController    |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/MaterialController.java) | MaterialController    |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseController.java) |  CourseController   |
+|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/UserController.java)  |   UserController    |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CommentController.java)  |   CommentController   |
+
+
 
 <h3>Marcos Alejandro Pascual Rojas</h3>
 I implemented the user registration functionality, the course page and the uploading of material to the course. I was also involved in implementing the security of the application. Finally, I configured some error pages.
