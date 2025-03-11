@@ -28,7 +28,7 @@
         <p>{{course.description}}</p>
 
         <img src="/courses/{{course.id}}/image" alt="{{course.title}}" />
-        
+
         <!-- Attached Files Section -->
         <!-- Formulario para subir archivos -->
         {{#admin}}
@@ -49,7 +49,8 @@
                                 <a href="/courses/{{course.id}}/materials/{{id}}/download">{{name}}</a>
 
                                 {{#admin}}
-                                <form action="/courses/{{course.id}}/materials/{{id}}/delete" method="post" class="d-inline">
+                                <form action="/courses/{{course.id}}/materials/{{id}}/delete" method="post"
+                                    class="d-inline">
                                     <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                                     <input type="hidden" name="_csrf" value="{{token}}">
                                 </form>
@@ -65,7 +66,7 @@
                 </div>
             </div>
         </div>
-        
+
 
         <!--Comentarios-->
         <div class="comment-section mt-4">
@@ -87,7 +88,8 @@
                 {{/comments}}
             </ul>
             <form class="comment-form" action="/courses/{{course.id}}/comment/upload" method="post">
-                <textarea class="form-control mt-2" name="newcomment" placeholder="Escribe tu comentario aquí..."></textarea>
+                <textarea class="form-control mt-2" name="newcomment"
+                    placeholder="Escribe tu comentario aquí..."></textarea>
                 <input type="hidden" name="_csrf" value="{{token}}" />
                 <button class="btn btn-primary btn-sm mt-2">Enviar</button>
             </form>
@@ -109,17 +111,19 @@
         <h3>¡Felicidades! Aquí tienes tu diploma</h3>
         <form id="pdfForm" action="/api/pdf/generate/{{course.id}}" method="post">
             <input type="hidden" id="templateName" name="templateName" value="diploma" required>
-            <input type="hidden" id="outputFileName" name="outputFileName" value="Diploma_{{userFormalName}}_{{course.title}}" required>
+            <input type="hidden" id="outputFileName" name="outputFileName"
+                value="Diploma_{{userFormalName}}_{{course.title}}" required>
             <input type="hidden" id="csrfToken" name="_csrf" value="{{token}}">
             <button type="submit" class="btn btn-primary">¡Descarga tu diploma!</button>
         </form>
     </div>
     {{/logged}}
-</div>
+    </div>
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="/js/scripts.js"></script>
 </body>
+
 </html>

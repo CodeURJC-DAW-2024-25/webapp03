@@ -8,6 +8,9 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.stereotype.Controller;
 
 import es.webapp03.backend.service.UserService;
+import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -74,10 +78,18 @@ public class UserController {
     }
 
     @GetMapping("/admin/users")
-    public String showAdminUsers(Model model) {
-        List<User> users = userService.findByRoles("USER");
-        model.addAttribute("users", users);
+    public String showAdminUsers(Model model, @RequestParam(defaultValue = "0") int page) {
+     {
+        int pageSize = 3; // Número de cursos por página
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<User> usersPage = userService.findAll(pageable);
+
+        model.addAttribute("users", usersPage.getContent()); // Solo los cursos de la página actual
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", usersPage.getTotalPages());
+
         return "adminUsers";
+    }
     }
 
     @GetMapping("/deleteuser/{id}")
@@ -154,4 +166,15 @@ public class UserController {
         }
         return "redirect:/edit_profile";
     }
+
+    @GetMapping("/admin/users/load")
+	public String loadMoreUser(@RequestParam int page, Model model) {
+		int pageSize = 3; // Número de cursos por página
+		Pageable pageable = PageRequest.of(page, pageSize);
+		Page<User> userPage = userService.findAll(pageable);
+
+		model.addAttribute("users", userPage.getContent());
+		return "fragments/userList"; // Devuelve un fragmento de HTML con los cursos
+	}
 }
+
