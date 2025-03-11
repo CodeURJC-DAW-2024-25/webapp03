@@ -55,18 +55,18 @@ public class UserController {
                                @RequestParam String password) {
 
         try {
-            // Verificar si el usuario ya existe
+            // Check if the user already exists
             if (userService.findByEmail(email) != null) {
                 return "registererror";
             }
 
-            // Encriptar contraseña
+            // Encrypt password
             String encodedPassword = passwordEncoder.encode(password);
 
-            // Crear y guardar usuario con rol "USER" (sin imagen)
+            // Create and save user with role "USER" (without image)
             User newUser = new User(name, email, encodedPassword, null, "USER");
             userService.save(newUser);
-            // Redirigir a la página de inicio
+            // Redirect to index
             return "redirect:/";
         } catch (Exception e) {
             return "registererror";

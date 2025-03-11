@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,11 +53,11 @@ public class WebController {
 
     @GetMapping("/")
     public String showCourses(Model model, @RequestParam(defaultValue = "0") int page) {
-        int pageSize = 3; // Número de cursos por página
+        int pageSize = 3; // Number of courses per page
         Pageable pageable = PageRequest.of(page, pageSize);
         Page<Course> coursePage = courseService.findAll(pageable);
 
-        model.addAttribute("courses", coursePage.getContent()); // Solo los cursos de la página actual
+        model.addAttribute("courses", coursePage.getContent()); // Only the courses on the current page
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", coursePage.getTotalPages());
 

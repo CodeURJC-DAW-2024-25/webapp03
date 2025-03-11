@@ -27,7 +27,7 @@ public class Comment {
     private LocalDate createdDate;
 
     public Comment() {
-        // Constructor vacío requerido por JPA
+        // Empty constructor required by JPA
     }
 
     public Comment(Course course, User user, String text, LocalDate createdDate){
