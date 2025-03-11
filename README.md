@@ -192,6 +192,8 @@ An algorithm to filter courses based on a tag provided by the user.
 
 <h3>David Cereceda Catalán</h3>
 
+I have mainly been concerned with initializing the database with default data, implementing the course comments, and implementing the graph that shows the courses with the most users.
+
 | Commit | Description |
 | :----: | :---------: |
 |   [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/ae082b63a87d8a90743a9f1a266e2ddd65c611e7)   | Updated DatabaseInitializer |
