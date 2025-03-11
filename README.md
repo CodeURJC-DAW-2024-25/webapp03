@@ -194,19 +194,19 @@ An algorithm to filter courses based on a tag provided by the user.
 
 | Commit | Description |
 | :----: | :---------: |
-|   1º   | Description |
-|   2º   | Description |
-|   3º   | Description |
-|   4º   | Description |
-|   5º   | Description |
+|   [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/ae082b63a87d8a90743a9f1a266e2ddd65c611e7)   | Updated DatabaseInitializer |
+|   [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/2d04deb3b781420561521f4a1d373609bf9afba7)   | Separated WebController into different controllers |
+|   [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/58a981e1451f95a19c046b75d048acf6b41d2a24)   | Comments implemented |
+|   [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/d343f83ff8809d0854ff878a5368a4970b3e135f)   | Fixed chart |
+|   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/08e71f1d4783108a4365825516b53c3360c4adcd)   | Updated models and added DBInitializer (not finished) |
 
 | File | Name |
 | :--: | :--: |
-|  1º  | Name |
-|  2º  | Name |
-|  3º  | Name |
-|  4º  | Name |
-|  5º  | Name |
+|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/DatabaseInitializer.java)  | DatabaseInitializer.java |
+|  [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CommentController.java)  | CommentController.java |
+|  [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseController.java)  | CourseController.java |
+|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commits/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)  | CourseService.java |
+|  [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/WebController.java)  | WebController.java |
 
 <h3>Sergio Rodríguez Gil</h3>
 
