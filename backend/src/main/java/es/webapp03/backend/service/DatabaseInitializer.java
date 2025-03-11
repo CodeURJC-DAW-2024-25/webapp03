@@ -127,67 +127,67 @@ public class DatabaseInitializer {
 
         courseRepository.saveAll(Arrays.asList(course_calculo, course_DAA, course_DAW, course_EAS, course_ED, course_IO, course_IP, course_MDA, course_POO, course_SI));
 
-        Comment comment1_calculo = new Comment(course_calculo, user1, "¡Excelente curso!", LocalDate.now());
-        Comment comment2_calculo = new Comment(course_calculo, user2, "Muy útil, gracias!", LocalDate.now());
-        Comment comment3_calculo = new Comment(course_calculo, user3, "Me encantó la dinámica de las clases.", LocalDate.now());
-        Comment comment4_calculo = new Comment(course_calculo, user4, "Información clara y bien explicada.", LocalDate.now());
-        Comment comment5_calculo = new Comment(course_calculo, user5, "Definitivamente lo recomendaré a mis amigos.", LocalDate.now());
+        Comment comment1_calculo = new Comment(course_calculo, user1, "El curso me ayudó a comprender mejor los conceptos de derivadas e integrales. Las explicaciones son claras y los ejemplos bien elegidos.", LocalDate.now());
+        Comment comment2_calculo = new Comment(course_calculo, user2, "Algunas partes avanzadas son algo rápidas, pero los ejercicios prácticos ayudan mucho a reforzar lo aprendido.", LocalDate.now());
+        Comment comment3_calculo = new Comment(course_calculo, user3, "Me gustó la forma en que se explican los límites, nunca los había entendido tan bien.", LocalDate.now());
+        Comment comment4_calculo = new Comment(course_calculo, user4, "Buen curso, aunque me hubiera gustado que se incluyeran más problemas resueltos paso a paso.", LocalDate.now());
+        Comment comment5_calculo = new Comment(course_calculo, user5, "Si tienes problemas con cálculo, este curso es muy recomendable. Explica los fundamentos de manera clara y sin rodeos.", LocalDate.now());
         commentRepository.saveAll(Arrays.asList(comment1_calculo, comment2_calculo, comment3_calculo, comment4_calculo, comment5_calculo));
 
-        Comment comment1_DAA = new Comment(course_DAA, user1, "¡Excelente curso!", LocalDate.now());
-        Comment comment2_DAA = new Comment(course_DAA, user2, "Muy útil, gracias!", LocalDate.now());
-        Comment comment3_DAA = new Comment(course_DAA, user3, "Me encantó la dinámica de las clases.", LocalDate.now());
-        Comment comment4_DAA = new Comment(course_DAA, user4, "Información clara y bien explicada.", LocalDate.now());
-        Comment comment5_DAA = new Comment(course_DAA, user5, "Definitivamente lo recomendaré a mis amigos.", LocalDate.now());
+        Comment comment1_DAA = new Comment(course_DAA, user1, "Excelente curso para comprender el diseño de algoritmos. Me ayudó a mejorar mi forma de pensar en la optimización.", LocalDate.now());
+        Comment comment2_DAA = new Comment(course_DAA, user2, "El profesor explica muy bien, pero algunos temas requieren conocimiento previo para seguir el ritmo.", LocalDate.now());
+        Comment comment3_DAA = new Comment(course_DAA, user3, "Me gustó mucho la parte de backtracking y programación dinámica. Muy bien explicados los ejemplos.", LocalDate.now());
+        Comment comment4_DAA = new Comment(course_DAA, user4, "El curso está bien estructurado, aunque faltaron más problemas complejos para practicar.", LocalDate.now());
+        Comment comment5_DAA = new Comment(course_DAA, user5, "Si buscas aprender sobre eficiencia algorítmica, este curso es una muy buena opción.", LocalDate.now());
         commentRepository.saveAll(Arrays.asList(comment1_DAA, comment2_DAA, comment3_DAA, comment4_DAA, comment5_DAA));
 
-        Comment comment1_DAW = new Comment(course_DAW, user1, "¡Excelente curso!", LocalDate.now());
-        Comment comment2_DAW = new Comment(course_DAW, user2, "Muy útil, gracias!", LocalDate.now());
-        Comment comment3_DAW = new Comment(course_DAW, user3, "Me encantó la dinámica de las clases.", LocalDate.now());
-        Comment comment4_DAW = new Comment(course_DAW, user4, "Información clara y bien explicada.", LocalDate.now());
-        Comment comment5_DAW = new Comment(course_DAW, user5, "Definitivamente lo recomendaré a mis amigos.", LocalDate.now());
+        Comment comment1_DAW = new Comment(course_DAW, user1, "Muy completo en cuanto a HTML, CSS y JavaScript, pero podría profundizar más en frameworks modernos.", LocalDate.now());
+        Comment comment2_DAW = new Comment(course_DAW, user2, "Me gustó mucho la parte de diseño responsivo, aprendí a hacer páginas bien estructuradas.", LocalDate.now());
+        Comment comment3_DAW = new Comment(course_DAW, user3, "Las explicaciones son claras, pero me hubiera gustado más proyectos prácticos.", LocalDate.now());
+        Comment comment4_DAW = new Comment(course_DAW, user4, "Es un buen curso si estás empezando en desarrollo web, pero si ya tienes conocimientos básicos, se queda algo corto.", LocalDate.now());
+        Comment comment5_DAW = new Comment(course_DAW, user5, "Gracias a este curso, logré desarrollar mi primera página web completa.", LocalDate.now());
         commentRepository.saveAll(Arrays.asList(comment1_DAW, comment2_DAW, comment3_DAW, comment4_DAW, comment5_DAW));
 
-        Comment comment1_EAS = new Comment(course_EAS, user1, "¡Excelente curso!", LocalDate.now());
-        Comment comment2_EAS = new Comment(course_EAS, user2, "Muy útil, gracias!", LocalDate.now());
-        Comment comment3_EAS = new Comment(course_EAS, user3, "Me encantó la dinámica de las clases.", LocalDate.now());
-        Comment comment4_EAS = new Comment(course_EAS, user4, "Información clara y bien explicada.", LocalDate.now());
-        Comment comment5_EAS = new Comment(course_EAS, user5, "Definitivamente lo recomendaré a mis amigos.", LocalDate.now());
+        Comment comment1_EAS = new Comment(course_EAS, user1, "El contenido de patrones de diseño me pareció excelente. Me ayudó mucho en mi proyecto de software.", LocalDate.now());
+        Comment comment2_EAS = new Comment(course_EAS, user2, "Muy bien explicado, aunque algunos conceptos requieren conocimientos previos en arquitectura de software.", LocalDate.now());
+        Comment comment3_EAS = new Comment(course_EAS, user3, "La parte teórica está bien cubierta, pero me hubiera gustado más ejemplos prácticos.", LocalDate.now());
+        Comment comment4_EAS = new Comment(course_EAS, user4, "Me ayudó a entender cómo diseñar software escalable y bien estructurado.", LocalDate.now());
+        Comment comment5_EAS = new Comment(course_EAS, user5, "Un curso recomendable si quieres aprender sobre arquitectura de software desde una base sólida.", LocalDate.now());
         commentRepository.saveAll(Arrays.asList(comment1_EAS, comment2_EAS, comment3_EAS, comment4_EAS, comment5_EAS));
 
-        Comment comment1_ED = new Comment(course_ED, user1, "¡Excelente curso!", LocalDate.now());
-        Comment comment2_ED = new Comment(course_ED, user2, "Muy útil, gracias!", LocalDate.now());
-        Comment comment3_ED = new Comment(course_ED, user3, "Me encantó la dinámica de las clases.", LocalDate.now());
-        Comment comment4_ED = new Comment(course_ED, user4, "Información clara y bien explicada.", LocalDate.now());
-        Comment comment5_ED = new Comment(course_ED, user5, "Definitivamente lo recomendaré a mis amigos.", LocalDate.now());
+        Comment comment1_ED = new Comment(course_ED, user1, "Un excelente repaso de estructuras de datos. Me ayudó a reforzar listas y árboles binarios.", LocalDate.now());
+        Comment comment2_ED = new Comment(course_ED, user2, "Me gustó la forma en que explicaron las pilas y colas, con ejemplos prácticos bien pensados.", LocalDate.now());
+        Comment comment3_ED = new Comment(course_ED, user3, "Curso recomendable, aunque la parte de grafos fue algo difícil de seguir sin conocimientos previos.", LocalDate.now());
+        Comment comment4_ED = new Comment(course_ED, user4, "Me sirvió mucho para entrevistas técnicas, especialmente la parte de listas enlazadas.", LocalDate.now());
+        Comment comment5_ED = new Comment(course_ED, user5, "Un buen curso, pero sería ideal incluir más ejercicios complejos para afianzar los conceptos.", LocalDate.now());
         commentRepository.saveAll(Arrays.asList(comment1_ED, comment2_ED, comment3_ED, comment4_ED, comment5_ED));
 
-        Comment comment1_IP = new Comment(course_IP, user1, "¡Excelente curso!", LocalDate.now());
-        Comment comment2_IP = new Comment(course_IP, user2, "Muy útil, gracias!", LocalDate.now());
-        Comment comment3_IP = new Comment(course_IP, user3, "Me encantó la dinámica de las clases.", LocalDate.now());
-        Comment comment4_IP = new Comment(course_IP, user4, "Información clara y bien explicada.", LocalDate.now());
-        Comment comment5_IP = new Comment(course_IP, user5, "Definitivamente lo recomendaré a mis amigos.", LocalDate.now());
+        Comment comment1_IP = new Comment(course_IP, user1, "Un curso básico pero bien explicado, ideal para quienes inician en la programación.", LocalDate.now());
+        Comment comment2_IP = new Comment(course_IP, user2, "Los fundamentos están bien cubiertos, aunque me hubiera gustado más ejercicios prácticos.", LocalDate.now());
+        Comment comment3_IP = new Comment(course_IP, user3, "Me ayudó a entender mejor la lógica de programación con ejemplos sencillos.", LocalDate.now());
+        Comment comment4_IP = new Comment(course_IP, user4, "Las explicaciones son claras y el ritmo es adecuado para principiantes.", LocalDate.now());
+        Comment comment5_IP = new Comment(course_IP, user5, "Si nunca has programado antes, este curso te dará una buena base.", LocalDate.now());
         commentRepository.saveAll(Arrays.asList(comment1_IP, comment2_IP, comment3_IP, comment4_IP, comment5_IP));
 
-        Comment comment1_MDA = new Comment(course_MDA, user1, "¡Excelente curso!", LocalDate.now());
-        Comment comment2_MDA = new Comment(course_MDA, user2, "Muy útil, gracias!", LocalDate.now());
-        Comment comment3_MDA = new Comment(course_MDA, user3, "Me encantó la dinámica de las clases.", LocalDate.now());
-        Comment comment4_MDA = new Comment(course_MDA, user4, "Información clara y bien explicada.", LocalDate.now());
-        Comment comment5_MDA = new Comment(course_MDA, user5, "Definitivamente lo recomendaré a mis amigos.", LocalDate.now());
+        Comment comment1_MDA = new Comment(course_MDA, user1, "El curso explica muy bien el análisis de datos y cómo aplicar modelos matemáticos en problemas reales.", LocalDate.now());
+        Comment comment2_MDA = new Comment(course_MDA, user2, "Me gustó la forma en que presentan los algoritmos de optimización, aunque algunos temas avanzados requieren repasar varias veces.", LocalDate.now());
+        Comment comment3_MDA = new Comment(course_MDA, user3, "Muy interesante la parte de machine learning, aunque esperaba más ejemplos prácticos con datasets reales.", LocalDate.now());
+        Comment comment4_MDA = new Comment(course_MDA, user4, "Explicaciones claras y ejercicios bien estructurados. Me sirvió mucho para entender la teoría detrás del análisis de datos.", LocalDate.now());
+        Comment comment5_MDA = new Comment(course_MDA, user5, "Un curso esencial si quieres profundizar en matemáticas aplicadas a la ciencia de datos.", LocalDate.now());
         commentRepository.saveAll(Arrays.asList(comment1_MDA, comment2_MDA, comment3_MDA, comment4_MDA, comment5_MDA));
 
-        Comment comment1_POO = new Comment(course_POO, user1, "¡Excelente curso!", LocalDate.now());
-        Comment comment2_POO = new Comment(course_POO, user2, "Muy útil, gracias!", LocalDate.now());
-        Comment comment3_POO = new Comment(course_POO, user3, "Me encantó la dinámica de las clases.", LocalDate.now());
-        Comment comment4_POO = new Comment(course_POO, user4, "Información clara y bien explicada.", LocalDate.now());
-        Comment comment5_POO = new Comment(course_POO, user5, "Definitivamente lo recomendaré a mis amigos.", LocalDate.now());
+        Comment comment1_POO = new Comment(course_POO, user1, "Un curso imprescindible para aprender los principios de la programación orientada a objetos. Explicaciones claras y ejemplos bien elegidos.", LocalDate.now());
+        Comment comment2_POO = new Comment(course_POO, user2, "Aprendí a aplicar correctamente herencia y polimorfismo. Muy útil para quienes quieren mejorar su código.", LocalDate.now());
+        Comment comment3_POO = new Comment(course_POO, user3, "Me encantó la forma en que explican la encapsulación y cómo aplicarla en proyectos reales.", LocalDate.now());
+        Comment comment4_POO = new Comment(course_POO, user4, "Los ejercicios son muy buenos, pero algunos temas podrían profundizar más en patrones de diseño.", LocalDate.now());
+        Comment comment5_POO = new Comment(course_POO, user5, "Después de este curso, me siento más preparado para estructurar mejor mis programas. Muy recomendado.", LocalDate.now());
         commentRepository.saveAll(Arrays.asList(comment1_POO, comment2_POO, comment3_POO, comment4_POO, comment5_POO));
 
-        Comment comment1_SI = new Comment(course_SI, user1, "¡Excelente curso!", LocalDate.now());
-        Comment comment2_SI = new Comment(course_SI, user2, "Muy útil, gracias!", LocalDate.now());
-        Comment comment3_SI = new Comment(course_SI, user3, "Me encantó la dinámica de las clases.", LocalDate.now());
-        Comment comment4_SI = new Comment(course_SI, user4, "Información clara y bien explicada.", LocalDate.now());
-        Comment comment5_SI = new Comment(course_SI, user5, "Definitivamente lo recomendaré a mis amigos.", LocalDate.now());
+        Comment comment1_SI = new Comment(course_SI, user1, "Un curso muy completo sobre sistemas de información. Me ayudó a entender la relación entre bases de datos y aplicaciones empresariales.", LocalDate.now());
+        Comment comment2_SI = new Comment(course_SI, user2, "Muy útil para comprender cómo gestionar grandes volúmenes de información de manera eficiente.", LocalDate.now());
+        Comment comment3_SI = new Comment(course_SI, user3, "Me gustó la parte de análisis de requerimientos y diseño de sistemas, es clave para desarrollar software de calidad.", LocalDate.now());
+        Comment comment4_SI = new Comment(course_SI, user4, "El contenido es bueno, pero hubiera sido ideal incluir más casos prácticos de implementación en empresas.", LocalDate.now());
+        Comment comment5_SI = new Comment(course_SI, user5, "Definitivamente lo recomendaré a mis compañeros, muy útil para quienes trabajan con bases de datos y sistemas de gestión.", LocalDate.now());
         commentRepository.saveAll(Arrays.asList(comment1_SI, comment2_SI, comment3_SI, comment4_SI, comment5_SI));
 
 
