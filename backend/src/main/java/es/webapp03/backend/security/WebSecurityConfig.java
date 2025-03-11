@@ -39,13 +39,13 @@ public class WebSecurityConfig {
 
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        // 📌 Páginas públicas
+                        // Public pages
                         .requestMatchers("/", "/index", "/courses/**", "/register", "/registererror").permitAll()
                         .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/login", "/logout").permitAll()
 
-                        // 📌 Páginas privadas
+                        // Private pages
                         .requestMatchers("/newcourse").hasRole("ADMIN")
                         .requestMatchers("courses/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/editcourse/**").hasRole("ADMIN")
@@ -54,8 +54,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/edit_profile/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/newcomment").hasRole("USER")
 
-                        // 📌 Cualquier otra petición NO DEBE FORZAR AUTENTICACIÓN
-                        .anyRequest().permitAll() // 👈 Esto permite todo lo no especificado
+                        // Any other request
+                        .anyRequest().permitAll()
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")

@@ -30,7 +30,7 @@
         <img src="/courses/{{course.id}}/image" alt="{{course.title}}" />
 
         <!-- Attached Files Section -->
-        <!-- Formulario para subir archivos -->
+        <!-- File upload form -->
         {{#admin}}
         <form action="/courses/{{course.id}}/materials/upload" method="post" enctype="multipart/form-data">
             <input type="file" name="file" required>
@@ -68,7 +68,7 @@
         </div>
 
 
-        <!--Comentarios-->
+        <!--Comments-->
         <div class="comment-section mt-4">
             <h3>Comentarios</h3>
             <ul class="list-group">

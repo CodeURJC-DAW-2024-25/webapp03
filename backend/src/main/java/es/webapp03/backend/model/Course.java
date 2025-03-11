@@ -45,7 +45,7 @@ public class Course {
     private List<String> tags;
 
     public Course() {
-        // Constructor vacío requerido por JPA
+        // Empty constructor required by JPA
     }
 
     public Course(String title, String description, Blob imageFile, int numberOfUsers) {
