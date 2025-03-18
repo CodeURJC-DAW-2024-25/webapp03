@@ -107,7 +107,7 @@
     {{#logged}}
     <div class="generate-pdf mt-5 text-center mb-5">
         <h3>¡Felicidades! Aquí tienes tu diploma</h3>
-        <form id="pdfForm" action="/api/pdf/generate/{{course.id}}" method="post">
+        <form id="pdfForm" action="/pdf/generate/{{course.id}}" method="post">
             <input type="hidden" id="templateName" name="templateName" value="diploma" required>
             <input type="hidden" id="outputFileName" name="outputFileName" value="Diploma_{{userFormalName}}_{{course.title}}" required>
             <input type="hidden" id="csrfToken" name="_csrf" value="{{token}}">

@@ -25,7 +25,7 @@
             const templateName = document.getElementById('templateName').value;
             const outputFileName = document.getElementById('outputFileName').value;
 
-            fetch('/api/pdf/generate?templateName=' + templateName + '&outputFileName=' + outputFileName, {
+            fetch('/pdf/generate?templateName=' + templateName + '&outputFileName=' + outputFileName, {
                 method: 'POST'
             })
             .then(response => response.text())

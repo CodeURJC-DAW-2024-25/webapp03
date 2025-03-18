@@ -39,7 +39,7 @@ public class PdfController {
     @Autowired
     private CourseService courseService;
 
-    @PostMapping("/api/pdf/generate/{courseId}")
+    @PostMapping("/pdf/generate/{courseId}")
     public ResponseEntity<byte[]> generatePdf(@RequestParam String templateName, @RequestParam String outputFileName, @RequestParam("_csrf") String csrfToken, Principal principal, @PathVariable Long courseId) {
         if (principal == null) {
             return ResponseEntity.status(401).body(null); // Unauthorized
