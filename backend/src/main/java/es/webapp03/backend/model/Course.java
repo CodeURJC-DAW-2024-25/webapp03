@@ -33,7 +33,7 @@ public class Course {
     private int numberOfUsers;
 
     @ManyToMany(mappedBy = "courses")
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Material> materials = new ArrayList<>();
@@ -45,7 +45,7 @@ public class Course {
     private List<String> tags;
 
     public Course() {
-        // Constructor vacío requerido por JPA
+        // Empty constructor required by JPA
     }
 
     public Course(String title, String description, Blob imageFile, int numberOfUsers) {

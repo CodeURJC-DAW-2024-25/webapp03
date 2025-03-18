@@ -44,6 +44,7 @@ public class User {
     private List<Comment> comments;
 
     public User() {
+        // Empty constructor required by JPA
     }
 
     public User(String name, String email, String encodedPassword, Blob imageFile, String... roles) {

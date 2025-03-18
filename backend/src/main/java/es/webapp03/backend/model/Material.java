@@ -30,6 +30,7 @@ public class Material {
     private Blob file;
 
     public Material() {
+        // Empty constructor required by JPA
     }
 
     public Material(String name, String type, Blob file, Course course) {

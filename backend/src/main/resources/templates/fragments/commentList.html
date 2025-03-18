@@ -1,0 +1,14 @@
+{{#comments}}
+<li class="list-group-item">
+    <div>
+        <strong>{{user.name}}</strong> comentó el <em>{{createdDate}}</em>:
+    </div>
+    <p>{{text}}</p>
+    {{#admin}}
+    <form action="/courses/{{course.id}}/comment/{{id}}/delete" method="post" class="d-inline">
+        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+        <input type="hidden" name="_csrf" value="{{token}}">
+    </form>
+    {{/admin}}
+</li>
+{{/comments}}

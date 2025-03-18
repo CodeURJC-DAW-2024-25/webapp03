@@ -61,34 +61,45 @@ public class CourseController {
 	}
 
 	@GetMapping("/courses/{id}")
-	public String showCourse(Model model, @PathVariable long id) {
-		Optional<Course> course = courseService.findById(id);
-		if (course.isPresent()) {
-			Course c = course.get();
+public String showCourse(Model model, @PathVariable long id) {
+    Optional<Course> course = courseService.findById(id);
+    if (course.isPresent()) {
+        Course c = course.get();
 
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			String username = authentication.getName();
-			if (!courseService.isUserInCourse(id, username)) {
-				User user = userService.findByEmail(username);
-				if (user != null) {
-					courseService.addUserToCourse(c, user);
-					userService.addCourseToUser(user, c);
-				}
-			}
-			if (c.getMaterials() == null) {
-				c.setMaterials(new ArrayList<>()); // Ensure materials is never null
-			}
+        // Verificar si el usuario está en el curso y agregarlo si no lo está
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        if (!courseService.isUserInCourse(id, username)) {
+            User user = userService.findByEmail(username);
+            if (user != null) {
+                courseService.addUserToCourse(c, user);
+                userService.addCourseToUser(user, c);
+            }
+        }
 
-			List<Material> m = c.getMaterials();
-			List<Comment> comments = commentService.findByCourseIdOrderByCreatedDateDesc(id);
-			model.addAttribute("course", c);
-			model.addAttribute("material", m);
-			model.addAttribute("comments", comments);
-			return "course";
-		} else {
-			return "index";
-		}
-	}
+        // Asegurarse de que la lista de materiales no sea nula
+        if (c.getMaterials() == null) {
+            c.setMaterials(new ArrayList<>());
+        }
+
+        // Obtener solo los 3 primeros materiales
+        List<Material> materials = c.getMaterials();
+        List<Material> firstThreeMaterials = materials.subList(0, Math.min(materials.size(), 3));
+
+        // Obtener solo los 3 primeros comentarios ordenados por fecha descendente
+        List<Comment> comments = commentService.findByCourseIdOrderByCreatedDateDesc(id);
+        List<Comment> firstThreeComments = comments.subList(0, Math.min(comments.size(), 3));
+
+        // Agregar atributos al modelo
+        model.addAttribute("course", c);
+        model.addAttribute("material", firstThreeMaterials);
+        model.addAttribute("comments", firstThreeComments);
+
+        return "course";
+    } else {
+        return "index";
+    }
+}
 
 	@GetMapping("/removecourse/{id}")
 	public String removeCourse(@PathVariable long id) {
@@ -103,7 +114,7 @@ public class CourseController {
 	public String filterCoursesByTags(@RequestParam List<String> tags, Model model) {
 		List<Course> filteredCourses = courseService.findByTags(tags);
 		model.addAttribute("courses", filteredCourses);
-		return "index"; // Devuelve la vista index con los cursos filtrados
+		return "index"; // Returns the index view with filtered courses
 	}
 
 	@PostMapping("/newcourse")
@@ -115,21 +126,21 @@ public class CourseController {
 		course.setDescription(description);
 		course.setNumberOfUsers(0);
 
-		// Procesar los tags (separados por comas)
+		// Process tags (separated by commas)
 		List<String> tagList = Arrays.asList(tags.split(","));
 		course.setTags(tagList);
 
-		// Manejo de la imagen
+		// Image management
 		if (!imageField.isEmpty()) {
 			course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
 			course.setImage(true);
 		}
 
-		courseService.save(course); // Guarda el curso en la base de datos
+		courseService.save(course); // Save the course in the database
 
 		model.addAttribute("courseId", course.getId());
 
-		return "redirect:/courses/" + course.getId(); // Redirige a la página del curso
+		return "redirect:/courses/" + course.getId();
 	}
 
 	@GetMapping("/editcourse/{id}")
@@ -137,9 +148,9 @@ public class CourseController {
 		Optional<Course> course = courseService.findById(id);
 		if (course.isPresent()) {
 			model.addAttribute("course", course.get());
-			return "editcourse"; // Devuelve la plantilla de edición
+			return "editcourse";
 		} else {
-			return "redirect:/index"; // Si el curso no existe, redirige al índice
+			return "redirect:/index";
 		}
 	}
 
@@ -153,7 +164,6 @@ public class CourseController {
 			course.setTitle(title);
 			course.setDescription(description);
 
-			// Manejo de la imagen
 			if (removeImage) {
 				course.setImageFile(null);
 				course.setImage(false);
@@ -162,20 +172,20 @@ public class CourseController {
 				course.setImage(true);
 			}
 
-			courseService.save(course); // Guarda los cambios en la base de datos
-			return "redirect:/courses/" + course.getId(); // Redirige a la página del curso
+			courseService.save(course);
+			return "redirect:/courses/" + course.getId();
 		} else {
-			return "redirect:/index"; // Si el curso no existe, redirige al índice
+			return "redirect:/index";
 		}
 	}
 
 	@GetMapping("/courses/loadMore")
 	public String loadMoreCourses(@RequestParam int page, Model model) {
-		int pageSize = 3; // Número de cursos por página
+		int pageSize = 3; // Number of courses per page
 		Pageable pageable = PageRequest.of(page, pageSize);
 		Page<Course> coursePage = courseService.findAll(pageable);
 
 		model.addAttribute("courses", coursePage.getContent());
-		return "fragments/courseList"; // Devuelve un fragmento de HTML con los cursos
+		return "fragments/courseList"; // Returns an html fragment with the courses
 	}
 }
