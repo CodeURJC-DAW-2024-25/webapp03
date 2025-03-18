@@ -3,7 +3,6 @@ package es.webapp03.backend.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
-import java.util.List;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -21,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.stereotype.Controller;
 
 import es.webapp03.backend.service.UserService;
-import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

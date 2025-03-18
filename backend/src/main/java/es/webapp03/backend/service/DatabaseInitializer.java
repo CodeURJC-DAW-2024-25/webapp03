@@ -14,11 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import es.webapp03.backend.repository.UserRepository;
-import es.webapp03.backend.service.UserService;
 import jakarta.annotation.PostConstruct;
 import es.webapp03.backend.repository.MaterialRepository;
 import es.webapp03.backend.repository.CourseRepository;
-import es.webapp03.backend.service.CourseService;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.model.Comment;
 import es.webapp03.backend.model.Course;
@@ -30,9 +28,6 @@ public class DatabaseInitializer {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private MaterialRepository materialRepository;
@@ -64,7 +59,6 @@ public class DatabaseInitializer {
 
     @PostConstruct
     public void init() throws IOException, URISyntaxException, SQLException {
-        Blob defaultCourseImage = loadResource("/static/assets/img/portfolio/5.jpg");
         Blob defaultUserImage = loadResource("/static/assets/user_image_default.jpg");
     
         userRepository.save(new User("Laura", "laura@gmail.com", passwordEncoder.encode("laurapass"), defaultUserImage, "USER"));
