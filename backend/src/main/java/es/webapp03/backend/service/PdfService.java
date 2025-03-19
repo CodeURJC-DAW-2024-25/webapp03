@@ -1,9 +1,9 @@
 package es.webapp03.backend.service;
 
 import com.lowagie.text.DocumentException;
+import es.webapp03.backend.dto.PdfRequestDTO;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
@@ -43,13 +43,13 @@ public class PdfService {
     @Autowired
     private Mustache.Compiler mustacheCompiler;
 
-    public ResponseEntity<byte[]> createPdf(String templateName, String outputFileName, Principal principal, Long courseId) throws IOException, DocumentException {
+    public ResponseEntity<byte[]> createPdf(PdfRequestDTO pdfRequest, Principal principal, Long courseId) throws IOException, DocumentException {
         if (principal == null) {
             return ResponseEntity.status(401).body(null); // Unauthorized
         }
 
         // Load the template content from classpath
-        ClassPathResource resource = new ClassPathResource("templates/" + templateName + ".html");
+        ClassPathResource resource = new ClassPathResource("templates/" + pdfRequest.getTemplateName() + ".html");
         String templateContent = new String(Files.readAllBytes(resource.getFile().toPath()));
 
         // Get the current user
@@ -87,7 +87,7 @@ public class PdfService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDispositionFormData("attachment", outputFileName + ".pdf");
+        headers.setContentDispositionFormData("attachment", pdfRequest.getOutputFileName() + ".pdf");
 
         return ResponseEntity.ok().headers(headers).body(pdfBytes);
     }
