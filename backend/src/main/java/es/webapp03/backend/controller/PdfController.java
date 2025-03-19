@@ -20,7 +20,7 @@ public class PdfController {
     @Autowired
     private PdfService pdfService;
 
-    @PostMapping("/pdf/generate/{courseId}")
+    @PostMapping(value = "/pdf/generate/{courseId}", consumes = "application/json")
     public ResponseEntity<byte[]> generatePdf(@RequestBody PdfRequestDTO pdfRequest, @RequestParam("_csrf") String csrfToken, Principal principal, @PathVariable Long courseId) {
         try {
             return pdfService.createPdf(pdfRequest, principal, courseId);

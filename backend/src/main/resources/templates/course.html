@@ -209,6 +209,37 @@
                 });
             }
         });
+
+        document.getElementById('pdfForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const form = event.target; //Referencia al formulario
+            const data = { //Datos a enviar
+                templateName: form.templateName.value,
+                outputFileName: form.outputFileName.value
+            };
+
+            fetch(form.action, { 
+                method: 'POST', 
+                headers: {  //Indican que se envía un JSON y el token CSRF 
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': form._csrf.value 
+                },
+                body: JSON.stringify(data) //Convierte el objeto a JSON
+            })
+            .then(response => response.blob()) //Obtiene el archivo PDF
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob); //Crea una URL del archivo
+                const a = document.createElement('a'); //Crea un enlace
+                a.style.display = 'none'; 
+                a.href = url;
+                a.download = data.outputFileName + '.pdf'; //Nombre del archivo para la descarga (donde se usa outputFileName)
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => console.error('Error:', error));
+        });
     </script>
 </body>
 
