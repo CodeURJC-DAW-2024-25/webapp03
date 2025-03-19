@@ -119,6 +119,14 @@ public class Course {
         this.materials = materials;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     public List<String> getTags() {
         return tags;
     }
