@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import java.sql.Blob;
 
 @Entity
 public class Material {
@@ -26,13 +27,13 @@ public class Material {
 
     @Lob
     @Column(columnDefinition = "LONGBLOB")
-    private byte[] file;
+    private Blob file;
 
     public Material() {
-        // Constructor vacío requerido por JPA
+        // Empty constructor required by JPA
     }
 
-    public Material(String name, String type, byte[] file, Course course) {
+    public Material(String name, String type, Blob file, Course course) {
         this.name = name;
         this.type = type;
         this.course = course;
@@ -63,15 +64,15 @@ public class Material {
         this.url = url;
     }
 
-    public byte[] getFile() {
+    public Blob getFile() {
         return file;
     }
 
-    public void setFile(byte[] file) {
+    public void setFile(Blob file) {
         this.file = file;
     }
 
-    public Course getcourse() {
+    public Course getCourse() {
         return course;
     }
 

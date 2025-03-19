@@ -24,14 +24,6 @@
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="col-md-4">
             <h3 class="text-center mb-4">Cree una cuenta</h3>
-
-            <!-- Mensaje de error si el nombre de usuario ya está en uso -->
-            {{#error}}
-                <div class="alert alert-danger text-center">
-                    {{error}}
-                </div>
-            {{/error}}
-
             <form action="/register" method="post">
                 <div class="input-group mb-3">
                     <span class="input-group-text">👤</span>

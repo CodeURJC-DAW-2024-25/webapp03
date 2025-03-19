@@ -1,9 +1,9 @@
 package es.webapp03.backend.service;
 
 import com.lowagie.text.DocumentException;
-import es.webapp03.backend.dto.PdfRequestDTO;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
@@ -13,12 +13,18 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.security.Principal;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.jsoup.Jsoup;
 import org.jsoup.helper.W3CDom;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
@@ -29,15 +35,21 @@ import com.samskivert.mustache.Template;
 public class PdfService {
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
+    private CourseService courseService;
+
+    @Autowired
     private Mustache.Compiler mustacheCompiler;
 
-    public ResponseEntity<byte[]> createPdf(PdfRequestDTO pdfRequest, Principal principal, Long courseId) throws IOException, DocumentException {
+    public ResponseEntity<byte[]> createPdf(String templateName, String outputFileName, Principal principal, Long courseId) throws IOException, DocumentException {
         if (principal == null) {
             return ResponseEntity.status(401).body(null); // Unauthorized
         }
 
         // Load the template content from classpath
-        ClassPathResource resource = new ClassPathResource("templates/" + pdfRequest.getTemplateName() + ".html");
+        ClassPathResource resource = new ClassPathResource("templates/" + templateName + ".html");
         String templateContent = new String(Files.readAllBytes(resource.getFile().toPath()));
 
         // Get the current user
@@ -75,7 +87,7 @@ public class PdfService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDispositionFormData("attachment", pdfRequest.getOutputFileName() + ".pdf");
+        headers.setContentDispositionFormData("attachment", outputFileName + ".pdf");
 
         return ResponseEntity.ok().headers(headers).body(pdfBytes);
     }

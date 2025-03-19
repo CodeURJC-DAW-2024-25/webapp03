@@ -30,23 +30,29 @@ public class Course {
 
     private boolean image;
 
+    private int numberOfUsers;
+
     @ManyToMany(mappedBy = "courses")
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Material> materials = new ArrayList<>();
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();    
 
     @ElementCollection
     private List<String> tags;
 
     public Course() {
-        // Constructor vacío requerido por JPA
+        // Empty constructor required by JPA
     }
 
-    public Course(String title, String description, Blob imageFile) {
+    public Course(String title, String description, Blob imageFile, int numberOfUsers) {
         this.title = title;
         this.description = description;
         this.imageFile = imageFile;
+        this.numberOfUsers = numberOfUsers;
     }
 
     public Long getId() {
@@ -77,6 +83,14 @@ public class Course {
         this.image = image;
     }
 
+    public int getNumberOfUsers() {
+        return this.numberOfUsers;
+    }
+
+    public void setNumberOfUsers(int numberOfUsers) {
+        this.numberOfUsers = numberOfUsers;
+    }
+
     public Blob getImageFile() {
         return imageFile;
     }
@@ -93,12 +107,24 @@ public class Course {
         this.users = users;
     }
 
+    public void addUser(User user){
+        this.users.add(user);
+    }
+
     public List<Material> getMaterials() {
         return materials;
     }
 
     public void setMaterials(List<Material> materials) {
         this.materials = materials;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public List<String> getTags() {

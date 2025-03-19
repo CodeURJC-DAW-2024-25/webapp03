@@ -50,29 +50,29 @@ window.addEventListener("DOMContentLoaded", (event) => {
   });
 });
 
-let currentPage = 0; // Página actual
+let currentPage = 0; // Current page
 
 document.getElementById("load-more").addEventListener("click", function () {
   const spinner = document.getElementById("loading-spinner");
   const loadMoreButton = document.getElementById("load-more");
 
-  // Mostrar el spinner y ocultar el botón
+  // Show spinner and hide button
   spinner.style.display = "block";
   loadMoreButton.style.display = "none";
 
-  // Realizar la solicitud AJAX
+  // Make an AJAX request
   fetch(`/courses/loadMore?page=${currentPage + 1}`)
     .then((response) => response.text())
     .then((html) => {
-      // Insertar los nuevos cursos en el contenedor
+      // Insert the new courses into the container
       document
         .getElementById("course-container")
         .insertAdjacentHTML("beforeend", html);
 
-      // Incrementar la página actual
+      // Increase current page
       currentPage++;
 
-      // Ocultar el spinner y mostrar el botón de nuevo
+      // Hide the spinner and show the button again
       spinner.style.display = "none";
       loadMoreButton.style.display = "block";
     })

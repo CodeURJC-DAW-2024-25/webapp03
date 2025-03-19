@@ -1,0 +1,12 @@
+{{#material}}
+<li class="list-group-item d-flex justify-content-between align-items-center">
+    <a href="/courses/{{course.id}}/materials/{{id}}/download">{{name}}</a>
+
+    {{#admin}}
+    <form action="/courses/{{course.id}}/materials/{{id}}/delete" method="post" class="d-inline">
+        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+        <input type="hidden" name="_csrf" value="{{token}}">
+    </form>
+    {{/admin}}
+</li>
+{{/material}}

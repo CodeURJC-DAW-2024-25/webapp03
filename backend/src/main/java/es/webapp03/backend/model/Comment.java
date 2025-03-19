@@ -1,6 +1,6 @@
 package es.webapp03.backend.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,17 +24,17 @@ public class Comment {
 
     private String text;
 
-    private Date created_date;
+    private LocalDate createdDate;
 
     public Comment() {
-        // Constructor vacío requerido por JPA
+        // Empty constructor required by JPA
     }
 
-    public Comment(Course course, User user, String text, Date created_date){
+    public Comment(Course course, User user, String text, LocalDate createdDate){
         this.course = course;
         this.user = user;
         this.text = text;
-        this.created_date = created_date;
+        this.createdDate = createdDate;
     }
 
     public Course getCourse() {
@@ -61,11 +61,11 @@ public class Comment {
         this.text = text;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    public LocalDate getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
     }
 }
