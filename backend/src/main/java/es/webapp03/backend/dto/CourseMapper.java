@@ -18,5 +18,6 @@ public interface CourseMapper {
     @Mapping(target = "users", ignore = true)
     @Mapping(target = "materials", ignore = true)
     @Mapping(target = "comments", ignore = true)
+    @Mapping(target = "imageFile", ignore = true)
     Course toDomain(CourseBasicDTO courseDTO);
 }
