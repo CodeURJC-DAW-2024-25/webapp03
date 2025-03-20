@@ -29,7 +29,7 @@ import es.webapp03.backend.service.UserService;
 import es.webapp03.backend.service.CourseService;
 
 @Controller
-public class WebController {
+public class HomeController {
 
     @Autowired
     private UserService userService;

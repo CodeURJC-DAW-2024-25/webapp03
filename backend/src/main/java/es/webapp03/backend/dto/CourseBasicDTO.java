@@ -4,6 +4,7 @@ import java.util.List;
 
 public record CourseBasicDTO(    
     Long id,
+    String title,
 	String description,
     boolean image,
     int numberOfUsers,
