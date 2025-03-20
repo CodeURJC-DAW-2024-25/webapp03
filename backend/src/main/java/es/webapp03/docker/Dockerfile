@@ -1,5 +1,5 @@
 # Compilation
-FROM maven:3.9.6-openjdk-21 AS builder
+FROM maven:3.9.6-sapmachine-21 AS builder
 WORKDIR /project
 COPY backend/pom.xml /project/
 COPY backend/src /project/src
