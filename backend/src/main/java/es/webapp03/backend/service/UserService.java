@@ -32,7 +32,7 @@ public class UserService {
         user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
         user.getRoles().add(roleName);
         User savedUser = userRepository.save(user);
-        return userMapper.toBasicDTO(savedUser); // 🔹 Usamos toBasicDTO
+        return userMapper.toBasicDTO(savedUser);
     }
 
     public void addCourseToUser(Long userId, Course course) {
@@ -45,11 +45,11 @@ public class UserService {
     }
 
     public UserBasicDTO findByName(String name) {
-        return userRepository.findByName(name).map(userMapper::toBasicDTO).orElse(null); // 🔹 Usamos toBasicDTO
+        return userRepository.findByName(name).map(userMapper::toBasicDTO).orElse(null);
     }
 
     public UserBasicDTO findByEmail(String email) {
-        return userRepository.findByEmail(email).map(userMapper::toBasicDTO).orElse(null); // 🔹 Usamos toBasicDTO
+        return userRepository.findByEmail(email).map(userMapper::toBasicDTO).orElse(null);
     }
 
     public User findEntityByEmail(String email) {
@@ -62,7 +62,7 @@ public class UserService {
 
     public List<UserBasicDTO> findByRoles(String role) {
         return userRepository.findByRoles(role).stream()
-            .map(userMapper::toBasicDTO) // 🔹 Usamos toBasicDTO
+            .map(userMapper::toBasicDTO)
             .collect(Collectors.toList());
     }
 
@@ -75,6 +75,6 @@ public class UserService {
     }
 
     public Page<UserDTO> findAll(Pageable pageable) {
-        return userRepository.findAll(pageable).map(userMapper::toDTO); // 🔹 Aquí sí usamos toDTO
+        return userRepository.findAll(pageable).map(userMapper::toDTO);
     }
 }

@@ -18,7 +18,6 @@ public interface MaterialMapper {
     @Mapping(target = "id", source = "id")
     Material toDomain(MaterialBasicDTO materialDTO);
 
-    // Agregar este método para mapear a MaterialDTO
     @Mapping(target = "id", source = "id")
     MaterialDTO toMaterialDTO(Material material);
 }

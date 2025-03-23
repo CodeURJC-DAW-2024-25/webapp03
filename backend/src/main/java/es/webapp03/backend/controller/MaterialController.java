@@ -117,11 +117,11 @@ public class MaterialController {
     
     @GetMapping("/courses/{courseId}/materials/load")
     public String loadMoreMaterials(@PathVariable Long courseId, @RequestParam int page, Model model) {
-    int pageSize = 3; // Número de materiales por página
+    int pageSize = 3;
     Pageable pageable = PageRequest.of(page, pageSize);
     Page<Material> materialsPage = materialService.findByCourseId(courseId, pageable);
 
     model.addAttribute("material", materialsPage.getContent());
-    return "fragments/materialList"; // Devuelve un fragmento de HTML con los materiales
+    return "fragments/materialList";
 }
 }

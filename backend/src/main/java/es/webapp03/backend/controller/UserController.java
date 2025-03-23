@@ -79,7 +79,7 @@ public class UserController {
 
     @GetMapping("/admin/users")
     public String showAdminUsers(Model model, @RequestParam(defaultValue = "0") int page) {
-        int pageSize = 3; // Número de usuarios por página
+        int pageSize = 3;
         Pageable pageable = PageRequest.of(page, pageSize);
         Page<UserDTO> usersPage = userService.findAll(pageable);
     
@@ -140,7 +140,6 @@ public class UserController {
             UserBasicDTO userDTO = userService.findByEmail(principal.getName());
 
             if (userDTO != null) {
-                // Buscar el usuario real en la base de datos usando el email del DTO
                 User user = userService.findEntityByEmail(userDTO.email()); 
 
                 if (user != null) {

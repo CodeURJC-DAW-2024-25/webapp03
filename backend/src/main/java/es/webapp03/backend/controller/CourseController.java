@@ -71,12 +71,12 @@ public class CourseController {
 
 	@GetMapping("/courses/{id}")
 	public String showCourse(Model model, @PathVariable long id) {
-		CourseDTO courseDTO = courseService.findById(id); // Obtiene el CourseDTO
+		CourseDTO courseDTO = courseService.findById(id);
 
-		if (courseDTO != null) { // Verifica si el curso existe
-			Course course = courseMapper.toDomain(courseDTO);  // Convertimos CourseDTO a Course
+		if (courseDTO != null) {
+			Course course = courseMapper.toDomain(courseDTO);
 
-			// Verificar si el usuario está en el curso y agregarlo si no lo está
+			
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String username = authentication.getName();
 			if (!courseService.isUserInCourse(id, username)) {
@@ -87,31 +87,26 @@ public class CourseController {
 				}
 			}
 
-			// Asegurar que la lista de materiales no sea nula
+			
 			if (course.getMaterials() == null) {
 				course.setMaterials(new ArrayList<>());
 			}
 
-			// Obtener solo los 3 primeros materiales
-			/* List<Material> materials = course.getMaterials(); */
-			int pageSize = 3; // Número de materiales por página
+
+			int pageSize = 3;
     		Pageable pageable = PageRequest.of(0, pageSize);
 			Page<Material> materials = materialService.findByCourseId(id, pageable);
-			// Page<Material> firstThreeMaterials = materials.subList(0, Math.min(materials.size(), 3));
 
-			// Obtener solo los 3 primeros comentarios ordenados por fecha descendente
 			List<Comment> comments = commentService.findByCourseIdOrderByCreatedDateDesc(id);
 			List<Comment> firstThreeComments = comments.subList(0, Math.min(comments.size(), 3));
 
-			// Agregar atributos al modelo
 			model.addAttribute("course", course);
-			// model.addAttribute("material", firstThreeMaterials);
 			model.addAttribute("material", materials.getContent());
 			model.addAttribute("comments", firstThreeComments);
 
 			return "course";
 		} else {
-			return "index"; // Si no se encuentra el curso, redirige al index
+			return "index";
 		}
 	}
 
@@ -166,9 +161,9 @@ public class CourseController {
 
 	@GetMapping("/editcourse/{id}")
 	public String editCourse(Model model, @PathVariable long id) {
-		CourseDTO courseDTO = courseService.findById(id); // Obtener CourseDTO directamente
+		CourseDTO courseDTO = courseService.findById(id);
 		if (courseDTO != null) {
-			Course course = courseMapper.toDomain(courseDTO); // Convertir CourseDTO a Course
+			Course course = courseMapper.toDomain(courseDTO);
 			model.addAttribute("course", course);
 			return "editcourse";
 		} else {
@@ -182,9 +177,9 @@ public class CourseController {
 			@RequestParam String description, @RequestParam(required = false) MultipartFile imageField,
 			@RequestParam(required = false) boolean removeImage) throws IOException, SQLException {
 	
-		CourseDTO courseDTO = courseService.findById(id); // Obtener CourseDTO directamente
+		CourseDTO courseDTO = courseService.findById(id);
 		if (courseDTO != null) {
-			Course course = courseMapper.toDomain(courseDTO); // Convertir CourseDTO a Course
+			Course course = courseMapper.toDomain(courseDTO);
 			course.setTitle(title);
 			course.setDescription(description);
 	
@@ -196,8 +191,8 @@ public class CourseController {
 				course.setImage(true);
 			}
 	
-			CourseBasicDTO updatedCourseDTO = courseMapper.toDTO(course); // Convertir Course a CourseBasicDTO
-			courseService.save(updatedCourseDTO); // Guardar el curso actualizado
+			CourseBasicDTO updatedCourseDTO = courseMapper.toDTO(course);
+			courseService.save(updatedCourseDTO);
 	
 			return "redirect:/courses/" + course.getId();
 		} else {

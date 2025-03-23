@@ -38,7 +38,7 @@ public class CourseService {
                 course.setNumberOfUsers(course.getUsers().size());
                 courseRepository.save(course);
             }
-            return courseMapper.toFullDTO(course); // Usar el método correcto
+            return courseMapper.toFullDTO(course);
         }
         return null;
     }
@@ -55,7 +55,7 @@ public class CourseService {
 
     public CourseDTO findById(Long courseId) {
         return courseRepository.findById(courseId)
-                .map(courseMapper::toFullDTO) // Usar el método correcto
+                .map(courseMapper::toFullDTO)
                 .orElse(null);
     }
 
@@ -79,7 +79,7 @@ public class CourseService {
 
     public CourseDTO save(CourseBasicDTO courseDTO) {
         Course course = courseMapper.toDomain(courseDTO);
-        return courseMapper.toFullDTO(courseRepository.save(course)); // Usar toFullDTO()
+        return courseMapper.toFullDTO(courseRepository.save(course));
     }    
 
     public Page<CourseBasicDTO> findAll(Pageable pageable) {

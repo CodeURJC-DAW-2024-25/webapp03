@@ -64,7 +64,6 @@
                         <p class="text-muted text-center mt-3">No hay material en estos momentos.</p>
                         {{/material}}
 
-                        <!-- Botón "Mostrar más" y Spinner de carga para materiales -->
                         <div id="load-more-material-section" class="text-center mt-3">
                             <button id="load-more-material-btn" class="btn btn-primary">Mostrar más</button>
                             <div id="loading-material-spinner" class="spinner-border text-primary" role="status"
@@ -100,7 +99,6 @@
             <p class="text-muted text-center mt-3">No hay comentarios en estos momentos.</p>
             {{/comments}}
 
-            <!-- Botón "Mostrar más" y Spinner de carga para comentarios -->
             <div id="load-more-comment-section" class="text-center mt-3">
                 <button id="load-more-comment-btn" class="btn btn-primary">Mostrar más</button>
                 <div id="loading-comment-spinner" class="spinner-border text-primary" role="status"
@@ -148,10 +146,8 @@
     <!-- Core theme JS-->
     <script src="/js/scripts.js"></script>
 
-    <!-- JavaScript para cargar más materiales y comentarios -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Cargar más materiales
             const loadMoreMaterialButton = document.getElementById("load-more-material-btn");
             const loadingMaterialSpinner = document.getElementById("loading-material-spinner");
             const materialList = document.getElementById("material-list");
@@ -180,7 +176,6 @@
                 });
             }
 
-            // Cargar más comentarios
             const loadMoreCommentButton = document.getElementById("load-more-comment-btn");
             const loadingCommentSpinner = document.getElementById("loading-comment-spinner");
             const commentList = document.getElementById("comment-list");

@@ -78,15 +78,12 @@ public class CommentController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        // Convertir CourseDTO a Course si es necesario
         Course course = courseMapper.toDomain(courseDTO);
         LocalDate date = LocalDate.now();
 
-        // Guardar el comentario en la base de datos
         Comment comment = new Comment(course, user, newcomment, date);
         commentService.save(comment);
 
-        // Redirigir a la página del curso
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create("/courses/" + courseId));
         return new ResponseEntity<>(headers, HttpStatus.FOUND);
@@ -108,11 +105,11 @@ public class CommentController {
     }
     @GetMapping("/courses/{courseId}/comments/load")
     public String loadMoreComments(@PathVariable Long courseId, @RequestParam int page, Model model) {
-    int pageSize = 3; // Número de comentarios por página
+    int pageSize = 3;
     Pageable pageable = PageRequest.of(page, pageSize);
     Page<Comment> commentsPage = commentService.findByCourseId(courseId, pageable);
 
     model.addAttribute("comments", commentsPage.getContent());
-    return "fragments/commentList"; // Devuelve un fragmento de HTML con los comentarios
+    return "fragments/commentList";
 }
 }

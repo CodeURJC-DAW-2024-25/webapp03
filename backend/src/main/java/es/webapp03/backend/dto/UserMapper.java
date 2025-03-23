@@ -9,5 +9,5 @@ public interface UserMapper {
 
     UserBasicDTO toBasicDTO(User user);
 
-    UserDTO toDTO(User user); // <-- Agregamos este método para el UserDTO
+    UserDTO toDTO(User user);
 }
