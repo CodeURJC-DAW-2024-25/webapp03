@@ -19,4 +19,7 @@ public interface CommentMapper {
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "course", ignore = true)
     Comment toDomain(CommentBasicDTO commentDTO);
+
+    @Mapping(target = "id", ignore = true)
+    CommentDTO toCommentDTO(Comment comment);
 }
