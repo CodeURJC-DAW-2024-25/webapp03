@@ -76,7 +76,6 @@ public class CourseController {
 		if (courseDTO != null) {
 			Course course = courseMapper.toDomain(courseDTO);
 
-			
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String username = authentication.getName();
 			if (!courseService.isUserInCourse(id, username)) {
@@ -87,14 +86,12 @@ public class CourseController {
 				}
 			}
 
-			
 			if (course.getMaterials() == null) {
 				course.setMaterials(new ArrayList<>());
 			}
 
-
 			int pageSize = 3;
-    		Pageable pageable = PageRequest.of(0, pageSize);
+			Pageable pageable = PageRequest.of(0, pageSize);
 			Page<Material> materials = materialService.findByCourseId(id, pageable);
 
 			List<Comment> comments = commentService.findByCourseIdOrderByCreatedDateDesc(id);
@@ -110,7 +107,6 @@ public class CourseController {
 		}
 	}
 
-
 	@GetMapping("/removecourse/{id}")
 	public String removeCourse(@PathVariable long id) {
 		if (courseService.existsById(id)) {
@@ -124,8 +120,8 @@ public class CourseController {
 	public String filterCoursesByTags(@RequestParam List<String> tags, Model model) {
 		List<CourseBasicDTO> courseDTOs = courseService.findByTags(tags);
 		List<Course> filteredCourses = courseDTOs.stream()
-												.map(courseMapper::toDomain)
-												.toList();
+				.map(courseMapper::toDomain)
+				.toList();
 		model.addAttribute("courses", filteredCourses);
 		return "index"; // Returns the index view with filtered courses
 	}
@@ -152,12 +148,10 @@ public class CourseController {
 		CourseBasicDTO courseDTO = courseMapper.toDTO(course);
 		courseService.save(courseDTO);
 
-
 		model.addAttribute("courseId", course.getId());
 
 		return "redirect:/courses/" + course.getId();
 	}
-
 
 	@GetMapping("/editcourse/{id}")
 	public String editCourse(Model model, @PathVariable long id) {
@@ -171,18 +165,17 @@ public class CourseController {
 		}
 	}
 
-	
 	@PostMapping("/editcourse")
 	public String editCourseProcess(Model model, @RequestParam Long id, @RequestParam String title,
 			@RequestParam String description, @RequestParam(required = false) MultipartFile imageField,
 			@RequestParam(required = false) boolean removeImage) throws IOException, SQLException {
-	
+
 		CourseDTO courseDTO = courseService.findById(id);
 		if (courseDTO != null) {
 			Course course = courseMapper.toDomain(courseDTO);
 			course.setTitle(title);
 			course.setDescription(description);
-	
+
 			if (removeImage) {
 				course.setImageFile(null);
 				course.setImage(false);
@@ -190,16 +183,15 @@ public class CourseController {
 				course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
 				course.setImage(true);
 			}
-	
+
 			CourseBasicDTO updatedCourseDTO = courseMapper.toDTO(course);
 			courseService.save(updatedCourseDTO);
-	
+
 			return "redirect:/courses/" + course.getId();
 		} else {
 			return "redirect:/index";
 		}
-	}	
-	
+	}
 
 	@GetMapping("/courses/loadMore")
 	public String loadMoreCourses(@RequestParam int page, Model model) {
