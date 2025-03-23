@@ -33,6 +33,7 @@ import es.webapp03.backend.model.User;
 import es.webapp03.backend.service.UserService;
 import es.webapp03.backend.service.CourseService;
 import es.webapp03.backend.service.CommentService;
+import es.webapp03.backend.service.MaterialService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
@@ -46,6 +47,9 @@ public class CourseController {
 
 	@Autowired
 	private CommentService commentService;
+
+	@Autowired
+	private MaterialService materialService;
 
 	@Autowired
 	private CourseMapper courseMapper;
@@ -70,7 +74,7 @@ public class CourseController {
 		CourseDTO courseDTO = courseService.findById(id); // Obtiene el CourseDTO
 
 		if (courseDTO != null) { // Verifica si el curso existe
-			Course course = courseMapper.toDomain(courseDTO);  // 🔹 Convertimos CourseDTO a Course
+			Course course = courseMapper.toDomain(courseDTO);  // Convertimos CourseDTO a Course
 
 			// Verificar si el usuario está en el curso y agregarlo si no lo está
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -89,8 +93,11 @@ public class CourseController {
 			}
 
 			// Obtener solo los 3 primeros materiales
-			List<Material> materials = course.getMaterials();
-			List<Material> firstThreeMaterials = materials.subList(0, Math.min(materials.size(), 3));
+			/* List<Material> materials = course.getMaterials(); */
+			int pageSize = 3; // Número de materiales por página
+    		Pageable pageable = PageRequest.of(0, pageSize);
+			Page<Material> materials = materialService.findByCourseId(id, pageable);
+			// Page<Material> firstThreeMaterials = materials.subList(0, Math.min(materials.size(), 3));
 
 			// Obtener solo los 3 primeros comentarios ordenados por fecha descendente
 			List<Comment> comments = commentService.findByCourseIdOrderByCreatedDateDesc(id);
@@ -98,7 +105,8 @@ public class CourseController {
 
 			// Agregar atributos al modelo
 			model.addAttribute("course", course);
-			model.addAttribute("material", firstThreeMaterials);
+			// model.addAttribute("material", firstThreeMaterials);
+			model.addAttribute("material", materials.getContent());
 			model.addAttribute("comments", firstThreeComments);
 
 			return "course";

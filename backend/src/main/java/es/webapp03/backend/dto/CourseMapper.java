@@ -23,6 +23,9 @@ public interface CourseMapper {
     @Mapping(target = "comments", ignore = true)
     Course toDomain(CourseBasicDTO courseDTO);
 
+    @Mapping(target = "users", ignore = true)
+    @Mapping(target = "materials", ignore = true)
+    @Mapping(target = "comments", ignore = true)
     Course toDomain(CourseDTO courseDTO);
 
     @Mapping(target = "users", source = "users")
@@ -30,10 +33,15 @@ public interface CourseMapper {
     @Mapping(target = "comments", source = "comments")
     CourseDTO toFullDTO(Course course);
 
-    // 🔹 Métodos extra para mapear listas correctamente
+    @Mapping(target = "comments", ignore = true)
+    @Mapping(target = "courses", ignore = true)
+    @Mapping(target = "encodedPassword", ignore = true)
     List<UserBasicDTO> mapUsers(Collection<User> users);
 
+    @Mapping(target = "course", ignore = true)
     List<MaterialBasicDTO> mapMaterials(Collection<Material> materials);    
 
+    @Mapping(target = "course", ignore = true)
+    @Mapping(target = "user", ignore = true)
     List<CommentBasicDTO> mapComments(Collection<Comment> comments);
 }
