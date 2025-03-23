@@ -1,51 +1,69 @@
 package es.webapp03.backend.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import es.webapp03.backend.model.User;
+import es.webapp03.backend.dto.UserBasicDTO;
+import es.webapp03.backend.dto.UserDTO;
+import es.webapp03.backend.dto.UserMapper;
 import es.webapp03.backend.model.Course;
+import es.webapp03.backend.model.User;
 import es.webapp03.backend.repository.UserRepository;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userMapper = userMapper;
     }
 
-    public User registerUser(User user, String roleName) {
+    public UserBasicDTO registerUser(User user, String roleName) {
         user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
         user.getRoles().add(roleName);
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        return userMapper.toBasicDTO(savedUser); // 🔹 Usamos toBasicDTO
     }
 
-    public void addCourseToUser(User user, Course course){
-        user.addCourse(course);
-        userRepository.save(user);
+    public void addCourseToUser(Long userId, Course course) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            user.addCourse(course);
+            userRepository.save(user);
+        }
     }
 
-    public User findByName(String name) {
-        return userRepository.findByName(name).orElse(null);
+    public UserBasicDTO findByName(String name) {
+        return userRepository.findByName(name).map(userMapper::toBasicDTO).orElse(null); // 🔹 Usamos toBasicDTO
     }
 
-    public User findByEmail(String email) {
+    public UserBasicDTO findByEmail(String email) {
+        return userRepository.findByEmail(email).map(userMapper::toBasicDTO).orElse(null); // 🔹 Usamos toBasicDTO
+    }
+
+    public User findEntityByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
-    }
+    }    
 
     public void save(User newUser) {
         userRepository.save(newUser);
     }
 
-    public List<User> findByRoles(String role) {
-        return userRepository.findByRoles(role);
+    public List<UserBasicDTO> findByRoles(String role) {
+        return userRepository.findByRoles(role).stream()
+            .map(userMapper::toBasicDTO) // 🔹 Usamos toBasicDTO
+            .collect(Collectors.toList());
     }
 
     public boolean existsById(long id) {
@@ -56,7 +74,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public Page<User> findAll(Pageable pageable) {
-        return userRepository.findAll(pageable);
+    public Page<UserDTO> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable).map(userMapper::toDTO); // 🔹 Aquí sí usamos toDTO
     }
 }

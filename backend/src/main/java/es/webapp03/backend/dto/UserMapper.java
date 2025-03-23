@@ -7,8 +7,7 @@ import es.webapp03.backend.model.User;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    UserBasicDTO toDTO(User user);
+    UserBasicDTO toBasicDTO(User user);
 
-    
-
+    UserDTO toDTO(User user); // <-- Agregamos este método para el UserDTO
 }

@@ -72,7 +72,7 @@ public class CommentController {
         }
 
         String username = principal.getName();
-        User user = userService.findByEmail(username);
+        User user = userService.findEntityByEmail(username);
 
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

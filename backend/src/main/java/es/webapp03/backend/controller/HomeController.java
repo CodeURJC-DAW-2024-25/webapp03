@@ -108,7 +108,7 @@ public class HomeController {
     public String showProfilePage(Model model, Principal principal) {
         if (principal != null) {
             String email = principal.getName();
-            User user = userService.findByEmail(email);
+            User user = userService.findEntityByEmail(email);
 
             if (user != null) {
                 model.addAttribute("name", user.getName());

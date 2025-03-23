@@ -61,7 +61,7 @@ public class CourseController {
 		if (principal != null) {
 			model.addAttribute("logged", true);
 			model.addAttribute("userName", principal.getName());
-			User user = userService.findByEmail(principal.getName());
+			User user = userService.findEntityByEmail(principal.getName());
 			model.addAttribute("userFormalName", user.getName());
 			model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		} else {
@@ -80,10 +80,10 @@ public class CourseController {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String username = authentication.getName();
 			if (!courseService.isUserInCourse(id, username)) {
-				User user = userService.findByEmail(username);
+				User user = userService.findEntityByEmail(username);
 				if (user != null) {
 					courseService.addUserToCourse(course.getId(), user);
-					userService.addCourseToUser(user, course);
+					userService.addCourseToUser(user.getId(), course);
 				}
 			}
 

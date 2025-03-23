@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.stereotype.Controller;
 
 import es.webapp03.backend.service.UserService;
+import es.webapp03.backend.dto.UserBasicDTO;
+import es.webapp03.backend.dto.UserDTO;
 import es.webapp03.backend.model.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -77,18 +79,17 @@ public class UserController {
 
     @GetMapping("/admin/users")
     public String showAdminUsers(Model model, @RequestParam(defaultValue = "0") int page) {
-     {
-        int pageSize = 3; // Número de cursos por página
+        int pageSize = 3; // Número de usuarios por página
         Pageable pageable = PageRequest.of(page, pageSize);
-        Page<User> usersPage = userService.findAll(pageable);
-
-        model.addAttribute("users", usersPage.getContent()); // Solo los cursos de la página actual
+        Page<UserDTO> usersPage = userService.findAll(pageable);
+    
+        model.addAttribute("users", usersPage.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", usersPage.getTotalPages());
-
+    
         return "adminUsers";
     }
-    }
+    
 
     @GetMapping("/deleteuser/{id}")
     public String deleteUser(@PathVariable long id) {
@@ -101,78 +102,86 @@ public class UserController {
     @GetMapping("/profile/image")
     public ResponseEntity<Object> getProfileImage(Principal principal) throws SQLException {
         if (principal != null) {
-            User user = userService.findByEmail(principal.getName());
-            if (user != null && user.getImageFile() != null) {
-                Resource file = new InputStreamResource(user.getImageFile().getBinaryStream());
+            UserBasicDTO userDTO = userService.findByEmail(principal.getName());
+            if (userDTO != null && userDTO.imageFile() != null) {
+                Resource file = new InputStreamResource(userDTO.imageFile().getBinaryStream());
                 return ResponseEntity.ok()
                         .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                        .contentLength(user.getImageFile().length())
+                        .contentLength(userDTO.imageFile().length())
                         .body(file);
             }
         }
         return ResponseEntity.notFound().build();
-    }
+    }    
 
     @GetMapping("/edit_profile")
     public String showEditProfile(Model model, Principal principal) {
         if (principal != null) {
-            User user = userService.findByEmail(principal.getName());
-            if (user != null) {
-                model.addAttribute("user", user);
+            UserBasicDTO userDTO = userService.findByEmail(principal.getName());
+            if (userDTO != null) {
+                model.addAttribute("user", userDTO);
                 return "modify_profile";
             }
         }
         return "redirect:/profile_page";
     }
-
+    
+    
     @PostMapping("/edit_profile")
     public String editProfile(@RequestParam String name,
-                              @RequestParam String email,
-                              @RequestParam(required = false) String password,
-                              @RequestParam(required = false) MultipartFile image,
-                              HttpServletRequest request,
-                              HttpServletResponse response,
-                              Principal principal) throws IOException {
+                            @RequestParam String email,
+                            @RequestParam(required = false) String password,
+                            @RequestParam(required = false) MultipartFile image,
+                            HttpServletRequest request,
+                            HttpServletResponse response,
+                            Principal principal) throws IOException {
 
         if (principal != null) {
-            User user = userService.findByEmail(principal.getName());
+            UserBasicDTO userDTO = userService.findByEmail(principal.getName());
 
-            if (user != null) {
-                user.setName(name);
+            if (userDTO != null) {
+                // Buscar el usuario real en la base de datos usando el email del DTO
+                User user = userService.findEntityByEmail(userDTO.email()); 
 
-                boolean emailChanged = !user.getEmail().equals(email);
-                user.setEmail(email);
+                if (user != null) {
+                    user.setName(name);
 
-                if (password != null && !password.isEmpty()) {
-                    user.setEncodedPassword(passwordEncoder.encode(password));
+                    boolean emailChanged = !user.getEmail().equals(email);
+                    user.setEmail(email);
+
+                    if (password != null && !password.isEmpty()) {
+                        user.setEncodedPassword(passwordEncoder.encode(password));
+                    }
+
+                    if (image != null && !image.isEmpty()) {
+                        user.setImage(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+                    }
+
+                    userService.save(user);
+
+                    if (emailChanged) {
+                        request.getSession().invalidate();
+                        SecurityContextHolder.clearContext();
+                        return "redirect:/login";
+                    }
+
+                    return "redirect:/profile_page";
                 }
-
-                if (image != null && !image.isEmpty()) {
-                    user.setImage(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
-                }
-
-                userService.save(user);
-
-                if (emailChanged) {
-                    request.getSession().invalidate();
-                    SecurityContextHolder.clearContext();
-                    return "redirect:/login";
-                }
-
-                return "redirect:/profile_page";
             }
         }
         return "redirect:/edit_profile";
     }
 
-    @GetMapping("/admin/users/load")
-	public String loadMoreUser(@RequestParam int page, Model model) {
-		int pageSize = 3; // Número de cursos por página
-		Pageable pageable = PageRequest.of(page, pageSize);
-		Page<User> userPage = userService.findAll(pageable);
 
-		model.addAttribute("users", userPage.getContent());
-		return "fragments/userList"; // Devuelve un fragmento de HTML con los cursos
-	}
+    @GetMapping("/admin/users/load")
+    public String loadMoreUser(@RequestParam int page, Model model) {
+        int pageSize = 3;
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<UserDTO> userPage = userService.findAll(pageable);
+    
+        model.addAttribute("users", userPage.getContent());
+        return "fragments/userList";
+    }
+    
 }
 

@@ -59,7 +59,7 @@ public class PdfService {
         String templateContent = new String(Files.readAllBytes(resource.getFile().toPath()));
 
         // Get the current user
-        User user = userService.findByEmail(principal.getName());
+        User user = userService.findEntityByEmail(principal.getName());
         if (user == null) {
             return ResponseEntity.status(404).body(null); // User not found
         }
