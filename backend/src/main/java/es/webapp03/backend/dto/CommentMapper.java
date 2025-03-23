@@ -11,7 +11,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CommentMapper {
 
-    @Mapping(target = "id", ignore = true)
     CommentBasicDTO toDTO(Comment comment);
 
     List<CommentBasicDTO> toDTOs(Collection<Comment> comments);
@@ -20,6 +19,5 @@ public interface CommentMapper {
     @Mapping(target = "course", ignore = true)
     Comment toDomain(CommentBasicDTO commentDTO);
 
-    @Mapping(target = "id", ignore = true)
     CommentDTO toCommentDTO(Comment comment);
 }

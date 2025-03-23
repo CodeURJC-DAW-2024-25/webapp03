@@ -1,5 +1,6 @@
 package es.webapp03.backend.dto;
 
+import java.sql.Blob;
 import java.util.List;
 
 public record UserDTO(    
@@ -7,6 +8,7 @@ public record UserDTO(
 	String name,
     String email,
     boolean image,
+    Blob imageFile,
     List<CourseBasicDTO> courses,
     List<CommentBasicDTO> comments,
 	List<String> roles) {

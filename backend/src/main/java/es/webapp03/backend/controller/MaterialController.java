@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import es.webapp03.backend.dto.CourseDTO;
+import es.webapp03.backend.dto.CourseMapper;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.Material;
 import es.webapp03.backend.service.CourseService;
@@ -41,6 +43,9 @@ public class MaterialController {
 
     @Autowired
     private MaterialService materialService;
+
+    @Autowired
+    private CourseMapper courseMapper;
 
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
@@ -58,7 +63,9 @@ public class MaterialController {
     @PostMapping("/courses/{courseId}/materials/upload")
     public ResponseEntity<Void> uploadFile(@PathVariable Long courseId, @RequestParam("file") MultipartFile file) {
         try {
-            Optional<Course> courseOpt = courseService.findById(courseId);
+            CourseDTO courseDTO = courseService.findById(courseId);
+            Optional<Course> courseOpt = Optional.ofNullable(courseDTO != null ? courseMapper.toDomain(courseDTO) : null);
+
             if (courseOpt.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
@@ -107,6 +114,7 @@ public class MaterialController {
         headers.setLocation(URI.create("/courses/" + courseId));
         return new ResponseEntity<>(headers, HttpStatus.FOUND);
     }
+    
     @GetMapping("/courses/{courseId}/materials/load")
     public String loadMoreMaterials(@PathVariable Long courseId, @RequestParam int page, Model model) {
     int pageSize = 3; // Número de materiales por página

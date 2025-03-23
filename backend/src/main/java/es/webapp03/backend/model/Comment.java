@@ -68,4 +68,12 @@ public class Comment {
     public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
     }
+
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }  
 }

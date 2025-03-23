@@ -12,6 +12,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.webapp03.backend.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
@@ -57,6 +58,7 @@ public class DatabaseInitializer {
         return null;
     }
 
+    @Transactional
     @PostConstruct
     public void init() throws IOException, URISyntaxException, SQLException {
         Blob defaultUserImage = loadResource("/static/assets/user_image_default.jpg");
@@ -369,67 +371,67 @@ public class DatabaseInitializer {
 
         materialRepository.saveAll(Arrays.asList(mat1_SI, mat2_SI, mat3_SI, mat4_SI, mat5_SI, mat6_SI, mat7_SI, mat8_SI, mat9_SI, mat10_SI));
 
-        courseService.addUserToCourse(course_calculo, user1);
-        courseService.addUserToCourse(course_calculo, user2);
-        courseService.addUserToCourse(course_calculo, user3);
-        courseService.addUserToCourse(course_calculo, user4);
-        courseService.addUserToCourse(course_calculo, user5);
-        courseService.addUserToCourse(course_calculo, user6);
-        courseService.addUserToCourse(course_calculo, user7);
+        courseService.addUserToCourse(course_calculo.getId(), user1);
+        courseService.addUserToCourse(course_calculo.getId(), user2);
+        courseService.addUserToCourse(course_calculo.getId(), user3);
+        courseService.addUserToCourse(course_calculo.getId(), user4);
+        courseService.addUserToCourse(course_calculo.getId(), user5);
+        courseService.addUserToCourse(course_calculo.getId(), user6);
+        courseService.addUserToCourse(course_calculo.getId(), user7);
 
-        courseService.addUserToCourse(course_DAA, user1);
-        courseService.addUserToCourse(course_DAA, user3);
-        courseService.addUserToCourse(course_DAA, user5);
-        courseService.addUserToCourse(course_DAA, user7);
-        courseService.addUserToCourse(course_DAA, user9);
+        courseService.addUserToCourse(course_DAA.getId(), user1);
+        courseService.addUserToCourse(course_DAA.getId(), user3);
+        courseService.addUserToCourse(course_DAA.getId(), user5);
+        courseService.addUserToCourse(course_DAA.getId(), user7);
+        courseService.addUserToCourse(course_DAA.getId(), user9);
 
-        courseService.addUserToCourse(course_DAW, user2);
-        courseService.addUserToCourse(course_DAW, user4);
-        courseService.addUserToCourse(course_DAW, user6);
-        courseService.addUserToCourse(course_DAW, user8);
-        courseService.addUserToCourse(course_DAW, user10);
+        courseService.addUserToCourse(course_DAW.getId(), user2);
+        courseService.addUserToCourse(course_DAW.getId(), user4);
+        courseService.addUserToCourse(course_DAW.getId(), user6);
+        courseService.addUserToCourse(course_DAW.getId(), user8);
+        courseService.addUserToCourse(course_DAW.getId(), user10);
 
-        courseService.addUserToCourse(course_EAS, user6);
-        courseService.addUserToCourse(course_EAS, user7);
-        courseService.addUserToCourse(course_EAS, user8);
-        courseService.addUserToCourse(course_EAS, user9);
-        courseService.addUserToCourse(course_EAS, user10);
+        courseService.addUserToCourse(course_EAS.getId(), user6);
+        courseService.addUserToCourse(course_EAS.getId(), user7);
+        courseService.addUserToCourse(course_EAS.getId(), user8);
+        courseService.addUserToCourse(course_EAS.getId(), user9);
+        courseService.addUserToCourse(course_EAS.getId(), user10);
 
-        courseService.addUserToCourse(course_ED, user3);
-        courseService.addUserToCourse(course_ED, user4);
-        courseService.addUserToCourse(course_ED, user5);
-        courseService.addUserToCourse(course_ED, user6);
-        courseService.addUserToCourse(course_ED, user7);
+        courseService.addUserToCourse(course_ED.getId(), user3);
+        courseService.addUserToCourse(course_ED.getId(), user4);
+        courseService.addUserToCourse(course_ED.getId(), user5);
+        courseService.addUserToCourse(course_ED.getId(), user6);
+        courseService.addUserToCourse(course_ED.getId(), user7);
 
-        courseService.addUserToCourse(course_IP, user1);
-        courseService.addUserToCourse(course_IP, user4);
-        courseService.addUserToCourse(course_IP, user6);
-        courseService.addUserToCourse(course_IP, user7);
-        courseService.addUserToCourse(course_IP, user9);
+        courseService.addUserToCourse(course_IP.getId(), user1);
+        courseService.addUserToCourse(course_IP.getId(), user4);
+        courseService.addUserToCourse(course_IP.getId(), user6);
+        courseService.addUserToCourse(course_IP.getId(), user7);
+        courseService.addUserToCourse(course_IP.getId(), user9);
 
-        courseService.addUserToCourse(course_MDA, user1);
-        courseService.addUserToCourse(course_MDA, user2);
-        courseService.addUserToCourse(course_MDA, user6);
-        courseService.addUserToCourse(course_MDA, user8);
-        courseService.addUserToCourse(course_MDA, user9);
-        courseService.addUserToCourse(course_MDA, user4);
-        courseService.addUserToCourse(course_MDA, user5);
-        courseService.addUserToCourse(course_MDA, user3);
+        courseService.addUserToCourse(course_MDA.getId(), user1);
+        courseService.addUserToCourse(course_MDA.getId(), user2);
+        courseService.addUserToCourse(course_MDA.getId(), user6);
+        courseService.addUserToCourse(course_MDA.getId(), user8);
+        courseService.addUserToCourse(course_MDA.getId(), user9);
+        courseService.addUserToCourse(course_MDA.getId(), user4);
+        courseService.addUserToCourse(course_MDA.getId(), user5);
+        courseService.addUserToCourse(course_MDA.getId(), user3);
 
-        courseService.addUserToCourse(course_POO, user1);
-        courseService.addUserToCourse(course_POO, user2);
-        courseService.addUserToCourse(course_POO, user3);
-        courseService.addUserToCourse(course_POO, user4);
-        courseService.addUserToCourse(course_POO, user5);
-        courseService.addUserToCourse(course_POO, user6);
-        courseService.addUserToCourse(course_POO, user7);
-        courseService.addUserToCourse(course_POO, user8);
-        courseService.addUserToCourse(course_POO, user9);
+        courseService.addUserToCourse(course_POO.getId(), user1);
+        courseService.addUserToCourse(course_POO.getId(), user2);
+        courseService.addUserToCourse(course_POO.getId(), user3);
+        courseService.addUserToCourse(course_POO.getId(), user4);
+        courseService.addUserToCourse(course_POO.getId(), user5);
+        courseService.addUserToCourse(course_POO.getId(), user6);
+        courseService.addUserToCourse(course_POO.getId(), user7);
+        courseService.addUserToCourse(course_POO.getId(), user8);
+        courseService.addUserToCourse(course_POO.getId(), user9);
 
-        courseService.addUserToCourse(course_SI, user2);
-        courseService.addUserToCourse(course_SI, user3);
-        courseService.addUserToCourse(course_SI, user5);
-        courseService.addUserToCourse(course_SI, user8);
-        courseService.addUserToCourse(course_SI, user10);
+        courseService.addUserToCourse(course_SI.getId(), user2);
+        courseService.addUserToCourse(course_SI.getId(), user3);
+        courseService.addUserToCourse(course_SI.getId(), user5);
+        courseService.addUserToCourse(course_SI.getId(), user8);
+        courseService.addUserToCourse(course_SI.getId(), user10);
     }
 }

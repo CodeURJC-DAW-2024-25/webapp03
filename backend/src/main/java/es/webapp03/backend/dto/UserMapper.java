@@ -8,5 +8,7 @@ import es.webapp03.backend.model.User;
 public interface UserMapper {
 
     UserBasicDTO toDTO(User user);
+
     
+
 }

@@ -80,4 +80,11 @@ public class Material {
         this.course = course;
     }
 
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }    
 }

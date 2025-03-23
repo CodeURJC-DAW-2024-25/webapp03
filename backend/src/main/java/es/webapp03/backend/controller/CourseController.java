@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +24,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import es.webapp03.backend.model.Course;
+import es.webapp03.backend.dto.CourseBasicDTO;
+import es.webapp03.backend.dto.CourseDTO;
+import es.webapp03.backend.dto.CourseMapper;
 import es.webapp03.backend.model.Comment;
 import es.webapp03.backend.model.Material;
 import es.webapp03.backend.model.User;
@@ -45,6 +47,9 @@ public class CourseController {
 	@Autowired
 	private CommentService commentService;
 
+	@Autowired
+	private CourseMapper courseMapper;
+
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
 		Principal principal = request.getUserPrincipal();
@@ -61,45 +66,47 @@ public class CourseController {
 	}
 
 	@GetMapping("/courses/{id}")
-public String showCourse(Model model, @PathVariable long id) {
-    Optional<Course> course = courseService.findById(id);
-    if (course.isPresent()) {
-        Course c = course.get();
+	public String showCourse(Model model, @PathVariable long id) {
+		CourseDTO courseDTO = courseService.findById(id); // Obtiene el CourseDTO
 
-        // Verificar si el usuario está en el curso y agregarlo si no lo está
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        if (!courseService.isUserInCourse(id, username)) {
-            User user = userService.findByEmail(username);
-            if (user != null) {
-                courseService.addUserToCourse(c, user);
-                userService.addCourseToUser(user, c);
-            }
-        }
+		if (courseDTO != null) { // Verifica si el curso existe
+			Course course = courseMapper.toDomain(courseDTO);  // 🔹 Convertimos CourseDTO a Course
 
-        // Asegurarse de que la lista de materiales no sea nula
-        if (c.getMaterials() == null) {
-            c.setMaterials(new ArrayList<>());
-        }
+			// Verificar si el usuario está en el curso y agregarlo si no lo está
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String username = authentication.getName();
+			if (!courseService.isUserInCourse(id, username)) {
+				User user = userService.findByEmail(username);
+				if (user != null) {
+					courseService.addUserToCourse(course.getId(), user);
+					userService.addCourseToUser(user, course);
+				}
+			}
 
-        // Obtener solo los 3 primeros materiales
-        List<Material> materials = c.getMaterials();
-        List<Material> firstThreeMaterials = materials.subList(0, Math.min(materials.size(), 3));
+			// Asegurar que la lista de materiales no sea nula
+			if (course.getMaterials() == null) {
+				course.setMaterials(new ArrayList<>());
+			}
 
-        // Obtener solo los 3 primeros comentarios ordenados por fecha descendente
-        List<Comment> comments = commentService.findByCourseIdOrderByCreatedDateDesc(id);
-        List<Comment> firstThreeComments = comments.subList(0, Math.min(comments.size(), 3));
+			// Obtener solo los 3 primeros materiales
+			List<Material> materials = course.getMaterials();
+			List<Material> firstThreeMaterials = materials.subList(0, Math.min(materials.size(), 3));
 
-        // Agregar atributos al modelo
-        model.addAttribute("course", c);
-        model.addAttribute("material", firstThreeMaterials);
-        model.addAttribute("comments", firstThreeComments);
+			// Obtener solo los 3 primeros comentarios ordenados por fecha descendente
+			List<Comment> comments = commentService.findByCourseIdOrderByCreatedDateDesc(id);
+			List<Comment> firstThreeComments = comments.subList(0, Math.min(comments.size(), 3));
 
-        return "course";
-    } else {
-        return "index";
-    }
-}
+			// Agregar atributos al modelo
+			model.addAttribute("course", course);
+			model.addAttribute("material", firstThreeMaterials);
+			model.addAttribute("comments", firstThreeComments);
+
+			return "course";
+		} else {
+			return "index"; // Si no se encuentra el curso, redirige al index
+		}
+	}
+
 
 	@GetMapping("/removecourse/{id}")
 	public String removeCourse(@PathVariable long id) {
@@ -112,7 +119,10 @@ public String showCourse(Model model, @PathVariable long id) {
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/courses/filter")
 	public String filterCoursesByTags(@RequestParam List<String> tags, Model model) {
-		List<Course> filteredCourses = courseService.findByTags(tags);
+		List<CourseBasicDTO> courseDTOs = courseService.findByTags(tags);
+		List<Course> filteredCourses = courseDTOs.stream()
+												.map(courseMapper::toDomain)
+												.toList();
 		model.addAttribute("courses", filteredCourses);
 		return "index"; // Returns the index view with filtered courses
 	}
@@ -136,34 +146,40 @@ public String showCourse(Model model, @PathVariable long id) {
 			course.setImage(true);
 		}
 
-		courseService.save(course); // Save the course in the database
+		CourseBasicDTO courseDTO = courseMapper.toDTO(course);
+		courseService.save(courseDTO);
+
 
 		model.addAttribute("courseId", course.getId());
 
 		return "redirect:/courses/" + course.getId();
 	}
 
+
 	@GetMapping("/editcourse/{id}")
 	public String editCourse(Model model, @PathVariable long id) {
-		Optional<Course> course = courseService.findById(id);
-		if (course.isPresent()) {
-			model.addAttribute("course", course.get());
+		CourseDTO courseDTO = courseService.findById(id); // Obtener CourseDTO directamente
+		if (courseDTO != null) {
+			Course course = courseMapper.toDomain(courseDTO); // Convertir CourseDTO a Course
+			model.addAttribute("course", course);
 			return "editcourse";
 		} else {
 			return "redirect:/index";
 		}
 	}
 
+	
 	@PostMapping("/editcourse")
 	public String editCourseProcess(Model model, @RequestParam Long id, @RequestParam String title,
 			@RequestParam String description, @RequestParam(required = false) MultipartFile imageField,
 			@RequestParam(required = false) boolean removeImage) throws IOException, SQLException {
-		Optional<Course> optionalCourse = courseService.findById(id);
-		if (optionalCourse.isPresent()) {
-			Course course = optionalCourse.get();
+	
+		CourseDTO courseDTO = courseService.findById(id); // Obtener CourseDTO directamente
+		if (courseDTO != null) {
+			Course course = courseMapper.toDomain(courseDTO); // Convertir CourseDTO a Course
 			course.setTitle(title);
 			course.setDescription(description);
-
+	
 			if (removeImage) {
 				course.setImageFile(null);
 				course.setImage(false);
@@ -171,19 +187,23 @@ public String showCourse(Model model, @PathVariable long id) {
 				course.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
 				course.setImage(true);
 			}
-
-			courseService.save(course);
+	
+			CourseBasicDTO updatedCourseDTO = courseMapper.toDTO(course); // Convertir Course a CourseBasicDTO
+			courseService.save(updatedCourseDTO); // Guardar el curso actualizado
+	
 			return "redirect:/courses/" + course.getId();
 		} else {
 			return "redirect:/index";
 		}
-	}
+	}	
+	
 
 	@GetMapping("/courses/loadMore")
 	public String loadMoreCourses(@RequestParam int page, Model model) {
 		int pageSize = 3; // Number of courses per page
 		Pageable pageable = PageRequest.of(page, pageSize);
-		Page<Course> coursePage = courseService.findAll(pageable);
+		Page<CourseBasicDTO> coursePageDTO = courseService.findAll(pageable);
+		Page<Course> coursePage = coursePageDTO.map(courseMapper::toDomain);
 
 		model.addAttribute("courses", coursePage.getContent());
 		return "fragments/courseList"; // Returns an html fragment with the courses

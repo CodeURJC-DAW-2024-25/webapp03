@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import es.webapp03.backend.dto.CourseBasicDTO;
+import es.webapp03.backend.dto.CourseDTO;
+import es.webapp03.backend.dto.CourseMapper;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.service.UserService;
@@ -37,6 +41,8 @@ public class HomeController {
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private CourseMapper courseMapper;
 
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
@@ -55,7 +61,9 @@ public class HomeController {
     public String showCourses(Model model, @RequestParam(defaultValue = "0") int page) {
         int pageSize = 3; // Number of courses per page
         Pageable pageable = PageRequest.of(page, pageSize);
-        Page<Course> coursePage = courseService.findAll(pageable);
+        Page<CourseBasicDTO> coursePageDTO = courseService.findAll(pageable);
+        Page<Course> coursePage = coursePageDTO.map(courseMapper::toDomain);
+
 
         model.addAttribute("courses", coursePage.getContent()); // Only the courses on the current page
         model.addAttribute("currentPage", page);
@@ -66,7 +74,9 @@ public class HomeController {
 
     @GetMapping("/chartData")
     public ResponseEntity<?> getChartData() {
-        List<Course> topCourses = courseService.getTopCourses();
+        List<CourseBasicDTO> topCoursesDTO = courseService.getTopCourses();
+        List<Course> topCourses = topCoursesDTO.stream().map(courseMapper::toDomain).toList();
+
         List<Map<String, Object>> chartData = new ArrayList<>();
 
         for (Course course : topCourses) {
@@ -81,7 +91,9 @@ public class HomeController {
 
     @GetMapping("/courses/{id}/image")
     public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
-        Optional<Course> course = courseService.findById(id);
+        CourseDTO courseDTO = courseService.findById(id);
+        Optional<Course> course = Optional.ofNullable(courseDTO != null ? courseMapper.toDomain(courseDTO) : null);
+
         if (course.isPresent() && course.get().getImageFile() != null) {
             Resource file = new InputStreamResource(course.get().getImageFile().getBinaryStream());
 

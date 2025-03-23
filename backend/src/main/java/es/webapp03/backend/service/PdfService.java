@@ -1,6 +1,9 @@
 package es.webapp03.backend.service;
 
 import com.lowagie.text.DocumentException;
+
+import es.webapp03.backend.dto.CourseDTO;
+import es.webapp03.backend.dto.CourseMapper;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.User;
 
@@ -43,6 +46,9 @@ public class PdfService {
     @Autowired
     private Mustache.Compiler mustacheCompiler;
 
+    @Autowired
+    private CourseMapper courseMapper;
+
     public ResponseEntity<byte[]> createPdf(String templateName, String outputFileName, Principal principal, Long courseId) throws IOException, DocumentException {
         if (principal == null) {
             return ResponseEntity.status(401).body(null); // Unauthorized
@@ -58,7 +64,9 @@ public class PdfService {
             return ResponseEntity.status(404).body(null); // User not found
         }
 
-        Optional<Course> courseOpt = courseService.findById(courseId);
+        CourseDTO courseDTO = courseService.findById(courseId);
+        Optional<Course> courseOpt = Optional.ofNullable(courseDTO != null ? courseMapper.toDomain(courseDTO) : null);
+
         if (courseOpt.isEmpty()) {
             return ResponseEntity.status(404).body(null); // Course not found
         }

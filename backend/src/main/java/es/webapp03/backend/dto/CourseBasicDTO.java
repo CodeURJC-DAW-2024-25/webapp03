@@ -1,5 +1,6 @@
 package es.webapp03.backend.dto;
 
+import java.sql.Blob;
 import java.util.List;
 
 public record CourseBasicDTO(    
@@ -7,6 +8,7 @@ public record CourseBasicDTO(
     String title,
 	String description,
     boolean image,
+    Blob imageFile,
     int numberOfUsers,
     List<String> tags) {
 }
