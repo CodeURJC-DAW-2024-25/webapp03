@@ -1,6 +1,5 @@
 package es.webapp03.backend.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.webapp03.backend.dto.CommentBasicDTO;
 import es.webapp03.backend.dto.CommentDTO;
@@ -22,6 +22,8 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
+    
+
     @Autowired
     private CommentMapper commentMapper;
 
@@ -31,16 +33,6 @@ public class CommentService {
 
     public void deleteById(Long commentId) {
         commentRepository.deleteById(commentId);
-    }
-
-    public CommentBasicDTO createComment(Long courseId, String text) { // Cambiar a CommentDTO
-    // Implementación básica de creación de comentario
-    Comment comment = new Comment();
-    comment.setText(text);
-    comment.setCreatedDate(LocalDate.now());
-    // Asignar curso y usuario (sin hacer)
-    commentRepository.save(comment);
-    return commentMapper.toDTO(comment);
     }
 
     public boolean existsById(Long commentId) {
@@ -63,4 +55,5 @@ public class CommentService {
     public Optional<CommentDTO> findById(Long id) {
         return commentRepository.findById(id).map(commentMapper::toCommentDTO);
     }
+
 }
