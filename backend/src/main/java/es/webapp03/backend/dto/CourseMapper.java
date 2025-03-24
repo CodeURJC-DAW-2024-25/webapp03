@@ -21,6 +21,7 @@ public interface CourseMapper {
     @Mapping(target = "users", ignore = true)
     @Mapping(target = "materials", ignore = true)
     @Mapping(target = "comments", ignore = true)
+    @Mapping(target = "imageFile", ignore = true)
     Course toDomain(CourseBasicDTO courseDTO);
 
     @Mapping(target = "users", ignore = true)
@@ -39,7 +40,7 @@ public interface CourseMapper {
     List<UserBasicDTO> mapUsers(Collection<User> users);
 
     @Mapping(target = "course", ignore = true)
-    List<MaterialBasicDTO> mapMaterials(Collection<Material> materials);    
+    List<MaterialBasicDTO> mapMaterials(Collection<Material> materials);
 
     @Mapping(target = "course", ignore = true)
     @Mapping(target = "user", ignore = true)
