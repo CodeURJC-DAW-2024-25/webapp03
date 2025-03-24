@@ -72,7 +72,7 @@ public class MaterialRestController {
     }
 
     // Endpoint download file from course
-    @GetMapping("/courses/{courseId}/materials/{materialId}")
+    @GetMapping("/courses/{courseId}/materials/{materialId}/")
     public ResponseEntity<byte[]> downloadFile(@PathVariable Long courseId, @PathVariable Long materialId)
             throws SQLException {
         Optional<Material> materialOpt = materialService.findById(materialId);
@@ -89,7 +89,7 @@ public class MaterialRestController {
     }
 
     // Endpoint delete file
-    @DeleteMapping("/courses/{courseId}/materials/{materialId}")
+    @DeleteMapping("/courses/{courseId}/materials/{materialId}/")
     public ResponseEntity<Void> deleteFile(@PathVariable Long courseId, @PathVariable Long materialId) {
         materialService.deleteById(materialId);
         return ResponseEntity.noContent().build();
