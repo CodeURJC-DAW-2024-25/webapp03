@@ -35,7 +35,9 @@ public class CourseService {
             Course course = optCourse.get();
             if (!course.getUsers().contains(user)) {
                 course.addUser(user);
-                course.setNumberOfUsers(course.getUsers().size());
+                int numberOfUsers = course.getNumberOfUsers();
+                /* course.setNumberOfUsers(course.getUsers().size()); */
+                course.setNumberOfUsers(numberOfUsers + 1);
                 courseRepository.save(course);
             }
             return courseMapper.toFullDTO(course);
