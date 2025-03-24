@@ -10,12 +10,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import es.webapp03.backend.dto.CourseBasicDTO;
 import es.webapp03.backend.dto.CourseDTO;
+import es.webapp03.backend.dto.CourseMapper;
+import es.webapp03.backend.dto.CourseMapper;
+import es.webapp03.backend.model.Course;
 import es.webapp03.backend.service.CourseService;
 import java.io.IOException;
 import java.net.URI;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.core.io.Resource;
@@ -26,6 +33,9 @@ public class CourseRestController {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private CourseMapper courseMapper;
 
     // Endpoint get all courses
     @GetMapping("/")
@@ -103,6 +113,23 @@ public class CourseRestController {
         courseService.deleteCourseImage(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/chartdata")
+    public ResponseEntity<?> getChartData() {
+        List<CourseBasicDTO> topCoursesDTO = courseService.getTopCourses();
+        List<Course> topCourses = topCoursesDTO.stream().map(courseMapper::toDomain).toList();
+
+        List<Map<String, Object>> chartData = new ArrayList<>();
+
+        for (Course course : topCourses) {
+            Map<String, Object> courseData = new HashMap<>();
+            courseData.put("name", course.getTitle());
+            courseData.put("inscriptions", course.getNumberOfUsers());
+            chartData.add(courseData);
+        }
+
+        return ResponseEntity.ok(chartData);
     }
 
 }

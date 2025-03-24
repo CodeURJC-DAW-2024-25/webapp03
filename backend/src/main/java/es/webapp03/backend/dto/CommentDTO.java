@@ -11,7 +11,7 @@ public record CommentDTO(
     
     // Constructor simplificado
     public CommentDTO {
-        course = course != null ? course : new CourseBasicDTO(null, null, null, false, null, 0, null);
+        course = course != null ? course : new CourseBasicDTO(null, null, null, false, 0, null);
         user = user != null ? user : new UserBasicDTO(null, null, null, false, null, null);
     }
 }
