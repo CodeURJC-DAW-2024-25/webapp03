@@ -1,5 +1,6 @@
 package es.webapp03.backend.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,6 +31,20 @@ public class CommentService {
 
     public void deleteById(Long commentId) {
         commentRepository.deleteById(commentId);
+    }
+
+    public CommentBasicDTO createComment(Long courseId, String text) {
+    // Implementación básica - necesitarás inyectar CourseRepository y UserRepository
+    Comment comment = new Comment();
+    comment.setText(text);
+    comment.setCreatedDate(LocalDate.now());
+    // Asignar curso y usuario (aquí necesitas la lógica real)
+    commentRepository.save(comment);
+    return commentMapper.toDTO(comment);
+    }
+
+    public boolean existsById(Long commentId) {
+    return commentRepository.existsById(commentId);
     }
 
     public List<Comment> findByCourseIdOrderByCreatedDateDesc(long id) {
