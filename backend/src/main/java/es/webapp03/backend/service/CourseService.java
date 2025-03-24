@@ -42,7 +42,6 @@ public class CourseService {
             if (!course.getUsers().contains(user)) {
                 course.addUser(user);
                 int numberOfUsers = course.getNumberOfUsers();
-                /* course.setNumberOfUsers(course.getUsers().size()); */
                 course.setNumberOfUsers(numberOfUsers + 1);
                 courseRepository.save(course);
             }
