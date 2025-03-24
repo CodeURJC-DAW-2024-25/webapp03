@@ -41,7 +41,7 @@ public class CommentRestController {
     public ResponseEntity<CommentBasicDTO> createComment(
             @PathVariable Long courseId,
             @RequestParam String text) {
-        // Necesitarás implementar este método en el servicio
+        
         CommentBasicDTO savedComment = commentService.createComment(courseId, text);
         return ResponseEntity.ok(savedComment);
     }

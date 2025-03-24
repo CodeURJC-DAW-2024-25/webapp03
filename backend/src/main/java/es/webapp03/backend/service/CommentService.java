@@ -33,12 +33,12 @@ public class CommentService {
         commentRepository.deleteById(commentId);
     }
 
-    public CommentBasicDTO createComment(Long courseId, String text) {
-    // Implementación básica - necesitarás inyectar CourseRepository y UserRepository
+    public CommentBasicDTO createComment(Long courseId, String text) { // Cambiar a CommentDTO
+    // Implementación básica de creación de comentario
     Comment comment = new Comment();
     comment.setText(text);
     comment.setCreatedDate(LocalDate.now());
-    // Asignar curso y usuario (aquí necesitas la lógica real)
+    // Asignar curso y usuario (sin hacer)
     commentRepository.save(comment);
     return commentMapper.toDTO(comment);
     }
