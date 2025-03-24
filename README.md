@@ -253,23 +253,23 @@ I implemented the filter of courses by TAGS, made the entire pagination system f
 
 
 <h3>Marcos Alejandro Pascual Rojas</h3>
-I implemented the user registration functionality, the course page and the uploading of material to the course. I was also involved in implementing the security of the application. Finally, I configured some error pages.
+I worked implementing the CourseRestController and the MaterialRestController. I also modify their respective services.
 
-|                                                 Commit                                                 |                             Description                             |
-| :----------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/359f947247d14a215951d4c58b73dabeae0b2410) |             Add material to course and fixed header bug             |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/556e9e842ccc36e42e0755219e9d21d5325dc3ae) |                     Security and register logic                     |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/44b7f26d63fdfb1a56010b988e53e1cf04324aee) |              Register user feat, create course button               |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/471b68fd24354f178cb315c69f0ade3925dc66ea) |                     Added csrf and email login                      |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/db8f5195af986de2fa56c585317607308fd20a93) | Added login and error pages, fixed non logged users acces to course |
+|                                                 Commit                                                 |                Description                 |
+|:------------------------------------------------------------------------------------------------------:|:------------------------------------------:|
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/7df4189bbfdb902c20dbe609c91a2e8195089871) | Updated Course Service and CourseContrller |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/73c822980f3b1df2d4616629108320a994acd143) |         Fixed courseRestController         |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/73f09c2f6e81b59f27eb97f025241f60a9de3016) |    Fixed MaterialRestController upload     |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/9b08135fb0fb781fa1fe3cc523c54755fa2ced35) |  Implemented MaterialRest and CourseRest   |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/0313f0b237bc3050ef8fdea205b473514920b810) |                 Fixed urls                 |
 
-|                                                                         File                                                                          |             Name             |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------: |
-|     [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/MaterialController.java)     |      MaterialController      |
-|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseController.java)      |       CourseController       |
-|       [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/UserController.java)       |        UserController        |
-|      [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/security/WebSecurityConfig.java)       |      WebSecurityConfig       |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/security/RepositoryUserDetailsService.java) | RepositoryUserDetailsService |
+|                                                                         File                                                                          |              Name              |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------: |:------------------------------:|
+|     [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java)     |      CourseRestController      |
+|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/MaterialRestController.java)      |        MaterialRestController        |
+|       [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)       |         CourseService         |
+|      [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/MaterialService.java)       |       MaterialService        |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CourseDTO.java) |  CourseBasicDTO  |
 
 <h3>Gonzalo García Castillo</h3>
 

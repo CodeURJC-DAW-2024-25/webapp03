@@ -2,29 +2,22 @@ package es.webapp03.backend.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
 import es.webapp03.backend.service.UserService;
-import es.webapp03.backend.dto.UserBasicDTO;
 import es.webapp03.backend.dto.UserDTO;
-import es.webapp03.backend.dto.UserProfileDTO;
+import es.webapp03.backend.dto.UserNoImageDTO;
 import es.webapp03.backend.model.User;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import es.webapp03.backend.dto.UserMapper;
+
 
 //Si necesito devolver sin contraseña puedo mmapear profile dto a basic
 @RestController
@@ -37,24 +30,27 @@ public class UserRestController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @PostMapping("/")
-    public ResponseEntity<UserProfileDTO> registerUser(@RequestBody UserProfileDTO userProfileDTO) {
+    public ResponseEntity<UserNoImageDTO> registerUser(@RequestBody UserNoImageDTO userNoImageDTO) {
 
         try {
             // Check if the user already exists
-            if (userService.findByEmail(userProfileDTO.email()) != null) {
+            if (userService.findByEmail(userNoImageDTO.email()) != null) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).build();
             }
 
             // Encrypt password
-            String encodedPassword = passwordEncoder.encode(userProfileDTO.password());
+            String encodedPassword = passwordEncoder.encode(userNoImageDTO.password());
 
             // Create and save user with role "USER" (without image)
-            User newUser = new User(userProfileDTO.name(), userProfileDTO.email(), encodedPassword, null, "USER");
+            User newUser = new User(userNoImageDTO.name(), userNoImageDTO.email(), encodedPassword, null, "USER");
             userService.save(newUser);
 
             // Convert the saved user to UserProfileDTO
-            UserProfileDTO createdUserProfileDTO = userService.findUserProfileById(newUser.getId());
+            UserNoImageDTO createdUserProfileDTO = userService.findUserProfileById(newUser.getId());
 
             // Return success response with the created user
             return ResponseEntity.status(HttpStatus.CREATED).body(createdUserProfileDTO);
@@ -63,20 +59,22 @@ public class UserRestController {
         }
     }
 
-    @GetMapping("/") // Mirar paginacion en el material
-    public Page<UserDTO> showUsers(Pageable pageable) { // recibir pageable
-        return userService.findAll(pageable);
+    @GetMapping("/") 
+    public Page<UserNoImageDTO> showUsers(Pageable pageable) { 
+        return userService.findAllWithNoImage(pageable);
     }
 
-    @DeleteMapping("/{id}") // Checkear respuesta borrado
-    public ResponseEntity<UserDTO> deleteUser(@PathVariable long id) { // Checkear respuesta borrado
+    @DeleteMapping("/{id}")
+    public ResponseEntity<UserNoImageDTO> deleteUser(@PathVariable long id) {
         UserDTO userDTO = userService.findUserById(id);
         if (userDTO != null) {
             userService.deleteById(id);
-            return ResponseEntity.ok(userDTO); // Devolver el recurso borrado
+            UserNoImageDTO userNoImageDTO = userMapper.toNoImageDTO(userDTO);
+            return ResponseEntity.ok(userNoImageDTO); // Devolver el recurso borrado
         }
         return ResponseEntity.notFound().build();
     }
+
 
     @GetMapping("/{id}/image")
     public ResponseEntity<Object> getProfileImage(@PathVariable Long id) throws SQLException, IOException {
@@ -92,11 +90,11 @@ public class UserRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserProfileDTO> showUserProfile(@PathVariable Long id) {
-        UserProfileDTO userProfileDTO = userService.findUserProfileById(id);
+    public ResponseEntity<UserNoImageDTO> showUserProfile(@PathVariable Long id) {
+        UserNoImageDTO UserNoImageDTO = userService.findUserProfileById(id);
 
-        if (userProfileDTO != null) {
-            return ResponseEntity.ok(userProfileDTO);
+        if (UserNoImageDTO != null) {
+            return ResponseEntity.ok(UserNoImageDTO);
         }
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

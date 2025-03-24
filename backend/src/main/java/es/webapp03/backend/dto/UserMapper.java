@@ -12,9 +12,12 @@ public interface UserMapper {
 
     UserDTO toDTO(User user);
 
+
     @Mapping(target = "password", source = "encodedPassword")
-    UserProfileDTO toProfileDTO(User user);
+    UserNoImageDTO toNoImageDTO(User user);
 
-
+    
+    @Mapping(target = "password", ignore = true)
+    UserNoImageDTO toNoImageDTO(UserDTO userDTO);
     
 }

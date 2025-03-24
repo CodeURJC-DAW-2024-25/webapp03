@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import es.webapp03.backend.dto.UserBasicDTO;
 import es.webapp03.backend.dto.UserDTO;
 import es.webapp03.backend.dto.UserMapper;
-import es.webapp03.backend.dto.UserProfileDTO;
+import es.webapp03.backend.dto.UserNoImageDTO;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.repository.UserRepository;
@@ -75,6 +75,10 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public Page<UserNoImageDTO> findAllWithNoImage(Pageable pageable) {
+        return userRepository.findAll(pageable).map(userMapper::toNoImageDTO);
+    }
+
     public Page<UserDTO> findAll(Pageable pageable) {
         return userRepository.findAll(pageable).map(userMapper::toDTO);
     }
@@ -84,7 +88,7 @@ public class UserService {
     }
 
     //pasar a profile
-    public UserProfileDTO findUserProfileById(Long id) {
-        return userRepository.findById(id).map(userMapper::toProfileDTO).orElse(null);
+    public UserNoImageDTO findUserProfileById(Long id) {
+        return userRepository.findById(id).map(userMapper::toNoImageDTO).orElse(null);
     }
 }
