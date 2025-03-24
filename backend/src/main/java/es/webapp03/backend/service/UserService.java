@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import es.webapp03.backend.dto.UserBasicDTO;
 import es.webapp03.backend.dto.UserDTO;
 import es.webapp03.backend.dto.UserMapper;
+import es.webapp03.backend.dto.UserProfileDTO;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.repository.UserRepository;
@@ -76,5 +77,14 @@ public class UserService {
 
     public Page<UserDTO> findAll(Pageable pageable) {
         return userRepository.findAll(pageable).map(userMapper::toDTO);
+    }
+
+    public UserDTO findUserById(Long id) { //todo: pasar basic
+        return userRepository.findById(id).map(userMapper::toDTO).orElse(null);
+    }
+
+    //pasar a profile
+    public UserProfileDTO findUserProfileById(Long id) {
+        return userRepository.findById(id).map(userMapper::toProfileDTO).orElse(null);
     }
 }
