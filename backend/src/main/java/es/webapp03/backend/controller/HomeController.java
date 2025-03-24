@@ -1,5 +1,6 @@
 package es.webapp03.backend.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -63,7 +64,6 @@ public class HomeController {
         Pageable pageable = PageRequest.of(page, pageSize);
         Page<CourseBasicDTO> coursePageDTO = courseService.findAll(pageable);
         Page<Course> coursePage = coursePageDTO.map(courseMapper::toDomain);
-
 
         model.addAttribute("courses", coursePage.getContent()); // Only the courses on the current page
         model.addAttribute("currentPage", page);

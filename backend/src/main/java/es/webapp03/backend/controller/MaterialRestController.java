@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import es.webapp03.backend.dto.CourseDTO;
 import es.webapp03.backend.dto.CourseMapper;
 import es.webapp03.backend.dto.MaterialBasicDTO;
+import es.webapp03.backend.dto.MaterialDTO;
+import es.webapp03.backend.dto.MaterialMapper;
 import es.webapp03.backend.model.Material;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.service.MaterialService;
@@ -38,11 +40,15 @@ public class MaterialRestController {
     @Autowired
     private CourseMapper courseMapper;
 
+    @Autowired
+    private MaterialMapper materialMapper;
+
     // Endpoint upload material to course
-    @PostMapping("/courses/{courseId}/upload")
-    public ResponseEntity<Void> uploadFile(@PathVariable Long courseId, @RequestParam("file") MultipartFile file) {
+    @PostMapping("/courses/{id}/")
+    public ResponseEntity<MaterialBasicDTO> uploadFile(@PathVariable Long id,
+            @RequestParam("file") MultipartFile file) {
         try {
-            CourseDTO courseDTO = courseService.findById(courseId);
+            CourseDTO courseDTO = courseService.findById(id);
             if (courseDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
@@ -53,9 +59,12 @@ public class MaterialRestController {
             Blob fileBlob = new SerialBlob(fileInputStream.readAllBytes());
 
             Material material = new Material(file.getOriginalFilename(), file.getContentType(), fileBlob, course);
+
             materialService.save(material);
 
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+            MaterialBasicDTO materialBasicDTO = materialMapper.toDTO(material);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(materialBasicDTO);
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -63,7 +72,7 @@ public class MaterialRestController {
     }
 
     // Endpoint download file from course
-    @GetMapping("/courses/{courseId}/materials/{materialId}/download")
+    @GetMapping("/courses/{courseId}/materials/{materialId}/")
     public ResponseEntity<byte[]> downloadFile(@PathVariable Long courseId, @PathVariable Long materialId)
             throws SQLException {
         Optional<Material> materialOpt = materialService.findById(materialId);
@@ -80,7 +89,7 @@ public class MaterialRestController {
     }
 
     // Endpoint delete file
-    @DeleteMapping("/courses/{courseId}/materials/{materialId}")
+    @DeleteMapping("/courses/{courseId}/materials/{materialId}/")
     public ResponseEntity<Void> deleteFile(@PathVariable Long courseId, @PathVariable Long materialId) {
         materialService.deleteById(materialId);
         return ResponseEntity.noContent().build();

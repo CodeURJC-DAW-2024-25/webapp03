@@ -16,7 +16,7 @@ public class MaterialService {
 
     @Autowired
     private MaterialRepository materialRepository;
-    
+
     @Autowired
     private MaterialMapper materialMapper;
 
