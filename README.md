@@ -312,4 +312,5 @@ My job consisted mostly in implementing the API logic for the UserRestController
 5. Access the URL https://appweb03.dawgis.etsii.urjc.es/ in any browser
 
 <h2 id=apiDocumentation>API Documentation</h2>
-[API Documentation](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.html)
+[API Documentation (HTML)](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.html)
+[API Documentation (YAML)](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.yaml)
