@@ -274,25 +274,24 @@ I worked implementing the CourseRestController and the MaterialRestController. I
 
 <h3>Gonzalo García Castillo</h3>
 
-Mostly focused on implementing the external library functionality (the PDF Diploma generation from Html). Finally also refactoring the dependencies logic in the project since I was in charge of creating the Class Diagram (The fifth commit is the first of this refactors).
+My job consisted mostly in implementing the API logic for the UserRestController (and by so creating new DTOs), documenting the API using Open-API, and update the class diagram.
 
-IMPORTANT NOTE: All commits under the name of "Layncatto" were done by me by a personal github account by mistake. Apologies in advance.
 
 |                                                 Commit                                                 |                                 Description                                  |
 | :----------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/dc4ec0ed3263344f99aa1d6f22e9ccff6ed1cd87) |                              Resuming pdf logic                              |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/67f9357689d84412f98379cca24b99b7ce2a2f1f) |     Enhance course display with user context and improve diploma layout      |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/f4120f10ea4cdbc6f005c1134f5ae73d6a31a782) |            Fixed Diploma generation to retrive name and not email            |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/c57a5f0fe1c8ec1c81a36da5831c26c385b797d5) |        Add base64 image support for course diplomas in PDF generation        |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/d2bf6c9a7c5a5022db4a68175691643a5c7a3337) | Refactor CommentController to use services for comment and course operations |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/31e43b753ca1fc82082df84f4d8959193d792aec) |      Add OpenAPI generator configuration and update UserRestController       |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/c1d53831b164b50af9c4d3d6d29e4f1e8d153537) |          Add UserProfileDTO and UserRestController for user management       |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/8cbfff9aeae53149db42057c3b27f4d985608cc4) | refactor UserRestController and related DTOs to use UserNoImageDTO; remove UserProfileDTO       |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/fdf1a3747daf492b97efc672f24bccc2b506188f) |        Update pom.xml to add OpenAPI and HTML documentation generation plugins        |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/fbc406d906d8331eb3ccb5d133a12b2074eb119e) | Refactor PDF generation logic into PdfService|
 
 |                                                                   File                                                                   |     Name      |
 | :--------------------------------------------------------------------------------------------------------------------------------------: | :-----------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/PdfController.java) | PdfController |
-|    [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/PdfService.java)    |  PdfService   |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseService.java) | CourseService |
-|            [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/resources/templates/diploma.html)            | diploma.html  |
-|            [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/resources/templates/course.html)             |  course.html  |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/UserRestController.java) | UserRestController |
+|    [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/UserNoImageDTO.java)    |  UserNoImageDTO   |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/UserService.java) | UserService |
+|            [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/UserMapper.java)            | UserMapper |
+|            [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/pom.xml)             |  pom.xml  |
 
 <h2 id="execution">Execution instructions</h2>
 
