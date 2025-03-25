@@ -24,61 +24,57 @@ import es.webapp03.backend.security.jwt.UnauthorizedHandlerJwt;
 public class SecurityConfig {
 
     @Autowired
-	private JwtRequestFilter jwtRequestFilter;
+    private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-	private UnauthorizedHandlerJwt unauthorizedHandlerJwt;
-    
+    private UnauthorizedHandlerJwt unauthorizedHandlerJwt;
+
     @Autowired
-    RepositoryUserDetailsService userDetailsService;
+    private RepositoryUserDetailsService userDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-		return authConfig.getAuthenticationManager();
-	}
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
+    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
-
         return authProvider;
     }
 
+    @Bean
+    @Order(1)
+    public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
+        http.authenticationProvider(authenticationProvider());
 
-	@Bean
-	@Order(1)
-	public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
-		
-		http.authenticationProvider(authenticationProvider());
-		
-		http
-			.securityMatcher("/api/**")
-			.exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
-		
-		http
-			.authorizeHttpRequests(authorize -> authorize
-                    // PRIVATE ENDPOINTS
-                    .requestMatchers(HttpMethod.GET,"/api/courses/").hasRole("USER")
-                    .requestMatchers(HttpMethod.GET,"/api/materials/").hasRole("USER")
-                    .requestMatchers(HttpMethod.GET,"/api/comments/").hasRole("USER")
-                    .requestMatchers(HttpMethod.POST,"/api/materials/").hasRole("USER")
-                    .requestMatchers(HttpMethod.POST,"/api/comments/").hasRole("USER")
-                    .requestMatchers(HttpMethod.POST,"/api/courses/").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.PUT,"/api/users/**").hasRole("USER")
-                    .requestMatchers(HttpMethod.PUT,"/api/**").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.DELETE,"/api/**").hasRole("ADMIN")
-					// PUBLIC ENDPOINTS
-					.anyRequest().permitAll()
-			);
-		
+        http
+            .securityMatcher("/api/**")
+            .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
+
+        http
+            .authorizeHttpRequests(authorize -> authorize
+                // PRIVATE ENDPOINTS
+                .requestMatchers(HttpMethod.GET, "/api/courses/").hasRole("USER")
+                .requestMatchers(HttpMethod.GET, "/api/materials/").hasRole("USER")
+                .requestMatchers(HttpMethod.GET, "/api/comments/").hasRole("USER")
+                .requestMatchers(HttpMethod.POST, "/api/materials/").hasRole("USER")
+                .requestMatchers(HttpMethod.POST, "/api/comments/").hasRole("USER")
+                .requestMatchers(HttpMethod.POST, "/api/courses/").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/users/**").hasRole("USER")
+                .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
+                // PUBLIC ENDPOINTS
+                .anyRequest().permitAll()
+            );
+
         // Disable Form login Authentication
         http.formLogin(formLogin -> formLogin.disable());
 
@@ -91,49 +87,48 @@ public class SecurityConfig {
         // Stateless session
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-		// Add JWT Token filter
-		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
-		return http.build();
-	}
-
-    @Bean
-    @Order(2)
-    public SecurityFilterChain webFilterChain(HttpSecurity http) throws Exception {
-
-        http.authenticationProvider(authenticationProvider());
-
-        http
-                .authorizeHttpRequests(authorize -> authorize
-                        // Public pages
-                        .requestMatchers("/", "/index", "/courses/**", "/register", "/registererror").permitAll()
-                        .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers("/error").permitAll()
-                        .requestMatchers("/login", "/logout").permitAll()
-
-                        // Private pages
-                        .requestMatchers("/newcourse").hasRole("ADMIN")
-                        .requestMatchers("courses/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/editcourse/**").hasRole("ADMIN")
-                        .requestMatchers("/removecourse/**").hasRole("ADMIN")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/edit_profile/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/newcomment").hasRole("USER")
-
-                        // Any other request
-                        .anyRequest().permitAll()
-                )
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login")
-                        .failureUrl("/loginerror")
-                        .defaultSuccessUrl("/")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .permitAll());
+        // Add JWT Token filter
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
+    @Bean
+    @Order(2)
+    public SecurityFilterChain webFilterChain(HttpSecurity http) throws Exception {
+        http.authenticationProvider(authenticationProvider());
+
+        http
+            .authorizeHttpRequests(authorize -> authorize
+                // Public pages
+                .requestMatchers("/", "/index", "/courses/**", "/register", "/registererror").permitAll()
+                .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/error").permitAll()
+                .requestMatchers("/login", "/logout").permitAll()
+                .requestMatchers("/v3/api-docs*/**").permitAll()
+                .requestMatchers("/swagger-ui.html").permitAll()
+                .requestMatchers("/swagger-ui/**").permitAll()
+                // Private pages
+                .requestMatchers("/newcourse").hasRole("ADMIN")
+                .requestMatchers("courses/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/editcourse/**").hasRole("ADMIN")
+                .requestMatchers("/removecourse/**").hasRole("ADMIN")
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/edit_profile/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/newcomment").hasRole("USER")
+                // Any other request
+                .anyRequest().permitAll()
+            )
+            .formLogin(formLogin -> formLogin
+                .loginPage("/login")
+                .failureUrl("/loginerror")
+                .defaultSuccessUrl("/")
+                .permitAll())
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll());
+
+        return http.build();
+    }
 }

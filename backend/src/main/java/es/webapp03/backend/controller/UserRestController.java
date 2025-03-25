@@ -18,8 +18,6 @@ import es.webapp03.backend.dto.UserNoImageDTO;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.dto.UserMapper;
 
-
-//Si necesito devolver sin contraseña puedo mmapear profile dto a basic
 @RestController
 @RequestMapping("/api/users")
 public class UserRestController {
@@ -35,7 +33,6 @@ public class UserRestController {
 
     @PostMapping("/")
     public ResponseEntity<UserNoImageDTO> registerUser(@RequestBody UserNoImageDTO userNoImageDTO) {
-
         try {
             // Check if the user already exists
             if (userService.findByEmail(userNoImageDTO.email()) != null) {
@@ -59,8 +56,8 @@ public class UserRestController {
         }
     }
 
-    @GetMapping("/") 
-    public Page<UserNoImageDTO> showUsers(Pageable pageable) { 
+    @GetMapping("/")
+    public Page<UserNoImageDTO> showUsers(Pageable pageable) {
         return userService.findAllWithNoImage(pageable);
     }
 
@@ -74,7 +71,6 @@ public class UserRestController {
         }
         return ResponseEntity.notFound().build();
     }
-
 
     @GetMapping("/{id}/image")
     public ResponseEntity<Object> getProfileImage(@PathVariable Long id) throws SQLException, IOException {
@@ -91,20 +87,18 @@ public class UserRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserNoImageDTO> showUserProfile(@PathVariable Long id) {
-        UserNoImageDTO UserNoImageDTO = userService.findUserProfileById(id);
+        UserNoImageDTO userNoImageDTO = userService.findUserProfileById(id);
 
-        if (UserNoImageDTO != null) {
-            return ResponseEntity.ok(UserNoImageDTO);
+        if (userNoImageDTO != null) {
+            return ResponseEntity.ok(userNoImageDTO);
         }
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @PutMapping("/{id}") // TODO logout logic
-
-    public ResponseEntity<String> editUserProfile() {
-            return null;
-
+    @PutMapping("/{id}")
+    public ResponseEntity<String> editUserProfile(@PathVariable Long id, @RequestBody UserNoImageDTO userNoImageDTO) {
         
+        return ResponseEntity.ok("User profile updated");
     }
 }
