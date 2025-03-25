@@ -232,23 +232,24 @@ At the beginning of the project I created the DTOs and basic DTOs, added the sec
 
 <h3>Sergio López Cuesta</h3>
 
-I implemented the filter of courses by TAGS, made the entire pagination system from all entities and created some methods that we needed during the Sprint
 
-|                                                 Commit                                                 |                   Description                   |
-| :----------------------------------------------------------------------------------------------------: | :---------------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/6a560779e30ab099ef4909171fba618056904992)| Pagination changes on 2 entities (Materials & Courses)|
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/944bcf5859d341c53667ee2822996e0727ff6c05) |          Pagination changed on Courses          |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/6c807de36b67d24c6805ae4c41d5b27b4988441e) |   Pagination changed on UserList from Admin     |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/321ad56dbb68bef2f5ce3ccefd28cc015832f917) |  Filter by tags and changes in the html files   |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/f7470eb4487abb9b8f2ee87cecd740aae4f50f44) |         Create methods of NewCourses            |
+I implemented all the Comment Logic for the REST API
 
-|                                                                    File                                                                     |        Name         |
+|                                                                    File                                                                           |        Name             |
+| :-----------------------------------------------------------------------------------------------------------------------------------------:       | :-----------------:     |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CommentRestController.java)  |  CommentRestController  |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CouresService.java)             |     CommentService      |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/DTO/CommentDTO.java)                    |      CommentDTO         |
+|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)            |    CourseService        |
+
+
+|                                                                    Commit                                                                   |        Description                  |
 | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-----------------: |
-|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/WebController.java)   |    WebController    |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/MaterialController.java) | MaterialController    |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseController.java) |  CourseController   |
-|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/UserController.java)  |   UserController    |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CommentController.java)  |   CommentController   |
+|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b859e2360ab297671336dc8c62837d128d335a66)                                     |    CommentRestController started    |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/145656ab43333a37452cced3179f1d9e39d185f9)                                      |   CommentRestController uptade      |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/722107e3f8c9a78852611c3d51014b9dd2a967da)                                      |    CommentRestController started    |
+|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/145656ab43333a37452cced3179f1d9e39d185f9)                                     |      Created DTO Files              |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/03c5d86259a0fae150a9a97c706274d1bbd5e4b8)                                      |      Fixed minor changes            |
 
 
 
