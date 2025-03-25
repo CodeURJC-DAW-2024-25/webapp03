@@ -17,8 +17,10 @@
   - [Screenshots](#screenshots)
   - [Navigation](#navigation)
   - [Classes and Templates Diagram](#classes)
-- [Members contribution](#contribution)
-- [Execution instructions](#execution)
+  - [Members contribution](#contribution)
+  - [Execution instructions](#execution)
+  - [Execution instructions in remote machine](#executionRemote)
+  - [API Documentation](#apiDocumentation)
 
 <br>
 
@@ -300,3 +302,14 @@ My job consisted mostly in implementing the API logic for the UserRestController
 3. Download MySQL and MySQL Workbench (use "password" as your password). Create a schema named "libace"
 4. Download this repository code and execute it on VSCode (is easier with the Spring Boot Dashboard extension)
 5. Introduce this URL in your browser (it will tell you its not secure, but that just because its on development, nothing to worry about): https://localhost:8443/
+
+<h2 id=executionRemote>Execution instructions in remote machine</h2>
+
+1. Connect to the remote machine: Run ssh -i ssh-keys/appWeb03.key in GitBash from the appWeb03 folder containing the ssh-keys folder and type yes if a warning message appears.
+2. Run git clone https://github.com/CodeURJC-DAW-2024-25/webapp03
+3. Access the docker directory with cd webapp03/docker
+4. Run docker compose up -d
+5. Access the URL https://appweb03.dawgis.etsii.urjc.es/ in any browser
+
+<h2 id=apiDocumentation>API Documentation</h2>
+[API Documentation](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.html)
