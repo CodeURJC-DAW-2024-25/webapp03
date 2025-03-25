@@ -194,23 +194,23 @@ An algorithm to filter courses based on a tag provided by the user.
 
 <h3>David Cereceda Catalán</h3>
 
-I have mainly been concerned with initializing the database with default data, implementing the course comments, and implementing the graph that shows the courses with the most users.
+I have mainly been in charge of Docker and the deployment of the web application on the remote machine, and I have also helped with whatever was missing from the API.
 
 | Commit | Description |
 | :----: | :---------: |
-|   [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/ae082b63a87d8a90743a9f1a266e2ddd65c611e7)   | Updated DatabaseInitializer |
-|   [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/2d04deb3b781420561521f4a1d373609bf9afba7)   | Separated WebController into different controllers |
-|   [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/58a981e1451f95a19c046b75d048acf6b41d2a24)   | Comments implemented |
-|   [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/d343f83ff8809d0854ff878a5368a4970b3e135f)   | Fixed chart |
-|   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/08e71f1d4783108a4365825516b53c3360c4adcd)   | Updated models and added DBInitializer (not finished) |
+|   [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/995a9524aac0ca4ef811be9c864154574f9c569f)   | Added Dockerfile, docker-compose.yml and create_image.sh |
+|   [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/01410986648f5c5e5892b620009c4d15aad0ea43)   | Fixed course screen |
+|   [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/db144aea2829fe8e4cde0659e3f9104388e8b6c3)   | Fixed chart |
+|   [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/860f44f6418af2067a8984517bdc83397f11c869)   | chartdata from API |
+|   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/723b14d7388502384f883152e66a0ec62c797b37)   | Added execution instructiones in remote machine and api documentation to README.md |
 
 | File | Name |
 | :--: | :--: |
-|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/DatabaseInitializer.java)  | DatabaseInitializer.java |
-|  [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CommentController.java)  | CommentController.java |
-|  [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseController.java)  | CourseController.java |
-|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commits/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)  | CourseService.java |
-|  [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/WebController.java)  | WebController.java |
+|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/docker-compose.yml)  | docker-compose.yml |
+|  [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/create_image.sh)  | create_image.sh |
+|  [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/Dockerfile)  | Dockerfile |
+|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java)  | CourseRestController.java |
+|  [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseController.java)  | CourseController.java |
 
 <h3>Sergio Rodríguez Gil</h3>
 
