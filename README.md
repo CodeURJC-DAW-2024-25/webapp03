@@ -212,23 +212,23 @@ I have mainly been concerned with initializing the database with default data, i
 
 <h3>Sergio Rodríguez Gil</h3>
 
-At the beginning of the project I created the repositories and the main controller (which was divided into smaller ones later). Secondly, I modified the class responsible to initialize the database with users, courses, materials and comments. Finally, I implemented functionalities such as modify profile data, modify password, and delete users; apart from fixing some errors along the way meaning.
+At the beginning of the project I created the DTOs and basic DTOs, added the security files needed for the API REST, and implemented the mappers. Apart from that, I was responsible to adapt the services to the API REST.
 
 |                                                 Commit                                                 |                   Description                   |
 | :----------------------------------------------------------------------------------------------------: | :---------------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/0252236a6c185d1f551e7d4fc3e6412ea142b7fd) |             Implement delete course             |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/0fd628b7b6e32ba1678d0ed7f92effe353afab4f) |     Implements logic behind adminUsers.html     |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/52359184a890dd44796740399d71e29aaffb288c) |      Implement edit profile functionality       |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/fd36af402ef8c0b1669cbb5ea3f34ac43b235a14) |    Implements change password functionality     |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/81022fb4891dc903e1026835ba120c5d9cf2cbc4) | Initialize database with materials and comments |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/beb290aa847abc904bc1d9c83d7a0f8b0662c4c3) |             Add mappers to dto folder             |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/360f6e3ec7db9028296a329dee335678f2c5cadc) |     Refactor UserService to use DTOs     |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/09716c8c8d4a705263da18650530b42dfa867d9e) |      Refactor MaterialService to use DTOs       |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/1ac3d071fe34c95aff79d054291397058795c7d3) |    Modify CommentService to work with dtos     |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/886e206f7758936ebbaa5f2def94de677e1037b1) | Create DTOs and BasicDTOs |
 
 |                                                                    File                                                                     |        Name         |
 | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-----------------: |
-|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/WebController.java)   |    WebController    |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/DatabaseInitializer.java) | DatabaseInitializer |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseController.java) |  CourseController   |
-|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/UserController.java)  |   UserController    |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/LoginController.java)  |   LoginController   |
+|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)   |    CourseService    |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/UserService.java) | UserService |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/MaterialService.java) |  MaterialService   |
+|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CommentService.java)  |   CommentService    |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CourseMapper.java)  |   CourseMapper   |
 
 <h3>Sergio López Cuesta</h3>
 
