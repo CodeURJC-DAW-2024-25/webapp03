@@ -18,6 +18,7 @@ import es.webapp03.backend.service.CourseService;
 import es.webapp03.backend.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.net.URI;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -78,48 +79,32 @@ public class CommentRestController {
 
     /* ========== ENDPOINTS DE CREACIÓN ========== */
 
-    @PostMapping
-public ResponseEntity<?> createComment(
+    @PostMapping("/new")
+    public ResponseEntity<CommentBasicDTO> createComment(
         @PathVariable Long courseId,
-        @RequestParam String text,
-        HttpServletRequest request) { 
+        @RequestBody CommentBasicDTO commentBasicDTO,
+        HttpServletRequest request) {
     
-    try {
         Principal principal = request.getUserPrincipal();
-        if (principal == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "No autenticado"));
-        }
+
         User author = userService.findEntityByEmail(principal.getName());
-        if (author == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "Usuario no encontrado"));
-        }
-        if (!courseService.existsById(courseId)) {
-            return ResponseEntity.notFound().build();
-        }
         Comment newComment = new Comment();
         newComment.setUser(author);
-        newComment.setText(text);
+        newComment.setText(commentBasicDTO.text());
         newComment.setCreatedDate(LocalDate.now());
         
         Comment savedComment = commentRepository.save(newComment);
-
+        
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new CommentBasicDTO(
-                    savedComment.getId(),
-                    savedComment.getCreatedDate(),
-                    savedComment.getText()
+                        savedComment.getId(),
+                        savedComment.getCreatedDate(),
+                        savedComment.getText()
                 ));
-
-    } catch (Exception e) {
-        return ResponseEntity.internalServerError()
-                .body(Map.of(
-                    "error", "Error al crear comentario",
-                    "details", e.getMessage()
-                ));
-    }
+   
 }
+
+
 
     /* ========== ENDPOINTS DE ELIMINACIÓN ========== */
     @DeleteMapping("/{commentId}")
