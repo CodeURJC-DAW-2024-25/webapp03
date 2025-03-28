@@ -60,20 +60,26 @@ public class SecurityConfig {
             .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
 
         http
-            .authorizeHttpRequests(authorize -> authorize
-                // PRIVATE ENDPOINTS
-                .requestMatchers(HttpMethod.GET, "/api/courses/").hasRole("USER")
-                .requestMatchers(HttpMethod.GET, "/api/materials/").hasRole("USER")
-                .requestMatchers(HttpMethod.GET, "/api/comments/").hasRole("USER")
-                .requestMatchers(HttpMethod.POST, "/api/materials/").hasRole("USER")
-                .requestMatchers(HttpMethod.POST, "/api/comments/").hasRole("USER")
-                .requestMatchers(HttpMethod.POST, "/api/courses/").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/api/users/**").hasRole("USER")
-                .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
-                // PUBLIC ENDPOINTS
-                .anyRequest().permitAll()
-            );
+        .authorizeHttpRequests(authorize -> authorize
+        // PUBLIC ENDPOINTS (Solo los que realmente deben ser accesibles sin autenticación)
+        .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+        .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+        
+        // PRIVATE ENDPOINTS (Requieren autenticación)
+        .requestMatchers(HttpMethod.GET, "/api/courses/").authenticated() 
+        .requestMatchers(HttpMethod.GET, "/api/materials/").authenticated()
+        .requestMatchers(HttpMethod.GET, "/api/comments/").authenticated()  // 🔥 Ahora solo autenticados pueden acceder
+        .requestMatchers(HttpMethod.POST, "/api/materials/").hasRole("USER")
+        .requestMatchers(HttpMethod.POST, "/api/comments/").hasRole("USER")
+        .requestMatchers(HttpMethod.POST, "/api/courses/").hasRole("ADMIN")
+        .requestMatchers(HttpMethod.PUT, "/api/users/**").hasRole("USER")
+        .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
+        .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
+
+        // Cualquier otra petición requiere autenticación
+        .anyRequest().authenticated()
+        );
+
 
         // Disable Form login Authentication
         http.formLogin(formLogin -> formLogin.disable());

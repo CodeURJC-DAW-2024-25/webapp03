@@ -1,31 +1,25 @@
 package es.webapp03.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import es.webapp03.backend.dto.CommentBasicDTO;
-import es.webapp03.backend.dto.CommentDTO;
 import es.webapp03.backend.model.Comment;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.repository.CommentRepository;
 import es.webapp03.backend.service.CommentService;
-import es.webapp03.backend.service.CourseService;
 import es.webapp03.backend.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
-import java.net.URI;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/courses/{courseId}/comments")
@@ -36,9 +30,6 @@ public class CommentRestController {
 
     @Autowired
     private CommentService commentService;
-
-    @Autowired
-    private CourseService courseService;
 
     @Autowired
     private UserService userService;

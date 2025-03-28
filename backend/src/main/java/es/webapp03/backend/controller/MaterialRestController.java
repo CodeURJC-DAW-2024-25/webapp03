@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import es.webapp03.backend.dto.CourseDTO;
 import es.webapp03.backend.dto.CourseMapper;
 import es.webapp03.backend.dto.MaterialBasicDTO;
-import es.webapp03.backend.dto.MaterialDTO;
 import es.webapp03.backend.dto.MaterialMapper;
 import es.webapp03.backend.model.Material;
 import es.webapp03.backend.model.Course;
