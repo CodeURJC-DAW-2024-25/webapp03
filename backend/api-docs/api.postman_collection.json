@@ -1,0 +1,2455 @@
+{
+	"info": {
+		"_postman_id": "60a1b922-5c2f-4a23-af8d-8731f8b2f9c7",
+		"name": "OpenAPI definition",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42992508"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "image",
+									"item": [
+										{
+											"name": "get Profile Image",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/users/:id/image",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"users",
+														":id",
+														"image"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "https://localhost:8443/api/users/:id/image",
+															"protocol": "https",
+															"host": [
+																"localhost"
+															],
+															"port": "8443",
+															"path": [
+																"api",
+																"users",
+																":id",
+																"image"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "show User Profile",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "https://localhost:8443/api/users/:id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "8443",
+													"path": [
+														"api",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"<string>\",\n  \"courses\": [\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"comments\": [\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+										}
+									]
+								},
+								{
+									"name": "edit User Profile",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"<string>\",\n  \"courses\": [\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"comments\": [\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"<string>\",\n  \"courses\": [\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"comments\": [\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "https://localhost:8443/api/users/:id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "8443",
+													"path": [
+														"api",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "<string>"
+										}
+									]
+								},
+								{
+									"name": "delete User",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "https://localhost:8443/api/users/:id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "8443",
+													"path": [
+														"api",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"<string>\",\n  \"courses\": [\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"comments\": [\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "show Users",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/?page=<integer>&size=<integer>&sort=<string>,<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										""
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>",
+											"description": "(Required) "
+										},
+										{
+											"key": "size",
+											"value": "<integer>",
+											"description": "(Required) "
+										},
+										{
+											"key": "sort",
+											"value": "<string>,<string>",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "https://localhost:8443/api/users/?page=<integer>&size=<integer>&sort=<string>,<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "8443",
+											"path": [
+												"api",
+												"users",
+												""
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "<integer>",
+													"description": "(Required) "
+												},
+												{
+													"key": "size",
+													"value": "<integer>",
+													"description": "(Required) "
+												},
+												{
+													"key": "sort",
+													"value": "<string>,<string>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"content\": [\n    {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"password\": \"<string>\",\n      \"courses\": [\n        {\n          \"id\": \"<long>\",\n          \"title\": \"<string>\",\n          \"description\": \"<string>\",\n          \"image\": \"<boolean>\",\n          \"numberOfUsers\": \"<integer>\",\n          \"tags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"id\": \"<long>\",\n          \"title\": \"<string>\",\n          \"description\": \"<string>\",\n          \"image\": \"<boolean>\",\n          \"numberOfUsers\": \"<integer>\",\n          \"tags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"comments\": [\n        {\n          \"id\": \"<long>\",\n          \"createdDate\": \"<date>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"id\": \"<long>\",\n          \"createdDate\": \"<date>\",\n          \"text\": \"<string>\"\n        }\n      ],\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"password\": \"<string>\",\n      \"courses\": [\n        {\n          \"id\": \"<long>\",\n          \"title\": \"<string>\",\n          \"description\": \"<string>\",\n          \"image\": \"<boolean>\",\n          \"numberOfUsers\": \"<integer>\",\n          \"tags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"id\": \"<long>\",\n          \"title\": \"<string>\",\n          \"description\": \"<string>\",\n          \"image\": \"<boolean>\",\n          \"numberOfUsers\": \"<integer>\",\n          \"tags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"comments\": [\n        {\n          \"id\": \"<long>\",\n          \"createdDate\": \"<date>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"id\": \"<long>\",\n          \"createdDate\": \"<date>\",\n          \"text\": \"<string>\"\n        }\n      ],\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"page\": {\n    \"size\": \"<long>\",\n    \"number\": \"<long>\",\n    \"totalElements\": \"<long>\",\n    \"totalPages\": \"<long>\"\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "register User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"<string>\",\n  \"courses\": [\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"comments\": [\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"<string>\",\n  \"courses\": [\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"comments\": [\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:8443/api/users/",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "8443",
+											"path": [
+												"api",
+												"users",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"<string>\",\n  \"courses\": [\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"comments\": [\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "courses",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "image",
+									"item": [
+										{
+											"name": "get Course Image",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/courses/:id/image",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"courses",
+														":id",
+														"image"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/courses/:id/image",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"courses",
+																":id",
+																"image"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										},
+										{
+											"name": "replace Course Image",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"imageFile\": \"<binary>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/courses/:id/image",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"courses",
+														":id",
+														"image"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"imageFile\": \"<binary>\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/courses/:id/image",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"courses",
+																":id",
+																"image"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										},
+										{
+											"name": "create Course Image",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"imageFile\": \"<binary>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/courses/:id/image",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"courses",
+														":id",
+														"image"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"imageFile\": \"<binary>\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/courses/:id/image",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"courses",
+																":id",
+																"image"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										},
+										{
+											"name": "delete Course Image",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/courses/:id/image",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"courses",
+														":id",
+														"image"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/courses/:id/image",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"courses",
+																":id",
+																"image"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "get Course",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/courses/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"courses",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/courses/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"courses",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"<long>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<boolean>\",\n  \"numberOfUsers\": \"<integer>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+										}
+									]
+								},
+								{
+									"name": "edit Course",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<long>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<boolean>\",\n  \"numberOfUsers\": \"<integer>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/courses/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"courses",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": \"<long>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<boolean>\",\n  \"numberOfUsers\": \"<integer>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/courses/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"courses",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"<long>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<boolean>\",\n  \"numberOfUsers\": \"<integer>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+										}
+									]
+								},
+								{
+									"name": "delete Course",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/courses/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"courses",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/courses/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"courses",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"<long>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<boolean>\",\n  \"numberOfUsers\": \"<integer>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "{courseId}",
+							"item": [
+								{
+									"name": "comments",
+									"item": [
+										{
+											"name": "{commentId}",
+											"item": [
+												{
+													"name": "get Comment By Id",
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/courses/:courseId/comments/:commentId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"courses",
+																":courseId",
+																"comments",
+																":commentId"
+															],
+															"variable": [
+																{
+																	"key": "courseId",
+																	"value": "<long>",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "commentId",
+																	"value": "<long>",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"response": [
+														{
+															"name": "OK",
+															"originalRequest": {
+																"method": "GET",
+																"header": [
+																	{
+																		"key": "Accept",
+																		"value": "*/*"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/api/courses/:courseId/comments/:commentId",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"api",
+																		"courses",
+																		":courseId",
+																		"comments",
+																		":commentId"
+																	],
+																	"variable": [
+																		{
+																			"key": "courseId"
+																		},
+																		{
+																			"key": "commentId"
+																		}
+																	]
+																}
+															},
+															"status": "OK",
+															"code": 200,
+															"_postman_previewlanguage": "text",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "*/*"
+																}
+															],
+															"cookie": [],
+															"body": "{}"
+														}
+													]
+												},
+												{
+													"name": "delete Comment",
+													"request": {
+														"method": "DELETE",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/api/courses/:courseId/comments/:commentId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"courses",
+																":courseId",
+																"comments",
+																":commentId"
+															],
+															"variable": [
+																{
+																	"key": "courseId",
+																	"value": "<long>",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "commentId",
+																	"value": "<long>",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"response": [
+														{
+															"name": "OK",
+															"originalRequest": {
+																"method": "DELETE",
+																"header": [],
+																"url": {
+																	"raw": "{{baseUrl}}/api/courses/:courseId/comments/:commentId",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"api",
+																		"courses",
+																		":courseId",
+																		"comments",
+																		":commentId"
+																	],
+																	"variable": [
+																		{
+																			"key": "courseId"
+																		},
+																		{
+																			"key": "commentId"
+																		}
+																	]
+																}
+															},
+															"status": "OK",
+															"code": 200,
+															"_postman_previewlanguage": "text",
+															"header": [],
+															"cookie": [],
+															"body": ""
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "paginated",
+											"item": [
+												{
+													"name": "get Paginated Comments",
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/courses/:courseId/comments/paginated?page=<integer>&size=<integer>&sort=<string>,<string>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"courses",
+																":courseId",
+																"comments",
+																"paginated"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "<integer>",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "size",
+																	"value": "<integer>",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "sort",
+																	"value": "<string>,<string>",
+																	"description": "(Required) "
+																}
+															],
+															"variable": [
+																{
+																	"key": "courseId",
+																	"value": "<long>",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"response": [
+														{
+															"name": "OK",
+															"originalRequest": {
+																"method": "GET",
+																"header": [
+																	{
+																		"key": "Accept",
+																		"value": "*/*"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/api/courses/:courseId/comments/paginated?page=<integer>&size=<integer>&sort=<string>,<string>",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"api",
+																		"courses",
+																		":courseId",
+																		"comments",
+																		"paginated"
+																	],
+																	"query": [
+																		{
+																			"key": "page",
+																			"value": "<integer>",
+																			"description": "(Required) "
+																		},
+																		{
+																			"key": "size",
+																			"value": "<integer>",
+																			"description": "(Required) "
+																		},
+																		{
+																			"key": "sort",
+																			"value": "<string>,<string>",
+																			"description": "(Required) "
+																		}
+																	],
+																	"variable": [
+																		{
+																			"key": "courseId"
+																		}
+																	]
+																}
+															},
+															"status": "OK",
+															"code": 200,
+															"_postman_previewlanguage": "text",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "*/*"
+																}
+															],
+															"cookie": [],
+															"body": "{\n  \"content\": [\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"createdDate\": \"<date>\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"page\": {\n    \"size\": \"<long>\",\n    \"number\": \"<long>\",\n    \"totalElements\": \"<long>\",\n    \"totalPages\": \"<long>\"\n  }\n}"
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "get Comments By Course",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/courses/:courseId/comments",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"courses",
+														":courseId",
+														"comments"
+													],
+													"variable": [
+														{
+															"key": "courseId",
+															"value": "<long>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/courses/:courseId/comments",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"courses",
+																":courseId",
+																"comments"
+															],
+															"variable": [
+																{
+																	"key": "courseId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "[\n  {\n    \"id\": \"<long>\",\n    \"createdDate\": \"<date>\",\n    \"text\": \"<string>\"\n  },\n  {\n    \"id\": \"<long>\",\n    \"createdDate\": \"<date>\",\n    \"text\": \"<string>\"\n  }\n]"
+												}
+											]
+										},
+										{
+											"name": "create Comment",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/courses/:courseId/comments?text=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"courses",
+														":courseId",
+														"comments"
+													],
+													"query": [
+														{
+															"key": "text",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													],
+													"variable": [
+														{
+															"key": "courseId",
+															"value": "<long>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/courses/:courseId/comments?text=<string>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"courses",
+																":courseId",
+																"comments"
+															],
+															"query": [
+																{
+																	"key": "text",
+																	"value": "<string>",
+																	"description": "(Required) "
+																}
+															],
+															"variable": [
+																{
+																	"key": "courseId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "chartdata",
+							"item": [
+								{
+									"name": "get Chart Data",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/courses/chartdata",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"courses",
+												"chartdata"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/courses/chartdata",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"courses",
+														"chartdata"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "get Courses",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/courses/?page=0&size=10&sortBy=id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"courses",
+										""
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "sortBy",
+											"value": "id"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/courses/?page=0&size=10&sortBy=id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"courses",
+												""
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "0"
+												},
+												{
+													"key": "size",
+													"value": "10"
+												},
+												{
+													"key": "sortBy",
+													"value": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"content\": [\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<long>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image\": \"<boolean>\",\n      \"numberOfUsers\": \"<integer>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"page\": {\n    \"size\": \"<long>\",\n    \"number\": \"<long>\",\n    \"totalElements\": \"<long>\",\n    \"totalPages\": \"<long>\"\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "create Course",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<long>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<boolean>\",\n  \"numberOfUsers\": \"<integer>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/courses/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"courses",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<long>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<boolean>\",\n  \"numberOfUsers\": \"<integer>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/courses/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"courses",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": \"<long>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"image\": \"<boolean>\",\n  \"numberOfUsers\": \"<integer>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "materials",
+					"item": [
+						{
+							"name": "courses",
+							"item": [
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "upload File",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"file\": \"<binary>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/materials/courses/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"materials",
+														"courses",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"file\": \"<binary>\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/materials/courses/:id/",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"materials",
+																"courses",
+																":id",
+																""
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"url\": \"<string>\",\n  \"file\": {\n    \"binaryStream\": {}\n  }\n}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "{courseId}",
+									"item": [
+										{
+											"name": "materials",
+											"item": [
+												{
+													"name": "{materialId}",
+													"item": [
+														{
+															"name": "download File",
+															"request": {
+																"method": "GET",
+																"header": [
+																	{
+																		"key": "Accept",
+																		"value": "*/*"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/api/materials/courses/:courseId/materials/:materialId/",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"api",
+																		"materials",
+																		"courses",
+																		":courseId",
+																		"materials",
+																		":materialId",
+																		""
+																	],
+																	"variable": [
+																		{
+																			"key": "courseId",
+																			"value": "<long>",
+																			"description": "(Required) "
+																		},
+																		{
+																			"key": "materialId",
+																			"value": "<long>",
+																			"description": "(Required) "
+																		}
+																	]
+																}
+															},
+															"response": [
+																{
+																	"name": "OK",
+																	"originalRequest": {
+																		"method": "GET",
+																		"header": [
+																			{
+																				"key": "Accept",
+																				"value": "*/*"
+																			}
+																		],
+																		"url": {
+																			"raw": "{{baseUrl}}/api/materials/courses/:courseId/materials/:materialId/",
+																			"host": [
+																				"{{baseUrl}}"
+																			],
+																			"path": [
+																				"api",
+																				"materials",
+																				"courses",
+																				":courseId",
+																				"materials",
+																				":materialId",
+																				""
+																			],
+																			"variable": [
+																				{
+																					"key": "courseId"
+																				},
+																				{
+																					"key": "materialId"
+																				}
+																			]
+																		}
+																	},
+																	"status": "OK",
+																	"code": 200,
+																	"_postman_previewlanguage": "text",
+																	"header": [
+																		{
+																			"key": "Content-Type",
+																			"value": "*/*"
+																		}
+																	],
+																	"cookie": [],
+																	"body": "<string>"
+																}
+															]
+														},
+														{
+															"name": "delete File",
+															"request": {
+																"method": "DELETE",
+																"header": [],
+																"url": {
+																	"raw": "{{baseUrl}}/api/materials/courses/:courseId/materials/:materialId/",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"api",
+																		"materials",
+																		"courses",
+																		":courseId",
+																		"materials",
+																		":materialId",
+																		""
+																	],
+																	"variable": [
+																		{
+																			"key": "courseId",
+																			"value": "<long>",
+																			"description": "(Required) "
+																		},
+																		{
+																			"key": "materialId",
+																			"value": "<long>",
+																			"description": "(Required) "
+																		}
+																	]
+																}
+															},
+															"response": [
+																{
+																	"name": "OK",
+																	"originalRequest": {
+																		"method": "DELETE",
+																		"header": [],
+																		"url": {
+																			"raw": "{{baseUrl}}/api/materials/courses/:courseId/materials/:materialId/",
+																			"host": [
+																				"{{baseUrl}}"
+																			],
+																			"path": [
+																				"api",
+																				"materials",
+																				"courses",
+																				":courseId",
+																				"materials",
+																				":materialId",
+																				""
+																			],
+																			"variable": [
+																				{
+																					"key": "courseId"
+																				},
+																				{
+																					"key": "materialId"
+																				}
+																			]
+																		}
+																	},
+																	"status": "OK",
+																	"code": 200,
+																	"_postman_previewlanguage": "text",
+																	"header": [],
+																	"cookie": [],
+																	"body": ""
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "load",
+											"item": [
+												{
+													"name": "load More Materials",
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/materials/courses/:courseId/load?page=<integer>&size=<integer>&sort=<string>,<string>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"materials",
+																"courses",
+																":courseId",
+																"load"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "<integer>",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "size",
+																	"value": "<integer>",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "sort",
+																	"value": "<string>,<string>",
+																	"description": "(Required) "
+																}
+															],
+															"variable": [
+																{
+																	"key": "courseId",
+																	"value": "<long>",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"response": [
+														{
+															"name": "OK",
+															"originalRequest": {
+																"method": "GET",
+																"header": [
+																	{
+																		"key": "Accept",
+																		"value": "*/*"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/api/materials/courses/:courseId/load?page=<integer>&size=<integer>&sort=<string>,<string>",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"api",
+																		"materials",
+																		"courses",
+																		":courseId",
+																		"load"
+																	],
+																	"query": [
+																		{
+																			"key": "page",
+																			"value": "<integer>",
+																			"description": "(Required) "
+																		},
+																		{
+																			"key": "size",
+																			"value": "<integer>",
+																			"description": "(Required) "
+																		},
+																		{
+																			"key": "sort",
+																			"value": "<string>,<string>",
+																			"description": "(Required) "
+																		}
+																	],
+																	"variable": [
+																		{
+																			"key": "courseId"
+																		}
+																	]
+																}
+															},
+															"status": "OK",
+															"code": 200,
+															"_postman_previewlanguage": "text",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "*/*"
+																}
+															],
+															"cookie": [],
+															"body": "{\n  \"content\": [\n    {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"url\": \"<string>\",\n      \"file\": {\n        \"binaryStream\": {}\n      }\n    },\n    {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"url\": \"<string>\",\n      \"file\": {\n        \"binaryStream\": {}\n      }\n    }\n  ],\n  \"page\": {\n    \"size\": \"<long>\",\n    \"number\": \"<long>\",\n    \"totalElements\": \"<long>\",\n    \"totalPages\": \"<long>\"\n  }\n}"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "refresh",
+							"item": [
+								{
+									"name": "refresh Token",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/auth/refresh",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"refresh"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/auth/refresh",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"auth",
+														"refresh"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "logout",
+							"item": [
+								{
+									"name": "log Out",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/auth/logout",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"logout"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/auth/logout",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"auth",
+														"logout"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "login",
+							"item": [
+								{
+									"name": "login",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/auth/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"login"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/auth/login",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"auth",
+														"login"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:8443"
+		}
+	]
+}

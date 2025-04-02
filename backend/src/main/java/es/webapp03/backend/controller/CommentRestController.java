@@ -34,8 +34,6 @@ public class CommentRestController {
     @Autowired
     private UserService userService;
 
-    /* ========== ENDPOINTS BÁSICOS ========== */
-
     @GetMapping
     public ResponseEntity<List<CommentBasicDTO>> getCommentsByCourse(@PathVariable Long courseId) {
         List<Comment> comments = commentRepository.findByCourseIdOrderByCreatedDateDesc(courseId);
@@ -68,8 +66,6 @@ public class CommentRestController {
         return ResponseEntity.ok(response);
     }
 
-    /* ========== ENDPOINTS DE CREACIÓN ========== */
-
     @PostMapping("/new")
     public ResponseEntity<CommentBasicDTO> createComment(
         @PathVariable Long courseId,
@@ -96,8 +92,6 @@ public class CommentRestController {
 }
 
 
-
-    /* ========== ENDPOINTS DE ELIMINACIÓN ========== */
     @DeleteMapping("/{commentId}")
     public ResponseEntity<Void> deleteComment(
             @PathVariable Long courseId,
@@ -110,8 +104,7 @@ public class CommentRestController {
     }
 
 
-    /* ========== PAGINACIÓN ========== */
-
+    
     @GetMapping("/paginated")
     public ResponseEntity<Page<CommentBasicDTO>> getPaginatedComments(
             @PathVariable Long courseId,

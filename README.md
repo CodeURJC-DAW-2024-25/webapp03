@@ -196,104 +196,99 @@ An algorithm to filter courses based on a tag provided by the user.
 
 I have mainly been in charge of Docker and the deployment of the web application on the remote machine, and I have also helped with whatever was missing from the API.
 
-| Commit | Description |
-| :----: | :---------: |
-|   [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/995a9524aac0ca4ef811be9c864154574f9c569f)   | Added Dockerfile, docker-compose.yml and create_image.sh |
-|   [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/01410986648f5c5e5892b620009c4d15aad0ea43)   | Fixed course screen |
-|   [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/db144aea2829fe8e4cde0659e3f9104388e8b6c3)   | Fixed chart |
-|   [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/860f44f6418af2067a8984517bdc83397f11c869)   | chartdata from API |
-|   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/723b14d7388502384f883152e66a0ec62c797b37)   | Added execution instructiones in remote machine and api documentation to README.md |
+|                                                 Commit                                                 |                                    Description                                     |
+| :----------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------: |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/995a9524aac0ca4ef811be9c864154574f9c569f) |              Added Dockerfile, docker-compose.yml and create_image.sh              |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/01410986648f5c5e5892b620009c4d15aad0ea43) |                                Fixed course screen                                 |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/db144aea2829fe8e4cde0659e3f9104388e8b6c3) |                                    Fixed chart                                     |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/860f44f6418af2067a8984517bdc83397f11c869) |                                 chartdata from API                                 |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/723b14d7388502384f883152e66a0ec62c797b37) | Added execution instructiones in remote machine and api documentation to README.md |
 
-| File | Name |
-| :--: | :--: |
-|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/docker-compose.yml)  | docker-compose.yml |
-|  [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/create_image.sh)  | create_image.sh |
-|  [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/Dockerfile)  | Dockerfile |
-|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java)  | CourseRestController.java |
-|  [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseController.java)  | CourseController.java |
+|                                                                      File                                                                       |           Name            |
+| :---------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------: |
+|                           [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/docker-compose.yml)                            |    docker-compose.yml     |
+|                             [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/create_image.sh)                             |      create_image.sh      |
+|                               [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/Dockerfile)                                |        Dockerfile         |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java) | CourseRestController.java |
+|   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseController.java)   |   CourseController.java   |
 
 <h3>Sergio Rodríguez Gil</h3>
 
 At the beginning of the project I created the DTOs and basic DTOs, added the security files needed for the API REST, and implemented the mappers. Apart from that, I was responsible to adapt the services to the API REST.
 
-|                                                 Commit                                                 |                   Description                   |
-| :----------------------------------------------------------------------------------------------------: | :---------------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/beb290aa847abc904bc1d9c83d7a0f8b0662c4c3) |             Add mappers to dto folder             |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/360f6e3ec7db9028296a329dee335678f2c5cadc) |     Refactor UserService to use DTOs     |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/09716c8c8d4a705263da18650530b42dfa867d9e) |      Refactor MaterialService to use DTOs       |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/1ac3d071fe34c95aff79d054291397058795c7d3) |    Modify CommentService to work with dtos     |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/886e206f7758936ebbaa5f2def94de677e1037b1) | Create DTOs and BasicDTOs |
+|                                                 Commit                                                 |               Description               |
+| :----------------------------------------------------------------------------------------------------: | :-------------------------------------: |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/beb290aa847abc904bc1d9c83d7a0f8b0662c4c3) |        Add mappers to dto folder        |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/360f6e3ec7db9028296a329dee335678f2c5cadc) |    Refactor UserService to use DTOs     |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/09716c8c8d4a705263da18650530b42dfa867d9e) |  Refactor MaterialService to use DTOs   |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/1ac3d071fe34c95aff79d054291397058795c7d3) | Modify CommentService to work with dtos |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/886e206f7758936ebbaa5f2def94de677e1037b1) |        Create DTOs and BasicDTOs        |
 
-|                                                                    File                                                                     |        Name         |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: | :-----------------: |
-|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)   |    CourseService    |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/UserService.java) | UserService |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/MaterialService.java) |  MaterialService   |
-|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CommentService.java)  |   CommentService    |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CourseMapper.java)  |   CourseMapper   |
+|                                                                  File                                                                   |      Name       |
+| :-------------------------------------------------------------------------------------------------------------------------------------: | :-------------: |
+|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)  |  CourseService  |
+|   [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/UserService.java)   |   UserService   |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/MaterialService.java) | MaterialService |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CommentService.java)  | CommentService  |
+|    [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CourseMapper.java)     |  CourseMapper   |
 
 <h3>Sergio López Cuesta</h3>
 
-
 I implemented all the Comment Logic for the REST API
 
-|                                                                    File                                                                           |        Name             |
-| :-----------------------------------------------------------------------------------------------------------------------------------------:       | :-----------------:     |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CommentRestController.java)  |  CommentRestController  |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CouresService.java)             |     CommentService      |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/DTO/CommentDTO.java)                    |      CommentDTO         |
-|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)            |    CourseService        |
+|                                                                       File                                                                       |         Name          |
+| :----------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------: |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CommentRestController.java) | CommentRestController |
+|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CouresService.java)       |    CommentService     |
+|          [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CommentDTO.java)          |      CommentDTO       |
+|      [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)       |     CourseService     |
 
-
-|                                                                    Commit                                                                   |        Description                  |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: | :-----------------: |
-|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b859e2360ab297671336dc8c62837d128d335a66)                                     |    CommentRestController started    |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/145656ab43333a37452cced3179f1d9e39d185f9)                                      |   CommentRestController uptade      |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/722107e3f8c9a78852611c3d51014b9dd2a967da)                                      |    CommentRestController started    |
-|  [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/145656ab43333a37452cced3179f1d9e39d185f9)                                     |      Created DTO Files              |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/03c5d86259a0fae150a9a97c706274d1bbd5e4b8)                                      |      Fixed minor changes            |
-
-
+|                                                 Commit                                                 |          Description          |
+| :----------------------------------------------------------------------------------------------------: | :---------------------------: |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b859e2360ab297671336dc8c62837d128d335a66) | CommentRestController started |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/145656ab43333a37452cced3179f1d9e39d185f9) | CommentRestController uptade  |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/722107e3f8c9a78852611c3d51014b9dd2a967da) | CommentRestController started |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/145656ab43333a37452cced3179f1d9e39d185f9) |       Created DTO Files       |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/03c5d86259a0fae150a9a97c706274d1bbd5e4b8) |      Fixed minor changes      |
 
 <h3>Marcos Alejandro Pascual Rojas</h3>
 I worked implementing the CourseRestController and the MaterialRestController. I also modify their respective services.
 
 |                                                 Commit                                                 |                Description                 |
-|:------------------------------------------------------------------------------------------------------:|:------------------------------------------:|
+| :----------------------------------------------------------------------------------------------------: | :----------------------------------------: |
 | [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/7df4189bbfdb902c20dbe609c91a2e8195089871) | Updated Course Service and CourseContrller |
 | [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/73c822980f3b1df2d4616629108320a994acd143) |         Fixed courseRestController         |
 | [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/73f09c2f6e81b59f27eb97f025241f60a9de3016) |    Fixed MaterialRestController upload     |
 | [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/9b08135fb0fb781fa1fe3cc523c54755fa2ced35) |  Implemented MaterialRest and CourseRest   |
 | [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/0313f0b237bc3050ef8fdea205b473514920b810) |                 Fixed urls                 |
 
-|                                                                         File                                                                          |              Name              |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------: |:------------------------------:|
-|     [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java)     |      CourseRestController      |
-|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/MaterialRestController.java)      |        MaterialRestController        |
-|       [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)       |         CourseService         |
-|      [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/MaterialService.java)       |       MaterialService        |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CourseDTO.java) |  CourseBasicDTO  |
+|                                                                       File                                                                        |          Name          |
+| :-----------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------: |
+|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java)  |  CourseRestController  |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/MaterialRestController.java) | MaterialRestController |
+|       [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)       |     CourseService      |
+|      [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/MaterialService.java)      |    MaterialService     |
+|           [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CourseDTO.java)           |     CourseBasicDTO     |
 
 <h3>Gonzalo García Castillo</h3>
 
 My job consisted mostly in implementing the API logic for the UserRestController (and by so creating new DTOs), documenting the API using Open-API, and update the class diagram.
 
+|                                                 Commit                                                 |                                        Description                                        |
+| :----------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/31e43b753ca1fc82082df84f4d8959193d792aec) |             Add OpenAPI generator configuration and update UserRestController             |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/c1d53831b164b50af9c4d3d6d29e4f1e8d153537) |               Add UserProfileDTO and UserRestController for user management               |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/8cbfff9aeae53149db42057c3b27f4d985608cc4) | refactor UserRestController and related DTOs to use UserNoImageDTO; remove UserProfileDTO |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/fdf1a3747daf492b97efc672f24bccc2b506188f) |          Update pom.xml to add OpenAPI and HTML documentation generation plugins          |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/fbc406d906d8331eb3ccb5d133a12b2074eb119e) |                       Refactor PDF generation logic into PdfService                       |
 
-|                                                 Commit                                                 |                                 Description                                  |
-| :----------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/31e43b753ca1fc82082df84f4d8959193d792aec) |      Add OpenAPI generator configuration and update UserRestController       |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/c1d53831b164b50af9c4d3d6d29e4f1e8d153537) |          Add UserProfileDTO and UserRestController for user management       |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/8cbfff9aeae53149db42057c3b27f4d985608cc4) | refactor UserRestController and related DTOs to use UserNoImageDTO; remove UserProfileDTO       |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/fdf1a3747daf492b97efc672f24bccc2b506188f) |        Update pom.xml to add OpenAPI and HTML documentation generation plugins        |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/fbc406d906d8331eb3ccb5d133a12b2074eb119e) | Refactor PDF generation logic into PdfService|
-
-|                                                                   File                                                                   |     Name      |
-| :--------------------------------------------------------------------------------------------------------------------------------------: | :-----------: |
+|                                                                     File                                                                      |        Name        |
+| :-------------------------------------------------------------------------------------------------------------------------------------------: | :----------------: |
 | [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/UserRestController.java) | UserRestController |
-|    [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/UserNoImageDTO.java)    |  UserNoImageDTO   |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/UserService.java) | UserService |
-|            [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/UserMapper.java)            | UserMapper |
-|            [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/pom.xml)             |  pom.xml  |
+|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/UserNoImageDTO.java)       |   UserNoImageDTO   |
+|      [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/UserService.java)      |    UserService     |
+|        [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/UserMapper.java)         |     UserMapper     |
+|                               [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/pom.xml)                                |      pom.xml       |
 
 <h2 id="execution">Execution instructions</h2>
 
@@ -314,3 +309,4 @@ My job consisted mostly in implementing the API logic for the UserRestController
 <h2 id=apiDocumentation>API Documentation</h2>
 [API Documentation (HTML)](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.html)
 [API Documentation (YAML)](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.yaml)
+[API Documentation (Link)](https://localhost:8443/swagger-ui/index.html)
