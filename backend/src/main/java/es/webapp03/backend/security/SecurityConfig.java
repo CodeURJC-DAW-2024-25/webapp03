@@ -64,9 +64,9 @@ public class SecurityConfig {
         // PUBLIC ENDPOINTS (Solo los que realmente deben ser accesibles sin autenticación)
         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+        .requestMatchers(HttpMethod.GET, "/api/courses/").permitAll()
         
-        // PRIVATE ENDPOINTS (Requieren autenticación)
-        .requestMatchers(HttpMethod.GET, "/api/courses/").authenticated() 
+        // PRIVATE ENDPOINTS (Requieren autenticación) 
         .requestMatchers(HttpMethod.GET, "/api/materials/").authenticated()
         .requestMatchers(HttpMethod.GET, "/api/comments/").authenticated()  // 🔥 Ahora solo autenticados pueden acceder
         .requestMatchers(HttpMethod.POST, "/api/materials/").hasRole("USER")
