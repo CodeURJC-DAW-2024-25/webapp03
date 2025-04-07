@@ -24,6 +24,11 @@ public class MaterialService {
         materialRepository.save(material);
     }
 
+    public Page<MaterialBasicDTO> findAllBasicDTOs(Pageable pageable) {
+        return materialRepository.findAll(pageable)
+                .map(materialMapper::toDTO);
+    }
+
     public Optional<Material> findById(Long materialId) {
         return materialRepository.findById(materialId);
     }

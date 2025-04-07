@@ -42,6 +42,12 @@ public class MaterialRestController {
     @Autowired
     private MaterialMapper materialMapper;
 
+    @GetMapping("/")
+    public ResponseEntity<Page<MaterialBasicDTO>> getMaterials(Pageable pageable) {
+        Page<MaterialBasicDTO> materials = materialService.findAllBasicDTOs(pageable);
+        return ResponseEntity.ok(materials);
+    }
+
     // Endpoint upload material to course
     @PostMapping("/courses/{id}/")
     public ResponseEntity<MaterialBasicDTO> uploadFile(@PathVariable Long id,
@@ -94,17 +100,4 @@ public class MaterialRestController {
         return ResponseEntity.noContent().build();
     }
 
-    // Endpoint load more files pageable
-    @GetMapping("/courses/{courseId}/load")
-    public ResponseEntity<Page<MaterialBasicDTO>> loadMoreMaterials(@PathVariable Long courseId, Pageable pageable) {
-        Page<Material> materialsPage = materialService.findByCourseId(courseId, pageable);
-        Page<MaterialBasicDTO> materialsDTO = materialsPage.map(material -> new MaterialBasicDTO(
-                material.getId(),
-                material.getName(),
-                material.getType(),
-                material.getUrl(),
-                material.getFile()));
-
-        return ResponseEntity.ok(materialsDTO);
-    }
 }
