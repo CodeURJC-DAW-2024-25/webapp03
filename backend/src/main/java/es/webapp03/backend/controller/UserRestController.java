@@ -15,7 +15,6 @@ import es.webapp03.backend.service.UserService;
 import es.webapp03.backend.dto.UserBasicDTO;
 import es.webapp03.backend.dto.UserDTO;
 import es.webapp03.backend.dto.UserNoImageDTO;
-import es.webapp03.backend.dto.UserMapper;
 
 @RestController
 @RequestMapping("/api/users")
@@ -24,8 +23,6 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserMapper userMapper;
 
     @PostMapping("/")
     public ResponseEntity<UserBasicDTO> registerUser(@RequestBody UserNoImageDTO userNoImageDTO) {
@@ -49,17 +46,17 @@ public class UserRestController {
     }
 
     @GetMapping("/")
-    public Page<UserNoImageDTO> showUsers(Pageable pageable) {
-        return userService.findAllWithNoImage(pageable);
+    public Page<UserBasicDTO> showUsers(Pageable pageable) {
+        return userService.findAllBasicUserDTO(pageable);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UserNoImageDTO> deleteUser(@PathVariable long id) {
-        UserDTO userDTO = userService.findUserById(id);
-        if (userDTO != null) {
+    public ResponseEntity<UserBasicDTO> deleteUser(@PathVariable long id) {
+        UserBasicDTO deletedUser = userService.findUserBasicDTOById(id);
+        if (deletedUser != null) {
             userService.deleteById(id);
-            UserNoImageDTO userNoImageDTO = userMapper.toNoImageDTO(userDTO);
-            return ResponseEntity.ok(userNoImageDTO); // Devolver el recurso borrado
+            
+            return ResponseEntity.ok(deletedUser);
         }
         return ResponseEntity.notFound().build();
     }
@@ -78,16 +75,16 @@ public class UserRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserNoImageDTO> showUserProfile(@PathVariable Long id) {
-        UserNoImageDTO userNoImageDTO = userService.findUserProfileById(id);
+    public ResponseEntity<UserBasicDTO> showUserProfile(@PathVariable Long id) {
+        UserBasicDTO retievedUser = userService.findUserBasicDTOById(id);
 
-        if (userNoImageDTO != null) {
-            return ResponseEntity.ok(userNoImageDTO);
+        if (retievedUser != null) {
+            return ResponseEntity.ok(retievedUser);
         }
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-
+    //TODO
     @PutMapping("/{id}")
     public ResponseEntity<String> editUserProfile(@PathVariable Long id, @RequestBody UserNoImageDTO userNoImageDTO) {
         

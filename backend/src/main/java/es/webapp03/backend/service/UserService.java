@@ -55,7 +55,11 @@ public class UserService {
     }
 
     public UserDTO findUserDTOByEmail(String email) {
-        return userRepository.findByEmail(email).map(userMapper::toDTO).orElse(null);    }
+        return userRepository.findByEmail(email).map(userMapper::toDTO).orElse(null);
+    }
+        
+    public UserBasicDTO findUserBasicDTOById(Long id) {
+        return userRepository.findById(id).map(userMapper::toBasicDTO).orElse(null);    }
 
     public User findEntityByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
@@ -81,6 +85,10 @@ public class UserService {
 
     public Page<UserNoImageDTO> findAllWithNoImage(Pageable pageable) {
         return userRepository.findAll(pageable).map(userMapper::toNoImageDTO);
+    }
+
+    public Page<UserBasicDTO> findAllBasicUserDTO(Pageable pageable) {
+        return userRepository.findAll(pageable).map(userMapper::toBasicDTO);
     }
 
     public Page<UserDTO> findAll(Pageable pageable) {
