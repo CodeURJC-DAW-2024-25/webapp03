@@ -9,7 +9,5 @@ public record UserDTO(
     String email,
     boolean image,
     Blob imageFile,
-    List<CourseBasicDTO> courses,
-    List<CommentBasicDTO> comments,
 	List<String> roles) {
 }

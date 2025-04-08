@@ -1,7 +1,6 @@
 package es.webapp03.backend.service;
 
 import java.io.InputStream;
-import java.sql.Blob;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,8 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import es.webapp03.backend.dto.UserBasicDTO;
 import es.webapp03.backend.dto.UserDTO;
 import es.webapp03.backend.dto.UserMapper;
@@ -63,7 +60,11 @@ public class UserService {
     }
         
     public UserBasicDTO findUserBasicDTOById(Long id) {
-        return userRepository.findById(id).map(userMapper::toBasicDTO).orElse(null);    }
+        return userRepository.findById(id).map(userMapper::toBasicDTO).orElse(null);
+    }
+        
+    public UserDTO findUserDTOById(Long id) {
+        return userRepository.findById(id).map(userMapper::toDTO).orElse(null);    }
 
     public User findEntityByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
