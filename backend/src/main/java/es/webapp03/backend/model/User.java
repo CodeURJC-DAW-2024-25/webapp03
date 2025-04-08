@@ -50,6 +50,7 @@ public class User {
     public User(String name, String email, String encodedPassword, Blob imageFile, String... roles) {
         this.name = name;
         this.email = email;
+        this.image = imageFile != null;
         this.encodedPassword = encodedPassword;
         this.imageFile = imageFile;
         this.roles = List.of(roles);

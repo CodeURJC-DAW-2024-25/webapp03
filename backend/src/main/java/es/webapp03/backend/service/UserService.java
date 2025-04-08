@@ -29,13 +29,14 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public UserBasicDTO registerUser(User user, String roleName) {
-        user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
-        user.getRoles().add(roleName);
+    public UserBasicDTO registerUser(String name, String email, String password, String roleName) {
+        // User user = new User();
+        User user = new User( name, email, passwordEncoder.encode(password),null, roleName);
+        
+    
         User savedUser = userRepository.save(user);
         return userMapper.toBasicDTO(savedUser);
     }
-
     public void addCourseToUser(Long userId, Course course) {
         Optional<User> userOpt = userRepository.findById(userId);
         if (userOpt.isPresent()) {
@@ -52,6 +53,9 @@ public class UserService {
     public UserBasicDTO findByEmail(String email) {
         return userRepository.findByEmail(email).map(userMapper::toBasicDTO).orElse(null);
     }
+
+    public UserDTO findUserDTOByEmail(String email) {
+        return userRepository.findByEmail(email).map(userMapper::toDTO).orElse(null);    }
 
     public User findEntityByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
@@ -91,4 +95,6 @@ public class UserService {
     public UserNoImageDTO findUserProfileById(Long id) {
         return userRepository.findById(id).map(userMapper::toNoImageDTO).orElse(null);
     }
+
+   
 }

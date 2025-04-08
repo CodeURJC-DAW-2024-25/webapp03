@@ -102,7 +102,7 @@ public class UserController {
     @GetMapping("/profile/image")
     public ResponseEntity<Object> getProfileImage(Principal principal) throws SQLException {
         if (principal != null) {
-            UserBasicDTO userDTO = userService.findByEmail(principal.getName());
+            UserDTO userDTO = userService.findUserDTOByEmail(principal.getName());
             if (userDTO != null && userDTO.imageFile() != null) {
                 Resource file = new InputStreamResource(userDTO.imageFile().getBinaryStream());
                 return ResponseEntity.ok()

@@ -1,13 +1,9 @@
 package es.webapp03.backend.dto;
 
-import java.sql.Blob;
-import java.util.List;
+
 
 public record UserBasicDTO(    
     Long id,
 	String name,
-    String email,
-    boolean image,
-    Blob imageFile,
-	List<String> roles) {
+    String email) {
 }

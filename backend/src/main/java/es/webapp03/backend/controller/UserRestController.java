@@ -10,12 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import es.webapp03.backend.service.UserService;
+import es.webapp03.backend.dto.UserBasicDTO;
 import es.webapp03.backend.dto.UserDTO;
 import es.webapp03.backend.dto.UserNoImageDTO;
-import es.webapp03.backend.model.User;
 import es.webapp03.backend.dto.UserMapper;
 
 @RestController
@@ -26,34 +25,27 @@ public class UserRestController {
     private UserService userService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private UserMapper userMapper;
 
     @PostMapping("/")
-    public ResponseEntity<UserNoImageDTO> registerUser(@RequestBody UserNoImageDTO userNoImageDTO) {
-        try {
+    public ResponseEntity<UserBasicDTO> registerUser(@RequestBody UserNoImageDTO userNoImageDTO) {
+
             // Check if the user already exists
             if (userService.findByEmail(userNoImageDTO.email()) != null) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).build();
             }
 
             // Encrypt password
-            String encodedPassword = passwordEncoder.encode(userNoImageDTO.password());
-
-            // Create and save user with role "USER" (without image)
-            User newUser = new User(userNoImageDTO.name(), userNoImageDTO.email(), encodedPassword, null, "USER");
-            userService.save(newUser);
-
-            // Convert the saved user to UserProfileDTO
-            UserNoImageDTO createdUserProfileDTO = userService.findUserProfileById(newUser.getId());
+            UserBasicDTO createdUserProfile = userService.registerUser(
+                    userNoImageDTO.name(),
+                    userNoImageDTO.email(),
+                    userNoImageDTO.password(),
+                    "USER");
 
             // Return success response with the created user
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdUserProfileDTO);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdUserProfile);
+        
+        
     }
 
     @GetMapping("/")
