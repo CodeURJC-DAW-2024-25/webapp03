@@ -1,13 +1,17 @@
 package es.webapp03.backend.service;
 
+import java.io.InputStream;
+import java.sql.Blob;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import es.webapp03.backend.dto.UserBasicDTO;
 import es.webapp03.backend.dto.UserDTO;
@@ -102,6 +106,26 @@ public class UserService {
     //pasar a profile
     public UserNoImageDTO findUserProfileById(Long id) {
         return userRepository.findById(id).map(userMapper::toNoImageDTO).orElse(null);
+    }
+
+    public void updateUserProfile(Long id, String name, String email, String password) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setName(name);
+            user.setEmail(email);
+            if (password != null && !password.isEmpty()) {
+                user.setEncodedPassword(passwordEncoder.encode(password));
+            }
+            userRepository.save(user);
+        }
+    }
+
+    public void updateUserProfileImage(Long id, InputStream inputStream, long size) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setImage(BlobProxy.generateProxy(inputStream, size));
+            userRepository.save(user);
+        }
     }
 
    

@@ -96,12 +96,12 @@ public class CourseRestController {
     }
 
     @PutMapping("/{id}/image")
-    public ResponseEntity<Object> replaceCourseImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
+    public ResponseEntity<String> replaceCourseImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
             throws IOException {
 
         courseService.replaceCourseImage(id, imageFile.getInputStream(), imageFile.getSize());
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Course image updated");
     }
 
     @DeleteMapping("/{id}/image")
