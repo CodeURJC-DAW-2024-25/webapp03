@@ -129,4 +129,16 @@ public class CourseRestController {
         return ResponseEntity.ok(chartData);
     }
 
+  @PostMapping("/filter")
+    public ResponseEntity<Page<CourseBasicDTO>> filterCoursesByTags(
+            @RequestBody List<String> tags,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CourseBasicDTO> filteredCourses = courseService.findByTags(tags, pageable);
+        return ResponseEntity.ok(filteredCourses);
+    }
+
+
 }

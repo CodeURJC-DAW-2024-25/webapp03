@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -196,4 +197,9 @@ public class CourseService {
 
         courseRepository.save(course);
     }
+
+   public Page<CourseBasicDTO> findByTags(List<String> tags, Pageable pageable) {
+    List<Course> courses = courseRepository.findByTags(tags);
+    return new PageImpl<>(courseMapper.toDTOs(courses));
+}
 }
