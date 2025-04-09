@@ -73,10 +73,10 @@ public class CourseRestController {
     // Endpoint course image
 
     @PostMapping("/{id}/image")
-    public ResponseEntity<Object> createCourseImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
+    public ResponseEntity<Object> postCourseImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
             throws IOException {
 
-        courseService.createCourseImage(id, imageFile.getInputStream(), imageFile.getSize());
+        courseService.postCourseImage(id, imageFile.getInputStream(), imageFile.getSize());
 
         URI location = fromCurrentRequest().build().toUri();
 
@@ -96,10 +96,10 @@ public class CourseRestController {
     }
 
     @PutMapping("/{id}/image")
-    public ResponseEntity<String> replaceCourseImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
+    public ResponseEntity<String> putCourseImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
             throws IOException {
 
-        courseService.replaceCourseImage(id, imageFile.getInputStream(), imageFile.getSize());
+        courseService.putCourseImage(id, imageFile.getInputStream(), imageFile.getSize());
 
         return ResponseEntity.ok("Course image updated");
     }

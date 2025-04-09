@@ -165,7 +165,7 @@ public class CourseService {
         }
     }
 
-    public void createCourseImage(long id, InputStream inputStream, long size) {
+    public void postCourseImage(long id, InputStream inputStream, long size) {
         Course course = courseRepository.findById(id).orElseThrow();
 
         course.setImage(true);
@@ -174,7 +174,7 @@ public class CourseService {
         courseRepository.save(course);
     }
 
-    public void replaceCourseImage(long id, InputStream inputStream, long size) {
+    public void putCourseImage(long id, InputStream inputStream, long size) {
         Course course = courseRepository.findById(id).orElseThrow();
 
         if (!course.getImage()) {
