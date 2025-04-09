@@ -7,10 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import es.webapp03.backend.dto.CommentBasicDTO;
+import es.webapp03.backend.dto.CommentTextDTO;
+import es.webapp03.backend.dto.CourseDTO;
 import es.webapp03.backend.model.Comment;
+import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.User;
 import es.webapp03.backend.repository.CommentRepository;
 import es.webapp03.backend.service.CommentService;
+import es.webapp03.backend.service.CourseService;
+import es.webapp03.backend.dto.CourseMapper;
 import es.webapp03.backend.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -30,6 +35,12 @@ public class CommentRestController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private CourseService courseService;
+
+    @Autowired
+    private CourseMapper courseMapper;
 
     @Autowired
     private UserService userService;
@@ -66,19 +77,22 @@ public class CommentRestController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/new")
+    @PostMapping("/")
     public ResponseEntity<CommentBasicDTO> createComment(
         @PathVariable Long courseId,
-        @RequestBody CommentBasicDTO commentBasicDTO,
+        @RequestBody CommentTextDTO commentTextDTO,
         HttpServletRequest request) {
     
         Principal principal = request.getUserPrincipal();
 
         User author = userService.findEntityByEmail(principal.getName());
+        CourseDTO courseDTO = courseService.findById(courseId);
+        Course course = courseMapper.toDomain(courseDTO);
         Comment newComment = new Comment();
         newComment.setUser(author);
-        newComment.setText(commentBasicDTO.text());
+        newComment.setText(commentTextDTO.text());
         newComment.setCreatedDate(LocalDate.now());
+        newComment.setCourse(course);
         
         Comment savedComment = commentRepository.save(newComment);
         
