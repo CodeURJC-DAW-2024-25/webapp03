@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import es.webapp03.backend.dto.CourseBasicDTO;
+import es.webapp03.backend.dto.CourseInputDTO;
 import es.webapp03.backend.dto.CourseMapper;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.service.CourseService;
@@ -50,8 +51,8 @@ public class CourseRestController {
 
     // Endppint create a course
     @PostMapping("/")
-    public ResponseEntity<CourseBasicDTO> createCourse(@RequestBody CourseBasicDTO courseBasicDTO) {
-        CourseBasicDTO courseDTO = courseService.saveBasic(courseBasicDTO);
+    public ResponseEntity<CourseBasicDTO> createCourse(@RequestBody CourseInputDTO courseInputDTO) {
+        CourseBasicDTO courseDTO = courseService.saveInput(courseInputDTO);
 
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(courseDTO.id()).toUri();
 
@@ -66,9 +67,9 @@ public class CourseRestController {
 
     // Endpoint edit a course
     @PutMapping("/{id}")
-    public CourseBasicDTO editCourse(@PathVariable long id, @RequestBody CourseBasicDTO updatedCourseDTO)
+    public CourseBasicDTO editCourse(@PathVariable long id, @RequestBody CourseInputDTO updatedCourseInputDTO)
             throws SQLException {
-        return courseService.editCourseBasic(id, updatedCourseDTO);
+        return courseService.editCourseInput(id, updatedCourseInputDTO);
     }
     // Endpoint course image
 

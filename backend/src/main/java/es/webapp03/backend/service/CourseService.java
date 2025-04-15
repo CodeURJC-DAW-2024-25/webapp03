@@ -2,6 +2,7 @@ package es.webapp03.backend.service;
 
 import es.webapp03.backend.dto.CourseBasicDTO;
 import es.webapp03.backend.dto.CourseDTO;
+import es.webapp03.backend.dto.CourseInputDTO;
 import es.webapp03.backend.dto.CourseMapper;
 import es.webapp03.backend.model.Course;
 import es.webapp03.backend.model.User;
@@ -93,9 +94,9 @@ public class CourseService {
 
     }
 
-    public CourseBasicDTO editCourseBasic(long id, CourseBasicDTO updatedCourseDTO) throws SQLException {
+    public CourseBasicDTO editCourseInput(long id, CourseInputDTO updatedCourseInputDTO) throws SQLException {
         Course oldCourse = courseRepository.findById(id).orElseThrow();
-        Course updatedCourse = courseMapper.toDomain(updatedCourseDTO);
+        Course updatedCourse = courseMapper.toDomain(updatedCourseInputDTO);
         updatedCourse.setId(id);
 
         if (oldCourse.getImage() && updatedCourse.getImage()) {
@@ -143,8 +144,8 @@ public class CourseService {
         return courseMapper.toFullDTO(courseRepository.save(course));
     }
 
-    public CourseBasicDTO saveBasic(CourseBasicDTO courseDTO) {
-        Course course = courseMapper.toDomain(courseDTO);
+    public CourseBasicDTO saveInput(CourseInputDTO courseInputDTO) {
+        Course course = courseMapper.toDomain(courseInputDTO);
         return courseMapper.toDTO(courseRepository.save(course));
     }
 
@@ -161,15 +162,20 @@ public class CourseService {
         if (course.getImageFile() != null) {
             return new InputStreamResource(course.getImageFile().getBinaryStream());
         } else {
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("No image found for course with id: " + id);
         }
     }
 
     public void postCourseImage(long id, InputStream inputStream, long size) {
         Course course = courseRepository.findById(id).orElseThrow();
 
-        course.setImage(true);
-        course.setImageFile(BlobProxy.generateProxy(inputStream, size));
+        if (inputStream != null && size > 0) {
+            course.setImage(true);
+            course.setImageFile(BlobProxy.generateProxy(inputStream, size));
+        } else {
+            course.setImage(false);
+            course.setImageFile(null);
+        }
 
         courseRepository.save(course);
     }

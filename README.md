@@ -148,7 +148,7 @@ An algorithm to filter courses based on a tag provided by the user.
 
 <h4 id="createCourse">Create course</h4>
 
-![createCourseImage](pics/screenshots/create_course.png)
+![postCourseImage](pics/screenshots/create_course.png)
 
 <h4 id="adminUsers">Users list</h4>
 

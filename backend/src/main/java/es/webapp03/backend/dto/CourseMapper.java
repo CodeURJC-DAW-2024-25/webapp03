@@ -18,6 +18,15 @@ public interface CourseMapper {
 
     List<CourseBasicDTO> toDTOs(Collection<Course> courses);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "image", ignore = true)
+    @Mapping(target = "imageFile", ignore = true)
+    @Mapping(target = "numberOfUsers", ignore = true)
+    @Mapping(target = "users", ignore = true)
+    @Mapping(target = "materials", ignore = true)
+    @Mapping(target = "comments", ignore = true)
+    Course toDomain(CourseInputDTO courseInputDTO);
+
     @Mapping(target = "users", ignore = true)
     @Mapping(target = "materials", ignore = true)
     @Mapping(target = "comments", ignore = true)

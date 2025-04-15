@@ -51,8 +51,8 @@ public class Course {
     public Course(String title, String description, Blob imageFile, int numberOfUsers) {
         this.title = title;
         this.description = description;
-        this.image = imageFile != null;
         this.imageFile = imageFile;
+        this.image = imageFile != null; // Set to true only if imageFile is not null
         this.numberOfUsers = numberOfUsers;
     }
 
