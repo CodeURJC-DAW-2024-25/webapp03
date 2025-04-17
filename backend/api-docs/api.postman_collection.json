@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "cb0eefe7-4b85-4022-ac44-4113cafe9dc5",
+		"_postman_id": "3f93f0b0-31ab-41f5-926d-6a0b48bc7e1f",
 		"name": "OpenAPI definition",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "43045943"
@@ -1983,14 +1983,14 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"file\": \"<binary>\"\n}",
-							"options": {
-								"raw": {
-									"headerFamily": "json",
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/usuario/Desktop/enlaces DAW.txt"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/materials/courses/:id/",
@@ -2007,7 +2007,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "<long>",
+									"value": "1",
 									"description": "(Required) "
 								}
 							]
@@ -2164,7 +2164,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+							"raw": "{\n  \"username\": \"admin@gmail.com\",\n  \"password\": \"adminpass\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
