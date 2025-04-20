@@ -54,4 +54,7 @@ public interface CourseMapper {
     @Mapping(target = "course", ignore = true)
     @Mapping(target = "user", ignore = true)
     List<CommentBasicDTO> mapComments(Collection<Comment> comments);
+
+    List<MaterialSimpleDTO> toSimpleMaterialDTOs(Collection<Material> materials);
+
 }

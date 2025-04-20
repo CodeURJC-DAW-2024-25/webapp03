@@ -8,5 +8,6 @@ public record CourseBasicDTO(
         String description,
         boolean image,
         int numberOfUsers,
-        List<String> tags) {
+        List<String> tags,
+        List<MaterialSimpleDTO> materials) {
 }
