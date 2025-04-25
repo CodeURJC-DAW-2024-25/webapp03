@@ -16,6 +16,7 @@ public interface MaterialMapper {
 
     @Mapping(target = "course", ignore = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "file", ignore = true)
     Material toDomain(MaterialBasicDTO materialDTO);
 
     @Mapping(target = "id", source = "id")

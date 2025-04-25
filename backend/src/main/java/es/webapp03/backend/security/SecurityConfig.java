@@ -67,8 +67,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/api/courses/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/courses/filter").permitAll() // Permitir a todos filtrar cursos
-
+                        .requestMatchers(HttpMethod.POST, "/api/courses/filter").permitAll() // Permitir a todos filtrar
+                                                                                             // cursos
 
                         // PRIVATE ENDPOINTS (Requieren autenticación)
                         .requestMatchers(HttpMethod.GET, "/api/materials/").authenticated()
@@ -76,13 +76,18 @@ public class SecurityConfig {
                                                                                            // pueden acceder
                         .requestMatchers(HttpMethod.POST, "/api/materials/").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/api/comments/").hasRole("USER")
-                        .requestMatchers(HttpMethod.POST, "/api/courses/").hasRole("ADMIN") // Crear curso solo para ADMIN
-                        .requestMatchers(HttpMethod.POST, "/api/courses/{id}/image").hasRole("ADMIN") // Subir imagen solo para ADMIN
+                        .requestMatchers(HttpMethod.POST, "/api/courses/").hasRole("ADMIN") // Crear curso solo para
+                                                                                            // ADMIN
+                        .requestMatchers(HttpMethod.POST, "/api/courses/{id}/image").hasRole("ADMIN") // Subir imagen
+                                                                                                      // solo para ADMIN
                         .requestMatchers(HttpMethod.PUT, "/api/users/**").hasAnyRole("USER", "ADMIN") // Editar perfil
-                        .requestMatchers(HttpMethod.GET, "/api/users/").hasRole("ADMIN") //Lista de usuarios
+                        .requestMatchers(HttpMethod.GET, "/api/users/").hasRole("ADMIN") // Lista de usuarios
                         .requestMatchers(HttpMethod.POST, "/api/users/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
+                        .requestMatchers("/v3/api-docs*/**").permitAll()
+                        .requestMatchers("/swagger-ui.html").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
 
                         // Cualquier otra petición requiere autenticación
                         .anyRequest().authenticated());

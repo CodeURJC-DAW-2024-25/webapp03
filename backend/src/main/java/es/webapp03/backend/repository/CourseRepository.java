@@ -12,6 +12,7 @@ import java.util.List;
 
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
+    @SuppressWarnings("null")
     Page<Course> findAll(Pageable pageable);
 
     // Search for courses that contain at least one of the provided tags
