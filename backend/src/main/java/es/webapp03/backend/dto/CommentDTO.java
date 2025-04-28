@@ -9,7 +9,7 @@ public record CommentDTO(
         LocalDate createdDate,
         String text) {
 
-    // Constructor simplificado
+    // Simplified constructor
     public CommentDTO {
         course = course != null ? course : new CourseBasicDTO(null, null, null, false, 0, null, null);
         user = user != null ? user : new UserBasicDTO(null, null, null);
