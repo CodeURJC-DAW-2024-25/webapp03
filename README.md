@@ -304,8 +304,10 @@ My job consisted mostly in implementing the API logic for the UserRestController
 1. Connect to the remote machine: Run ssh -i ssh-keys/appWeb03.key in GitBash from the appWeb03 folder containing the ssh-keys folder and type yes if a warning message appears.
 2. Run git clone https://github.com/CodeURJC-DAW-2024-25/webapp03
 3. Access the docker directory with cd webapp03/docker
-4. Run docker compose up -d
-5. Access the URL https://appweb03.dawgis.etsii.urjc.es/ in any browser
+4. Run ./create_image.sh
+5. Run ./publish_image.sh
+6. Run docker compose up -d
+7. Access the URL https://appweb03.dawgis.etsii.urjc.es/ in any browser
 
 <h2 id=apiDocumentation>API Documentation</h2>
 [API Documentation (HTML)](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.html)
