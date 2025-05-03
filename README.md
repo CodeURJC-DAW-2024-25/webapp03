@@ -273,7 +273,7 @@ I worked implementing the CourseRestController and the MaterialRestController. I
 
 <h3>Gonzalo García Castillo</h3>
 
-My job consisted mostly in implementing the API logic for the UserRestController (and by so creating new DTOs), documenting the API using Open-API, and update the class diagram.
+My job consisted mostly in implementing the API logic for the UserRestController (and by so creating new DTOs), documenting the API using Open-API, and update the class diagram. I also tested and improved the postman collection.
 
 |                                                 Commit                                                 |                                        Description                                        |
 | :----------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: |
@@ -310,6 +310,8 @@ My job consisted mostly in implementing the API logic for the UserRestController
 7. Access the URL https://appweb03.dawgis.etsii.urjc.es/ in any browser
 
 <h2 id=apiDocumentation>API Documentation</h2>
-[API Documentation (HTML)](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.html)
-[API Documentation (YAML)](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.yaml)
-[API Documentation (Link)](https://localhost:8443/swagger-ui/index.html)
+[API Documentation (HTML)]  (https://rawcdn.githack.com/CodeURJC-DAW-2024-25/webapp03/55e2a17214ba54c940fbf87b1f1faae197d6ad89/backend/api-docs/api-docs.html)
+
+[API Documentation (YAML)]  (https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.yaml)
+
+[API Documentation (Link)]  (https://localhost:8443/swagger-ui/index.html)
