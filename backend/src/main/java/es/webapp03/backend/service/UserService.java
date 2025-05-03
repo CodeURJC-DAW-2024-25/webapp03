@@ -31,7 +31,7 @@ public class UserService {
     }
 
     public UserBasicDTO registerUser(String name, String email, String password, String roleName) {
-        // User user = new User();
+
         User user = new User(name, email, passwordEncoder.encode(password), null, roleName);
 
         User savedUser = userRepository.save(user);
@@ -101,11 +101,10 @@ public class UserService {
         return userRepository.findAll(pageable).map(userMapper::toDTO);
     }
 
-    public UserDTO findUserById(Long id) { // todo: convert to basic
+    public UserDTO findUserById(Long id) {
         return userRepository.findById(id).map(userMapper::toDTO).orElse(null);
     }
 
-    // convert to profile
     public UserNoImageDTO findUserProfileById(Long id) {
         return userRepository.findById(id).map(userMapper::toNoImageDTO).orElse(null);
     }

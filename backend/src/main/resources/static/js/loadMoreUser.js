@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let currentPage = 0; // Página actual
+  let currentPage = 0; // Actual page number
   const loadMoreButton = document.getElementById("load-more-btn");
   const loadingSpinner = document.getElementById("loading-spinner");
   const userList = document.getElementById("user-list");
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
       loadingSpinner.style.display = "block";
       loadMoreButton.disabled = true;
 
-      currentPage += 1; // Incrementar la página actual
+      currentPage += 1; // Increment actual page number
 
       fetch(`/admin/users/load?page=${currentPage}`)
         .then((response) => response.text())
