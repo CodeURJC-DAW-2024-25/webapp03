@@ -31,13 +31,13 @@ public class UserService {
     }
 
     public UserBasicDTO registerUser(String name, String email, String password, String roleName) {
-        // User user = new User();
-        User user = new User( name, email, passwordEncoder.encode(password),null, roleName);
-        
-    
+
+        User user = new User(name, email, passwordEncoder.encode(password), null, roleName);
+
         User savedUser = userRepository.save(user);
         return userMapper.toBasicDTO(savedUser);
     }
+
     public void addCourseToUser(Long userId, Course course) {
         Optional<User> userOpt = userRepository.findById(userId);
         if (userOpt.isPresent()) {
@@ -58,17 +58,18 @@ public class UserService {
     public UserDTO findUserDTOByEmail(String email) {
         return userRepository.findByEmail(email).map(userMapper::toDTO).orElse(null);
     }
-        
+
     public UserBasicDTO findUserBasicDTOById(Long id) {
         return userRepository.findById(id).map(userMapper::toBasicDTO).orElse(null);
     }
-        
+
     public UserDTO findUserDTOById(Long id) {
-        return userRepository.findById(id).map(userMapper::toDTO).orElse(null);    }
+        return userRepository.findById(id).map(userMapper::toDTO).orElse(null);
+    }
 
     public User findEntityByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
-    }    
+    }
 
     public void save(User newUser) {
         userRepository.save(newUser);
@@ -76,8 +77,8 @@ public class UserService {
 
     public List<UserBasicDTO> findByRoles(String role) {
         return userRepository.findByRoles(role).stream()
-            .map(userMapper::toBasicDTO)
-            .collect(Collectors.toList());
+                .map(userMapper::toBasicDTO)
+                .collect(Collectors.toList());
     }
 
     public boolean existsById(long id) {
@@ -100,11 +101,10 @@ public class UserService {
         return userRepository.findAll(pageable).map(userMapper::toDTO);
     }
 
-    public UserDTO findUserById(Long id) { //todo: pasar basic
+    public UserDTO findUserById(Long id) {
         return userRepository.findById(id).map(userMapper::toDTO).orElse(null);
     }
 
-    //pasar a profile
     public UserNoImageDTO findUserProfileById(Long id) {
         return userRepository.findById(id).map(userMapper::toNoImageDTO).orElse(null);
     }
@@ -129,5 +129,4 @@ public class UserService {
         }
     }
 
-   
 }

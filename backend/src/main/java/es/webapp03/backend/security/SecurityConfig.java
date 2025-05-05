@@ -61,27 +61,26 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        // PUBLIC ENDPOINTS (Solo los que realmente deben ser accesibles sin
-                        // autenticación)
+                        // PUBLIC ENDPOINTS (Acces without auth)
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/api/courses/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/courses/filter").permitAll() // Permitir a todos filtrar
-                                                                                             // cursos
+                        .requestMatchers(HttpMethod.POST, "/api/courses/filter").permitAll() // Let everyone filter by
+                                                                                             // courses
 
                         // PRIVATE ENDPOINTS (Requieren autenticación)
                         .requestMatchers(HttpMethod.GET, "/api/materials/").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/comments/").authenticated() // 🔥 Ahora solo autenticados
-                                                                                           // pueden acceder
+                        .requestMatchers(HttpMethod.GET, "/api/comments/").authenticated() // Only auth users can
+                                                                                           // acces
                         .requestMatchers(HttpMethod.POST, "/api/materials/").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/api/comments/").hasRole("USER")
-                        .requestMatchers(HttpMethod.POST, "/api/courses/").hasRole("ADMIN") // Crear curso solo para
+                        .requestMatchers(HttpMethod.POST, "/api/courses/").hasRole("ADMIN") // Create course only for
                                                                                             // ADMIN
-                        .requestMatchers(HttpMethod.POST, "/api/courses/{id}/image").hasRole("ADMIN") // Subir imagen
-                                                                                                      // solo para ADMIN
-                        .requestMatchers(HttpMethod.PUT, "/api/users/**").hasAnyRole("USER", "ADMIN") // Editar perfil
-                        .requestMatchers(HttpMethod.GET, "/api/users/").hasRole("ADMIN") // Lista de usuarios
+                        .requestMatchers(HttpMethod.POST, "/api/courses/{id}/image").hasRole("ADMIN") // Upload image
+                                                                                                      // only Admin
+                        .requestMatchers(HttpMethod.PUT, "/api/users/**").hasAnyRole("USER", "ADMIN") // Edit profile
+                        .requestMatchers(HttpMethod.GET, "/api/users/").hasRole("ADMIN") // List of users
                         .requestMatchers(HttpMethod.POST, "/api/users/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
@@ -89,7 +88,7 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui.html").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
 
-                        // Cualquier otra petición requiere autenticación
+                        // Any other request needs auth
                         .anyRequest().authenticated());
 
         // Disable Form login Authentication

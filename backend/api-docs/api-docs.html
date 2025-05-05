@@ -100,7 +100,6 @@ h={};g()}};typeof define==="function"&&define.amd&&define("google-code-prettify"
         return textFile;
       };
 
-      /// TODO: Implement resizing for expanding within iframe
       function callResize() {
         window.parent.postMessage('resize', "*");
       }
@@ -13037,10 +13036,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return "json-formatter-" + className;
 	}
 	exports.cssClass = cssClass;
-	/*
-	  * Creates a new DOM element with given type and class
-	  * TODO: move me to helpers
-	*/
+
 	function createElement(type, className, content) {
 	    var el = document.createElement(type);
 	    if (className) {

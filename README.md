@@ -236,20 +236,21 @@ At the beginning of the project I created the DTOs and basic DTOs, added the sec
 
 I implemented all the Comment Logic for the REST API
 
-|                                                                       File                                                                       |         Name          |
-| :----------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CommentRestController.java) | CommentRestController |
-|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CouresService.java)       |    CommentService     |
-|          [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CommentDTO.java)          |      CommentDTO       |
-|      [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)       |     CourseService     |
-
 |                                                 Commit                                                 |          Description          |
 | :----------------------------------------------------------------------------------------------------: | :---------------------------: |
 | [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b859e2360ab297671336dc8c62837d128d335a66) | CommentRestController started |
 | [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/145656ab43333a37452cced3179f1d9e39d185f9) | CommentRestController uptade  |
 | [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/722107e3f8c9a78852611c3d51014b9dd2a967da) | CommentRestController started |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/145656ab43333a37452cced3179f1d9e39d185f9) |       Created DTO Files       |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/8ad3f2c0393404d7771cea7cc533304120a18385) | CourseRestController Working  |
 | [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/03c5d86259a0fae150a9a97c706274d1bbd5e4b8) |      Fixed minor changes      |
+
+|                                                                       File                                                                       |         Name          |
+| :----------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------: |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CommentRestController.java) | CommentRestController |
+|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)       |    CommentService     |
+|          [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CommentDTO.java)          |      CommentDTO       |
+|      [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)       |     CourseService     |
+|   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java)| CourseRestController  |
 
 <h3>Marcos Alejandro Pascual Rojas</h3>
 I worked implementing the CourseRestController and the MaterialRestController. I also modify their respective services.
@@ -272,7 +273,7 @@ I worked implementing the CourseRestController and the MaterialRestController. I
 
 <h3>Gonzalo García Castillo</h3>
 
-My job consisted mostly in implementing the API logic for the UserRestController (and by so creating new DTOs), documenting the API using Open-API, and update the class diagram.
+My job consisted mostly in implementing the API logic for the UserRestController (and by so creating new DTOs), documenting the API using Open-API, and update the class diagram. I also tested and improved the postman collection.
 
 |                                                 Commit                                                 |                                        Description                                        |
 | :----------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: |
@@ -303,10 +304,14 @@ My job consisted mostly in implementing the API logic for the UserRestController
 1. Connect to the remote machine: Run ssh -i ssh-keys/appWeb03.key in GitBash from the appWeb03 folder containing the ssh-keys folder and type yes if a warning message appears.
 2. Run git clone https://github.com/CodeURJC-DAW-2024-25/webapp03
 3. Access the docker directory with cd webapp03/docker
-4. Run docker compose up -d
-5. Access the URL https://appweb03.dawgis.etsii.urjc.es/ in any browser
+4. Run ./create_image.sh
+5. Run ./publish_image.sh
+6. Run docker compose up -d
+7. Access the URL https://appweb03.dawgis.etsii.urjc.es/ in any browser
 
 <h2 id=apiDocumentation>API Documentation</h2>
-[API Documentation (HTML)](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.html)
-[API Documentation (YAML)](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.yaml)
-[API Documentation (Link)](https://localhost:8443/swagger-ui/index.html)
+[API Documentation (HTML)]  (https://rawcdn.githack.com/CodeURJC-DAW-2024-25/webapp03/55e2a17214ba54c940fbf87b1f1faae197d6ad89/backend/api-docs/api-docs.html)
+
+[API Documentation (YAML)]  (https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.yaml)
+
+[API Documentation (Link)]  (https://localhost:8443/swagger-ui/index.html)
