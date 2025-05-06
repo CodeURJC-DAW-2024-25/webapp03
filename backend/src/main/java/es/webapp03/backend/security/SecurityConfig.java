@@ -117,7 +117,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         // Public pages
-                        .requestMatchers("/", "/index", "/courses/**", "/register", "/registererror").permitAll()
+                        .requestMatchers("/", "/new", "/new/**", "/index", "/courses/**", "/register", "/registererror").permitAll()
                         .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/login", "/logout").permitAll()

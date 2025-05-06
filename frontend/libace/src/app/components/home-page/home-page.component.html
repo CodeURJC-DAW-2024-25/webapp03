@@ -40,23 +40,24 @@
             <!-- Container for courses -->
             <div id="course-container" class="row">
                 <!--{{#courses}}-->
-                <div *ngFor="let course of courses">
+                <div *ngFor="let course of courses" class="col-lg-4 col-sm-6 mb-4">
                 <!-- Portfolio item -->
-                <div class="col-lg-4 col-sm-6 mb-4">
                     <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" [href]="'#portfolioModal' + course.id">
                         <!-- <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{id}}"> -->
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
+                            <img class="img-fluid" [src]="'/courses/' + course.id + '/image'" [alt]="course.title" />
                             <!-- <img class="img-fluid" src="/courses/{{id}}/image" alt="{{title}}" /> -->
-                        <!-- </a> -->
+                        </a>
                         <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">{{ course.title }}</div>
                             <!-- <div class="portfolio-caption-heading">{{title}}</div> -->
                             <div class="portfolio-caption-subheading text-muted">
+                                <span *ngFor="let tag of course.tags" class="badge bg-secondary">{{ tag }}</span>
                                 <!--{{#tags}}-->
-                                <div *ngFor="let tag of tags">
                                     <!-- <span class="badge bg-secondary">{{.}}</span> -->
-                                </div>
                                 <!--{{/tags}}-->
                             </div>
                         </div>
@@ -67,7 +68,17 @@
             </div>
 
             <div class="text-center mt-4">
-                <button id="load-more" class="btn btn-primary">Más resultados</button>
+                <button class="btn btn-primary" (click)="loadCourses()" [disabled]="loading || allLoaded">
+                    Más resultados
+                  </button>
+
+                  <div *ngIf="loading" class="mt-2">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Cargando...</span>
+                    </div>
+                  </div>
+                
+                  <p *ngIf="allLoaded" class="mt-2 text-muted">No hay más cursos.</p>
             </div>
 
             <!-- Charging Spinner -->
