@@ -1,15 +1,44 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { CourseBasicDTO } from '../dtos/courseBasic.dto';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
-  private apiUrl = 'https://localhost:8443/api/courses';
+  private apiUrl = '/api/courses/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
-  getCourses(page: number, size: number = 3) {
-    return this.http.get<any[]>(`${this.apiUrl}/?page=${page}&size=${size}&sortBy=id`);
+  /* getCourses(page: number, size: number = 3) {
+    return this.http.get<any[]>(`${this.apiUrl}?page=${page}&size=${size}&sortBy=id`);
+  } */
+
+  /* public getCourses(): Observable<CourseBasicDTO[]> {
+    return this.httpClient
+      .get(this.apiUrl)
+      .pipe(catchError((error) => this.handleError(error))) as Observable<
+      CourseBasicDTO[]
+    >;
+  } */
+
+  getCourses(page: number, size: number): Observable<CourseBasicDTO[]> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+    return this.httpClient.get<{ content: CourseBasicDTO[] }>(this.apiUrl, { params }).pipe(
+      map(response => response.content),
+      catchError(error => this.handleError(error))
+    );
   }
+
+  private handleError(error: any) {
+    console.log("ERROR:");
+    console.error(error);
+    return throwError("Server error (" + error.status + "): " + error.text());
+  }
+
 }

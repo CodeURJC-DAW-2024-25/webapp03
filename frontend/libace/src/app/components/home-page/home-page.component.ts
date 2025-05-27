@@ -23,7 +23,7 @@ export class HomePageComponent implements OnInit {
 
     this.loading = true;
 
-    this.courseService.getCourses(this.currentPage).subscribe({
+    this.courseService.getCourses(this.currentPage, 3).subscribe({
       next: (newCourses) => {
         if (newCourses.length === 0) {
           this.allLoaded = true;
