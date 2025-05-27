@@ -24,6 +24,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { Error403Component } from './components/error403/error403.component';
 import { Error404Component } from './components/error404/error404.component';
 import { Error500Component } from './components/error500/error500.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { Error500Component } from './components/error500/error500.component';
     ErrorComponent,
     Error403Component,
     Error404Component,
-    Error500Component
+    Error500Component,
+    ChartComponent
   ],
   imports: [
     BrowserModule,

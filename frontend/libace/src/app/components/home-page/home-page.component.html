@@ -89,42 +89,43 @@
             </div>
 
             <!-- Portfolio Modals-->
-            <!--
-            {{#courses}}
-            <div class="portfolio-modal modal fade" id="portfolioModal{{id}}" tabindex="-1" role="dialog"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
-                                alt="Close modal" />
-                        </div>
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <div class="modal-body">
-                                        <h2 class="text-uppercase">{{title}}</h2>
-                                        <img class="img-fluid" src="/courses/{{id}}/image" alt="{{title}}" />
-                                        <p>{{description}}</p>
-                                        <ul class="list-inline">
-                                            <li>
-                                                <strong>Categorías:</strong>
-                                                {{tags}}
-                                            </li>
-                                        </ul>
-                                        <a class="btn btn-primary btn-xl text-uppercase" href="/courses/{{id}}">
-                                            Ir al Curso
-                                        </a>
+            
+            <div *ngFor="let course of courses">
+                <div class="portfolio-modal modal fade" [id]="'portfolioModal' + course.id" tabindex="-1" role="dialog"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                                    alt="Close modal" />
+                            </div>
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8">
+                                        <div class="modal-body">
+                                            <h2 class="text-uppercase">{{ course.title }}</h2>
+                                            <img class="img-fluid" [src]="'/courses/' + course.id + '/image'" [alt]="course.title" />
+                                            <p>{{course.description}}</p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <strong>Categorías:</strong>
+                                                    <span *ngFor="let tag of course.tags">{{ tag }} </span>
+                                                </li>
+                                            </ul>
+                                            <a class="btn btn-primary btn-xl text-uppercase" [routerLink]="['/courses', course.id]">
+                                                Ir al Curso
+                                            </a>
 
-                                        
-                                        {{#admin}}
-                                        <a class="btn btn-secondary btn-xl text-uppercase" href="/editcourse/{{id}}">
-                                            Modificar Curso
-                                        </a>
-                                        <a class="btn btn-danger btn-xl text-uppercase" href="/removecourse/{{id}}">
-                                            <i class="fas fa-xmark me-1"></i>
-                                            Borrar Curso
-                                        </a>
-                                        {{/admin}}
+                                            <!--
+                                            
+                                            <a *ngIf="isAdmin" class="btn btn-secondary btn-xl text-uppercase" [routerLink]="['/editcourse', course.id]">
+                                                Modificar Curso
+                                            </a>
+                                            <a *ngIf="isAdmin" class="btn btn-danger btn-xl text-uppercase" [routerLink]="['/removecourse', course.id]">
+                                                <i class="fas fa-xmark me-1"></i>
+                                                Borrar Curso
+                                            </a>
+                                            -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -132,8 +133,7 @@
                     </div>
                 </div>
             </div>
-            {{/courses}}
-            -->
+            
 
             <!-- Option to create a course (only admins) 
             {{#admin}}
@@ -148,7 +148,7 @@
 -->
 
     <!-- Statistics Section -->
-    <section class="page-section" id="course-stats">
+    <!-- <section class="page-section" id="course-stats">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">Estadísticas de Usuarios por Curso</h2>
@@ -156,7 +156,8 @@
             </div>
             <canvas id="courseChart"></canvas>
         </div>
-    </section>
+    </section> -->
+    <app-chart></app-chart>
 
 
     <!--FILTER -->

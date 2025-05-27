@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="text-center mb-4">
+    <h2 class="section-heading text-uppercase">Estadísticas de Cursos</h2>
+    <h3 class="section-subheading text-muted">Inscripciones por curso</h3>
+  </div>
+
+  <div class="chart-container" style="position: relative; height: 400px;">
+    <canvas #ChartCanvas></canvas>
+  </div>
+
+  <div *ngIf="loading" class="text-center mt-3">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Cargando datos del gráfico...</span>
+    </div>
+  </div>
+</div>

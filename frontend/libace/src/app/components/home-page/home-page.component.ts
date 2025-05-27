@@ -16,6 +16,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCourses();
+    this.loadChart();
   }
 
   loadCourses() {
@@ -38,5 +39,9 @@ export class HomePageComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  loadChart() {
+    
   }
 }

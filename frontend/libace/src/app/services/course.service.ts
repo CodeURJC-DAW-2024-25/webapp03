@@ -13,19 +13,7 @@ export class CourseService {
 
   constructor(private httpClient: HttpClient) {}
 
-  /* getCourses(page: number, size: number = 3) {
-    return this.http.get<any[]>(`${this.apiUrl}?page=${page}&size=${size}&sortBy=id`);
-  } */
-
-  /* public getCourses(): Observable<CourseBasicDTO[]> {
-    return this.httpClient
-      .get(this.apiUrl)
-      .pipe(catchError((error) => this.handleError(error))) as Observable<
-      CourseBasicDTO[]
-    >;
-  } */
-
-  getCourses(page: number, size: number): Observable<CourseBasicDTO[]> {
+  public getCourses(page: number, size: number): Observable<CourseBasicDTO[]> {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
@@ -34,6 +22,8 @@ export class CourseService {
       catchError(error => this.handleError(error))
     );
   }
+
+  
 
   private handleError(error: any) {
     console.log("ERROR:");
