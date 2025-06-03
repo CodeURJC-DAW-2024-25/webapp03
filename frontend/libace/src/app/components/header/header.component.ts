@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-header',
@@ -6,6 +7,16 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  logged = false;
-  userName = "usuarioPrueba";
+
+  constructor(
+      private loginService: LoginService
+    ) {}
+
+  get logged(): boolean {
+    return this.loginService.isLogged();
+  }
+
+  get userName(): string {
+    return this.loginService.user?.email ?? '';
+  }
 }

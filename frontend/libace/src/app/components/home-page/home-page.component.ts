@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from '../../services/course.service';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-home-page',
@@ -12,11 +13,13 @@ export class HomePageComponent implements OnInit {
   loading = false;
   allLoaded = false;
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {
     this.loadCourses();
-    this.loadChart();
   }
 
   loadCourses() {
@@ -41,7 +44,8 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  loadChart() {
-    
+  get isAdmin(): boolean {
+    return this.loginService.isLogged();
   }
+
 }
