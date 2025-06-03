@@ -6,7 +6,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">LibACE</a>
+                    <a class="nav-link" routerLink="/">LibACE</a>
                 </li>
             </ul>
             <ng-container *ngIf="!logged">
@@ -18,14 +18,12 @@
 
             <ng-container *ngIf="logged">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/profile_page">
+                <li class="nav-item"><a class="nav-link" routerLink="/profile_page">
                     {{userName}}
                 </a></li>
                 <li class="nav-item">
-                    <form action="/logout" method="post" class="d-inline">
-                        <button class="btn btn-primary btn-nowrap" type="submit">Log Out</button>
-                        <!-- <input type="hidden" name="_csrf" value="{{token}}" /> -->
-                    </form>
+                    <button class="btn btn-primary btn-nowrap" (click)="logOut()">Log Out</button>
+                    <!-- <input type="hidden" name="_csrf" value="{{token}}" /> -->
                 </li>
             </ul>
             </ng-container>

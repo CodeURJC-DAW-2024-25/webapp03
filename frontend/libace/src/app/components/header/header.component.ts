@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { LoginService } from '../../services/login.service';
 export class HeaderComponent {
 
   constructor(
-      private loginService: LoginService
+      private loginService: LoginService, private router: Router
     ) {}
 
   get logged(): boolean {
@@ -18,5 +19,10 @@ export class HeaderComponent {
 
   get userName(): string {
     return this.loginService.user?.email ?? '';
+  }
+
+  logOut() {
+    this.loginService.logOut();
+    this.router.navigate(['/']);
   }
 }
