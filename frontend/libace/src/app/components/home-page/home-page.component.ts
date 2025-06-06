@@ -12,6 +12,8 @@ export class HomePageComponent implements OnInit {
   currentPage = 0;
   loading = false;
   allLoaded = false;
+  filteredCourses: any[] = [];
+  tagsInput: string = "";
 
   constructor(
     private courseService: CourseService,
@@ -40,6 +42,19 @@ export class HomePageComponent implements OnInit {
       error: (err) => {
         console.error('Error cargando cursos', err);
         this.loading = false;
+      }
+    });
+  }
+
+  filter(): void {
+    const tagsArray = this.tagsInput.split(',').map(tag => tag.trim()).filter(tag => tag);
+    this.courseService.filterCoursesByTags(tagsArray, 0, 10).subscribe({
+      next: (data) => {
+        this.filteredCourses = data.content;
+        this.courses = this.filteredCourses;
+      },
+      error: (err) => {
+        console.error('Error al filtrar cursos:', err);
       }
     });
   }

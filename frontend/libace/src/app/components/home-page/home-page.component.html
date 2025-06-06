@@ -146,13 +146,11 @@
 
     <!--FILTER -->
     <div class="container mt-3 mb-5">
-        <form action="/courses/filter" method="get">
+        <form (ngSubmit)="filter()">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" name="tags" placeholder="Filtrar por tags (separados por comas)"
-                    aria-label="Filtrar por tags" aria-describedby="filter-button">
-                <button class="btn btn-outline-secondary" type="submit" id="filter-button">Filtrar</button>
+                <input type="text" class="form-control" id="tags" [(ngModel)]="tagsInput" name="tags" placeholder="Filtrar por tags (separados por comas)" required/>
+                <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
             </div>
-            <!--<input type="hidden" name="_csrf" value="{{token}}" />-->
         </form>
     </div>
 

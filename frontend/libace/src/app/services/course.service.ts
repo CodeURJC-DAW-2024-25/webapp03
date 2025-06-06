@@ -22,13 +22,19 @@ export class CourseService {
       catchError(error => this.handleError(error))
     );
   }
-
   
-
   private handleError(error: any) {
     console.log("ERROR:");
     console.error(error);
     return throwError("Server error (" + error.status + "): " + error.text());
+  }
+
+  filterCoursesByTags(tags: string[], page: number = 0, size: number = 10): Observable<any> {
+    const params = new HttpParams()
+      .set('page', page)
+      .set('size', size);
+
+    return this.httpClient.post<any>(`${this.apiUrl}filter`, tags, { params });
   }
 
 }
