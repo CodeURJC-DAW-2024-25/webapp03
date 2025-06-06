@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CourseService {
-  private apiUrl = '/api/courses/';
+  private apiUrl = '/api/courses';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -17,7 +17,7 @@ export class CourseService {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
-    return this.httpClient.get<{ content: CourseBasicDTO[] }>(this.apiUrl, { params }).pipe(
+    return this.httpClient.get<{ content: CourseBasicDTO[] }>(`${this.apiUrl}/`, { params }).pipe(
       map(response => response.content),
       catchError(error => this.handleError(error))
     );
@@ -34,7 +34,11 @@ export class CourseService {
       .set('page', page)
       .set('size', size);
 
-    return this.httpClient.post<any>(`${this.apiUrl}filter`, tags, { params });
+    return this.httpClient.post<any>(`${this.apiUrl}/filter`, tags, { params });
+  }
+
+  deleteCourse(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
   }
 
 }

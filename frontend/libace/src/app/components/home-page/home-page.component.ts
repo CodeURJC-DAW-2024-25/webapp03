@@ -59,8 +59,25 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  deleteCourse(courseId: number): void {
+    this.courseService.deleteCourse(courseId).subscribe({
+      next: () => {
+        this.resetCourses();
+      },
+      error: (err) => {
+        console.error('Error al borrar curso:', err);
+      }
+    });
+}
+
   get isAdmin(): boolean {
     return this.loginService.isLogged();
+  }
+
+  private resetCourses(){
+    this.courses = [];
+    this.currentPage = 0;
+    this.loadCourses();
   }
 
 }

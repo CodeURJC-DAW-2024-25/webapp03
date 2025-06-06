@@ -111,14 +111,14 @@
                                                     <span *ngFor="let tag of course.tags">{{ tag }} </span>
                                                 </li>
                                             </ul>
-                                            <a class="btn btn-primary btn-xl text-uppercase" [routerLink]="['/courses', course.id]">
+                                            <a class="btn btn-primary btn-xl text-uppercase" [routerLink]="['/courses', course.id]" data-bs-dismiss="modal">
                                                 Ir al Curso
                                             </a>
 
-                                            <a *ngIf="isAdmin" class="btn btn-secondary btn-xl text-uppercase" [routerLink]="['/editcourse', course.id]">
+                                            <a *ngIf="isAdmin" class="btn btn-secondary btn-xl text-uppercase" [routerLink]="['/editcourse', course.id]" data-bs-dismiss="modal">
                                                 Modificar Curso
                                             </a>
-                                            <a *ngIf="isAdmin" class="btn btn-danger btn-xl text-uppercase" [routerLink]="['/removecourse', course.id]">
+                                            <a *ngIf="isAdmin" class="btn btn-danger btn-xl text-uppercase" (click)="deleteCourse(course.id)" data-bs-dismiss="modal">
                                                 <i class="fas fa-xmark me-1"></i>
                                                 Borrar Curso
                                             </a>
