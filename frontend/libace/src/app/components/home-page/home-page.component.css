@@ -1,0 +1,10 @@
+.close-modal img {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+    max-width: 30px;
+    max-height: 30px;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+}
