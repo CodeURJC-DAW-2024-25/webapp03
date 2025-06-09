@@ -1,1 +1,17 @@
-<p>profile-page works!</p>
+<app-header></app-header>
+
+
+<div class="container d-flex align-items-center vh-100">
+  <div class="text-center me-4">
+    <img *ngIf="user?.image" [src]="'/api/users/' + user?.id + '/image'" alt="Foto de perfil" style="width: 150px; height: 150px; border-radius: 50%;">
+
+    <div class="mt-2">
+      <a routerLink="/edit_profile" class="btn btn-secondary btn-sm">Editar Perfil</a>
+    </div>
+  </div>
+
+  <div>
+    <h3>Nombre: {{user?.name}}</h3>
+    <p>Correo: {{user?.email}}</p>
+  </div>
+</div>
