@@ -10,7 +10,6 @@ FROM maven:3.9.6-sapmachine-21 AS backend
 WORKDIR /project
 COPY backend/pom.xml /project/
 COPY backend/src /project/src
-RUN mvn clean install
 COPY --from=frontend /project/dist/libace/browser /project/src/main/resources/static/new
 RUN mvn clean package -DskipTests
 
