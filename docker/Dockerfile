@@ -1,7 +1,7 @@
 # Stage frontend
 FROM node:20.19-alpine AS frontend
 WORKDIR /project
-COPY /frontend .
+COPY /frontend/libace .
 RUN npm install
 RUN npm run build --configuration production
 
@@ -11,7 +11,7 @@ WORKDIR /project
 COPY backend/pom.xml /project/
 RUN mvn clean install
 COPY backend/src /project/src
-COPY --from=frontend /project/libace/dist/libace/browser /project/src/main/resources/static/new
+COPY --from=frontend /project/dist/libace/browser /project/src/main/resources/static/new
 RUN mvn clean package -DskipTests
 
 # Execution
