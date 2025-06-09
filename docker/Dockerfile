@@ -3,7 +3,7 @@ FROM node:20.19-alpine AS frontend
 WORKDIR /project
 COPY /frontend/libace .
 RUN npm install
-RUN npm run build --configuration production
+RUN npm run build -- --configuration production
 
 # Stage backend
 FROM maven:3.9.6-sapmachine-21 AS backend
