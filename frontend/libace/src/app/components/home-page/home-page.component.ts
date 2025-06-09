@@ -71,7 +71,7 @@ export class HomePageComponent implements OnInit {
 }
 
   get isAdmin(): boolean {
-    return this.loginService.isLogged();
+    return this.loginService.isAdmin();
   }
 
   private resetCourses(){

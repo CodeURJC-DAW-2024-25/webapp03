@@ -58,7 +58,7 @@ export class LoginService {
   }
 
   public isAdmin() {
-    return this.user && this.user.email === "admin@gmail.com";
+    return this.user?.email === "admin@gmail.com";
   }
 
   currentUser() {
