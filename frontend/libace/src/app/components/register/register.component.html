@@ -1,1 +1,63 @@
-<p>register works!</p>
+<app-header></app-header>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="col-md-4">
+    <h3 class="text-center mb-4">Cree una cuenta</h3>
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="input-group mb-3">
+        <span class="input-group-text">👤</span>
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          placeholder="Usuario"
+          required
+          [(ngModel)]="name"
+          #nameInput="ngModel"
+        >
+      </div>
+      <div *ngIf="nameInput.invalid && nameInput.touched" class="text-danger small mb-2">
+        El nombre es obligatorio.
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">📧</span>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="Correo"
+          required
+          email
+          [(ngModel)]="email"
+          #emailInput="ngModel"
+        >
+      </div>
+      <div *ngIf="emailInput.invalid && emailInput.touched" class="text-danger small mb-2">
+        Ingresa un correo válido.
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">🔒</span>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="Contraseña"
+          required
+          minlength="8"
+          [(ngModel)]="password"
+          #passwordInput="ngModel"
+        >
+      </div>
+      <div *ngIf="passwordInput.invalid && passwordInput.touched" class="text-danger small mb-2">
+        <span *ngIf="passwordInput.errors?.['required']">La contraseña es obligatoria.</span>
+        <span *ngIf="passwordInput.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</span>
+      </div>
+      <button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid">
+        Registrarse
+      </button>
+    </form>
+    <div *ngIf="error" class="alert alert-danger mt-3 text-center">{{ error }}</div>
+    <p class="text-muted text-center mt-3">
+      ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión aquí</a>
+    </p>
+  </div>
+</div>

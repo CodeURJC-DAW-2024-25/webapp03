@@ -31,6 +31,10 @@ export class LoginService {
     );
   }
 
+  register(name: string, email: string, password: string) {
+    return this.httpClient.post('/api/users/', { name, email, password });
+  }
+
   public logIn(user: string, pass: string) {
     return this.httpClient.post(
       this.apiUrl + "/login",
