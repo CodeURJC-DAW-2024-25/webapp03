@@ -1,1 +1,39 @@
-<p>user-list works!</p>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Administración de Usuarios</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <button (click)="deleteUser(user.id)" class="btn btn-danger btn-sm" [disabled]="!isAdmin">
+                            <i class="fas fa-trash-alt"></i> Eliminar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Mensajes y carga -->
+    <div *ngIf="users.length === 0 && !loading" class="alert alert-info text-center">
+        No hay usuarios registrados.
+    </div>
+
+    <div class="text-center mt-3">
+        <button *ngIf="!allLoaded" (click)="loadUsers()" [disabled]="loading" class="btn btn-primary">
+            {{ loading ? 'Cargando...' : 'Cargar más' }}
+        </button>
+    </div>
+</div>
