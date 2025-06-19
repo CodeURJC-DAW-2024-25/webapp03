@@ -32,6 +32,10 @@ export class UserService {
       );
   }
 
+  updateUser(userId: string, data: FormData) {
+    return this.http.put(`/api/users/${userId}`, data);
+  }
+
   private handleError(error: any) {
     console.log('error:');
     console.error(error);
