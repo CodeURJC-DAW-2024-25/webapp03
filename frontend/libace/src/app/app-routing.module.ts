@@ -9,6 +9,7 @@ import { CourseComponent } from './components/course/course.component';
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { ModifyProfileComponent } from './components/modify-profile/modify-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'courses/:id', component: CourseComponent },
   { path: 'editcourse/:id', component: EditCourseComponent },
   { path: 'admin/users', component: UserListComponent },
-  { path: 'profile_page', component: ProfilePageComponent }
+  { path: 'profile_page', component: ProfilePageComponent },
+  { path: 'edit_profile', component: ModifyProfileComponent }
 ];
 
 @NgModule({
