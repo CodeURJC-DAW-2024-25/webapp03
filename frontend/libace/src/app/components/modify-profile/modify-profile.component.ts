@@ -23,17 +23,23 @@ export class ModifyProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.getCurrentUser().subscribe(user => {
-      this.user = user;
-      this.originalEmail = user.email;
+    this.userService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.user = user;
+        this.originalEmail = user.email;
 
-      this.profileForm = this.fb.group({
-        name: [user.name],
-        email: [user.email],
-        password: [''],
-      });
+        this.profileForm = this.fb.group({
+          name: [user.name],
+          email: [user.email],
+          password: [''],
+        });
 
-      this.previewImageUrl = `/api/users/${user.id}/image`;
+        this.previewImageUrl = `/api/users/${user.id}/image`;
+      },
+      error: (_) => {
+        // Si no está autenticado, redirige al login
+        this.router.navigate(['/login']);
+      }
     });
   }
 
