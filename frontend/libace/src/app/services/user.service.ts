@@ -46,7 +46,8 @@ export class UserService {
   // Nuevo método para subir la imagen
   updateUserImage(userId: string, imageData: FormData): Observable<any> {
     return this.http.put(`${this.apiUrl}/${userId}/image`, imageData, {
-      withCredentials: true
+      withCredentials: true,
+      responseType: 'text' as 'json'
     }).pipe(
       catchError((error) => this.handleError(error))
     );
