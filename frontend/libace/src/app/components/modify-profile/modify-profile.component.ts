@@ -7,13 +7,14 @@ import { UserDTO } from '../../dtos/user.dto';
 @Component({
   selector: 'app-modify-profile',
   templateUrl: './modify-profile.component.html',
-  styleUrls: ['./modify-profile.component.css']  // ojo: era "styleUrl", debe ser "styleUrls"
+  styleUrls: ['./modify-profile.component.css']
 })
 export class ModifyProfileComponent implements OnInit {
   profileForm!: FormGroup;
   selectedImageFile: File | null = null;
   previewImageUrl: string | null = null;
   user: UserDTO | undefined;
+  originalEmail: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -24,6 +25,7 @@ export class ModifyProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(user => {
       this.user = user;
+      this.originalEmail = user.email;
 
       this.profileForm = this.fb.group({
         name: [user.name],
@@ -51,18 +53,44 @@ export class ModifyProfileComponent implements OnInit {
   onSubmit(): void {
     if (!this.user) return;
 
-    const formData = new FormData();
-    formData.append('name', this.profileForm.value.name);
-    formData.append('email', this.profileForm.value.email);
+    const updateData: any = {
+      name: this.profileForm.value.name,
+      email: this.profileForm.value.email,
+    };
+
+    // Añade la password solo si está escrita
     if (this.profileForm.value.password) {
-      formData.append('password', this.profileForm.value.password);
-    }
-    if (this.selectedImageFile) {
-      formData.append('image', this.selectedImageFile);
+      updateData.password = this.profileForm.value.password;
     }
 
-    this.userService.updateUser(this.user.id.toString(), formData).subscribe(() => {
-      this.router.navigate(['/profile_page']);
+    // 1. Actualiza los datos del usuario (sin imagen)
+    this.userService.updateUserData(this.user.id.toString(), updateData).subscribe({
+      next: () => {
+        // 2. Si hay imagen, súbela por separado
+        if (this.selectedImageFile) {
+          const formData = new FormData();
+          formData.append('imageFile', this.selectedImageFile);
+
+          this.userService.updateUserImage(this.user!.id.toString(), formData).subscribe({
+            next: () => this.redirectAfterUpdate(),
+            error: (err) => {
+              console.error('Error al subir la imagen:', err);
+              alert('Error al subir la imagen');
+            }
+          });
+        } else {
+          this.redirectAfterUpdate();
+        }
+      },
+      error: (err) => {
+        console.error('Error al guardar los cambios del usuario:', err);
+        alert('Error al guardar los cambios');
+      }
     });
+  }
+
+  redirectAfterUpdate(): void {
+    const emailEdited = this.profileForm.value.email !== this.originalEmail;
+    this.router.navigate([emailEdited ? '/login' : '/profile_page']);
   }
 }

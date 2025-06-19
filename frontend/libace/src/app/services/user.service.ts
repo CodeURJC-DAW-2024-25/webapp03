@@ -15,8 +15,9 @@ export class UserService {
   getCurrentUser(): Observable<UserDTO> {
     return this.http.get<UserDTO>(`${this.apiUrl}/me`, {
       withCredentials: true,
-    }); //Really needed for cookies? TODO
+    });
   }
+
   getAllBasicUsers(page: number, size: number): Observable<UserBasicDTO[]> {
     const params = new HttpParams()
       .set('page', page.toString())
@@ -32,13 +33,27 @@ export class UserService {
       );
   }
 
-  updateUser(userId: string, data: FormData) {
-    return this.http.put(`/api/users/${userId}`, data);
+  // Nuevo método para actualizar los datos del usuario
+  updateUserData(userId: string, data: { name: string; email: string; password: string }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${userId}`, data, {
+      withCredentials: true,
+      responseType: 'text' as 'json' // Esto evita el intento de parsear JSON
+    }).pipe(
+      catchError((error) => this.handleError(error))
+    );
+  }
+
+  // Nuevo método para subir la imagen
+  updateUserImage(userId: string, imageData: FormData): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${userId}/image`, imageData, {
+      withCredentials: true
+    }).pipe(
+      catchError((error) => this.handleError(error))
+    );
   }
 
   private handleError(error: any) {
-    console.log('error:');
-    console.error(error);
-    return throwError('Server Error (' + error.status + '): ' + error.text());
+    console.error('error:', error);
+    return throwError(() => new Error('Server Error (' + error.status + '): ' + error.message));
   }
 }
