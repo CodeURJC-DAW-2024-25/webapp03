@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { UserBasicDTO } from "../dtos/userBasic.dto";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { UserBasicDTO } from '../dtos/userBasic.dto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
   private apiUrl = '/api/auth';
@@ -16,7 +16,7 @@ export class LoginService {
   }
 
   public reqIsLogged() {
-    this.httpClient.get("/api/users/me", { withCredentials: true }).subscribe(
+    this.httpClient.get('/api/users/me', { withCredentials: true }).subscribe(
       (response) => {
         this.user = response as UserBasicDTO;
         this.logged = true;
@@ -24,7 +24,7 @@ export class LoginService {
       (error) => {
         if (error.status != 404) {
           console.error(
-            "Error when asking if logged: " + JSON.stringify(error)
+            'Error when asking if logged: ' + JSON.stringify(error)
           );
         }
       }
@@ -37,7 +37,7 @@ export class LoginService {
 
   public logIn(user: string, pass: string) {
     return this.httpClient.post(
-      this.apiUrl + "/login",
+      this.apiUrl + '/login',
       { username: user, password: pass },
       { withCredentials: true }
     );
@@ -45,9 +45,9 @@ export class LoginService {
 
   public logOut() {
     return this.httpClient
-      .post(this.apiUrl + "/logout", { withCredentials: true })
+      .post(this.apiUrl + '/logout', { withCredentials: true })
       .subscribe((_) => {
-        console.log("LOGOUT: Successfully");
+        console.log('LOGOUT: Successfully');
         this.logged = false;
         this.user = undefined;
       });
@@ -57,8 +57,8 @@ export class LoginService {
     return this.logged;
   }
 
-  public isAdmin() {
-    return this.user?.email === "admin@gmail.com";
+  public isAdmin(): boolean {
+    return this.user?.email === 'admin@gmail.com';
   }
 
   currentUser() {

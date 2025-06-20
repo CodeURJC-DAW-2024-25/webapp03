@@ -1,0 +1,57 @@
+.page-section {
+    padding: 6rem 0;
+    background-color: #f8f9fa;
+}
+
+.section-heading {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+}
+
+.section-subheading {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 4rem;
+    font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+.btn-xl {
+    padding: 1.25rem 2.5rem;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0.25rem;
+}
+
+.fa-stack {
+    display: inline-block;
+    height: 2em;
+    line-height: 2em;
+    position: relative;
+    vertical-align: middle;
+    width: 2.5em;
+    margin-bottom: 1.5rem;
+}
+
+.fa-stack-2x {
+    font-size: 2em;
+}
+
+.fa-stack-1x {
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}

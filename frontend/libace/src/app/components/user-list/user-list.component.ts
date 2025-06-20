@@ -22,18 +22,7 @@ export class UserListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.loginService.isLogged()) {
-      this.router.navigate(['/login']); // Redirigir a login si no está logueado
-      return;
-    }
-
-    // Verificar si el usuario es admin
-    if (!this.loginService.isAdmin()) {
-      this.router.navigate(['/error']); // Redirigir a página de error si no es admin
-      return;
-    }
-
-    this.loadUsers();
+    this.checkAccess();
   }
 
   loadUsers(): void {
@@ -72,5 +61,24 @@ export class UserListComponent implements OnInit {
   loadMore(): void {
     if (this.allLoaded) return;
     this.loadUsers();
+  }
+
+  private checkAccess(): void {
+    this.loginService.reqIsLogged(); // Actualiza el estado de autenticación
+
+    // Verificación después de un pequeño retraso para asegurar que reqIsLogged() complete
+    setTimeout(() => {
+      if (!this.loginService.isLogged()) {
+        this.router.navigate(['/login']);
+        return;
+      }
+
+      if (!this.loginService.isAdmin()) {
+        this.router.navigate(['/error']);
+        return;
+      }
+
+      this.loadUsers();
+    }, 100); // Pequeño retraso para asegurar la actualización
   }
 }

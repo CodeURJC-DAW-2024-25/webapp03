@@ -10,6 +10,7 @@ import { EditCourseComponent } from './components/edit-course/edit-course.compon
 import { UserListComponent } from './components/user-list/user-list.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { ModifyProfileComponent } from './components/modify-profile/modify-profile.component';
+import { ErrorComponent } from './components/error/error.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -20,11 +21,12 @@ const routes: Routes = [
   { path: 'editcourse/:id', component: EditCourseComponent },
   { path: 'admin/users', component: UserListComponent },
   { path: 'profile_page', component: ProfilePageComponent },
-  { path: 'edit_profile', component: ModifyProfileComponent }
+  { path: 'edit_profile', component: ModifyProfileComponent },
+  { path: 'error', component: ErrorComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
