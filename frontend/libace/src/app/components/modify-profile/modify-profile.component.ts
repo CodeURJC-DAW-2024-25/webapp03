@@ -34,7 +34,14 @@ export class ModifyProfileComponent implements OnInit {
           password: [''],
         });
 
-        this.previewImageUrl = `/api/users/${user.id}/image`;
+        this.userService.getUserImage(user.id.toString()).subscribe({
+          next: (blob) => {
+            this.previewImageUrl = URL.createObjectURL(blob);
+          },
+          error: (err) => {
+            console.error('Error loading user image:', err);
+          }
+        });
       },
       error: (_) => {
         // Si no está autenticado, redirige al login
