@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UserBasicDTO } from '../../dtos/userBasic.dto';
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-users',
@@ -16,10 +17,22 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    if (!this.loginService.isLogged()) {
+      this.router.navigate(['/login']); // Redirigir a login si no está logueado
+      return;
+    }
+
+    // Verificar si el usuario es admin
+    if (!this.loginService.isAdmin()) {
+      this.router.navigate(['/error']); // Redirigir a página de error si no es admin
+      return;
+    }
+
     this.loadUsers();
   }
 
