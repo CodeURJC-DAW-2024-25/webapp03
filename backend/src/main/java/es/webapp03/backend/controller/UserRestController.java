@@ -93,9 +93,16 @@ public class UserRestController {
                     .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
                     .contentLength(userDTO.imageFile().length())
                     .body(file);
+        } else {
+            // Return default image
+            Resource defaultImage = new InputStreamResource(
+                getClass().getResourceAsStream("/static/assets/user_image_default.jpg")
+            );
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+                    .body(defaultImage);
         }
 
-        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/{id}")

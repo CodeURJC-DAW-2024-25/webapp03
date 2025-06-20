@@ -1,9 +1,8 @@
 <app-header></app-header>
 
-
 <div class="container d-flex align-items-center vh-100">
   <div class="text-center me-4">
-    <img *ngIf="user" [src]="'/api/users/' + user?.id + '/image'" alt="Foto de perfil" style="width: 150px; height: 150px; border-radius: 50%;">
+    <img *ngIf="user" [src]="userImageUrl" alt="Foto de perfil" style="width: 150px; height: 150px; border-radius: 50%;">
 
     <div class="mt-2">
       <a routerLink="/edit_profile" class="btn btn-secondary btn-sm">Editar Perfil</a>

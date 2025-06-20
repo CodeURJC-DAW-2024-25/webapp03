@@ -56,6 +56,25 @@ export class UserService {
       .pipe(catchError((error) => this.handleError(error)));
   }
 
+  getUserImage(userId: string): Observable<Blob> {
+    return this.http
+      .get(`${this.apiUrl}/${userId}/image`, {
+        responseType: 'blob',
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status === 404) {
+            // Return default image as Blob
+            return this.http.get('assets/img/user_image_default.jpg', {
+              responseType: 'blob',
+            });
+          }
+          return this.handleError(error);
+        })
+      );
+  }
+
   private handleError(error: any) {
     console.error('error:', error);
     return throwError(
