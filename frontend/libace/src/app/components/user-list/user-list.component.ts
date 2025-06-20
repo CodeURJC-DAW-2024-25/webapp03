@@ -9,9 +9,6 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
-  deleteUser(arg0: number | undefined) {
-    throw new Error('Method not implemented.');
-  }
   users: UserBasicDTO[] = []; // Usamos UserBasicDTO aquí
   currentPage = 0;
   loading = false;
@@ -48,5 +45,22 @@ export class UserListComponent implements OnInit {
 
   get isAdmin(): boolean {
     return this.loginService.isAdmin();
+  }
+
+  deleteUser(userId: number): void {
+    if (!this.isAdmin) return;
+    this.userService.deleteUser(userId).subscribe({
+      next: () => {
+        this.users = this.users.filter((user) => user.id !== userId);
+      },
+      error: (err) => {
+        console.error('Error deleting user:', err);
+      },
+    });
+  }
+
+  loadMore(): void {
+    if (this.loading || this.allLoaded) return;
+    this.loadUsers();
   }
 }
