@@ -24,9 +24,7 @@ export class UserListComponent implements OnInit {
   }
 
   loadUsers(): void {
-    if (this.loading || this.allLoaded) return;
-
-    this.loading = true;
+    if (this.allLoaded) return;
     this.userService.getAllBasicUsers(this.currentPage, 3).subscribe({
       next: (newUsers) => {
         if (newUsers.length === 0) {
@@ -38,7 +36,6 @@ export class UserListComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error loading users:', err);
-        this.loading = false;
       },
     });
   }
@@ -60,7 +57,7 @@ export class UserListComponent implements OnInit {
   }
 
   loadMore(): void {
-    if (this.loading || this.allLoaded) return;
+    if (this.allLoaded) return;
     this.loadUsers();
   }
 }
