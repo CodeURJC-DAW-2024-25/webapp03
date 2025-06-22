@@ -3,7 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { CourseBasicDTO } from '../dtos/courseBasic.dto';
+import { CourseInputDTO } from '../dtos/courseInput.dto';
 import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +37,10 @@ export class CourseService {
       .set('size', size);
 
     return this.httpClient.post<any>(`${this.apiUrl}/filter`, tags, { params });
+  }
+
+  createCourse(newCourse: CourseInputDTO): Observable<void> {
+    return this.httpClient.post<void>(`${this.apiUrl}/`, newCourse);
   }
 
   deleteCourse(id: number): Observable<void> {

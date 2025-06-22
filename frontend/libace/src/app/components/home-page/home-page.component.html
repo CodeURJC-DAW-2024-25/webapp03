@@ -1,128 +1,105 @@
-<!--<!DOCTYPE html>
-<html lang="en">
+<app-header></app-header>
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>LibACE</title>
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container">
+        <div class="masthead-subheading">¡Bienvenido a LibACE!</div>
+        <div class="masthead-heading text-uppercase">¿Preparado para aprender?</div>
+    </div>
+</header>
 
-    <link rel="icon" type="image/x-icon" href="/assets/LibACE_icon.jpeg" />
-
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-
-    <link href="/css/styles.css" rel="stylesheet" />
-</head>
--->
-<!-- <body id="page-top"> -->
-    <!-- Navigation-->
-    <app-header></app-header>
-
-    <!-- Masthead-->
-    <header class="masthead">
-        <div class="container">
-            <div class="masthead-subheading">¡Bienvenido a LibACE!</div>
-            <div class="masthead-heading text-uppercase">¿Preparado para aprender?</div>
+<!-- Portfolio Grid-->
+<section class="page-section bg-light" id="portfolio">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Cursos</h2>
+            <h3 class="section-subheading text-muted">A continuación se encuentran los cursos disponibles.</h3>
         </div>
-    </header>
-
-    <!-- Portfolio Grid-->
-    <section class="page-section bg-light" id="portfolio">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase">Cursos</h2>
-                <h3 class="section-subheading text-muted">A continuación se encuentran los cursos disponibles.</h3>
-            </div>
-            <!-- Container for courses -->
-            <div id="course-container" class="row">
-                <!--{{#courses}}-->
-                <div *ngFor="let course of courses" class="col-lg-4 col-sm-6 mb-4">
-                <!-- Portfolio item -->
-                    <div class="portfolio-item">
-                        <a class="portfolio-link" data-bs-toggle="modal" [href]="'#portfolioModal' + course.id">
-                        <!-- <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{id}}"> -->
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" [src]="'/courses/' + course.id + '/image'" [alt]="course.title" />
-                            <!-- <img class="img-fluid" src="/courses/{{id}}/image" alt="{{title}}" /> -->
-                        </a>
-                        <div class="portfolio-caption">
-                            <div class="portfolio-caption-heading">{{ course.title }}</div>
-                            <!-- <div class="portfolio-caption-heading">{{title}}</div> -->
-                            <div class="portfolio-caption-subheading text-muted">
-                                <span *ngFor="let tag of course.tags" class="badge bg-secondary">{{ tag }}</span>
-                                <!--{{#tags}}-->
-                                    <!-- <span class="badge bg-secondary">{{.}}</span> -->
-                                <!--{{/tags}}-->
-                            </div>
+        <!-- Container for courses -->
+        <div id="course-container" class="row">
+            <!--{{#courses}}-->
+            <div *ngFor="let course of courses" class="col-lg-4 col-sm-6 mb-4">
+            <!-- Portfolio item -->
+                <div class="portfolio-item">
+                    <a class="portfolio-link" data-bs-toggle="modal" [href]="'#portfolioModal' + course.id">
+                    <!-- <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{id}}"> -->
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                        </div>
+                        <img class="img-fluid" [src]="'/courses/' + course.id + '/image'" [alt]="course.title" />
+                        <!-- <img class="img-fluid" src="/courses/{{id}}/image" alt="{{title}}" /> -->
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">{{ course.title }}</div>
+                        <!-- <div class="portfolio-caption-heading">{{title}}</div> -->
+                        <div class="portfolio-caption-subheading text-muted">
+                            <span *ngFor="let tag of course.tags" class="badge bg-secondary">{{ tag }}</span>
+                            <!--{{#tags}}-->
+                                <!-- <span class="badge bg-secondary">{{.}}</span> -->
+                            <!--{{/tags}}-->
                         </div>
                     </div>
                 </div>
-                </div>
-               <!-- {{/courses}}-->
             </div>
-
-            <div class="text-center mt-4">
-                <button class="btn btn-primary" (click)="loadCourses()" [disabled]="loading || allLoaded">
-                    Más resultados
-                  </button>
-
-                  <div *ngIf="loading" class="mt-2">
-                    <div class="spinner-border" role="status">
-                      <span class="visually-hidden">Cargando...</span>
-                    </div>
-                  </div>
-                
-                  <p *ngIf="allLoaded" class="mt-2 text-muted">No hay más cursos.</p>
             </div>
+            <!-- {{/courses}}-->
+        </div>
 
-            <!-- Charging Spinner -->
-            <div id="loading-spinner" class="text-center" style="display: none;">
+        <div class="text-center mt-4">
+            <button class="btn btn-primary" (click)="loadCourses()" [disabled]="loading || allLoaded">
+                Más resultados
+                </button>
+
+                <div *ngIf="loading" class="mt-2">
                 <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
+                    <span class="visually-hidden">Cargando...</span>
                 </div>
-            </div>
-
-            <!-- Portfolio Modals-->
+                </div>
             
-            <div *ngFor="let course of courses">
-                <div class="portfolio-modal modal fade" [id]="'portfolioModal' + course.id" tabindex="-1" role="dialog"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
-                                    alt="Close modal" />
-                            </div>
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-8">
-                                        <div class="modal-body">
-                                            <h2 class="text-uppercase">{{ course.title }}</h2>
-                                            <img class="img-fluid" [src]="'/courses/' + course.id + '/image'" [alt]="course.title" />
-                                            <p>{{course.description}}</p>
-                                            <ul class="list-inline">
-                                                <li>
-                                                    <strong>Categorías:</strong>
-                                                    <span *ngFor="let tag of course.tags">{{ tag }} </span>
-                                                </li>
-                                            </ul>
-                                            <a class="btn btn-primary btn-xl text-uppercase" [routerLink]="['/courses', course.id]" data-bs-dismiss="modal">
-                                                Ir al Curso
-                                            </a>
+                <p *ngIf="allLoaded" class="mt-2 text-muted">No hay más cursos.</p>
+        </div>
 
-                                            <a *ngIf="isAdmin" class="btn btn-secondary btn-xl text-uppercase" [routerLink]="['/editcourse', course.id]" data-bs-dismiss="modal">
-                                                Modificar Curso
-                                            </a>
-                                            <a *ngIf="isAdmin" class="btn btn-danger btn-xl text-uppercase" (click)="deleteCourse(course.id)" data-bs-dismiss="modal">
-                                                <i class="fas fa-xmark me-1"></i>
-                                                Borrar Curso
-                                            </a>
-                                        </div>
+        <!-- Charging Spinner -->
+        <div id="loading-spinner" class="text-center" style="display: none;">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Portfolio Modals-->
+        
+        <div *ngFor="let course of courses">
+            <div class="portfolio-modal modal fade" [id]="'portfolioModal' + course.id" tabindex="-1" role="dialog"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                                alt="Close modal" />
+                        </div>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="modal-body">
+                                        <h2 class="text-uppercase">{{ course.title }}</h2>
+                                        <img class="img-fluid" [src]="'/courses/' + course.id + '/image'" [alt]="course.title" />
+                                        <p>{{course.description}}</p>
+                                        <ul class="list-inline">
+                                            <li>
+                                                <strong>Categorías:</strong>
+                                                <span *ngFor="let tag of course.tags">{{ tag }} </span>
+                                            </li>
+                                        </ul>
+                                        <a class="btn btn-primary btn-xl text-uppercase" [routerLink]="['/courses', course.id]" data-bs-dismiss="modal">
+                                            Ir al Curso
+                                        </a>
+
+                                        <a *ngIf="isAdmin" class="btn btn-secondary btn-xl text-uppercase" [routerLink]="['/editcourse', course.id]" data-bs-dismiss="modal">
+                                            Modificar Curso
+                                        </a>
+                                        <a *ngIf="isAdmin" class="btn btn-danger btn-xl text-uppercase" (click)="deleteCourse(course.id)" data-bs-dismiss="modal">
+                                            <i class="fas fa-xmark me-1"></i>
+                                            Borrar Curso
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -130,38 +107,36 @@
                     </div>
                 </div>
             </div>
-            
+        </div>
+        
 
-            <!-- Option to create a course (only admins) -->
-            <div *ngIf="isAdmin" class="text-center mt-4">
-                <a [routerLink]="['/newcourse']" class="btn btn-success btn-xl text-uppercase">Crear Nuevo Curso</a>
-                <a [routerLink]="['/admin/users']" class="btn btn-secondary btn-xl text-uppercase">Lista de usuarios</a>
-            </div>
-    </section>
-
-
-    
-    <app-chart></app-chart>
+        <!-- Option to create a course (only admins) -->
+        <div *ngIf="isAdmin" class="text-center mt-4">
+            <a [routerLink]="['/newcourse']" class="btn btn-success btn-xl text-uppercase">Crear Nuevo Curso</a>
+            <a [routerLink]="['/admin/users']" class="btn btn-secondary btn-xl text-uppercase">Lista de usuarios</a>
+        </div>
+</section>
 
 
-    <!--FILTER -->
-    <div class="container mt-3 mb-5">
-        <form (ngSubmit)="filter()">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" id="tags" [(ngModel)]="tagsInput" name="tags" placeholder="Filtrar por tags (separados por comas)" required/>
-                <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
-            </div>
-        </form>
-    </div>
 
-    <!-- Bootstrap core JS (ruta absoluta) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS (ruta absoluta) -->
-    <script src="/js/scripts.js"></script>
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/chart.js"></script>
-<!-- </body> -->
+<app-chart></app-chart>
 
 
-<!--</html>-->
+<!--FILTER -->
+<div class="container mt-3 mb-5">
+    <form (ngSubmit)="filter()">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="tags" [(ngModel)]="tagsInput" name="tags" placeholder="Filtrar por tags (separados por comas)" required/>
+            <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
+        </div>
+    </form>
+</div>
+
+<!-- Bootstrap core JS (ruta absoluta) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS (ruta absoluta) -->
+<script src="/js/scripts.js"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/js/chart.js"></script>
+
