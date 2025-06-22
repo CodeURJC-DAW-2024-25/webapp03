@@ -12,6 +12,8 @@ export class NewCourseComponent {
   courseTitle = '';
   courseDescription = '';
   courseTags = '';
+
+  selectedImage: File | null = null;
   
   constructor(private courseService: CourseService, private router: Router) {}
 
@@ -20,17 +22,35 @@ export class NewCourseComponent {
       .split(',')
       .map(tag => tag.trim())
       .filter(tag => tag.length > 0);
+
     const newCourse: CourseInputDTO = {
       title: this.courseTitle,
       description: this.courseDescription,
       tags: courseTagsList
     };
+
     this.courseService.createCourse(newCourse).subscribe({
-      next: () => {
-        this.router.navigate(['/']);
-        },
-      error: (err) => alert('Login fallido'),
+      next: (createdCourse) => {
+        if (this.selectedImage) {
+          const imageFormData = new FormData();
+          imageFormData.append('imageFile', this.selectedImage);
+          this.courseService.uploadCourseImage(createdCourse.id, imageFormData).subscribe({
+            next: () => this.router.navigate(['/']),
+            error: (err) => alert('Error al subir imagen'),
+          });
+        } else {
+          this.router.navigate(['/']);
+        }
+      },
+      error: (err) => alert('Error al crear curso'),
     });
+  }
+
+  onImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedImage = input.files[0];
+    }
   }
 
 }
