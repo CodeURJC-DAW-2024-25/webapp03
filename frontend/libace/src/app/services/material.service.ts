@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { HttpClient, HttpParams, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map, last } from 'rxjs/operators';
 import { MaterialBasicDTO } from '../dtos/materialBasic.dto';
-import { MaterialDTO } from '../dtos/material.dto';
-import { map } from 'rxjs/operators';
-
 
 @Injectable({
     providedIn: 'root'
@@ -15,48 +12,50 @@ export class MaterialService {
 
     constructor(private httpClient: HttpClient) { }
 
-    getAllMaterialBasicDTOs(page: number, size: number): Observable<MaterialBasicDTO[]> {
+    getAllBasicDTOs(page: number, size: number): Observable<MaterialBasicDTO[]> {
         const params = new HttpParams()
             .set('page', page.toString())
             .set('size', size.toString());
 
-        return this.httpClient.get<{ content: MaterialBasicDTO[] }>(`${this.apiUrl}/basic`, { params }).pipe(
+        return this.httpClient.get<{ content: MaterialBasicDTO[] }>(`${this.apiUrl}/`, {
+            params,
+            withCredentials: true
+        }).pipe(
             map(response => response.content),
             catchError(error => this.handleError(error))
         );
     }
 
-    getMaterialById(id: number): Observable<MaterialDTO> {
-        return this.httpClient.get<MaterialDTO>(`${this.apiUrl}/dto/${id}`).pipe(
+    uploadFile(courseId: number, file: File): Observable<MaterialBasicDTO> {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        return this.httpClient.post<MaterialBasicDTO>(`${this.apiUrl}/courses/${courseId}/`, formData, {
+            withCredentials: true
+        }).pipe(
             catchError(error => this.handleError(error))
         );
     }
 
-    saveMaterial(material: any): Observable<void> {
-        return this.httpClient.post<void>(`${this.apiUrl}/`, material).pipe(
+    downloadFile(courseId: number, materialId: number): Observable<Blob> {
+        return this.httpClient.get(`${this.apiUrl}/courses/${courseId}/materials/${materialId}/`, {
+            responseType: 'blob',
+            withCredentials: true
+        }).pipe(
             catchError(error => this.handleError(error))
         );
     }
 
-    deleteMaterial(id: number): Observable<void> {
-        return this.httpClient.delete<void>(`${this.apiUrl}/${id}`).pipe(
-            catchError(error => this.handleError(error))
-        );
-    }
-
-    getByCourseId(courseId: number, page: number, size: number): Observable<MaterialBasicDTO[]> {
-        const params = new HttpParams()
-            .set('page', page.toString())
-            .set('size', size.toString());
-
-        return this.httpClient.get<{ content: MaterialBasicDTO[] }>(`${this.apiUrl}/course/${courseId}/dto`, { params }).pipe(
-            map(response => response.content),
+    deleteFile(courseId: number, materialId: number): Observable<void> {
+        return this.httpClient.delete<void>(`${this.apiUrl}/courses/${courseId}/materials/${materialId}/`, {
+            withCredentials: true
+        }).pipe(
             catchError(error => this.handleError(error))
         );
     }
 
     private handleError(error: any) {
-        console.error("ERROR:", error);
-        return throwError(() => new Error("Server error (" + error.status + "): " + error.statusText));
+        console.error('MaterialService error:', error);
+        return throwError(() => new Error("Server error (" + error.status + "): " + error.message));
     }
 }

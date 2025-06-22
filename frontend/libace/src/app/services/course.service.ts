@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
 export class CourseService {
   private apiUrl = '/api/courses';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   public getCourses(page: number, size: number): Observable<CourseBasicDTO[]> {
     const params = new HttpParams()
@@ -24,7 +24,13 @@ export class CourseService {
       catchError(error => this.handleError(error))
     );
   }
-  
+
+  getCourseById(id: number): Observable<CourseBasicDTO> {
+    return this.httpClient.get<CourseBasicDTO>(`${this.apiUrl}/${id}`).pipe(
+      catchError(error => this.handleError(error))
+    );
+  }
+
   private handleError(error: any) {
     console.log("ERROR:");
     console.error(error);
