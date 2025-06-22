@@ -4,6 +4,8 @@ import { CourseBasicDTO } from '../../dtos/courseBasic.dto';
 import { MaterialBasicDTO } from '../../dtos/materialBasic.dto';
 import { CourseService } from '../../services/course.service';
 import { MaterialService } from '../../services/material.service';
+import { LoginService } from '../../services/login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course',
@@ -30,19 +32,29 @@ export class CourseComponent implements OnInit {
   logged = false;
   admin = false;
 
+  private userSub!: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
     private materialService: MaterialService,
-
+    private loginService: LoginService
   ) { }
+
   ngOnInit(): void {
     this.courseId = Number(this.route.snapshot.paramMap.get('id'));
 
-
+    this.logged = this.loginService.isLogged();
+    this.admin = this.loginService.isAdmin();
 
     this.loadCourse();
     this.loadMaterials();
+  }
+
+  ngOnDestroy(): void {
+    if (this.userSub) {
+      this.userSub.unsubscribe();
+    }
   }
 
   loadCourse(): void {
@@ -68,7 +80,7 @@ export class CourseComponent implements OnInit {
   }
 
   loadComments(): void {
-
+    // Tu lógica de comentarios (si decides añadirla)
   }
 
   onFileSelected(event: Event): void {
@@ -100,11 +112,11 @@ export class CourseComponent implements OnInit {
   }
 
   onSubmitComment(): void {
-
+    // Lógica para añadir comentario
   }
 
   onDeleteComment(id: number): void {
-
+    // Lógica para eliminar comentario
   }
 
   loadMoreMaterials(): void {
