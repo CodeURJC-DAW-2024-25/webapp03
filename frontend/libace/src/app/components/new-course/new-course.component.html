@@ -16,12 +16,11 @@
                     aria-label="Tags" aria-describedby="tags-addon">
             </div>
 
-<!-- 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="image-addon"></span>
-                <input type="file" class="form-control" name="imageField" [(ngModel)]="courseImage" aria-label="Imagen del curso"
+                <input type="file" class="form-control" name="imageField" (change)="onImageSelected($event)" accept="image/*" aria-label="Imagen del curso"
                     aria-describedby="image-addon">
-            </div> -->
+            </div>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="description-addon"></span>

@@ -39,12 +39,21 @@ export class CourseService {
     return this.httpClient.post<any>(`${this.apiUrl}/filter`, tags, { params });
   }
 
-  createCourse(newCourse: CourseInputDTO): Observable<void> {
-    return this.httpClient.post<void>(`${this.apiUrl}/`, newCourse);
+  createCourse(newCourse: CourseInputDTO): Observable<CourseBasicDTO> {
+    return this.httpClient.post<CourseBasicDTO>(`${this.apiUrl}/`, newCourse);
   }
 
   deleteCourse(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  uploadCourseImage(id: number, imageData: FormData): Observable<any> {
+    return this.httpClient
+      .post(`${this.apiUrl}/${id}/image`, imageData, {
+        withCredentials: true,
+        responseType: 'text' as 'json',
+      })
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
 }
