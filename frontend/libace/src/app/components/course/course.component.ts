@@ -5,7 +5,9 @@ import { MaterialBasicDTO } from '../../dtos/materialBasic.dto';
 import { CourseService } from '../../services/course.service';
 import { MaterialService } from '../../services/material.service';
 import { LoginService } from '../../services/login.service';
-import { Subscription } from 'rxjs';
+import { CommentService } from '../../services/comment.service';
+import { CommentBasicDTO } from '../../dtos/commentBasic.dto';
+
 
 @Component({
   selector: 'app-course',
@@ -17,7 +19,8 @@ export class CourseComponent implements OnInit {
   course!: CourseBasicDTO;
   materials: MaterialBasicDTO[] = [];
 
-  newCommentText: string = '';
+  comments: CommentBasicDTO[] = [];
+
   selectedFile?: File;
 
   courseId!: number;
@@ -32,13 +35,13 @@ export class CourseComponent implements OnInit {
   logged = false;
   admin = false;
 
-  private userSub!: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
     private materialService: MaterialService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private commentService: CommentService
   ) { }
 
   ngOnInit(): void {
@@ -49,13 +52,9 @@ export class CourseComponent implements OnInit {
 
     this.loadCourse();
     this.loadMaterials();
+    this.loadComments();
   }
 
-  ngOnDestroy(): void {
-    if (this.userSub) {
-      this.userSub.unsubscribe();
-    }
-  }
 
   loadCourse(): void {
     this.courseService.getCourseById(this.courseId).subscribe({
@@ -80,7 +79,17 @@ export class CourseComponent implements OnInit {
   }
 
   loadComments(): void {
-    // Tu lógica de comentarios (si decides añadirla)
+    this.loadingComments = true;
+    this.commentService.getComments(this.courseId).subscribe({
+      next: (comments) => {
+        this.comments = comments;
+        this.loadingComments = false;
+      },
+      error: (err) => {
+        console.error('Error cargando comentarios', err);
+        this.loadingComments = false;
+      }
+    });
   }
 
   onFileSelected(event: Event): void {
@@ -96,7 +105,7 @@ export class CourseComponent implements OnInit {
       next: () => {
         this.pageMaterial = 0;
         this.materials = [];
-        this.loadMaterials(); // recarga desde cero
+        this.loadMaterials();
       },
       error: (err) => console.error('Error subiendo material', err)
     });
@@ -112,7 +121,6 @@ export class CourseComponent implements OnInit {
   }
 
   onSubmitComment(): void {
-    // Lógica para añadir comentario
   }
 
   onDeleteComment(id: number): void {
