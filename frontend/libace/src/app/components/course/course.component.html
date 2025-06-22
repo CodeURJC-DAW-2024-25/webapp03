@@ -1,1 +1,20 @@
-<p>course works!</p>
+<app-header></app-header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <img *ngIf="course" [src]="courseImageUrl" alt="Course Image" class="img-fluid rounded mb-3">
+            <h2>{{ course?.name }}</h2>
+            <p>{{ course?.description }}</p>
+            <a [routerLink]="['/courses', course?.id, 'edit']" class="btn btn-primary">Editar Curso</a>
+        </div>
+        <div class="col-md-9">
+            <h3>Material</h3>
+            <ul class="list-group">
+                <li *ngFor="let material of course?.material" class="list-group-item">
+                    {{ material.name }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
