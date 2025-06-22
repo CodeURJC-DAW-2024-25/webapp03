@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <!-- If the user is logged -->
-<div *ngIf="logged" class="container mt-5 pt-5 text-center">
+<div *ngIf="logged" class="container mt-5 pt-5 text-center mx-auto">
     <h1>{{ course.title }}</h1>
     <p>{{ course.description }}</p>
 
@@ -51,7 +51,29 @@
     <!-- Comments -->
     <div class="comment-section mt-4">
         <h3>Comentarios</h3>
+        <div *ngIf="comments.length > 0; else noComments">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let comment of comments">
+                    <small class="text-muted">{{ comment.createdDate | date:'shortDate' }}</small>
+                    <p>{{ comment.text }}</p>
+                </li>
+            </ul>
+        </div>
 
+        <ng-template #noComments>
+            <p class="text-muted">No hay comentarios aún.</p>
+        </ng-template>
+
+        <div id="load-more-comment-section" class="text-center mb-4 mt-3 mx-auto">
+            <button id="load-more-comment-btn" class="btn btn-primary" (click)="loadMoreComments()"
+                [disabled]="loadingComments">
+                Mostrar más
+            </button>
+            <div id="loading-comment-spinner" class="spinner-border text-primary ms-2" role="status"
+                *ngIf="loadingComments">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+        </div>
 
     </div>
 </div>
