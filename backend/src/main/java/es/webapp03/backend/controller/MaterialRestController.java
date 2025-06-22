@@ -48,6 +48,14 @@ public class MaterialRestController {
         return ResponseEntity.ok(materials);
     }
 
+    @GetMapping("/courses/{courseId}")
+    public ResponseEntity<Page<MaterialBasicDTO>> getMaterialsByCourse(
+            @PathVariable Long courseId, Pageable pageable) {
+
+        Page<MaterialBasicDTO> materials = materialService.findDTOByCourseId(courseId, pageable);
+        return ResponseEntity.ok(materials);
+    }
+
     // Endpoint upload material to course
     @PostMapping("/courses/{id}/")
     public ResponseEntity<MaterialBasicDTO> uploadFile(@PathVariable Long id,

@@ -66,7 +66,7 @@ export class CourseComponent implements OnInit {
 
   loadMaterials(): void {
     this.loadingMaterials = true;
-    this.materialService.getAllBasicDTOs(this.pageMaterial, this.pageSize).subscribe({
+    this.materialService.getByCourseId(this.courseId, this.pageMaterial, this.pageSize).subscribe({
       next: (data) => {
         this.materials = this.materials.concat(data);
         this.pageMaterial++;

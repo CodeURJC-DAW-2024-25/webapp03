@@ -26,6 +26,23 @@ export class MaterialService {
         );
     }
 
+    getByCourseId(courseId: number, page: number, size: number): Observable<MaterialBasicDTO[]> {
+        const params = new HttpParams()
+            .set('page', page.toString())
+            .set('size', size.toString());
+
+        return this.httpClient.get<{ content: MaterialBasicDTO[] }>(
+            `${this.apiUrl}/courses/${courseId}`,
+            {
+                params,
+                withCredentials: true
+            }).pipe(
+                map(response => response.content),
+                catchError(error => this.handleError(error))
+            );
+    }
+
+
     uploadFile(courseId: number, file: File): Observable<MaterialBasicDTO> {
         const formData = new FormData();
         formData.append('file', file);
