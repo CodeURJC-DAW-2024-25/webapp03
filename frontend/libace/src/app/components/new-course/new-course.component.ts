@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CourseService } from '../../services/course.service';
+import { LoginService } from '../../services/login.service';
 import { CourseInputDTO } from '../../dtos/courseInput.dto';
 import { Router } from '@angular/router';
 
@@ -15,7 +16,11 @@ export class NewCourseComponent {
 
   selectedImage: File | null = null;
   
-  constructor(private courseService: CourseService, private router: Router) {}
+  constructor(private courseService: CourseService, private loginService: LoginService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.checkAccess();
+  }
 
   createCourse() {
     const courseTagsList: string[] = this.courseTags
@@ -51,6 +56,23 @@ export class NewCourseComponent {
     if (input.files && input.files.length > 0) {
       this.selectedImage = input.files[0];
     }
+  }
+
+  private checkAccess(): void {
+    this.loginService.reqIsLogged();
+
+    setTimeout(() => {
+      if (!this.loginService.isLogged()) {
+        this.router.navigate(['/login']);
+        return;
+      }
+
+      if (!this.loginService.isAdmin()) {
+        this.router.navigate(['/error']);
+        return;
+      }
+
+    }, 2000);
   }
 
 }
