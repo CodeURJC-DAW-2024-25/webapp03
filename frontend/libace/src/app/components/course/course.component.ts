@@ -27,7 +27,8 @@ export class CourseComponent implements OnInit {
 
   pageMaterial: number = 0;
   pageComment: number = 0;
-  pageSize: number = 5;
+  pageSizeMaterial: number = 3;
+  pageSizeComment: number = 5;
 
   loadingMaterials = false;
   loadingComments = false;
@@ -57,7 +58,7 @@ export class CourseComponent implements OnInit {
 
   loadMaterials(): void {
     this.loadingMaterials = true;
-    this.materialService.getByCourseId(this.courseId, this.pageMaterial, this.pageSize).subscribe({
+    this.materialService.getByCourseId(this.courseId, this.pageMaterial, this.pageSizeMaterial).subscribe({
       next: (data) => {
         this.materials = this.materials.concat(data);
         this.pageMaterial++;
@@ -72,7 +73,7 @@ export class CourseComponent implements OnInit {
 
   loadComments(): void {
     this.loadingComments = true;
-    this.commentService.getCommentsByCourse(this.courseId, this.pageComment, this.pageSize).subscribe({
+    this.commentService.getCommentsByCourse(this.courseId, this.pageComment, this.pageSizeComment).subscribe({
       next: (comments) => {
         this.comments = this.comments.concat(comments);
         this.pageComment++;

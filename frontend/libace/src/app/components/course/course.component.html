@@ -53,20 +53,7 @@
     <div class="comment-section mt-4">
         <h3>Comentarios</h3>
 
-        <!-- Add comment forms -->
-        <form (ngSubmit)="onSubmitComment()" class="mb-4 text-start">
-            <label for="newComment" class="form-label">Añadir comentario</label>
-            <div style="display: flex; flex-direction: column;">
-                <textarea id="newComment" class="form-control mb-2" rows="3" [(ngModel)]="newCommentText"
-                    name="newCommentText" required></textarea>
-                <div style="display: flex; justify-content: flex-end;">
-                    <button type="submit" class="btn btn-primary"
-                        [disabled]="!newCommentText || newCommentText.trim() === ''">
-                        Enviar comentario
-                    </button>
-                </div>
-            </div>
-        </form>
+
 
         <div *ngIf="comments.length > 0; else noComments">
             <ul class="list-group">
@@ -101,12 +88,30 @@
                 <span class="visually-hidden">Cargando...</span>
             </div>
         </div>
+
+        <!-- Add comment forms -->
+        <form (ngSubmit)="onSubmitComment()" class="mb-4 text-start">
+            <label for="newComment" class="form-label">Añadir comentario</label>
+            <div style="display: flex; flex-direction: column;">
+                <textarea id="newComment" class="form-control mb-2" rows="3" [(ngModel)]="newCommentText"
+                    name="newCommentText" required></textarea>
+                <div style="display: flex; justify-content: flex-end;">
+                    <button type="submit" class="btn btn-primary"
+                        [disabled]="!newCommentText || newCommentText.trim() === ''">
+                        Enviar comentario
+                    </button>
+                </div>
+            </div>
+        </form>
+
+
     </div>
-    <!-- If user is not logged -->
-    <div *ngIf="!loginService.isLogged()" class="container mt-5 pt-5 text-center">
-        <h1>Debes iniciar sesión para acceder a los cursos</h1>
-        <div class="mt-3">
-            <a [routerLink]="['/login']" class="btn btn-primary me-2">Login</a>
-            <a [routerLink]="['/register']" class="btn btn-secondary">Registrarse</a>
-        </div>
+</div>
+<!-- If user is not logged -->
+<div *ngIf="!loginService.isLogged()" class="container mt-5 pt-5 text-center">
+    <h1>Debes iniciar sesión para acceder a los cursos</h1>
+    <div class="mt-3">
+        <a [routerLink]="['/login']" class="btn btn-primary me-2">Login</a>
+        <a [routerLink]="['/register']" class="btn btn-secondary">Registrarse</a>
     </div>
+</div>
