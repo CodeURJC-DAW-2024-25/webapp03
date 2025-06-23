@@ -1,12 +1,10 @@
 package es.webapp03.backend.service;
 
-import es.webapp03.backend.dto.CourseBasicDTO;
-import es.webapp03.backend.dto.CourseDTO;
-import es.webapp03.backend.dto.CourseInputDTO;
-import es.webapp03.backend.dto.CourseMapper;
-import es.webapp03.backend.model.Course;
-import es.webapp03.backend.model.User;
-import es.webapp03.backend.repository.CourseRepository;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +16,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.InputStream;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import es.webapp03.backend.dto.CourseBasicDTO;
+import es.webapp03.backend.dto.CourseDTO;
+import es.webapp03.backend.dto.CourseInputDTO;
+import es.webapp03.backend.dto.CourseMapper;
+import es.webapp03.backend.model.Course;
+import es.webapp03.backend.model.User;
+import es.webapp03.backend.repository.CourseRepository;
 
 @Service
 public class CourseService {
@@ -193,10 +193,6 @@ public class CourseService {
 
     public void deleteCourseImage(long id) {
         Course course = courseRepository.findById(id).orElseThrow();
-
-        if (!course.getImage()) {
-            throw new NoSuchElementException();
-        }
 
         course.setImageFile(null);
         course.setImage(false);

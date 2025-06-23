@@ -49,8 +49,19 @@ export class CourseService {
     return this.httpClient.post<CourseBasicDTO>(`${this.apiUrl}/`, newCourse);
   }
 
+  editCourse(editedCourse: CourseInputDTO, id: number): Observable<CourseBasicDTO> {
+    return this.httpClient.put<CourseBasicDTO>(`${this.apiUrl}/${id}`, editedCourse);
+  }
+
   deleteCourse(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  getCourseImage(id: number): Observable<Blob> {
+    return this.httpClient.get(`${this.apiUrl}/${id}/image`, {
+      withCredentials: true,
+      responseType: 'blob'
+    });
   }
 
   uploadCourseImage(id: number, imageData: FormData): Observable<any> {
@@ -60,6 +71,22 @@ export class CourseService {
         responseType: 'text' as 'json',
       })
       .pipe(catchError((error) => this.handleError(error)));
+  }
+
+  editCourseImage(id: number, imageData: FormData): Observable<any> {
+    return this.httpClient
+      .put(`${this.apiUrl}/${id}/image`, imageData, {
+        withCredentials: true,
+        responseType: 'text' as 'json',
+      })
+      .pipe(catchError((error) => this.handleError(error)));
+  }
+
+  deleteCourseImage(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiUrl}/${id}/image`, {
+      withCredentials: true,
+      responseType: 'text' as 'json'
+    });
   }
 
 }
