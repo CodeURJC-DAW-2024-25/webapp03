@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CommentBasicDTO } from '../dtos/commentBasic.dto';
+import { map } from 'rxjs/operators';
+
+import { CommentDTO } from '../dtos/comment.dto';
+
 
 @Injectable({
     providedIn: 'root'
@@ -11,12 +14,18 @@ export class CommentService {
 
     constructor(private http: HttpClient) { }
 
-    getComments(courseId: number): Observable<CommentBasicDTO[]> {
-        return this.http.get<CommentBasicDTO[]>(`${this.apiUrl}/${courseId}/comments`);
+    getCommentsByCourse(courseId: number, page: number, size: number): Observable<CommentDTO[]> {
+        return this.http.get<{ content: CommentDTO[] }>(`/api/courses/${courseId}/comments`, {
+            params: {
+                page: page.toString(),
+                size: size.toString()
+            }
+        }).pipe(
+            map(response => response.content)  // Extraemos el array dentro de 'content'
+        );
     }
-
-    addComment(courseId: number, text: string): Observable<CommentBasicDTO> {
-        return this.http.post<CommentBasicDTO>(`${this.apiUrl}/${courseId}/comments/`, { text });
+    addComment(courseId: number, text: string): Observable<CommentDTO> {
+        return this.http.post<CommentDTO>(`${this.apiUrl}/${courseId}/comments/`, { text });
     }
 
     deleteComment(courseId: number, commentId: number): Observable<void> {
