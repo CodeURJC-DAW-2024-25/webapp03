@@ -53,20 +53,7 @@
     <div class="comment-section mt-4">
         <h3>Comentarios</h3>
 
-        <!-- Add comment forms -->
-        <form (ngSubmit)="onSubmitComment()" class="mb-4 text-start">
-            <label for="newComment" class="form-label">Añadir comentario</label>
-            <div style="display: flex; flex-direction: column;">
-                <textarea id="newComment" class="form-control mb-2" rows="3" [(ngModel)]="newCommentText"
-                    name="newCommentText" required></textarea>
-                <div style="display: flex; justify-content: flex-end;">
-                    <button type="submit" class="btn btn-primary"
-                        [disabled]="!newCommentText || newCommentText.trim() === ''">
-                        Enviar comentario
-                    </button>
-                </div>
-            </div>
-        </form>
+
 
         <div *ngIf="comments.length > 0; else noComments">
             <ul class="list-group">
@@ -101,6 +88,23 @@
                 <span class="visually-hidden">Cargando...</span>
             </div>
         </div>
+
+        <!-- Add comment forms -->
+        <form (ngSubmit)="onSubmitComment()" class="mb-4 text-start">
+            <label for="newComment" class="form-label">Añadir comentario</label>
+            <div style="display: flex; flex-direction: column;">
+                <textarea id="newComment" class="form-control mb-2" rows="3" [(ngModel)]="newCommentText"
+                    name="newCommentText" required></textarea>
+                <div style="display: flex; justify-content: flex-end;">
+                    <button type="submit" class="btn btn-primary"
+                        [disabled]="!newCommentText || newCommentText.trim() === ''">
+                        Enviar comentario
+                    </button>
+                </div>
+            </div>
+        </form>
+
+
     </div>
 </div>
 <!-- If user is not logged -->
