@@ -79,6 +79,6 @@ export class UserListComponent implements OnInit {
       }
 
       this.loadUsers();
-    }, 100); // Pequeño retraso para asegurar la actualización
+    }, 2000); // Pequeño retraso para asegurar la actualización
   }
 }
