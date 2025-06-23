@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-edit-course',
   templateUrl: './edit-course.component.html',
-  styleUrl: './edit-course.component.css'
+  styleUrl: './edit-course.component.css',
 })
 export class EditCourseComponent {
   courseId = 0;
@@ -18,8 +18,13 @@ export class EditCourseComponent {
   oldImage: File | null = null;
 
   selectedImage: File | null = null;
-  
-  constructor(private courseService: CourseService, private loginService: LoginService, private router: Router, private route: ActivatedRoute) {}
+
+  constructor(
+    private courseService: CourseService,
+    private loginService: LoginService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.checkAccess();
@@ -31,23 +36,22 @@ export class EditCourseComponent {
   }
 
   loadCourse(id: number): void {
-  this.courseService.getCourseById(id).subscribe(course => {
-    this.courseTitle = course.title;
-    this.courseDescription = course.description;
-    this.courseTags = course.tags;
-  });
-  this.courseService.getCourseImage(id).subscribe(blob => {
-    const file = new File([blob], 'original.jpg', { type: blob.type });
-    this.oldImage = file;
-  });
-}
+    this.courseService.getCourseById(id).subscribe((course) => {
+      this.courseTitle = course.title;
+      this.courseDescription = course.description;
+      this.courseTags = course.tags;
+    });
+    this.courseService.getCourseImage(id).subscribe((blob) => {
+      const file = new File([blob], 'original.jpg', { type: blob.type });
+      this.oldImage = file;
+    });
+  }
 
   editCourse() {
-
     const courseToEdit: CourseInputDTO = {
       title: this.courseTitle,
       description: this.courseDescription,
-      tags: this.courseTags
+      tags: this.courseTags,
     };
 
     this.courseService.editCourse(courseToEdit, this.courseId).subscribe({
@@ -55,27 +59,31 @@ export class EditCourseComponent {
         if (this.selectedImage) {
           const imageFormData = new FormData();
           imageFormData.append('imageFile', this.selectedImage);
-          this.courseService.uploadCourseImage(editedCourse.id, imageFormData).subscribe({
-            next: () => this.router.navigate(['/']),
-            error: (err) => alert('Error al subir imagen'),
-          });
-        } else if (this.removeImage){
+          this.courseService
+            .uploadCourseImage(editedCourse.id, imageFormData)
+            .subscribe({
+              next: () => this.router.navigate(['/']),
+              error: (err) => this.router.navigate(['/error']),
+            });
+        } else if (this.removeImage) {
           this.courseService.deleteCourseImage(editedCourse.id).subscribe({
             next: () => this.router.navigate(['/']),
-            error: (err) => alert('Error al borrar la imagen')
-          })
+            error: (err) => this.router.navigate(['/error']),
+          });
         } else if (this.oldImage) {
           const oldImageFormData = new FormData();
           oldImageFormData.append('imageFile', this.oldImage);
-          this.courseService.uploadCourseImage(editedCourse.id, oldImageFormData).subscribe({
-            next: () => this.router.navigate(['/']),
-            error: (err) => alert('Error al subir imagen sin modificar'),
-          });
+          this.courseService
+            .uploadCourseImage(editedCourse.id, oldImageFormData)
+            .subscribe({
+              next: () => this.router.navigate(['/']),
+              error: (err) => this.router.navigate(['/error']),
+            });
         } else {
-          this.router.navigate(['/'])
+          this.router.navigate(['/']);
         }
       },
-      error: (err) => alert('Error al editar curso'),
+      error: (err) => this.router.navigate(['/error']),
     });
   }
 
@@ -99,7 +107,6 @@ export class EditCourseComponent {
         this.router.navigate(['/error']);
         return;
       }
-
     }, 2000);
   }
 }

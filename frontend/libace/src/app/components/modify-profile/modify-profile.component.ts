@@ -7,7 +7,7 @@ import { UserDTO } from '../../dtos/user.dto';
 @Component({
   selector: 'app-modify-profile',
   templateUrl: './modify-profile.component.html',
-  styleUrls: ['./modify-profile.component.css']
+  styleUrls: ['./modify-profile.component.css'],
 })
 export class ModifyProfileComponent implements OnInit {
   profileForm!: FormGroup;
@@ -40,13 +40,13 @@ export class ModifyProfileComponent implements OnInit {
           },
           error: (err) => {
             console.error('Error loading user image:', err);
-          }
+          },
         });
       },
       error: (_) => {
         // Si no está autenticado, redirige al login
         this.router.navigate(['/login']);
-      }
+      },
     });
   }
 
@@ -77,29 +77,32 @@ export class ModifyProfileComponent implements OnInit {
     }
 
     // 1. Actualiza los datos del usuario (sin imagen)
-    this.userService.updateUserData(this.user.id.toString(), updateData).subscribe({
-      next: () => {
-        // 2. Si hay imagen, súbela por separado
-        if (this.selectedImageFile) {
-          const formData = new FormData();
-          formData.append('imageFile', this.selectedImageFile);
+    this.userService
+      .updateUserData(this.user.id.toString(), updateData)
+      .subscribe({
+        next: () => {
+          // 2. Si hay imagen, súbela por separado
+          if (this.selectedImageFile) {
+            const formData = new FormData();
+            formData.append('imageFile', this.selectedImageFile);
 
-          this.userService.updateUserImage(this.user!.id.toString(), formData).subscribe({
-            next: () => this.redirectAfterUpdate(),
-            error: (err) => {
-              console.error('Error al subir la imagen:', err);
-              alert('Error al subir la imagen');
-            }
-          });
-        } else {
-          this.redirectAfterUpdate();
-        }
-      },
-      error: (err) => {
-        console.error('Error al guardar los cambios del usuario:', err);
-        alert('Error al guardar los cambios');
-      }
-    });
+            this.userService
+              .updateUserImage(this.user!.id.toString(), formData)
+              .subscribe({
+                next: () => this.redirectAfterUpdate(),
+                error: (err) => {
+                  console.error('Error al subir la imagen:', err);
+                  this.router.navigate(['/error']);
+                },
+              });
+          } else {
+            this.redirectAfterUpdate();
+          }
+        },
+        error: (err) => {
+          this.router.navigate(['/error']);
+        },
+      });
   }
 
   redirectAfterUpdate(): void {
