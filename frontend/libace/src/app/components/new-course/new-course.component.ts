@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-new-course',
   templateUrl: './new-course.component.html',
-  styleUrl: './new-course.component.css'
+  styleUrl: './new-course.component.css',
 })
 export class NewCourseComponent {
   courseTitle = '';
@@ -15,8 +15,12 @@ export class NewCourseComponent {
   courseTags = '';
 
   selectedImage: File | null = null;
-  
-  constructor(private courseService: CourseService, private loginService: LoginService, private router: Router) {}
+
+  constructor(
+    private courseService: CourseService,
+    private loginService: LoginService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.checkAccess();
@@ -25,13 +29,13 @@ export class NewCourseComponent {
   createCourse() {
     const courseTagsList: string[] = this.courseTags
       .split(',')
-      .map(tag => tag.trim())
-      .filter(tag => tag.length > 0);
+      .map((tag) => tag.trim())
+      .filter((tag) => tag.length > 0);
 
     const newCourse: CourseInputDTO = {
       title: this.courseTitle,
       description: this.courseDescription,
-      tags: courseTagsList
+      tags: courseTagsList,
     };
 
     this.courseService.createCourse(newCourse).subscribe({
@@ -39,15 +43,17 @@ export class NewCourseComponent {
         if (this.selectedImage) {
           const imageFormData = new FormData();
           imageFormData.append('imageFile', this.selectedImage);
-          this.courseService.uploadCourseImage(createdCourse.id, imageFormData).subscribe({
-            next: () => this.router.navigate(['/']),
-            error: (err) => alert('Error al subir imagen'),
-          });
+          this.courseService
+            .uploadCourseImage(createdCourse.id, imageFormData)
+            .subscribe({
+              next: () => this.router.navigate(['/']),
+              error: (err) => this.router.navigate(['/error']),
+            });
         } else {
           this.router.navigate(['/']);
         }
       },
-      error: (err) => alert('Error al crear curso'),
+      error: (err) => this.router.navigate(['/error']),
     });
   }
 
@@ -71,8 +77,6 @@ export class NewCourseComponent {
         this.router.navigate(['/error']);
         return;
       }
-
     }, 2000);
   }
-
 }
