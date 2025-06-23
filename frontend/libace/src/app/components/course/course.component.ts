@@ -128,7 +128,14 @@ export class CourseComponent implements OnInit {
   }
 
   onDeleteComment(id: number): void {
-    // Lógica para eliminar comentario
+    this.commentService.deleteComment(this.courseId, id).subscribe({
+      next: () => {
+        this.pageComment = 0;
+        this.comments = [];
+        this.loadComments();
+      },
+      error: (err) => console.error('Error eliminando comentario', err)
+    });
   }
 
   loadMoreMaterials(): void {
