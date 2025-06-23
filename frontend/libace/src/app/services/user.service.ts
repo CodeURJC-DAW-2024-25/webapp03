@@ -10,7 +10,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 export class UserService {
   private apiUrl = '/api/users';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getCurrentUser(): Observable<UserDTO> {
     return this.http.get<UserDTO>(`${this.apiUrl}/me`, {
@@ -33,7 +33,14 @@ export class UserService {
       );
   }
 
-  // Nuevo método para actualizar los datos del usuario
+  getUserById(id: number): Observable<UserBasicDTO> {
+    return this.http.get<UserBasicDTO>(`${this.apiUrl}/${id}`, {
+      withCredentials: true,
+    }).pipe(
+      catchError((error) => this.handleError(error))
+    );
+  }
+
   updateUserData(
     userId: string,
     data: { name: string; email: string; password: string }
@@ -41,12 +48,11 @@ export class UserService {
     return this.http
       .put(`${this.apiUrl}/${userId}`, data, {
         withCredentials: true,
-        responseType: 'text' as 'json', // Esto evita el intento de parsear JSON
+        responseType: 'text' as 'json',
       })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
-  // Nuevo método para subir la imagen
   updateUserImage(userId: string, imageData: FormData): Observable<any> {
     return this.http
       .put(`${this.apiUrl}/${userId}/image`, imageData, {
@@ -65,7 +71,6 @@ export class UserService {
       .pipe(
         catchError((error) => {
           if (error.status === 404) {
-            // Return default image as Blob
             return this.http.get('assets/img/user_image_default.jpg', {
               responseType: 'blob',
             });

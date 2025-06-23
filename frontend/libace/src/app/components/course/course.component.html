@@ -1,14 +1,14 @@
 <app-header></app-header>
 
 <!-- If the user is logged -->
-<div *ngIf="logged" class="container mt-5 pt-5 text-center mx-auto">
+<div *ngIf="loginService.isLogged()" class="container mt-5 pt-5 text-center mx-auto">
     <h1>{{ course.title }}</h1>
     <p>{{ course.description }}</p>
 
     <img [src]="'/courses/' + course.id + '/image'" [alt]="course.title" />
 
     <!-- Only admins upload material -->
-    <div *ngIf="admin">
+    <div *ngIf="loginService.isAdmin()">
         <form (ngSubmit)="onUploadMaterial()" enctype="multipart/form-data">
             <input type="file" name="file" (change)="onFileSelected($event)" required />
             <button type="submit" class="btn btn-primary btn-sm mt-2">Subir Archivo</button>
@@ -27,7 +27,7 @@
                             <a [href]="'/courses/' + course.id + '/materials/' + mat.id + '/download'">{{ mat.name
                                 }}</a>
 
-                            <form *ngIf="admin" (ngSubmit)="onDeleteMaterial(mat.id!)" class="d-inline">
+                            <form *ngIf="loginService.isAdmin" (ngSubmit)="onDeleteMaterial(mat.id!)" class="d-inline">
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                             </form>
                         </li>
@@ -49,12 +49,32 @@
     </div>
 
     <!-- Comments -->
+    <!-- Comments -->
     <div class="comment-section mt-4">
         <h3>Comentarios</h3>
+
+        <!-- Add comment forms -->
+        <form (ngSubmit)="onSubmitComment()" class="mb-4 text-start">
+            <label for="newComment" class="form-label">Añadir comentario</label>
+            <div style="display: flex; flex-direction: column;">
+                <textarea id="newComment" class="form-control mb-2" rows="3" [(ngModel)]="newCommentText"
+                    name="newCommentText" required></textarea>
+                <div style="display: flex; justify-content: flex-end;">
+                    <button type="submit" class="btn btn-primary"
+                        [disabled]="!newCommentText || newCommentText.trim() === ''">
+                        Enviar comentario
+                    </button>
+                </div>
+            </div>
+        </form>
+
         <div *ngIf="comments.length > 0; else noComments">
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let comment of comments">
-                    <small class="text-muted">{{ comment.createdDate | date:'shortDate' }}</small>
+                    <p>
+                        {{ comment.user.name || 'Usuario desconocido' }}
+                        comentó el {{ comment.createdDate | date: 'yyyy-MM-dd' }}:
+                    </p>
                     <p>{{ comment.text }}</p>
                 </li>
             </ul>
@@ -74,12 +94,11 @@
                 <span class="visually-hidden">Cargando...</span>
             </div>
         </div>
-
     </div>
 </div>
 
 <!-- If user is not logged -->
-<div *ngIf="!logged" class="container mt-5 pt-5 text-center">
+<div *ngIf="!loginService.isLogged()" class="container mt-5 pt-5 text-center">
     <h1>Debes iniciar sesión para acceder a los cursos</h1>
     <div class="mt-3">
         <a [routerLink]="['/login']" class="btn btn-primary me-2">Login</a>

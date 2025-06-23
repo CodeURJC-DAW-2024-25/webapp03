@@ -6,8 +6,7 @@ import { CourseService } from '../../services/course.service';
 import { MaterialService } from '../../services/material.service';
 import { LoginService } from '../../services/login.service';
 import { CommentService } from '../../services/comment.service';
-import { CommentBasicDTO } from '../../dtos/commentBasic.dto';
-
+import { CommentDTO } from '../../dtos/comment.dto';
 
 @Component({
   selector: 'app-course',
@@ -19,7 +18,8 @@ export class CourseComponent implements OnInit {
   course!: CourseBasicDTO;
   materials: MaterialBasicDTO[] = [];
 
-  comments: CommentBasicDTO[] = [];
+  comments: CommentDTO[] = [];
+  newCommentText: string = '';
 
   selectedFile?: File;
 
@@ -32,29 +32,21 @@ export class CourseComponent implements OnInit {
   loadingMaterials = false;
   loadingComments = false;
 
-  logged = false;
-  admin = false;
-
-
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
     private materialService: MaterialService,
-    private loginService: LoginService,
-    private commentService: CommentService
+    public loginService: LoginService,
+    private commentService: CommentService,
   ) { }
 
   ngOnInit(): void {
     this.courseId = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.logged = this.loginService.isLogged();
-    this.admin = this.loginService.isAdmin();
-
     this.loadCourse();
     this.loadMaterials();
     this.loadComments();
   }
-
 
   loadCourse(): void {
     this.courseService.getCourseById(this.courseId).subscribe({
@@ -80,9 +72,10 @@ export class CourseComponent implements OnInit {
 
   loadComments(): void {
     this.loadingComments = true;
-    this.commentService.getComments(this.courseId).subscribe({
+    this.commentService.getCommentsByCourse(this.courseId, this.pageComment, this.pageSize).subscribe({
       next: (comments) => {
-        this.comments = comments;
+        this.comments = this.comments.concat(comments);
+        this.pageComment++;
         this.loadingComments = false;
       },
       error: (err) => {
@@ -121,6 +114,17 @@ export class CourseComponent implements OnInit {
   }
 
   onSubmitComment(): void {
+    if (!this.newCommentText.trim()) return;
+
+    this.commentService.addComment(this.courseId, this.newCommentText).subscribe({
+      next: () => {
+        this.pageComment = 0;
+        this.comments = [];
+        this.loadComments();
+        this.newCommentText = '';
+      },
+      error: (err) => console.error('Error al añadir comentario', err)
+    });
   }
 
   onDeleteComment(id: number): void {

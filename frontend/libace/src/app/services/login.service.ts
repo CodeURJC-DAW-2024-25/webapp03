@@ -9,6 +9,7 @@ export class LoginService {
   private apiUrl = '/api/auth';
 
   public logged: boolean = false;
+  public loading: boolean = true;
   public user: UserBasicDTO | undefined = undefined;
 
   constructor(private httpClient: HttpClient) {
@@ -16,16 +17,20 @@ export class LoginService {
   }
 
   public reqIsLogged() {
+    this.loading = true;
     this.httpClient.get('/api/users/me', { withCredentials: true }).subscribe(
       (response) => {
         this.user = response as UserBasicDTO;
         this.logged = true;
+        this.loading = false;
       },
       (error) => {
+        this.logged = false;
+        this.user = undefined;
+        this.loading = false;
+
         if (error.status != 404) {
-          console.error(
-            'Error when asking if logged: ' + JSON.stringify(error)
-          );
+          console.error('Error when asking if logged: ' + JSON.stringify(error));
         }
       }
     );
