@@ -7,7 +7,7 @@ import { LoginService } from '../../services/login.service';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent { //DTOs?
+export class RegisterComponent {
   name = '';
   email = '';
   password = '';
