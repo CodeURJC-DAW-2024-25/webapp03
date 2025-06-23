@@ -21,6 +21,7 @@
   - [Execution instructions](#execution)
   - [Execution instructions in remote machine](#executionRemote)
   - [API Documentation](#apiDocumentation)
+  - [Execution instructions with Angular](#executionAngular)
 
 <br>
 
@@ -317,3 +318,15 @@ My job consisted mostly in implementing the API logic for the UserRestController
 [API Documentation (YAML)]  (https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.yaml)
 
 [API Documentation (Link)]  (https://localhost:8443/swagger-ui/index.html)
+
+<h2 id=executionAngular>Execution instructions with Angular</h2>
+
+1. Install Angular with: npm install -g @angular/cli
+2. Clone the repository: git clone https://github.com/CodeURJC-DAW-2024-25/webapp03.git
+3. Access to /frontend/libace
+4. Run npm install (only first time)
+5. Run ng build --configuration=production
+6. Copy files from /frontend/libace/dist/libace/browser to /backend/src/main/resources/static/new
+7. Run backend ([Execution instructions](#execution))
+8. The SPA application with Angular will be available at https://localhost:8443/new
+9. To run on a remote machine, the same steps as in the previous version are followed ([Execution instructions in remote machine](#executionRemote)) and the app will be available at https://appweb03.dawgis.etsii.urjc.es/new
