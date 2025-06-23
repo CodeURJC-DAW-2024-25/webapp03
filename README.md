@@ -2,7 +2,7 @@
 
 ![LibACE logo](pics/LibACE_logo.jpeg)
 
-[Video Demo]  (https://youtu.be/J9MKhOOcBUQ)
+[Video Demo](https://youtu.be/J9MKhOOcBUQ)
 
 <h2>Index</h2>
 
@@ -315,11 +315,12 @@ My job consisted mostly in implementing the API logic for the UserRestController
 9. Access the URL https://appweb03.dawgis.etsii.urjc.es/ in any browser
 
 <h2 id=apiDocumentation>API Documentation</h2>
-[API Documentation (HTML)]  (https://rawcdn.githack.com/CodeURJC-DAW-2024-25/webapp03/55e2a17214ba54c940fbf87b1f1faae197d6ad89/backend/api-docs/api-docs.html)
 
-[API Documentation (YAML)]  (https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.yaml)
+[API Documentation (HTML)](https://rawcdn.githack.com/CodeURJC-DAW-2024-25/webapp03/55e2a17214ba54c940fbf87b1f1faae197d6ad89/backend/api-docs/api-docs.html)
 
-[API Documentation (Link)]  (https://localhost:8443/swagger-ui/index.html)
+[API Documentation (YAML)](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/api-docs/api-docs.yaml)
+
+[API Documentation (Link)](https://localhost:8443/swagger-ui/index.html)
 
 <h2 id=executionAngular>Execution instructions with Angular</h2>
 
