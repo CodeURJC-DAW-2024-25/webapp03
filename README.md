@@ -206,19 +206,19 @@ I have been responsible for implementing the home page (view courses, graph, fil
 
 |                                                 Commit                                                 |                                    Description                                     |
 | :----------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b01d6ca082b802c0d93edeb6866f095d9c6b94dc) |              Implemented courses in home page              |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/1cb872fe6dae30e9c214ed057f925ea0a9618fca) |                                Implemented home page chart                                 |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/75c37da49fc715087708494bee2e0df6963d2e23) |                                    Implemented login                                     |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b334458ffc11af14062eb6b27de687d308d0c0b7) |                                 Added angular stage to dockerfile                                 |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/cf94bb4ae4a2fc98e11b31fca793b3fa0e9b4239) | Edit course working |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b01d6ca082b802c0d93edeb6866f095d9c6b94dc) |              Implemented courses in home page                                       |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/1cb872fe6dae30e9c214ed057f925ea0a9618fca) |                                Implemented home page chart                          |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/75c37da49fc715087708494bee2e0df6963d2e23) |                                    Implemented login                                |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b334458ffc11af14062eb6b27de687d308d0c0b7) |                                 Added angular stage to dockerfile                   |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/cf94bb4ae4a2fc98e11b31fca793b3fa0e9b4239) |                             Edit course working                                     |
 
 |                                                                      File                                                                       |           Name            |
 | :---------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------: |
-|                           [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/course.service.ts)                            |    course.service.ts     |
-|                             [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/login.service.ts)                             |      login.service.ts      |
-|                               [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/home-page/home-page.component.ts)                                |        home-page.component.ts         |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/Dockerfile) | Dockerfile |
-|   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/new-course/new-course.component.ts)   |   new-course.component.ts   |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/course.service.ts)                             |    course.service.ts      |
+|  [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/login.service.ts)                             |      login.service.ts     |
+|  [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/home-page/home-page.component.ts)           |     homepage.component.ts |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/Dockerfile)                                                              |           Dockerfile      |
+|   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/new-course/new-course.component.ts)        |   new-course.component.ts |
 
 <h3>Sergio Rodríguez Gil</h3>
 
@@ -242,23 +242,23 @@ I was responsible for implementing everything related to the modify profile page
 
 <h3>Sergio López Cuesta</h3>
 
-I implemented all the Comment Logic for the REST API
+I implemented the user-list component, the error pages, and worked on the services
 
-|                                                 Commit                                                 |          Description          |
-| :----------------------------------------------------------------------------------------------------: | :---------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b859e2360ab297671336dc8c62837d128d335a66) | CommentRestController started |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/145656ab43333a37452cced3179f1d9e39d185f9) | CommentRestController uptade  |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/722107e3f8c9a78852611c3d51014b9dd2a967da) | CommentRestController started |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/8ad3f2c0393404d7771cea7cc533304120a18385) | CourseRestController Working  |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/03c5d86259a0fae150a9a97c706274d1bbd5e4b8) |      Fixed minor changes      |
+|                                                 Commit                                                 |          Description              |
+| :----------------------------------------------------------------------------------------------------: | :---------------------------:     |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/6e827da1b078c01748fbdc160b0b1d5e82429fdd) | User-list.component.ts done       |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/6cb67a7a9ab21c689ce3acb3e9f4a328d28dcfa8) | User-list.component.html finished |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/e4cb5f20ba7bbe484f62b2efe7eea23035acd8df) |    User.service.ts updated        |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/cd4a261d843449eb8864382137ae2339727e0f58) | User-list.component.html started  |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/8a2f787bd105c21ebaefc5074951a25c3a5633a5) |  Minor changes on services        |
 
-|                                                                       File                                                                       |         Name          |
-| :----------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CommentRestController.java) | CommentRestController |
-|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)       |    CommentService     |
-|          [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CommentDTO.java)          |      CommentDTO       |
-|      [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)       |     CourseService     |
-|   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java)| CourseRestController  |
+|                                                                       File                                                                       |         Name            |
+| :----------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------:   |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/user-list/user-list.component.ts)             | User-list.component.ts  |
+|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/user-list/user-list.component.html)      | User-list.component.html|
+|          [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/user.service.ts)                       | UserService.ts          |
+|      [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/error/error.component.html)              | error.component.html    |
+|   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/login.service.ts)                             | login.service.ts        |
 
 <h3>Marcos Alejandro Pascual Rojas</h3>
 I worked in the develop of the Course Page, implementing the upload, download and delete of materials, and the functionality of the comment section.
@@ -285,19 +285,19 @@ My job consisted mostly in implementing the logic behind registrations and user 
 
 |                                                 Commit                                                 |                                        Description                                        |
 | :----------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/9e8313b8c2fec4ba3b79e1370c4b44726100e248) |             Implement registration form and service integration             |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/43608de1660172f68214541092c45f1989ee57cb) |               Add profile page component and user service integration               |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/d292d44807a1b201fff2b3f864c0b5863d3bce82) | Fixed user image logic to use service and updated backend for fallback |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/cd2bc6e0d0da94ec8a6e72293db13bf65958d403) |          Fixed api call not using service          |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/9d24a8f3e49fee3fd73f20c9a02627386c409a4d) |                       Refactor course component to use getters for login and admin status                       |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/9e8313b8c2fec4ba3b79e1370c4b44726100e248) |             Implement registration form and service integration            |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/43608de1660172f68214541092c45f1989ee57cb) |               Add profile page component and user service integratio       |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/d292d44807a1b201fff2b3f864c0b5863d3bce82) | Fixed user image logic to use service and updated backend for fallback     |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/cd2bc6e0d0da94ec8a6e72293db13bf65958d403) |                      Fixed api call not using service                      |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/9d24a8f3e49fee3fd73f20c9a02627386c409a4d) |   Refactor course component to use getters for login and admin status      |
 
 |                                                                     File                                                                      |        Name        |
 | :-------------------------------------------------------------------------------------------------------------------------------------------: | :----------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/user.service.ts) | user.service.ts |
-|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/register/register.component.ts)       |   register.component.ts   |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/user.service.ts)                              | user.service.ts |
+|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/register/register.component.ts)        |   register.component.ts   |
 |      [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/register/register.component.html)      |    register.component.html     |
-|        [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/dtos/user.dto.ts)         |     user.dto.ts     |
-|                               [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/profile-page/profile-page.component.ts)                                |      profile-page.component.ts       |
+|        [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/dtos/user.dto.ts)                               |     user.dto.ts     |
+|  [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/profile-page/profile-page.component.ts)    |    profile-page.component.ts       |
 
 <h2 id="execution">Execution instructions</h2>
 
