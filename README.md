@@ -291,8 +291,7 @@ My job consisted mostly in implementing the logic behind registrations and user 
 | [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/frontend/libace/src/app/services/user.service.ts) | user.service.ts |
 |      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/frontend/libace/src/app/components/register/register.component.ts)       |   register.component.ts   |
 |      [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/frontend/libace/src/app/components/register/register.component.html)      |    register.component.html     |
-|        [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/frontend/libace/src/app/dtos/user.dto.ts
-)         |     user.dto.ts     |
+|        [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/frontend/libace/src/app/dtos/user.dto.ts)         |     user.dto.ts     |
 |                               [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/profile-page/profile-page.component.ts)                                |      profile-page.component.ts       |
 
 <h2 id="execution">Execution instructions</h2>
