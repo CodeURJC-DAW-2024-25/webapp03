@@ -191,7 +191,7 @@ An algorithm to filter courses based on a tag provided by the user.
 
 <h3 id="classes">Classes and Templates Diagram</h3>
 
-![ClassesTemplatesDiagram](pics/classes_diagram.jpeg)
+![ClassesTemplatesDiagram](pics/classes_diagram.png)
 
 <h3 id="contribution">Members contribution</h3>
 
