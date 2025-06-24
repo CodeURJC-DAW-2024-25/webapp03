@@ -189,31 +189,35 @@ An algorithm to filter courses based on a tag provided by the user.
 
 ![navigationDiagram](pics/navigation_diagram.png)
 
-<h3 id="classes">Classes and Templates Diagram</h3>
+<h3 id="classes">Classes and Templates Diagram (backend, phase 2)</h3>
 
-![ClassesTemplatesDiagram](pics/classes_diagram.png)
+![ClassesTemplatesDiagram](pics/classes_diagram.jpeg)
+
+<h3 id="classes">Classes and Templates Diagram (frontend, phase 3)</h3>
+
+![ClassesTemplatesDiagramFrontend](pics/classes_diagram_frontend.png)
 
 <h3 id="contribution">Members contribution</h3>
 
 <h3>David Cereceda Catalán</h3>
 
-I have mainly been in charge of Docker and the deployment of the web application on the remote machine, and I have also helped with whatever was missing from the API.
+I have been responsible for implementing the home page (view courses, graph, filter and delete courses), the header (login), the create and edit course form pages, and I have taken care of adding the frontend phase to the Dockerfile.
 
 |                                                 Commit                                                 |                                    Description                                     |
 | :----------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/995a9524aac0ca4ef811be9c864154574f9c569f) |              Added Dockerfile, docker-compose.yml and create_image.sh              |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/01410986648f5c5e5892b620009c4d15aad0ea43) |                                Fixed course screen                                 |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/db144aea2829fe8e4cde0659e3f9104388e8b6c3) |                                    Fixed chart                                     |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/860f44f6418af2067a8984517bdc83397f11c869) |                                 chartdata from API                                 |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/723b14d7388502384f883152e66a0ec62c797b37) | Added execution instructiones in remote machine and api documentation to README.md |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b01d6ca082b802c0d93edeb6866f095d9c6b94dc) |              Implemented courses in home page              |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/1cb872fe6dae30e9c214ed057f925ea0a9618fca) |                                Implemented home page chart                                 |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/75c37da49fc715087708494bee2e0df6963d2e23) |                                    Implemented login                                     |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b334458ffc11af14062eb6b27de687d308d0c0b7) |                                 Added angular stage to dockerfile                                 |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/cf94bb4ae4a2fc98e11b31fca793b3fa0e9b4239) | Edit course working |
 
 |                                                                      File                                                                       |           Name            |
 | :---------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------: |
-|                           [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/docker-compose.yml)                            |    docker-compose.yml     |
-|                             [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/create_image.sh)                             |      create_image.sh      |
-|                               [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/Dockerfile)                                |        Dockerfile         |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java) | CourseRestController.java |
-|   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseController.java)   |   CourseController.java   |
+|                           [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/course.service.ts)                            |    course.service.ts     |
+|                             [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/login.service.ts)                             |      login.service.ts      |
+|                               [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/home-page/home-page.component.ts)                                |        home-page.component.ts         |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/docker/Dockerfile) | Dockerfile |
+|   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/new-course/new-course.component.ts)   |   new-course.component.ts   |
 
 <h3>Sergio Rodríguez Gil</h3>
 
