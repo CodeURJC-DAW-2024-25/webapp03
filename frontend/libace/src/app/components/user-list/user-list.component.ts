@@ -64,7 +64,7 @@ export class UserListComponent implements OnInit {
   }
 
   private checkAccess(): void {
-    this.loginService.reqIsLogged(); // Update el estado de autenticación
+    this.loginService.reqIsLogged();
 
     // Verify if the user is logged in and is an admin
     setTimeout(() => {

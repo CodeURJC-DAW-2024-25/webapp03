@@ -17,32 +17,24 @@
         </div>
         <!-- Container for courses -->
         <div id="course-container" class="row">
-            <!--{{#courses}}-->
             <div *ngFor="let course of courses" class="col-lg-4 col-sm-6 mb-4">
             <!-- Portfolio item -->
                 <div class="portfolio-item">
                     <a class="portfolio-link" data-bs-toggle="modal" [href]="'#portfolioModal' + course.id">
-                    <!-- <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{id}}"> -->
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
                         <img class="img-fluid" [src]="'/courses/' + course.id + '/image'" [alt]="course.title" />
-                        <!-- <img class="img-fluid" src="/courses/{{id}}/image" alt="{{title}}" /> -->
                     </a>
                     <div class="portfolio-caption">
                         <div class="portfolio-caption-heading">{{ course.title }}</div>
-                        <!-- <div class="portfolio-caption-heading">{{title}}</div> -->
                         <div class="portfolio-caption-subheading text-muted">
                             <span *ngFor="let tag of course.tags" class="badge bg-secondary">{{ tag }}</span>
-                            <!--{{#tags}}-->
-                                <!-- <span class="badge bg-secondary">{{.}}</span> -->
-                            <!--{{/tags}}-->
                         </div>
                     </div>
                 </div>
             </div>
             </div>
-            <!-- {{/courses}}-->
         </div>
 
         <div class="text-center mt-4">
@@ -132,9 +124,9 @@
     </form>
 </div>
 
-<!-- Bootstrap core JS (ruta absoluta) -->
+<!-- Bootstrap core JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS (ruta absoluta) -->
+<!-- Core theme JS -->
 <script src="/js/scripts.js"></script>
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

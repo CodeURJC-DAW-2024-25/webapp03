@@ -62,7 +62,6 @@
                     </p>
                     <p>{{ comment.text }}</p>
 
-                    <!-- Botón eliminar, centrado y solo visible para admin -->
                     <div class="text-center mt-2" *ngIf="isAdmin">
                         <button class="btn btn-danger btn-sm" (click)="onDeleteComment(comment.id)">
                             Eliminar comentario
