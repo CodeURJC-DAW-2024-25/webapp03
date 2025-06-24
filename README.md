@@ -191,7 +191,7 @@ An algorithm to filter courses based on a tag provided by the user.
 
 <h3 id="classes">Classes and Templates Diagram</h3>
 
-![ClassesTemplatesDiagram](pics/classes_diagram.jpeg)
+![ClassesTemplatesDiagram](pics/classes_diagram.png)
 
 <h3 id="contribution">Members contribution</h3>
 
@@ -276,23 +276,23 @@ I worked in the develop of the Course Page, implementing the upload, download an
 
 <h3>Gonzalo García Castillo</h3>
 
-My job consisted mostly in implementing the API logic for the UserRestController (and by so creating new DTOs), documenting the API using Open-API, and update the class diagram. I also tested and improved the postman collection.
+My job consisted mostly in implementing the logic behind registrations and user profile (creating the neccesary service), while also update the class diagram and fixing minor issues.
 
 |                                                 Commit                                                 |                                        Description                                        |
 | :----------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/31e43b753ca1fc82082df84f4d8959193d792aec) |             Add OpenAPI generator configuration and update UserRestController             |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/c1d53831b164b50af9c4d3d6d29e4f1e8d153537) |               Add UserProfileDTO and UserRestController for user management               |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/8cbfff9aeae53149db42057c3b27f4d985608cc4) | refactor UserRestController and related DTOs to use UserNoImageDTO; remove UserProfileDTO |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/fdf1a3747daf492b97efc672f24bccc2b506188f) |          Update pom.xml to add OpenAPI and HTML documentation generation plugins          |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/fbc406d906d8331eb3ccb5d133a12b2074eb119e) |                       Refactor PDF generation logic into PdfService                       |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/9e8313b8c2fec4ba3b79e1370c4b44726100e248) |             Implement registration form and service integration             |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/43608de1660172f68214541092c45f1989ee57cb) |               Add profile page component and user service integration               |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/d292d44807a1b201fff2b3f864c0b5863d3bce82) | Fixed user image logic to use service and updated backend for fallback |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/cd2bc6e0d0da94ec8a6e72293db13bf65958d403) |          Fixed api call not using service          |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/9d24a8f3e49fee3fd73f20c9a02627386c409a4d) |                       Refactor course component to use getters for login and admin status                       |
 
 |                                                                     File                                                                      |        Name        |
 | :-------------------------------------------------------------------------------------------------------------------------------------------: | :----------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/UserRestController.java) | UserRestController |
-|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/UserNoImageDTO.java)       |   UserNoImageDTO   |
-|      [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/UserService.java)      |    UserService     |
-|        [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/UserMapper.java)         |     UserMapper     |
-|                               [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/pom.xml)                                |      pom.xml       |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/user.service.ts) | user.service.ts |
+|      [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/register/register.component.ts)       |   register.component.ts   |
+|      [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/register/register.component.html)      |    register.component.html     |
+|        [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/dtos/user.dto.ts)         |     user.dto.ts     |
+|                               [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/profile-page/profile-page.component.ts)                                |      profile-page.component.ts       |
 
 <h2 id="execution">Execution instructions</h2>
 
