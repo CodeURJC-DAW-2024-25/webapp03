@@ -19,6 +19,7 @@
   - [Screenshots](#screenshots)
   - [Navigation](#navigation)
   - [Classes and Templates Diagram](#classes)
+  - [Classes and Templates Diagram (Frontend)](#classes_frontend)
   - [Members contribution](#contribution)
   - [Execution instructions](#execution)
   - [Execution instructions in remote machine](#executionRemote)
@@ -193,7 +194,7 @@ An algorithm to filter courses based on a tag provided by the user.
 
 ![ClassesTemplatesDiagram](pics/classes_diagram.jpeg)
 
-<h3 id="classes">Classes and Templates Diagram (frontend, phase 3)</h3>
+<h3 id="classes_frontend">Classes and Templates Diagram (frontend, phase 3)</h3>
 
 ![ClassesTemplatesDiagramFrontend](pics/classes_diagram_frontend.png)
 
