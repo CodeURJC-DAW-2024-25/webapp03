@@ -256,23 +256,23 @@ I implemented all the Comment Logic for the REST API
 |   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java)| CourseRestController  |
 
 <h3>Marcos Alejandro Pascual Rojas</h3>
-I worked implementing the CourseRestController and the MaterialRestController. I also modify their respective services.
+I worked in the develop of the Course Page, implementing the upload, download and delete of materials, and the functionality of the comment section.
 
 |                                                 Commit                                                 |                Description                 |
 | :----------------------------------------------------------------------------------------------------: | :----------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/7df4189bbfdb902c20dbe609c91a2e8195089871) | Updated Course Service and CourseContrller |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/73c822980f3b1df2d4616629108320a994acd143) |         Fixed courseRestController         |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/73f09c2f6e81b59f27eb97f025241f60a9de3016) |    Fixed MaterialRestController upload     |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/9b08135fb0fb781fa1fe3cc523c54755fa2ced35) |  Implemented MaterialRest and CourseRest   |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/0313f0b237bc3050ef8fdea205b473514920b810) |                 Fixed urls                 |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/ef3277257a44c61e5c250dda7645d107c0a9ea54) |    Added course component and template     |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/ba703d32aa416f152a00c17d1c67a4e20000204d) |  Course page shows corresponding materials |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/2724bb9fc4302443e375f125b62094670e1df930) |    Feature show comments in course page    |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/1cee3800917874436bb7fa9da5bf671db37a70fc) |      feature users can add comments        |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/1d89624d13824f8c3087f1ff8abe68e5bf63d71e) |     feature admin can delete comments      |
 
 |                                                                       File                                                                        |          Name          |
 | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------: |
-|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java)  |  CourseRestController  |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/MaterialRestController.java) | MaterialRestController |
-|       [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)       |     CourseService      |
-|      [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/MaterialService.java)      |    MaterialService     |
-|           [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CourseDTO.java)           |     CourseBasicDTO     |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/comment.service.ts)                              |    comment.service     |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/course.service.ts)                               |    course.service      |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/material.service.ts)                             |    material.service    |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/course/course.component.ts)                    |    course.component    |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CommentRestController.java)  |  CommentRestController |
 
 <h3>Gonzalo García Castillo</h3>
 
