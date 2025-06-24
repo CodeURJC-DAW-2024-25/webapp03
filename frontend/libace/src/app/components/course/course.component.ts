@@ -33,11 +33,19 @@ export class CourseComponent implements OnInit {
   loadingMaterials = false;
   loadingComments = false;
 
+  get isLogged(): boolean {
+    return this.loginService.isLogged();
+  }
+
+  get isAdmin(): boolean {
+    return this.loginService.isAdmin();
+  }
+
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
     private materialService: MaterialService,
-    public loginService: LoginService,
+    private loginService: LoginService,
     private commentService: CommentService,
   ) { }
 

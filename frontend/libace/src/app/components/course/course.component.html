@@ -1,14 +1,14 @@
 <app-header></app-header>
 
 <!-- If the user is logged -->
-<div *ngIf="loginService.isLogged()" class="container mt-5 pt-5 text-center mx-auto">
+<div *ngIf="isLogged" class="container mt-5 pt-5 text-center mx-auto">
     <h1>{{ course.title }}</h1>
     <p>{{ course.description }}</p>
 
     <img [src]="'/courses/' + course.id + '/image'" [alt]="course.title" />
 
     <!-- Only admins upload material -->
-    <div *ngIf="loginService.isAdmin()">
+    <div *ngIf="isAdmin">
         <form (ngSubmit)="onUploadMaterial()" enctype="multipart/form-data">
             <input type="file" name="file" (change)="onFileSelected($event)" required />
             <button type="submit" class="btn btn-primary btn-sm mt-2">Subir Archivo</button>
@@ -27,7 +27,7 @@
                             <a [href]="'/courses/' + course.id + '/materials/' + mat.id + '/download'">{{ mat.name
                                 }}</a>
 
-                            <form *ngIf="loginService.isAdmin()" (ngSubmit)="onDeleteMaterial(mat.id!)"
+                            <form *ngIf="isAdmin" (ngSubmit)="onDeleteMaterial(mat.id!)"
                                 class="d-inline">
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                             </form>
@@ -53,8 +53,6 @@
     <div class="comment-section mt-4">
         <h3>Comentarios</h3>
 
-
-
         <div *ngIf="comments.length > 0; else noComments">
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let comment of comments">
@@ -65,7 +63,7 @@
                     <p>{{ comment.text }}</p>
 
                     <!-- Botón eliminar, centrado y solo visible para admin -->
-                    <div class="text-center mt-2" *ngIf="loginService.isAdmin()">
+                    <div class="text-center mt-2" *ngIf="isAdmin">
                         <button class="btn btn-danger btn-sm" (click)="onDeleteComment(comment.id)">
                             Eliminar comentario
                         </button>
@@ -103,12 +101,10 @@
                 </div>
             </div>
         </form>
-
-
     </div>
 </div>
 <!-- If user is not logged -->
-<div *ngIf="!loginService.isLogged()" class="container mt-5 pt-5 text-center">
+<div *ngIf="!isLogged" class="container mt-5 pt-5 text-center">
     <h1>Debes iniciar sesión para acceder a los cursos</h1>
     <div class="mt-3">
         <a [routerLink]="['/login']" class="btn btn-primary me-2">Login</a>
