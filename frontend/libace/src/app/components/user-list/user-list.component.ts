@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
-  users: UserBasicDTO[] = []; // Usamos UserBasicDTO aquí
+  users: UserBasicDTO[] = [];
   currentPage = 0;
   loading = false;
   allLoaded = false;
@@ -19,7 +19,7 @@ export class UserListComponent implements OnInit {
     private userService: UserService,
     private loginService: LoginService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.checkAccess();
@@ -64,9 +64,9 @@ export class UserListComponent implements OnInit {
   }
 
   private checkAccess(): void {
-    this.loginService.reqIsLogged(); // Actualiza el estado de autenticación
+    this.loginService.reqIsLogged(); // Update el estado de autenticación
 
-    // Verificación después de un pequeño retraso para asegurar que reqIsLogged() complete
+    // Verify if the user is logged in and is an admin
     setTimeout(() => {
       if (!this.loginService.isLogged()) {
         this.router.navigate(['/login']);
@@ -79,6 +79,6 @@ export class UserListComponent implements OnInit {
       }
 
       this.loadUsers();
-    }, 2000); // Pequeño retraso para asegurar la actualización
+    }, 2000);
   }
 }

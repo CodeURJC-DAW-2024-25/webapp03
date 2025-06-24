@@ -21,7 +21,7 @@ export class CommentService {
                 size: size.toString()
             }
         }).pipe(
-            map(response => response.content)  // Extraemos el array dentro de 'content'
+            map(response => response.content)
         );
     }
     addComment(courseId: number, text: string): Observable<CommentDTO> {
