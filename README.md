@@ -217,23 +217,23 @@ I have mainly been in charge of Docker and the deployment of the web application
 
 <h3>Sergio Rodríguez Gil</h3>
 
-At the beginning of the project I created the DTOs and basic DTOs, added the security files needed for the API REST, and implemented the mappers. Apart from that, I was responsible to adapt the services to the API REST.
+I was responsible for implementing everything related to the modify profile page, and a part of the profile page. Being able to redirect the user when accessing this pages without being authenticated was also my job.
 
 |                                                 Commit                                                 |               Description               |
 | :----------------------------------------------------------------------------------------------------: | :-------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/beb290aa847abc904bc1d9c83d7a0f8b0662c4c3) |        Add mappers to dto folder        |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/360f6e3ec7db9028296a329dee335678f2c5cadc) |    Refactor UserService to use DTOs     |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/09716c8c8d4a705263da18650530b42dfa867d9e) |  Refactor MaterialService to use DTOs   |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/1ac3d071fe34c95aff79d054291397058795c7d3) | Modify CommentService to work with dtos |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/886e206f7758936ebbaa5f2def94de677e1037b1) |        Create DTOs and BasicDTOs        |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/c4c2cba8a02e9d9f45b6aba251ddfd9355bfbda4) |        Redirects to login when not authenticated        |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/13321a3ee6a3e8699a44e4ce33132bf470613b9d) |    Modify profile works excluding image update     |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b8bf8d3f6d39f9e6e4fc319bcae5cdb94071d485) |  Change edit profile page appearance   |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/d0975a2503f4c6b95bc6b7535c8f5e732cef0b89) | Working redirection to edit profile page |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/33cdb28f0d2062ae94826941a12ed901513c6347) |        Fix modify profile image        |
 
 |                                                                  File                                                                   |      Name       |
 | :-------------------------------------------------------------------------------------------------------------------------------------: | :-------------: |
-|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)  |  CourseService  |
-|   [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/UserService.java)   |   UserService   |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/MaterialService.java) | MaterialService |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CommentService.java)  | CommentService  |
-|    [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CourseMapper.java)     |  CourseMapper   |
+|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/modify-profile/modify-profile.component.ts)  |  modify-profile.component  |
+|   [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/profile-page/profile-page.component.ts)   |   profile-page.component   |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/user.service.ts) | user.service |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/modify-profile/modify-profile.component.html)  | modify-profile.component.html  |
+|    [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/app.module.ts)     |  app.module   |
 
 <h3>Sergio López Cuesta</h3>
 
