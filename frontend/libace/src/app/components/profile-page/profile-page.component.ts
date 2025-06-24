@@ -16,7 +16,7 @@ export class ProfilePageComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe({
@@ -34,7 +34,7 @@ export class ProfilePageComponent implements OnInit {
         }
       },
       error: (_) => {
-        // Si no está autenticado, redirige al login
+        // if the user is not authenticated, redirect to login
         this.router.navigate(['/login']);
       }
     });

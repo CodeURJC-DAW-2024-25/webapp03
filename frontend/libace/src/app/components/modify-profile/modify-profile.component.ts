@@ -20,7 +20,7 @@ export class ModifyProfileComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe({
@@ -44,7 +44,6 @@ export class ModifyProfileComponent implements OnInit {
         });
       },
       error: (_) => {
-        // Si no está autenticado, redirige al login
         this.router.navigate(['/login']);
       },
     });
@@ -71,17 +70,17 @@ export class ModifyProfileComponent implements OnInit {
       email: this.profileForm.value.email,
     };
 
-    // Añade la password solo si está escrita
+    // Add password only if it is provided
     if (this.profileForm.value.password) {
       updateData.password = this.profileForm.value.password;
     }
 
-    // 1. Actualiza los datos del usuario (sin imagen)
+    // 1. Update user data (without image)
     this.userService
       .updateUserData(this.user.id.toString(), updateData)
       .subscribe({
         next: () => {
-          // 2. Si hay imagen, súbela por separado
+          // 2. If there is an image, upload it separately
           if (this.selectedImageFile) {
             const formData = new FormData();
             formData.append('imageFile', this.selectedImageFile);

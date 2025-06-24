@@ -217,23 +217,23 @@ I have mainly been in charge of Docker and the deployment of the web application
 
 <h3>Sergio Rodríguez Gil</h3>
 
-At the beginning of the project I created the DTOs and basic DTOs, added the security files needed for the API REST, and implemented the mappers. Apart from that, I was responsible to adapt the services to the API REST.
+I was responsible for implementing everything related to the modify profile page, and a part of the profile page. Being able to redirect the user when accessing this pages without being authenticated was also my job.
 
 |                                                 Commit                                                 |               Description               |
 | :----------------------------------------------------------------------------------------------------: | :-------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/beb290aa847abc904bc1d9c83d7a0f8b0662c4c3) |        Add mappers to dto folder        |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/360f6e3ec7db9028296a329dee335678f2c5cadc) |    Refactor UserService to use DTOs     |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/09716c8c8d4a705263da18650530b42dfa867d9e) |  Refactor MaterialService to use DTOs   |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/1ac3d071fe34c95aff79d054291397058795c7d3) | Modify CommentService to work with dtos |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/886e206f7758936ebbaa5f2def94de677e1037b1) |        Create DTOs and BasicDTOs        |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/c4c2cba8a02e9d9f45b6aba251ddfd9355bfbda4) |        Redirects to login when not authenticated        |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/13321a3ee6a3e8699a44e4ce33132bf470613b9d) |    Modify profile works excluding image update     |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/b8bf8d3f6d39f9e6e4fc319bcae5cdb94071d485) |  Change edit profile page appearance   |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/d0975a2503f4c6b95bc6b7535c8f5e732cef0b89) | Working redirection to edit profile page |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/33cdb28f0d2062ae94826941a12ed901513c6347) |        Fix modify profile image        |
 
 |                                                                  File                                                                   |      Name       |
 | :-------------------------------------------------------------------------------------------------------------------------------------: | :-------------: |
-|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)  |  CourseService  |
-|   [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/UserService.java)   |   UserService   |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/MaterialService.java) | MaterialService |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CommentService.java)  | CommentService  |
-|    [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CourseMapper.java)     |  CourseMapper   |
+|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/modify-profile/modify-profile.component.ts)  |  modify-profile.component  |
+|   [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/profile-page/profile-page.component.ts)   |   profile-page.component   |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/user.service.ts) | user.service |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/modify-profile/modify-profile.component.html)  | modify-profile.component.html  |
+|    [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/app.module.ts)     |  app.module   |
 
 <h3>Sergio López Cuesta</h3>
 
@@ -256,23 +256,23 @@ I implemented all the Comment Logic for the REST API
 |   [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java)| CourseRestController  |
 
 <h3>Marcos Alejandro Pascual Rojas</h3>
-I worked implementing the CourseRestController and the MaterialRestController. I also modify their respective services.
+I worked in the develop of the Course Page, implementing the upload, download and delete of materials, and the functionality of the comment section.
 
 |                                                 Commit                                                 |                Description                 |
 | :----------------------------------------------------------------------------------------------------: | :----------------------------------------: |
-| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/7df4189bbfdb902c20dbe609c91a2e8195089871) | Updated Course Service and CourseContrller |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/73c822980f3b1df2d4616629108320a994acd143) |         Fixed courseRestController         |
-| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/73f09c2f6e81b59f27eb97f025241f60a9de3016) |    Fixed MaterialRestController upload     |
-| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/9b08135fb0fb781fa1fe3cc523c54755fa2ced35) |  Implemented MaterialRest and CourseRest   |
-| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/0313f0b237bc3050ef8fdea205b473514920b810) |                 Fixed urls                 |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/ef3277257a44c61e5c250dda7645d107c0a9ea54) |    Added course component and template     |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/ba703d32aa416f152a00c17d1c67a4e20000204d) |  Course page shows corresponding materials |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/2724bb9fc4302443e375f125b62094670e1df930) |    Feature show comments in course page    |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/1cee3800917874436bb7fa9da5bf671db37a70fc) |      Feature users can add comments        |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/commit/1d89624d13824f8c3087f1ff8abe68e5bf63d71e) |     Feature admin can delete comments      |
 
 |                                                                       File                                                                        |          Name          |
 | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------: |
-|  [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CourseRestController.java)  |  CourseRestController  |
-| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/MaterialRestController.java) | MaterialRestController |
-|       [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/CourseService.java)       |     CourseService      |
-|      [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/service/MaterialService.java)      |    MaterialService     |
-|           [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/dto/CourseDTO.java)           |     CourseBasicDTO     |
+| [1º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/comment.service.ts)                              |    comment.service     |
+| [2º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/course.service.ts)                               |    course.service      |
+| [3º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/services/material.service.ts)                             |    material.service    |
+| [4º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/frontend/libace/src/app/components/course/course.component.ts)                    |    course.component    |
+| [5º](https://github.com/CodeURJC-DAW-2024-25/webapp03/blob/main/backend/src/main/java/es/webapp03/backend/controller/CommentRestController.java)  |  CommentRestController |
 
 <h3>Gonzalo García Castillo</h3>
 
